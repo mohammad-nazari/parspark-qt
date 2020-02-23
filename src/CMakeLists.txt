@@ -1,0 +1,9 @@
+add_subdirectory(
+   ${CMAKE_SOURCE_DIR}/src/control
+   )
+add_subdirectory(
+   ${CMAKE_SOURCE_DIR}/src/model
+   )
+add_subdirectory(
+   ${CMAKE_SOURCE_DIR}/src/view
+   )
