@@ -14,7 +14,7 @@ namespace parspark::model {
       m_settingBoard->FromJson(json["board"].toMap());
       m_settingCamera->FromJson(json["camera"].toMap());
       m_settingCardReader->FromJson(json["cardReader"].toMap());
-      m_settingDataBase->FromJson(json["sdataBase"].toMap());
+      m_settingDataBase->FromJson(json["dataBase"].toMap());
       m_settingGate->FromJson(json["gate"].toMap());
       m_settingParking->FromJson(json["parking"].toMap());
       m_settingPayment->FromJson(json["payment"].toMap());

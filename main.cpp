@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
    auto root_context = engine.rootContext();
 
    parspark::view::LoginView loginView;
-   loginView.loadLoginInfo();
+//   loginView.loadLoginInfo();
    parspark::view::SettingsView settingsView;
    // Add view classes to context to reach data in QML
    root_context->setContextProperty("login", &loginView);

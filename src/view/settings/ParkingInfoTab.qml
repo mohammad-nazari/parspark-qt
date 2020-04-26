@@ -4,7 +4,24 @@ import QtQuick.Controls 1.4
 import "../common"
 
 Column{
-    property var parking: ({})
+    property var parking: {
+        "aDayTariff": 16000,
+        "capacity": 100,
+        "dayTariff": {
+            "firstHour": 2000,
+            "fromHour": 7,
+            "nextHour": 2400,
+            "toHoure": 22
+        },
+        "freeTime": 0,
+        "lastHourFreeTime": 0,
+        "nightTariff": {
+            "firstHour": 2400,
+            "fromHour": 22,
+            "nextHour": 3000,
+            "toHoure": 22
+        }
+    }
     id: parkingColumnId
     padding: 10
     spacing: 10

@@ -1,0 +1,116 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "src/control/common/libcommon.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"src/control/common/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 4,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 27,
+				"parent" : 2
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-O3 -DNDEBUG  "
+				},
+				{
+					"fragment" : "-std=gnu++1z"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/control/common"
+				},
+				{
+					"path" : "E:/Projects/ParsPark/QT/ParsPark/src/control/common"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/control/common/common_autogen/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "E:/Projects/ParsPark/QT/ParsPark/src"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "common_autogen::@ed205a840e5bec4d45f8"
+		}
+	],
+	"id" : "common::@ed205a840e5bec4d45f8",
+	"name" : "common",
+	"nameOnDisk" : "libcommon.a",
+	"paths" : 
+	{
+		"build" : "src/control/common",
+		"source" : "src/control/common"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/MinGW_64_bit/Release/src/control/common/common_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

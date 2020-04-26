@@ -25,6 +25,6 @@ Rectangle {
       id: dateAndTimeTextId
       anchors.centerIn: parent
       text: dateAndTimeString
-      font.pixelSize: dateAndTimeId.height / 2 - 5
+      font.pointSize: dateAndTimeId.width / 25
    }
 }

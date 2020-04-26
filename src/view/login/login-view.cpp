@@ -14,7 +14,7 @@ namespace parspark::view {
 
    void LoginView::doLogin(QVariantMap item) {
       m_loginInfo = item;
-      qDebug() << item;
+//      qDebug() << m_loginInfo;
       model::LoginPtr login{new model::Login};
       login->User::UserName(m_loginInfo["userName"].toString());
       login->User::Password(m_loginInfo["passWord"].toString());
@@ -48,6 +48,7 @@ namespace parspark::view {
       m_loginInfo["serverPassword"] = dataBase->Password();
       m_loginInfo["serverPort"] = dataBase->Port();
       m_loginInfo["serverDBName"] = dataBase->DatabaseName();
+//      qDebug() << m_loginInfo;
       emit loginInfoChanged();
    }
 } // namespace parspark::view

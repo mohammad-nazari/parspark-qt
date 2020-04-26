@@ -6,33 +6,22 @@ import "../common"
 
 ApplicationWindow  {
     property var loginInfo: {
-        "userName": "",
-        "passWord": "",
-        "serverAddress": "",
-        "serverUser": "",
-        "serverPassword": "",
-        "serverPort": 1,
-        "serverDBName": "",
-        "loginDone": false,
-        "error": ""
+        userName: ""
+        passWord: ""
+        serverAddress: ""
+        serverUser: ""
+        serverPassword: ""
+        serverPort: 1
+        serverDBName: ""
+        loginDone: false
+        error: ""
     }
     MessageDialog {
         id: messageDialog
         icon: StandardIcon.Critical
     }
     function doLogin(){
-         var loginInfo2 = {
-            "userName": userTextFieldlId.textFieldText,
-            "passWord": passwordTextFieldlId.textFieldText,
-            "serverAddress": serverAddressTextFieldlId.textFieldText,
-            "serverUser": serverUserTextFieldlId.textFieldText,
-            "serverPassword": serverPasswordTextFieldlId.textFieldText,
-            "serverPort": serverPortSpinBoxId.spinBoxValue,
-            "serverDBName": serverDBNameTextFieldlId.textFieldText,
-            "loginDone": false,
-            "error": ""
-        }
-        login.doLogin(loginInfo2)
+        login.doLogin(loginInfo)
         if(login.loginInfo.loginDone){
             close();
         }else{
@@ -44,6 +33,7 @@ ApplicationWindow  {
     Component.onCompleted: {
         login.loadLoginInfo();
         loginInfo = login.loginInfo;
+        console.log(loginInfo.serverPort)
     }
 
     id: settingWindowId
@@ -67,6 +57,7 @@ ApplicationWindow  {
             labelWidth: 100
             placeholderTextText:qsTr("Input user name")
             textFieldWidth: 200
+            onTextFieldTextChanged: {loginInfo.userName = textFieldText}
         }
         CommonTextField {
             id: passwordTextFieldlId
@@ -75,6 +66,7 @@ ApplicationWindow  {
             placeholderTextText:qsTr("Input user password")
             textFieldWidth: 200
             textFieldEchoMode: TextInput.Password
+            onTextFieldTextChanged: {loginInfo.passWord = textFieldText}
         }
         GroupBox {
             id: showDataBaseSettingId
@@ -92,6 +84,7 @@ ApplicationWindow  {
                     placeholderTextText:qsTr("Input database server address")
                     textFieldWidth: 200
                     textFieldText: loginInfo.serverAddress
+                    onTextFieldTextChanged: {loginInfo.serverAddress = textFieldText}
                 }
                 CommonTextField {
                     id: serverUserTextFieldlId
@@ -100,6 +93,7 @@ ApplicationWindow  {
                     placeholderTextText:qsTr("Input database server user name")
                     textFieldWidth: 200
                     textFieldText: loginInfo.serverUser
+                    onTextFieldTextChanged: {loginInfo.serverUser = textFieldText}
                 }
                 CommonTextField {
                     id: serverPasswordTextFieldlId
@@ -109,6 +103,7 @@ ApplicationWindow  {
                     textFieldWidth: 200
                     textFieldEchoMode: TextInput.Password
                     textFieldText: loginInfo.serverPassword
+                    onTextFieldTextChanged: {loginInfo.serverPassword = textFieldText}
                 }
                 CommonSpinBox {
                     id: serverPortSpinBoxId
@@ -117,6 +112,7 @@ ApplicationWindow  {
                     minimumValueValue: 1
                     maximumValueValue: 65535
                     spinBoxValue: loginInfo.serverPort
+                    onSpinBoxValueChanged: {loginInfo.serverPort = spinBoxValue}
                 }
                 CommonTextField {
                     id: serverDBNameTextFieldlId
@@ -125,6 +121,7 @@ ApplicationWindow  {
                     placeholderTextText:qsTr("Input database name")
                     textFieldWidth: 200
                     textFieldText: loginInfo.serverDBName
+                    onTextFieldTextChanged: {loginInfo.serverDBName = textFieldText}
                 }
             }
         }
