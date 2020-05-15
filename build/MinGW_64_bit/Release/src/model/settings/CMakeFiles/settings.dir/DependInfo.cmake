@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "E:/Projects/ParsPark/QT/ParsPark/src/model/settings/gate.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/gate.cpp.obj"
   "E:/Projects/ParsPark/QT/ParsPark/src/model/settings/parking.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/parking.cpp.obj"
   "E:/Projects/ParsPark/QT/ParsPark/src/model/settings/payment.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/payment.cpp.obj"
+  "E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj"
   "E:/Projects/ParsPark/QT/ParsPark/src/model/settings/server.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/server.cpp.obj"
   "E:/Projects/ParsPark/QT/ParsPark/src/model/settings/settings.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj"
   "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/settings_autogen/mocs_compilation.cpp" "E:/Projects/ParsPark/QT/ParsPark/build/MinGW_64_bit/Release/src/model/settings/CMakeFiles/settings.dir/settings_autogen/mocs_compilation.cpp.obj"

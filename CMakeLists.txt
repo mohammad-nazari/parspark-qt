@@ -55,7 +55,7 @@ target_link_libraries(ParsPark
   Qt5::Quick
   Qt5::Sql
   control
-  common
+  service
   model
   settings
   view

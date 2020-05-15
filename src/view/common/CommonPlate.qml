@@ -2,8 +2,8 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 
 Rectangle{
-   property string buttonText: "Edit"
-   property string buttonToolTipText: "Edit plate number"
+   property string buttonText: qsTr("Edit")
+   property string buttonToolTipText: qsTr("Edit plate number")
    property bool readOnlyText: false
 
    id: plateRectanglId
@@ -51,7 +51,7 @@ Rectangle{
          Image {
             id: platePictureId
             anchors.fill: parent
-            source:"qrc:/src/images/plate.png"
+            source: "qrc:/src/images/plate.png"
          }
          TextInput  {
             id: firstNoId

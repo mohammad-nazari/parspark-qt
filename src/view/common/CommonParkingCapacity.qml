@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 
 RowLayout{
     property int capacity: 1000
-    property int empty: 1000
+    property int empty: capacity
 
    id: capacityRowLayoutId
    Layout.margins: 2
@@ -28,7 +28,13 @@ RowLayout{
       Layout.preferredHeight: width / 6
       Text {
           id: fullCapacityTextId
+          anchors.fill: parent
+          minimumPixelSize: 2
+          fontSizeMode: Text.Fit
+          horizontalAlignment: Text.AlignHCenter
+          verticalAlignment: Text.AlignVCenter
           text: capacity
+          font.pointSize: parent.height / 2
       }
    }
    Rectangle {
@@ -47,7 +53,13 @@ RowLayout{
       Layout.preferredHeight: width / 6
       Text {
           id: emptyCapacityTextId
+          anchors.fill: parent
+          minimumPixelSize: 2
+          fontSizeMode: Text.Fit
+          horizontalAlignment: Text.AlignHCenter
+          verticalAlignment: Text.AlignVCenter
           text: empty
+          font.pointSize: parent.height / 2
       }
    }
 }

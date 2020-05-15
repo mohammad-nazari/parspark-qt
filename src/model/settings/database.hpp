@@ -1,5 +1,5 @@
-#ifndef DATABASE_HPP
-#define DATABASE_HPP
+#ifndef MODEL_DATABASE_HPP
+#define MODEL_DATABASE_HPP
 
 #include <model/base-model.hpp>
 
@@ -53,4 +53,4 @@ namespace parspark::model {
       QString m_databaseName{"parspark"};
    };
 } // namespace parspark::model
-#endif // DATABASE_HPP
+#endif // MODEL_DATABASE_HPP

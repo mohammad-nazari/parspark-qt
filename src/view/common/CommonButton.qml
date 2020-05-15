@@ -3,17 +3,18 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
 
 RoundButton{
-   property string buttonText: "Button"
-   property string buttonToolTipText: ""
+   property string buttonText: qsTr("Button")
+   property string buttonToolTipText: qsTr("")
    property bool isMouseArea: false
    property bool isPressed: false
-   property string imageSource: ""
+   property string imageSource: qsTr("")
 
    id: buttonId
    text: buttonText
    onTextChanged: {buttonText = text}
    radius: 10
    Layout.margins: 1
+   activeFocusOnTab : true
    Layout.fillWidth: true
    Layout.fillHeight: true
    Image {

@@ -1,5 +1,5 @@
-#ifndef BOARD_HPP
-#define BOARD_HPP
+#ifndef MODEL_BOARD_HPP
+#define MODEL_BOARD_HPP
 
 #include "comport.hpp"
 #include "server.hpp"
@@ -110,4 +110,4 @@ namespace parspark::model {
       CapacityBoardPtr m_capacity{new CapacityBoard};
    };
 } // namespace parspark::model
-#endif // BOARD_HPP
+#endif // MODEL_BOARD_HPP

@@ -23,3 +23,5 @@ E:/Projects/ParsPark/QT/ParsPark/src/model/settings/payment.cpp
 E:/Projects/ParsPark/QT/ParsPark/src/model/settings/server.cpp
 E:/Projects/ParsPark/QT/ParsPark/src/model/settings/settings.cpp
 E:/Projects/ParsPark/QT/ParsPark/src/model/settings/software.cpp
+E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.hpp
+E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.cpp

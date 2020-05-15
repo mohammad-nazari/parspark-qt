@@ -4,17 +4,28 @@ import QtQuick.Controls 1.4
 import "../common"
 
 Column {
+   property var gateSettings: ({})
+   property var gateSerialPortsModel: []
+
+   id: gateId
    padding: 10
    spacing: 2
    GroupBox {
       id: controlEnterGateGroupBoxId
       title: qsTr("Control Enter Gate")
       checkable: true
+      checked: gateSettings.enter.enable
+      onCheckedChanged: {gateSettings.enter.enable = checked}
       Row {
          leftPadding: 5
          spacing: 5
          CommonCOMPort {
             id:  enterGateCompPortId
+            comPortModel: gateSerialPortsModel
+            address: gateSettings.enter.address.portName
+            onAddressChanged: {gateSettings.enter.address.portName = address}
+            baudRate: gateSettings.enter.address.baudRate
+            onBaudRateChanged: {gateSettings.enter.address.baudRate = baudRate}
          }
          Column {
             leftPadding: 5
@@ -30,12 +41,15 @@ Column {
                      id: openEnterGateAutoRadioButtonId
                      text: qsTr("Open auto(By card)")
                      exclusiveGroup: openEnterGateOptions
-                     checked: true
+                     checked: gateSettings.enter.openAuto
+                     onCheckedChanged: {gateSettings.enter.openAuto = checked}
                   }
                   RadioButton{
                      id: openEnterGateManuallyRadioButtonId
                      text: qsTr("Open manually")
                      exclusiveGroup: openEnterGateOptions
+                     checked: !gateSettings.enter.openAuto
+                     onCheckedChanged: {gateSettings.enter.openAuto = !checked}
                   }
                }
             }
@@ -51,7 +65,8 @@ Column {
                         id: closeEnterGateAfterRadioButtonId
                         text: qsTr("Close after(Seconds)")
                         exclusiveGroup: closeEnterGateOptions
-                        checked: true
+                        checked: gateSettings.enter.openAuto
+                        onCheckedChanged: {gateSettings.enter.openAuto = checked}
                      }
                      CommonNumericComboBox{
                         id: closeEnterGateAfterCommonNumericComboBoxId
@@ -60,12 +75,16 @@ Column {
                         labelWidth: 0
                         minimumValue: 10
                         maximumValue: 60
+                        comboBoxCurrentValue: gateSettings.enter.closeAfter
+                        onComboBoxCurrentValueChanged: {gateSettings.enter.closeAfter = comboBoxCurrentValue}
                      }
                   }
                   RadioButton{
                      id: closeEnterGateManuallyRadioButtonId
                      text: qsTr("Close manually")
                      exclusiveGroup: closeEnterGateOptions
+                     checked: !gateSettings.enter.openAuto
+                     onCheckedChanged: {gateSettings.enter.openAuto = !checked}
                   }
                }
             }
@@ -81,6 +100,11 @@ Column {
          spacing: 5
          CommonCOMPort {
             id:  exitGateCompPortId
+            comPortModel: gateSerialPortsModel
+            address: gateSettings.exit.address.portName
+            onAddressChanged: {gateSettings.exit.address.portName = address}
+            baudRate: gateSettings.exit.address.baudRate
+            onBaudRateChanged: {gateSettings.exit.address.baudRate = baudRate}
          }
          Column {
             leftPadding: 5
@@ -94,14 +118,17 @@ Column {
                   spacing: 2
                   RadioButton{
                      id: openExitGateAutoRadioButtonId
-                     text: "Close auto(By card)"
+                     text: qsTr("Close auto(By card)")
                      exclusiveGroup: openExitGateOptions
-                     checked: true
+                     checked: gateSettings.exit.openAuto
+                     onCheckedChanged: {gateSettings.exit.openAuto = checked}
                   }
                   RadioButton{
                      id: openExitGateManuallyRadioButtonId
-                     text: "Close manually"
+                     text: qsTr("Close manually")
                      exclusiveGroup: openExitGateOptions
+                     checked: !gateSettings.exit.openAuto
+                     onCheckedChanged: {gateSettings.exit.openAuto = !checked}
                   }
                }
             }
@@ -117,21 +144,26 @@ Column {
                         id: closeExitGateAfterRadioButtonId
                         text: qsTr("Close after(Seconds)")
                         exclusiveGroup: closeExitGateOptions
-                        checked: true
+                        checked: gateSettings.exit.openAuto
+                        onCheckedChanged: {gateSettings.exit.openAuto = checked}
                      }
                      CommonNumericComboBox{
                         id: closeExitGateAfterCommonNumericComboBoxId
                         enabled: closeExitGateAfterRadioButtonId.checked
-                        labelText: ""
+                        labelText: qsTr("")
                         labelWidth: 0
                         minimumValue: 10
                         maximumValue: 60
+                        comboBoxCurrentValue: gateSettings.exit.closeAfter
+                        onComboBoxCurrentValueChanged: {gateSettings.exit.closeAfter = comboBoxCurrentValue}
                      }
                   }
                   RadioButton{
                      id: closeExitGateManuallyRadioButtonId
                      text: qsTr("Close manually")
                      exclusiveGroup: closeExitGateOptions
+                     checked: !gateSettings.exit.openAuto
+                     onCheckedChanged: {gateSettings.exit.openAuto = !checked}
                   }
                }
             }

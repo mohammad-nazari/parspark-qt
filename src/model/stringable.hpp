@@ -1,5 +1,5 @@
-#ifndef STRINGABLE_HPP
-#define STRINGABLE_HPP
+#ifndef MODEL_STRINGABLE_HPP
+#define MODEL_STRINGABLE_HPP
 
 #include <QString>
 
@@ -12,4 +12,4 @@ namespace parspark::model {
       virtual const QString ToString() const = 0;
    };
 } // namespace parspark::model
-#endif // STRINGABLE_HPP
+#endif // MODEL_STRINGABLE_HPP

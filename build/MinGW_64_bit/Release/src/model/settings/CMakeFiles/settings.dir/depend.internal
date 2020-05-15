@@ -654,6 +654,78 @@ src/model/settings/CMakeFiles/settings.dir/payment.cpp.obj
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/comport.hpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/payment.cpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/payment.hpp
+src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj
+ ../../../src/model/base-model.hpp
+ ../../../src/model/jsonable.hpp
+ ../../../src/model/stringable.hpp
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/QString
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/QVariantMap
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qalgorithms.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qarraydata.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qatomic.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qatomic_bootstrap.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qatomic_cxx11.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qatomic_msvc.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qbasicatomic.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qbytearray.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qbytearraylist.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qchar.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qcompilerdetection.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qconfig-bootstrapped.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qconfig.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qcontainerfwd.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qcontainertools_impl.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qcontiguouscache.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qcoreevent.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qdebug.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qflags.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qgenericatomic.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qglobal.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qglobalstatic.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qhash.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qhashfunctions.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qiodevice.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qiterator.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qlist.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qlocale.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qlogging.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qmap.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qmetatype.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qmutex.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qnamespace.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qnumeric.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qobject.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qobject_impl.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qobjectdefs.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qobjectdefs_impl.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qpair.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qpoint.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qprocessordetection.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qrefcount.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qregexp.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qscopedpointer.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qset.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qshareddata.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qsharedpointer.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qsharedpointer_impl.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstring.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstringalgorithms.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstringbuilder.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstringlist.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstringliteral.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstringmatcher.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qstringview.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qsysinfo.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qsystemdetection.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qtcore-config.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qtextstream.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qtypeinfo.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qvariant.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qvarlengtharray.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qvector.h
+ C:/Qt/Qt5.14.0/5.14.0/mingw73_64/include/QtCore/qversiontagging.h
+ E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.cpp
+ E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.hpp
 src/model/settings/CMakeFiles/settings.dir/server.cpp.obj
  ../../../src/model/base-model.hpp
  ../../../src/model/jsonable.hpp
@@ -805,6 +877,7 @@ src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/gate.hpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/parking.hpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/payment.hpp
+ E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.hpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/server.hpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/settings.cpp
  E:/Projects/ParsPark/QT/ParsPark/src/model/settings/settings.hpp

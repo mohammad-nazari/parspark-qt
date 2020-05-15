@@ -1,5 +1,5 @@
-#ifndef PAYMENT_HPP
-#define PAYMENT_HPP
+#ifndef MODEL_PAYMENT_HPP
+#define MODEL_PAYMENT_HPP
 
 #include "comport.hpp"
 #include <model/base-model.hpp>
@@ -15,11 +15,11 @@ namespace parspark::model {
       bool FromJson(const QVariantMap& json) override;
       const QVariantMap ToJson() const override;
 
-      bool Active() const {
-         return m_active;
+      bool Enable() const {
+         return m_enable;
       }
-      void Active(bool active) {
-         m_active = active;
+      void Enable(bool active) {
+         m_enable = active;
       }
       ComPortPtr Address() const {
          return m_address;
@@ -29,7 +29,7 @@ namespace parspark::model {
       }
 
     private:
-      bool m_active{false};
+      bool m_enable{false};
       ComPortPtr m_address{new ComPort};
       bool m_sendDirect{false};
    };
@@ -61,4 +61,4 @@ namespace parspark::model {
       PaymentInfoPtr m_posDevice{new PaymentInfo};
    };
 } // namespace parspark::model
-#endif // PAYMENT_HPP
+#endif // MODEL_PAYMENT_HPP

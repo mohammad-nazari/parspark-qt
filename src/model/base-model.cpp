@@ -25,17 +25,4 @@ namespace parspark::model {
       json["name"] = m_name;
       return json;
    }
-
-   QString BaseModel::Id() const {
-      return m_id;
-   }
-   void BaseModel::Id(const QString& id) {
-      m_id = id;
-   }
-   QString BaseModel::Name() const {
-      return m_name;
-   }
-   void BaseModel::Name(const QString& name) {
-      m_name = name;
-   }
 } // namespace parspark::model

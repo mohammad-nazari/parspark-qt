@@ -1,5 +1,5 @@
-#ifndef SERVER_HPP
-#define SERVER_HPP
+#ifndef MODEL_SERVER_HPP
+#define MODEL_SERVER_HPP
 
 #include <model/base-model.hpp>
 
@@ -32,4 +32,4 @@ namespace parspark::model {
       uint16_t m_port{50001};
    };
 } // namespace parspark::model
-#endif // SERVER_HPP
+#endif // MODEL_SERVER_HPP

@@ -1,5 +1,5 @@
-#ifndef BASE_MODEL_HPP
-#define BASE_MODEL_HPP
+#ifndef MODEL_BASE_MODEL_HPP
+#define MODEL_BASE_MODEL_HPP
 
 #include "jsonable.hpp"
 #include <memory>
@@ -16,14 +16,29 @@ namespace parspark::model {
       bool FromJson(const QVariantMap& json) override;
       const QVariantMap ToJson() const override;
 
-      QString Id() const;
-      void Id(const QString& id);
-      QString Name() const;
-      void Name(const QString& name);
+      QString Id() const {
+         return m_id;
+      }
+      void Id(const QString& id) {
+         m_id = id;
+      }
+      QString Name() const {
+          return m_name;
+      }
+      void Name(const QString& name) {
+          m_name = name;
+      }
+      QString Error() const {
+          return m_error;
+      }
+      void Error(const QString& error) {
+          m_error = error;
+      }
 
     protected:
       QString m_id;
       QString m_name;
+      QString m_error;
    };
 } // namespace parspark::model
-#endif // BASE_MODEL_HPP
+#endif // MODEL_BASE_MODEL_HPP

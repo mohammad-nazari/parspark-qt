@@ -1,5 +1,5 @@
-#ifndef GATE_HPP
-#define GATE_HPP
+#ifndef MODEL_GATE_HPP
+#define MODEL_GATE_HPP
 
 #include "comport.hpp"
 
@@ -81,4 +81,4 @@ namespace parspark::model {
       GateInfoPtr m_exit{new GateInfo};
    };
 } // namespace parspark::model
-#endif // GATE_HPP
+#endif // MODEL_GATE_HPP

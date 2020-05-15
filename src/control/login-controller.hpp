@@ -1,21 +1,21 @@
-#ifndef LOGIN_CONTROLLER_HPP
-#define LOGIN_CONTROLLER_HPP
+#ifndef CONTROL_LOGIN_CONTROLLER_HPP
+#define CONTROL_LOGIN_CONTROLLER_HPP
 
-#include <QObject>
+#include "base-controller.hpp"
 #include <model/login.hpp>
 
 namespace parspark::control {
    class LoginController;
    using LoginControllerPtr = std::shared_ptr<LoginController>;
-   class LoginController : public QObject {
-      Q_OBJECT
+   class LoginController : public BaseController {
     public:
       static LoginControllerPtr Create();
-      explicit LoginController(QObject* parent = nullptr);
+      explicit LoginController();
 
-      bool DoLogin(model::LoginPtr& login);
-    signals:
+      bool DoLogin(const model::LoginPtr& login);
+      bool SaveDataBaseSettings(const model::DataBasePtr& dataBase);
+      model::DataBasePtr LoadLoginSeeting();
    };
 } // namespace parspark::control
 
-#endif // LOGIN_CONTROLLER_HPP
+#endif // CONTROL_LOGIN_CONTROLLER_HPP

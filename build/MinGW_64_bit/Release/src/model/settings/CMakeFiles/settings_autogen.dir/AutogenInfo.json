@@ -53,6 +53,11 @@
 			"EWIEGA46WW/moc_payment.cpp"
 		],
 		[
+			"E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.hpp",
+			"MU",
+			"EWIEGA46WW/moc_printer.cpp"
+		],
+		[
 			"E:/Projects/ParsPark/QT/ParsPark/src/model/settings/server.hpp",
 			"MU",
 			"EWIEGA46WW/moc_server.cpp"
@@ -142,6 +147,10 @@
 		],
 		[
 			"E:/Projects/ParsPark/QT/ParsPark/src/model/settings/payment.cpp",
+			"MU"
+		],
+		[
+			"E:/Projects/ParsPark/QT/ParsPark/src/model/settings/printer.cpp",
 			"MU"
 		],
 		[

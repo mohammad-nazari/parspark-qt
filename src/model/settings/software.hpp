@@ -1,5 +1,5 @@
-#ifndef SOFTWARE_HPP
-#define SOFTWARE_HPP
+#ifndef MODEL_SOFTWARE_HPP
+#define MODEL_SOFTWARE_HPP
 
 #include "server.hpp"
 #include <model/base-model.hpp>
@@ -54,4 +54,4 @@ namespace parspark::model {
       ServerPtr m_serverAddress{new Server};
    };
 } // namespace parspark::model
-#endif // SOFTWARE_HPP
+#endif // MODEL_SOFTWARE_HPP

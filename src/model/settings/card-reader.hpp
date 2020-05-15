@@ -1,5 +1,5 @@
-#ifndef CARDREADER_HPP
-#define CARDREADER_HPP
+#ifndef MODEL_CARDREADER_HPP
+#define MODEL_CARDREADER_HPP
 
 #include "comport.hpp"
 
@@ -32,4 +32,4 @@ namespace parspark::model {
       ComPortPtr m_exit{new ComPort};
    };
 } // namespace parspark::model
-#endif // CARDREADER_HPP
+#endif // MODEL_CARDREADER_HPP

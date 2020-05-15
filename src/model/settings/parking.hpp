@@ -1,5 +1,5 @@
-#ifndef PARKING_HPP
-#define PARKING_HPP
+#ifndef MODEL_PARKING_HPP
+#define MODEL_PARKING_HPP
 
 #include <cstdint>
 #include <memory>
@@ -64,6 +64,12 @@ namespace parspark::model {
       bool FromJson(const QVariantMap& json) override;
       const QVariantMap ToJson() const override;
 
+      QString ParkingName() const {
+         return m_parkingName;
+      }
+      void ParkingName(const QString& parkingName) {
+         m_parkingName = parkingName;
+      }
       uint16_t Capacity() const {
          return m_capacity;
       }
@@ -102,6 +108,7 @@ namespace parspark::model {
       }
 
     private:
+      QString m_parkingName{"My Parking"};
       uint16_t m_capacity{100};
       TariffPtr m_dayTariff{new Tariff{7, 2000, 2400}};
       TariffPtr m_nightTariff{new Tariff{22, 2400, 3000}};
@@ -110,4 +117,4 @@ namespace parspark::model {
       uint8_t m_lastHourFreeTime{0};
    };
 } // namespace parspark::model
-#endif // PARKING_HPP
+#endif // MODEL_PARKING_HPP

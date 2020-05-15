@@ -1,44 +1,29 @@
 #include "settings-controller.hpp"
-#include <QDebug>
+
+#include <service/s-settings.hpp>
+#include <service/serial-port.hpp>
 
 namespace parspark::control {
-   SSettingsControllerPtr SSettingsController::_instance = nullptr;
-   model::SettingsPtr SSettingsController::_settings =
-       model::Settings::Create();
-
-   void SSettingsController::Load(const QString& address) {
-      try {
-         QFile file(address);
-         if (file.open(QFile::ReadOnly)) {
-            QString data = file.readAll();
-            //             qDebug() << data;
-            if (!_settings->FromString(data)) {
-               qDebug() << "Error on parse settings data";
-            }
-         } else {
-            qDebug() << "Error on open settings file";
-         }
-      } catch (std::exception& exception) {
-         qDebug() << "Error on read settings file";
-      }
+   SettingsControllerPtr SettingsController::Create() {
+      return std::make_shared<SettingsController>();
+   }
+   SettingsController::SettingsController()
+       : BaseController() {
    }
 
-   void SSettingsController::Save(const QString& address) {
-      try {
-         QFile file(address);
-         if (file.open(QFile::WriteOnly)) {
-            if (file.write(_settings->ToString().toStdString().c_str()) <= 0) {
-               qDebug() << "Error on save settings data";
-            }
-         } else {
-            qDebug() << "Error on open settings file";
-         }
-      } catch (std::exception& exception) {
-         qDebug() << "Error on write settings file";
+   model::SettingsPtr SettingsController::Load() {
+      return service::SSettings::Instance().Settings();
+   }
+   bool SettingsController::Save(const model::SettingsPtr& settings) {
+      service::SSettings::Instance().Settings(settings);
+      auto isSaved = service::SSettings::Instance().Save();
+      if (isSaved) {
+         m_error = service::SSettings::Instance().Error();
       }
+      return isSaved;
    }
 
-   SSettingsController::SSettingsController(QObject* parent)
-       : QObject(parent) {
+   QStringList SettingsController::GetSerialPortListNames() {
+      return service::SerialPort::GetListNames();
    }
 } // namespace parspark::control

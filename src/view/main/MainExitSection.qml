@@ -22,8 +22,8 @@ Rectangle{
       CommonPlate{
          id: exitEnterPlateId
          enabled: false
-         buttonText: ""
-         buttonToolTipText: ""
+         buttonText: qsTr("")
+         buttonToolTipText: qsTr("")
       }
       CommonPicture{
          id: exitEnterPictureId

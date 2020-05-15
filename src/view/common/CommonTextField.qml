@@ -6,7 +6,7 @@ Row {
     property int labelWidth: 100
     property string placeholderTextText: qsTr("")
     property int textFieldWidth: 200
-    property string textFieldText: ""
+    property string textFieldText: qsTr("")
     property var textFieldEchoMode: TextInput.Normal
 
     leftPadding: 5

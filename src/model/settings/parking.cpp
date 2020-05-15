@@ -45,6 +45,7 @@ namespace parspark::model {
 
    bool Parking::FromJson(const QVariantMap& json) {
       BaseModel::FromJson(json);
+      m_parkingName = json["parkingName"].toString();
       m_capacity = json["capacity"].toUInt();
       m_dayTariff->FromJson(json["dayTariff"].toMap());
       m_nightTariff->FromJson(json["nightTariff"].toMap());
@@ -55,6 +56,7 @@ namespace parspark::model {
    }
    const QVariantMap Parking::ToJson() const {
       QVariantMap json;
+      json["parkingName"] = m_parkingName;
       json["capacity"] = m_capacity;
       json["dayTariff"] = m_dayTariff->ToJson();
       json["nightTariff"] = m_nightTariff->ToJson();

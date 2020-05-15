@@ -1,5 +1,5 @@
-#ifndef USER_H
-#define USER_H
+#ifndef MODEL_USER_H
+#define MODEL_USER_H
 
 #include "base-model.hpp"
 
@@ -83,4 +83,4 @@ namespace parspark::model {
    };
 } // namespace parspark::model
 
-#endif // USER_H
+#endif // MODEL_USER_H

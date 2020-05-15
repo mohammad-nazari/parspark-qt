@@ -2,11 +2,28 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
 import QtQuick.Controls 1.4
+import QtQuick.Dialogs 1.3
 import "../common"
 
 ApplicationWindow  {
    property real relativeSize: 1.333334
     property var settings: ({})
+   property bool closing: false
+
+   MessageDialog {
+      id: exitMessageDialogId
+      icon: StandardIcon.Question
+      text: "Are you sure to exit?"
+      standardButtons: StandardButton.Yes | StandardButton.No
+      onYes: {
+         closing = true
+         mainWindowId.close()
+      }
+   }
+   onClosing: {
+      close.accepted = closing
+      onTriggered: if(!closing) exitMessageDialogId.open()
+   }
 
    id: mainWindowId
    visible: true

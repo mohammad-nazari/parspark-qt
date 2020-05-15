@@ -3,13 +3,19 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 1.4
 
 Row {
+   property var comboBoxModel: []
    property string labelText: qsTr("Label:")
    property int labelWidth: 100
    property int minimumValue: 0
    property int maximumValue: 0
    property int interval: 1
-   property int comboBoxCurrentIndex: 0
+   property int comboBoxCurrentIndex: -1
+   property int comboBoxCurrentValue
    property int comboBoxWidth: 40
+
+   Component.onCompleted: {
+       comboBoxCurrentIndex = comboBoxModel.indexOf(comboBoxCurrentValue);
+   }
 
    spacing: 2
    Label{
@@ -19,18 +25,21 @@ Row {
    }
    ComboBox {
       function setItems(){
-         var items = [];
-         for(var i = 0; i <= maximumValue - minimumValue; i += interval)
+         comboBoxModel = [];
+         for(var i = minimumValue; i <= maximumValue ; i += interval)
          {
-            items[i] = i + minimumValue;
+            comboBoxModel[i - minimumValue] = i;
          }
-         return items;
+         return comboBoxModel;
       }
 
       id: commonNumericComboBoxId
+      width: comboBoxWidth
       model: setItems()
       currentIndex: comboBoxCurrentIndex
-      width: comboBoxWidth
-      onCurrentIndexChanged: {comboBoxCurrentIndex = currentIndex}
+      onCurrentIndexChanged: {
+         comboBoxCurrentValue = comboBoxModel.length > 0 ? comboBoxModel[currentIndex]: 0
+         comboBoxCurrentIndex = currentIndex
+      }
    }
 }

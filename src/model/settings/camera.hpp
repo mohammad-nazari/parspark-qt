@@ -1,5 +1,5 @@
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
+#ifndef MODEL_CAMERA_HPP
+#define MODEL_CAMERA_HPP
 
 #include <model/base-model.hpp>
 
@@ -60,4 +60,4 @@ namespace parspark::model {
       CameraInfoPtr m_exit{new CameraInfo};
    };
 } // namespace parspark::model
-#endif // CAMERA_HPP
+#endif // MODEL_CAMERA_HPP

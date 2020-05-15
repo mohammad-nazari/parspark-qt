@@ -6,7 +6,8 @@ Row {
    property var comboBoxModel: []
    property string labelText: qsTr("Label:")
    property int labelWidth: 100
-   property int comboBoxCurrentIndex: 0
+   property int comboBoxCurrentIndex: -1
+   property string comboBoxCurrentText: ""
    property int comboBoxWidth: 120
 
    spacing: 2
@@ -17,9 +18,12 @@ Row {
    }
    ComboBox {
       id: commonNumericComboBoxId
-      model: comboBoxModel
-      currentIndex: comboBoxCurrentIndex
-      onCurrentIndexChanged: {comboBoxCurrentIndex = currentIndex}
       width: comboBoxWidth
+      model: comboBoxModel
+      currentIndex: comboBoxModel.indexOf(comboBoxCurrentText)
+      onCurrentIndexChanged: {
+         comboBoxCurrentIndex = currentIndex
+         comboBoxCurrentText = comboBoxModel && comboBoxModel.length > 0 ? comboBoxModel[currentIndex]: ""
+      }
    }
 }

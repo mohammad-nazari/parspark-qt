@@ -1,5 +1,5 @@
-#ifndef COMPORT_HPP
-#define COMPORT_HPP
+#ifndef MODEL_COMPORT_HPP
+#define MODEL_COMPORT_HPP
 
 #include <model/base-model.hpp>
 
@@ -32,4 +32,4 @@ namespace parspark::model {
       uint m_baudRate{19200};
    };
 } // namespace parspark::model
-#endif // COMPORT_HPP
+#endif // MODEL_COMPORT_HPP

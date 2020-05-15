@@ -247,6 +247,7 @@
 #define __INT_LEAST16_MAX__ 0x7fff
 #define __DEC64_MANT_DIG__ 16
 #define __UINT_LEAST32_MAX__ 0xffffffffU
+#define QT_NETWORK_LIB 1
 #define __SEG_GS 1
 #define __FLT32_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F32
 #define __GCC_ATOMIC_LONG_LOCK_FREE 2
@@ -377,6 +378,7 @@
 #define __PTRDIFF_TYPE__ long long int
 #define __ATOMIC_SEQ_CST 5
 #define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_16 1
+#define QT_QML_LIB 1
 #define __UINT32_TYPE__ unsigned int
 #define __FLT32X_MIN_10_EXP__ (-307)
 #define __UINTPTR_TYPE__ long long unsigned int

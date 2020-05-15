@@ -1,5 +1,5 @@
-#ifndef SETTING_HPP
-#define SETTING_HPP
+#ifndef MODEL_SETTING_HPP
+#define MODEL_SETTING_HPP
 
 #include "alpr.hpp"
 #include "board.hpp"
@@ -9,6 +9,7 @@
 #include "gate.hpp"
 #include "parking.hpp"
 #include "payment.hpp"
+#include "printer.hpp"
 #include "software.hpp"
 
 namespace parspark::model {
@@ -76,6 +77,12 @@ namespace parspark::model {
       void SettingSoftware(const SoftwarePtr& settingSoftware) {
          m_settingSoftware = settingSoftware;
       }
+      PrinterPtr SettingPrinter() const {
+         return m_settingPrinter;
+      }
+      void SettingPrinter(const PrinterPtr& settingPrinter) {
+         m_settingPrinter = settingPrinter;
+      }
 
     private:
       AlprPtr m_settingAlpr{new Alpr};
@@ -87,6 +94,7 @@ namespace parspark::model {
       ParkingPtr m_settingParking{new Parking};
       PaymentPtr m_settingPayment{new Payment};
       SoftwarePtr m_settingSoftware{new Software};
+      PrinterPtr m_settingPrinter{new Printer};
    };
 } // namespace parspark::model
-#endif // SETTING_HPP
+#endif // MODEL_SETTING_HPP

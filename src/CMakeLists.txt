@@ -1,4 +1,7 @@
 add_subdirectory(
+   ${CMAKE_SOURCE_DIR}/src/service
+   )
+add_subdirectory(
    ${CMAKE_SOURCE_DIR}/src/control
    )
 add_subdirectory(

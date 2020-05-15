@@ -19,6 +19,7 @@ namespace parspark::model {
       m_settingParking->FromJson(json["parking"].toMap());
       m_settingPayment->FromJson(json["payment"].toMap());
       m_settingSoftware->FromJson(json["software"].toMap());
+      m_settingPrinter->FromJson(json["printer"].toMap());
       return true;
    }
    const QVariantMap Settings::ToJson() const {
@@ -32,6 +33,7 @@ namespace parspark::model {
       json["parking"] = m_settingParking->ToJson();
       json["payment"] = m_settingPayment->ToJson();
       json["software"] = m_settingSoftware->ToJson();
+      json["printer"] = m_settingPrinter->ToJson();
       return json;
    }
 } // namespace parspark::model

@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
 
 Rectangle {
-   property string statusString: "Status"
+   property string statusString: qsTr("Status")
 
    id: statusRectangleId
    color: "transparent"
@@ -20,8 +20,12 @@ Rectangle {
    Layout.preferredHeight: width / 6
    Text {
       id: statusTextId
+      anchors.fill: parent
+      minimumPixelSize: 2
+      fontSizeMode: Text.Fit
+      horizontalAlignment: Text.AlignHCenter
+      verticalAlignment: Text.AlignVCenter
       text: statusString
-      anchors.centerIn: parent
-      font.pixelSize: statusRectangleId.height / 2 - 5
+      font.pixelSize: statusRectangleId.height / 2
    }
 }

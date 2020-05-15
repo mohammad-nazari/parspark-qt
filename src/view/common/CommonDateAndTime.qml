@@ -23,8 +23,12 @@ Rectangle {
    Layout.preferredHeight: width / 6
    Text {
       id: dateAndTimeTextId
-      anchors.centerIn: parent
+      anchors.fill: parent
+      minimumPixelSize: 2
+      fontSizeMode: Text.Fit
+      horizontalAlignment: Text.AlignHCenter
+      verticalAlignment: Text.AlignVCenter
       text: dateAndTimeString
-      font.pointSize: dateAndTimeId.width / 25
+      font.pointSize: dateAndTimeId.height / 4
    }
 }

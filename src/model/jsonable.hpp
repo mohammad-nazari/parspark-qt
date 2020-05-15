@@ -1,5 +1,5 @@
-#ifndef JSONABLE_HPP
-#define JSONABLE_HPP
+#ifndef MODEL_JSONABLE_HPP
+#define MODEL_JSONABLE_HPP
 
 #include "stringable.hpp"
 
@@ -18,4 +18,4 @@ namespace parspark::model {
       virtual const QVariantMap ToJson() const = 0;
    };
 } // namespace parspark::model
-#endif // JSONABLE_HPP
+#endif // MODEL_JSONABLE_HPP

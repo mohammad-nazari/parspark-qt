@@ -4,12 +4,17 @@ import QtQuick.Controls 1.4
 import "../common"
 
 Column{
+   property var printerSettings: ({})
+
+   id: printerId
    padding: 10
    spacing: 2
    GroupBox {
       id: printBillGroupBoxId
       title: qsTr("Print Bill")
       checkable: true
+      checked: printerSettings.enable
+      onCheckedChanged: {printerSettings.enable = checked}
       Column{
          padding: 5
          spacing: 5
@@ -19,12 +24,16 @@ Column{
             labelText: qsTr("Custom Text:")
             textFieldWidth: 480
             placeholderTextText: qsTr("Input custom text")
+            textFieldText: printerSettings.title
+            onTextFieldTextChanged: {printerSettings.title = textFieldText}
          }
          CommonComboBox{
             id: printersComboBoxId
             labelWidth: 100
             labelText: qsTr("Printers:")
             width: 300
+            comboBoxCurrentText: printerSettings.name
+            onComboBoxCurrentTextChanged: {printerSettings.name = comboBoxCurrentText}
          }
          CommonButton{
             id: testPrinterButtonId

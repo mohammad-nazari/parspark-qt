@@ -14,7 +14,7 @@ namespace parspark::model {
       m_activeEnter = json["activeEnter"].toBool();
       m_activeExit = json["activeExit"].toBool();
       m_asServer = json["asServer"].toBool();
-      m_port = json["port"].toBool();
+      m_port = json["port"].toUInt();
       m_serverAddress->FromJson(json["serverAddress"].toMap());
       return true;
    }

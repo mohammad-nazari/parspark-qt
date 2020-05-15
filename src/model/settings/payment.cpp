@@ -10,14 +10,14 @@ namespace parspark::model {
 
    bool PaymentInfo::FromJson(const QVariantMap& json) {
       BaseModel::FromJson(json);
-      m_active = json["active"].toBool();
+      m_enable = json["enable"].toBool();
       m_address->FromJson(json["address"].toMap());
       m_sendDirect = json["sendDirect"].toBool();
       return true;
    }
    const QVariantMap PaymentInfo::ToJson() const {
       QVariantMap json = BaseModel::ToJson();
-      json["active"] = m_active;
+      json["enable"] = m_enable;
       json["address"] = m_address->ToJson();
       json["sendDirect"] = m_sendDirect;
       return json;
@@ -33,7 +33,7 @@ namespace parspark::model {
    bool Payment::FromJson(const QVariantMap& json) {
       BaseModel::FromJson(json);
       m_citizenDevice->FromJson(json["citizenDevice"].toMap());
-      m_citizenDevice->FromJson(json["citizenDevice"].toMap());
+      m_posDevice->FromJson(json["posDevice"].toMap());
       return true;
    }
    const QVariantMap Payment::ToJson() const {

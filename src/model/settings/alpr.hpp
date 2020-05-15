@@ -1,5 +1,5 @@
-#ifndef ALPR_HPP
-#define ALPR_HPP
+#ifndef MODEL_ALPR_HPP
+#define MODEL_ALPR_HPP
 
 #include <cstdint>
 #include <memory>
@@ -70,4 +70,4 @@ namespace parspark::model {
       AlprByCameraPtr m_byCamera{new AlprByCamera};
    };
 } // namespace parspark::model
-#endif // ALPR_HPP
+#endif // MODEL_ALPR_HPP

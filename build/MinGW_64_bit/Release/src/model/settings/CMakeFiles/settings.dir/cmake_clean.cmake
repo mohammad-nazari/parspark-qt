@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/settings.dir/gate.cpp.obj"
   "CMakeFiles/settings.dir/parking.cpp.obj"
   "CMakeFiles/settings.dir/payment.cpp.obj"
+  "CMakeFiles/settings.dir/printer.cpp.obj"
   "CMakeFiles/settings.dir/server.cpp.obj"
   "CMakeFiles/settings.dir/settings.cpp.obj"
   "CMakeFiles/settings.dir/settings_autogen/mocs_compilation.cpp.obj"

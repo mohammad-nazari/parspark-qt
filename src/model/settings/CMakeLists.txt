@@ -1,4 +1,3 @@
-find_package(Qt5 COMPONENTS Core Quick LinguistTools Sql REQUIRED)
 set(SOURCES
    ${SOURCES}
    ${CMAKE_SOURCE_DIR}/src/model/settings/database.cpp
@@ -12,6 +11,7 @@ set(SOURCES
    ${CMAKE_SOURCE_DIR}/src/model/settings/payment.cpp
    ${CMAKE_SOURCE_DIR}/src/model/settings/software.cpp
    ${CMAKE_SOURCE_DIR}/src/model/settings/card-reader.cpp
+   ${CMAKE_SOURCE_DIR}/src/model/settings/printer.cpp
    ${CMAKE_SOURCE_DIR}/src/model/settings/settings.cpp
 )
 add_library(settings

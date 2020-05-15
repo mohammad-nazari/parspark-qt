@@ -224,10 +224,24 @@ src/model/settings/CMakeFiles/settings.dir/card-reader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/settings.dir/card-reader.cpp.s"
 	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && C:\Qt\Qt5.14.0\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Projects\ParsPark\QT\ParsPark\src\model\settings\card-reader.cpp -o CMakeFiles\settings.dir\card-reader.cpp.s
 
+src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj: src/model/settings/CMakeFiles/settings.dir/flags.make
+src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj: src/model/settings/CMakeFiles/settings.dir/includes_CXX.rsp
+src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj: ../../../src/model/settings/printer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj"
+	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && C:\Qt\Qt5.14.0\Tools\mingw730_64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\settings.dir\printer.cpp.obj -c E:\Projects\ParsPark\QT\ParsPark\src\model\settings\printer.cpp
+
+src/model/settings/CMakeFiles/settings.dir/printer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/settings.dir/printer.cpp.i"
+	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && C:\Qt\Qt5.14.0\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:\Projects\ParsPark\QT\ParsPark\src\model\settings\printer.cpp > CMakeFiles\settings.dir\printer.cpp.i
+
+src/model/settings/CMakeFiles/settings.dir/printer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/settings.dir/printer.cpp.s"
+	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && C:\Qt\Qt5.14.0\Tools\mingw730_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:\Projects\ParsPark\QT\ParsPark\src\model\settings\printer.cpp -o CMakeFiles\settings.dir\printer.cpp.s
+
 src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj: src/model/settings/CMakeFiles/settings.dir/flags.make
 src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj: src/model/settings/CMakeFiles/settings.dir/includes_CXX.rsp
 src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj: ../../../src/model/settings/settings.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj"
 	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && C:\Qt\Qt5.14.0\Tools\mingw730_64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\settings.dir\settings.cpp.obj -c E:\Projects\ParsPark\QT\ParsPark\src\model\settings\settings.cpp
 
 src/model/settings/CMakeFiles/settings.dir/settings.cpp.i: cmake_force
@@ -252,6 +266,7 @@ settings_OBJECTS = \
 "CMakeFiles/settings.dir/payment.cpp.obj" \
 "CMakeFiles/settings.dir/software.cpp.obj" \
 "CMakeFiles/settings.dir/card-reader.cpp.obj" \
+"CMakeFiles/settings.dir/printer.cpp.obj" \
 "CMakeFiles/settings.dir/settings.cpp.obj"
 
 # External object files for target settings
@@ -269,10 +284,11 @@ src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/gat
 src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/payment.cpp.obj
 src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/software.cpp.obj
 src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/card-reader.cpp.obj
+src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/printer.cpp.obj
 src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/settings.cpp.obj
 src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/build.make
 src/model/settings/libsettings.a: src/model/settings/CMakeFiles/settings.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX static library libsettings.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX static library libsettings.a"
 	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && $(CMAKE_COMMAND) -P CMakeFiles\settings.dir\cmake_clean_target.cmake
 	cd /d E:\Projects\ParsPark\QT\ParsPark\build\MinGW_64_bit\Release\src\model\settings && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\settings.dir\link.txt --verbose=$(VERBOSE)
 
