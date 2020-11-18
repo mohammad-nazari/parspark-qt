@@ -18,7 +18,6 @@ Row{
       onCheckedChanged: {boardSettings.price.enable = checked}
       CommonCOMPort {
          id: priceBoardCompPortId
-         comPortModel: boardSerialPortsModel
          address: boardSettings.price.address.portName
          onAddressChanged: {boardSettings.price.address.portName = address}
          baudRate: boardSettings.price.address.baudRate
@@ -50,7 +49,6 @@ Row{
             CommonCOMPort {
                id: capacityBoardCompPortId
                enabled: sendCapacityToBoardRadioButtonId.checked
-               comPortModel: boardSerialPortsModel
                address: boardSettings.capacity.address.portName
                onAddressChanged: {boardSettings.capacity.address.portName = address}
                baudRate: boardSettings.capacity.address.baudRate

@@ -21,7 +21,6 @@ Row{
          spacing: 5
          CommonCOMPort {
             id: enterCardReaderComPortId
-            comPortModel: paymentSerialPortsModel
             address: paymentSettings.citizenDevice.address.portName
             onAddressChanged: {paymentSettings.citizenDevice.address.portName = address}
             baudRate: paymentSettings.citizenDevice.address.baudRate
@@ -46,7 +45,6 @@ Row{
          spacing: 5
          CommonCOMPort {
             id: exitCardReaderComPortId
-            comPortModel: paymentSerialPortsModel
             address: paymentSettings.posDevice.address.portName
             onAddressChanged: {paymentSettings.posDevice.address.portName = address}
             baudRate: paymentSettings.posDevice.address.baudRate

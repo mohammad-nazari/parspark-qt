@@ -1,6 +1,6 @@
 #include "comport.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    ComPortPtr ComPort::Create() {
       return std::make_shared<ComPort>();
    }
@@ -8,16 +8,16 @@ namespace parspark::model {
        : BaseModel("Com1") {
    }
 
-   bool ComPort::FromJson(const QVariantMap& json) {
+   bool ComPort::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_portName = json["portName"].toString();
-      m_baudRate = json["baudRate"].toUInt();
+      m_portName = json["portName"];
+      m_baudRate = json["baudRate"];
       return true;
    }
-   const QVariantMap ComPort::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann ComPort::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["portName"] = m_portName;
       json["baudRate"] = m_baudRate;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

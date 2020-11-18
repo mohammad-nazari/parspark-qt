@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    CameraInfoPtr CameraInfo::Create() {
       return std::make_shared<CameraInfo>();
    }
@@ -8,14 +8,14 @@ namespace parspark::model {
        : BaseModel("Camera") {
    }
 
-   bool CameraInfo::FromJson(const QVariantMap& json) {
+   bool CameraInfo::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_address = json["address"].toString();
+      m_enable = json["enable"];
+      m_address = json["address"];
       return true;
    }
-   const QVariantMap CameraInfo::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann CameraInfo::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address;
       return json;
@@ -28,16 +28,16 @@ namespace parspark::model {
        : BaseModel("Camera") {
    }
 
-   bool Camera::FromJson(const QVariantMap& json) {
+   bool Camera::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enter->FromJson(json["enterAddress"].toMap());
-      m_exit->FromJson(json["exitAddress"].toMap());
+      m_enter->FromJson(json["enterAddress"]);
+      m_exit->FromJson(json["exitAddress"]);
       return true;
    }
-   const QVariantMap Camera::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann Camera::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enterAddress"] = m_enter->ToJson();
       json["exitAddress"] = m_exit->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

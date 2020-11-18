@@ -1,6 +1,6 @@
 #include "payment.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    PaymentInfoPtr PaymentInfo::Create() {
       return std::make_shared<PaymentInfo>();
    }
@@ -8,15 +8,15 @@ namespace parspark::model {
        : BaseModel("PaymentInfo") {
    }
 
-   bool PaymentInfo::FromJson(const QVariantMap& json) {
+   bool PaymentInfo::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_address->FromJson(json["address"].toMap());
-      m_sendDirect = json["sendDirect"].toBool();
+      m_enable = json["enable"];
+      m_address->FromJson(json["address"]);
+      m_sendDirect = json["sendDirect"];
       return true;
    }
-   const QVariantMap PaymentInfo::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann PaymentInfo::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address->ToJson();
       json["sendDirect"] = m_sendDirect;
@@ -30,16 +30,16 @@ namespace parspark::model {
        : BaseModel("Payment") {
    }
 
-   bool Payment::FromJson(const QVariantMap& json) {
+   bool Payment::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_citizenDevice->FromJson(json["citizenDevice"].toMap());
-      m_posDevice->FromJson(json["posDevice"].toMap());
+      m_citizenDevice->FromJson(json["citizenDevice"]);
+      m_posDevice->FromJson(json["posDevice"]);
       return true;
    }
-   const QVariantMap Payment::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann Payment::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["citizenDevice"] = m_citizenDevice->ToJson();
       json["posDevice"] = m_posDevice->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

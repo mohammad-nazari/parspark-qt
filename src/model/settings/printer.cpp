@@ -1,6 +1,6 @@
 #include "printer.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    PrinterPtr Printer::Create() {
       return std::make_shared<Printer>();
    }
@@ -8,18 +8,18 @@ namespace parspark::model {
        : BaseModel("Printer") {
    }
 
-   bool Printer::FromJson(const QVariantMap& json) {
+   bool Printer::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_name = json["name"].toString();
-      m_title = json["title"].toString();
+      m_enable = json["enable"];
+      m_name = json["name"];
+      m_title = json["title"];
       return true;
    }
-   const QVariantMap Printer::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann Printer::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["name"] = m_name;
       json["title"] = m_title;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

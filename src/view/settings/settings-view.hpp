@@ -4,18 +4,16 @@
 #include <QJSEngine>
 #include <QQmlEngine>
 #include <QVariantMap>
-#include <control/settings-controller.hpp>
+#include <controller/settings-controller.hpp>
 #include <view/base-view.hpp>
 
-namespace parspark::view {
+namespace anar::view {
    class SettingsView;
    using SettingsViewPtr = std::shared_ptr<SettingsView>;
    class SettingsView : public BaseView {
       Q_OBJECT
       Q_PROPERTY(QVariantMap settingsInfo MEMBER m_settingsInfo NOTIFY
                      settingsInfoChanged)
-      Q_PROPERTY(QStringList serialPorts MEMBER m_serialPorts NOTIFY
-                     serialPortsChanged)
 
     public:
       static SettingsViewPtr Create();
@@ -32,18 +30,15 @@ namespace parspark::view {
 
     signals:
         void settingsInfoChanged(QVariantMap settingsInfo);
-        void serialPortsChanged(QStringList serialPorts);
 
     public slots:
-      void loadSettingsInfo();
+      void loadSettings();
       void saveSettings(QVariantMap settingsInfo);
-      void getSerialPorts();
 
     private:
       QVariantMap m_settingsInfo;
-      QStringList m_serialPorts;
-      control::SettingsControllerPtr m_settingsController{
-          new control::SettingsController};
+      controller::SettingsControllerPtr m_settingsController{
+          new controller::SettingsController};
    };
-} // namespace parspark::view
+} // namespace anar::view
 #endif // VIEW_SETTING_VIEW_HPP

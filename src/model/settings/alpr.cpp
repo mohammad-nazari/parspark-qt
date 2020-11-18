@@ -1,6 +1,6 @@
 #include "alpr.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    AlprByCameraPtr AlprByCamera::Create() {
       return std::make_shared<AlprByCamera>();
    }
@@ -8,15 +8,15 @@ namespace parspark::model {
        : BaseModel("AlprByCamera") {
    }
 
-   bool AlprByCamera::FromJson(const QVariantMap& json) {
+   bool AlprByCamera::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_submitWithoutEnterPlate = json["submitWithoutEnterPlate"].toBool();
-      m_submitWithoutExitPlate = json["submitWithoutExitPlate"].toBool();
+      m_enable = json["enable"];
+      m_submitWithoutEnterPlate = json["submitWithoutEnterPlate"];
+      m_submitWithoutExitPlate = json["submitWithoutExitPlate"];
       return true;
    }
-   const QVariantMap AlprByCamera::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann AlprByCamera::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["submitWithoutEnterPlate"] = m_submitWithoutEnterPlate;
       json["submitWithoutExitPlate"] = m_submitWithoutExitPlate;
@@ -30,16 +30,16 @@ namespace parspark::model {
        : BaseModel("Alpr") {
    }
 
-   bool Alpr::FromJson(const QVariantMap& json) {
+   bool Alpr::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_byCamera->FromJson(json["byCamera"].toMap());
+      m_enable = json["enable"];
+      m_byCamera->FromJson(json["byCamera"]);
       return true;
    }
-   const QVariantMap Alpr::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann Alpr::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["byCamera"] = m_byCamera->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

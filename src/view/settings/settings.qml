@@ -2,20 +2,16 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
 import QtQuick.Dialogs 1.3
-import "../common"
+import "qrc:/src/view/common"
 
 import ParsPark.View 1.0
 
 ApplicationWindow  {
    property var settingsInfo: {
-      settingApi.loadSettingsInfo()
+      settingApi.loadSettings()
       return settingApi.settingsInfo
    }
    property bool closing: false
-   property var serialPortsModel: {
-      settingApi.getSerialPorts()
-      return settingApi.serialPorts
-   }
 
    SettingApi{
       id: settingApi
@@ -154,22 +150,18 @@ ApplicationWindow  {
          }
          CardReaderTab{
             cardReaderSettings: settingsInfo.cardReader
-            cardRaderSerialPortsModel: serialPortsModel
          }
          SoftwareTab{
             softwareSettings: settingsInfo.software
          }
          GateTab{
             gateSettings: settingsInfo.gate
-            gateSerialPortsModel: serialPortsModel
          }
          BoardTab{
             boardSettings: settingsInfo.board
-            boardSerialPortsModel: serialPortsModel
          }
          PaymentTab{
             paymentSettings: settingsInfo.payment
-            paymentSerialPortsModel: serialPortsModel
          }
       }
       //        CommonButton{

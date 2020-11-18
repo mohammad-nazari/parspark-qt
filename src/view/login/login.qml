@@ -65,7 +65,7 @@ ApplicationWindow  {
       CommonTextField {
          id: passwordTextFieldlId
          labelText: qsTr("Password:")
-         textFieldText: qsTr("123456")
+         textFieldText: qsTr("admin")
          labelWidth: 100
          placeholderTextText:qsTr("Input user password")
          textFieldWidth: 200

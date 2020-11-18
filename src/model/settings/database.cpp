@@ -1,6 +1,6 @@
 #include "database.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    DataBasePtr DataBase::Create() {
       return std::make_shared<DataBase>();
    }
@@ -8,22 +8,22 @@ namespace parspark::model {
        : BaseModel("DataBase") {
    }
 
-   bool DataBase::FromJson(const QVariantMap& json) {
+   bool DataBase::FromJson(const json_nlohmann &json) {
       BaseModel::FromJson(json);
-      m_address = json["address"].toString();
-      m_userName = json["userName"].toString();
-      m_password = json["password"].toString();
-      m_port = json["port"].toUInt();
-      m_databaseName = json["databaseName"].toString();
+      m_hostAddress = json["hostAddress"];
+      m_userName = json["userName"];
+      m_passWord = json["passWord"];
+      m_port = json["port"];
+      m_databaseName = json["databaseName"];
       return true;
    }
-   const QVariantMap DataBase::ToJson() const {
-      QVariantMap json;
-      json["address"] = m_address;
+   json_nlohmann DataBase::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
+      json["hostAddress"] = m_hostAddress;
       json["userName"] = m_userName;
-      json["password"] = m_password;
+      json["passWord"] = m_passWord;
       json["port"] = m_port;
       json["databaseName"] = m_databaseName;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

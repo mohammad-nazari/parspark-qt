@@ -1,34 +1,35 @@
-#ifndef MODEL_PAYMENT_HPP
-#define MODEL_PAYMENT_HPP
+#ifndef ANAR_PAYMENT_HPP
+#define ANAR_PAYMENT_HPP
 
-#include "comport.hpp"
 #include <model/base-model.hpp>
 
-namespace parspark::model {
+#include "comport.hpp"
+
+namespace anar::model {
    class PaymentInfo;
    using PaymentInfoPtr = std::shared_ptr<PaymentInfo>;
    class PaymentInfo : public BaseModel {
-    public:
+     public:
       static PaymentInfoPtr Create();
       PaymentInfo();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      bool Enable() const {
+      [[nodiscard]] bool Enable() const {
          return m_enable;
       }
       void Enable(bool active) {
          m_enable = active;
       }
-      ComPortPtr Address() const {
+      [[nodiscard]] ComPortPtr Address() const {
          return m_address;
       }
       void Address(const ComPortPtr& address) {
          m_address = address;
       }
 
-    private:
+     private:
       bool m_enable{false};
       ComPortPtr m_address{new ComPort};
       bool m_sendDirect{false};
@@ -36,29 +37,29 @@ namespace parspark::model {
    class Payment;
    using PaymentPtr = std::shared_ptr<Payment>;
    class Payment : public BaseModel {
-    public:
+     public:
       static PaymentPtr Create();
       Payment();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      PaymentInfoPtr CitizenDevice() const {
+      [[nodiscard]] const PaymentInfoPtr& CitizenDevice() const {
          return m_citizenDevice;
       }
       void CitizenDevice(const PaymentInfoPtr& citizenDevice) {
          m_citizenDevice = citizenDevice;
       }
-      PaymentInfoPtr PosDevice() const {
+      [[nodiscard]] const PaymentInfoPtr& PosDevice() const {
          return m_posDevice;
       }
       void PosDevice(const PaymentInfoPtr& posDevice) {
          m_posDevice = posDevice;
       }
 
-    private:
+     private:
       PaymentInfoPtr m_citizenDevice{new PaymentInfo};
       PaymentInfoPtr m_posDevice{new PaymentInfo};
    };
-} // namespace parspark::model
-#endif // MODEL_PAYMENT_HPP
+}  // namespace anar::model
+#endif  // ANAR_PAYMENT_HPP

@@ -1,21 +1,24 @@
 #include "gate.hpp"
 
-namespace parspark::model {
+namespace anar::model {
+   GateInfoPtr GateInfo::Create() {
+      return anar::model::GateInfoPtr();
+   }
    GateInfo::GateInfo()
        : BaseModel("Gate") {
    }
 
-   bool GateInfo::FromJson(const QVariantMap& json) {
+   bool GateInfo::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_address->FromJson(json["address"].toMap());
-      m_openAuto = json["openAuto"].toBool();
-      m_closeAuto = json["closeAuto"].toBool();
-      m_closeAfter = json["closeAfter"].toInt();
+      m_enable = json["enable"];
+      m_address->FromJson(json["address"]);
+      m_openAuto = json["openAuto"];
+      m_closeAuto = json["closeAuto"];
+      m_closeAfter = json["closeAfter"];
       return true;
    }
-   const QVariantMap GateInfo::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann GateInfo::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address->ToJson();
       json["openAuto"] = m_openAuto;
@@ -24,20 +27,23 @@ namespace parspark::model {
       return json;
    }
 
+   GatePtr Gate::Create() {
+      return anar::model::GatePtr();
+   }
    Gate::Gate()
        : BaseModel("Gate") {
    }
 
-   bool Gate::FromJson(const QVariantMap& json) {
+   bool Gate::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enter->FromJson(json["enter"].toMap());
-      m_exit->FromJson(json["exit"].toMap());
+      m_enter->FromJson(json["enter"]);
+      m_exit->FromJson(json["exit"]);
       return true;
    }
-   const QVariantMap Gate::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann Gate::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enter"] = m_enter->ToJson();
       json["exit"] = m_exit->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

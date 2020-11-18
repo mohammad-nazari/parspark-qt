@@ -8,7 +8,7 @@ RowLayout {
    MainExitSection{
       id: exitSideId
    }
-   MainMiddelSection{
+   MainMiddleSection{
       id: middelSideId
    }
    MainEnterSection{

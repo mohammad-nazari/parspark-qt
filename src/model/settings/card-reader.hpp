@@ -1,35 +1,35 @@
-#ifndef MODEL_CARDREADER_HPP
-#define MODEL_CARDREADER_HPP
+#ifndef ANAR_CARD_READER_HPP
+#define ANAR_CARD_READER_HPP
 
 #include "comport.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    class CardReader;
    using CardReaderPtr = std::shared_ptr<CardReader>;
    class CardReader : public BaseModel {
-    public:
+     public:
       static CardReaderPtr Create();
       CardReader();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      ComPortPtr Enter() const {
+      [[nodiscard]] const ComPortPtr& Enter() const {
          return m_enter;
       }
       void Enter(const ComPortPtr& enter) {
          m_enter = enter;
       }
-      ComPortPtr Exit() const {
+      [[nodiscard]] const ComPortPtr& Exit() const {
          return m_exit;
       }
       void Exit(const ComPortPtr& exit) {
          m_exit = exit;
       }
 
-    private:
+     private:
       ComPortPtr m_enter{new ComPort};
       ComPortPtr m_exit{new ComPort};
    };
-} // namespace parspark::model
-#endif // MODEL_CARDREADER_HPP
+}  // namespace anar::model
+#endif  // ANAR_CARD_READER_HPP

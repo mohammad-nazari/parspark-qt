@@ -1,35 +1,35 @@
-#ifndef MODEL_SERVER_HPP
-#define MODEL_SERVER_HPP
+#ifndef ANAR_SERVER_HPP
+#define ANAR_SERVER_HPP
 
-#include <model/base-model.hpp>
+#include "model/base-model.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    class Server;
    using ServerPtr = std::shared_ptr<Server>;
    class Server : public BaseModel {
-    public:
+     public:
       static ServerPtr Create();
       Server();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      QString Address() const {
+      [[nodiscard]] const std::string& Address() const {
          return m_address;
       }
-      void Address(const QString& address) {
+      void Address(const std::string& address) {
          m_address = address;
       }
-      uint16_t Port() const {
+      [[nodiscard]] uint16_t Port() const {
          return m_port;
       }
-      void Port(const uint16_t& port) {
+      void Port(uint16_t port) {
          m_port = port;
       }
 
-    private:
-      QString m_address{"localhost"};
+     private:
+      std::string m_address{"localhost"};
       uint16_t m_port{50001};
    };
-} // namespace parspark::model
-#endif // MODEL_SERVER_HPP
+}  // namespace anar::model
+#endif  // ANAR_SERVER_HPP

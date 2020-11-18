@@ -1,31 +1,29 @@
 #include "user.hpp"
 
-namespace parspark::model {
+namespace anar::model {
+   UserPtr User::Create() {
+      return std::make_shared<User>();
+   }
    User::User()
        : BaseModel("User") {
    }
 
-   UserPtr User::Create() {
-      return std::make_shared<User>();
-   }
-
-   bool User::FromJson(const QVariantMap& json) {
+   bool User::FromJson(const json_nlohmann &json) {
       BaseModel::FromJson(json);
-      m_userName = json["userName"].toString();
-      m_password = json["password"].toString();
-      m_firstName = json["firstName"].toString();
-      m_lastName = json["lastName"].toString();
-      m_address = json["address"].toString();
-      m_phoneNumber = json["phoneNumber"].toString();
-      m_userType = json["userType"].toString();
-      m_registerTime = json["registerTime"].toULongLong();
+      m_userName = json["userName"];
+      m_passWord = json["passWord"];
+      m_firstName = json["firstName"];
+      m_lastName = json["lastName"];
+      m_address = json["address"];
+      m_phoneNumber = json["phoneNumber"];
+      m_userType = json["userType"];
+      m_registerTime = json["registerTime"];
       return true;
    }
-
-   const QVariantMap User::ToJson() const {
-      QVariantMap json;
+   json_nlohmann User::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["userName"] = m_userName;
-      json["password"] = m_password;
+      json["passWord"] = m_passWord;
       json["firstName"] = m_firstName;
       json["lastName"] = m_lastName;
       json["address"] = m_address;
@@ -34,4 +32,4 @@ namespace parspark::model {
       json["registerTime"] = m_registerTime;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

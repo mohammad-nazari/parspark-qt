@@ -1,35 +1,35 @@
-#ifndef MODEL_COMPORT_HPP
-#define MODEL_COMPORT_HPP
+#ifndef ANAR_COMPORT_HPP
+#define ANAR_COMPORT_HPP
 
-#include <model/base-model.hpp>
+#include "model/base-model.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    class ComPort;
    using ComPortPtr = std::shared_ptr<ComPort>;
    class ComPort : public BaseModel {
-    public:
+     public:
       static ComPortPtr Create();
       ComPort();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      uint BaudRate() const {
-         return m_baudRate;
-      }
-      void BaudRate(const uint& baudRate) {
-         m_baudRate = baudRate;
-      }
-      QString PortName() const {
+      [[nodiscard]] const std::string& PortName() const {
          return m_portName;
       }
-      void PortName(const QString& portName) {
+      void PortName(const std::string& portName) {
          m_portName = portName;
       }
+      [[nodiscard]] uint16_t BaudRate() const {
+         return m_baudRate;
+      }
+      void BaudRate(uint16_t baudRate) {
+         m_baudRate = baudRate;
+      }
 
-    private:
-      QString m_portName;
-      uint m_baudRate{19200};
+     private:
+      std::string m_portName;
+      uint16_t m_baudRate{19200};
    };
-} // namespace parspark::model
-#endif // MODEL_COMPORT_HPP
+}  // namespace anar::model
+#endif  // ANAR_COMPORT_HPP

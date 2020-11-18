@@ -1,20 +1,23 @@
 #include "card-reader.hpp"
 
-namespace parspark::model {
+namespace anar::model {
+   CardReaderPtr CardReader::Create() {
+      return anar::model::CardReaderPtr();
+   }
    CardReader::CardReader()
        : BaseModel("CardReader") {
    }
 
-   bool CardReader::FromJson(const QVariantMap& json) {
+   bool CardReader::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enter->FromJson(json["enter"].toMap());
-      m_exit->FromJson(json["exit"].toMap());
+      m_enter->FromJson(json["enter"]);
+      m_exit->FromJson(json["exit"]);
       return true;
    }
-   const QVariantMap CardReader::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann CardReader::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enter"] = m_enter->ToJson();
       json["exit"] = m_exit->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

@@ -1,6 +1,6 @@
 #include "server.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    ServerPtr Server::Create() {
       return std::make_shared<Server>();
    }
@@ -8,16 +8,17 @@ namespace parspark::model {
        : BaseModel("Server") {
    }
 
-   bool Server::FromJson(const QVariantMap& json) {
+   bool Server::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_address = json["address"].toString();
-      m_port = json["port"].toUInt();
+      m_address = json["address"];
+      m_port = json["port"];
       return true;
    }
-   const QVariantMap Server::ToJson() const {
-      QVariantMap json;
+   json_nlohmann Server::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
+      ;
       json["address"] = m_address;
       json["port"] = m_port;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

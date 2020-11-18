@@ -1,86 +1,84 @@
-#ifndef MODEL_USER_H
-#define MODEL_USER_H
+#ifndef ANAR_USER_H
+#define ANAR_USER_H
 
 #include "base-model.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    namespace UserTypes {
-      const QString ADMIN = "admin";
-      const QString OPERATOR = "operator";
-      const QString EMPLOEE = "emploee";
-   } // namespace UserTypes
+      const std::string ADMIN = "admin";
+      const std::string OPERATOR = "operator";
+      const std::string EMPLOYER = "employer";
+   }  // namespace UserTypes
 
    class User;
    using UserPtr = std::shared_ptr<User>;
    class User : public BaseModel {
-    public:
-       static UserPtr Create();
+     public:
+      static UserPtr Create();
       User();
 
-      QString UserName() const {
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
+
+      [[nodiscard]] const std::string& UserName() const {
          return m_userName;
       }
-      void UserName(const QString& userName) {
+      void UserName(const std::string& userName) {
          m_userName = userName;
       }
-      QString Password() const {
-         return m_password;
+      [[nodiscard]] const std::string& PassWord() const {
+         return m_passWord;
       }
-      void Password(const QString& password) {
-         m_password = password;
+      void PassWord(const std::string& passWord) {
+         m_passWord = passWord;
       }
-      QString FirstName() const {
+      [[nodiscard]] const std::string& FirstName() const {
          return m_firstName;
       }
-      void FirstName(const QString& firstName) {
+      void FirstName(const std::string& firstName) {
          m_firstName = firstName;
       }
-      QString LastName() const {
+      [[nodiscard]] const std::string& LastName() const {
          return m_lastName;
       }
-      void LastName(const QString& lastName) {
+      void LastName(const std::string& lastName) {
          m_lastName = lastName;
       }
-      QString Address() const {
+      [[nodiscard]] const std::string& Address() const {
          return m_address;
       }
-      void Address(const QString& address) {
+      void Address(const std::string& address) {
          m_address = address;
       }
-      QString PhoneNumber() const {
+      [[nodiscard]] const std::string& PhoneNumber() const {
          return m_phoneNumber;
       }
-      void PhoneNumber(const QString& phoneNumber) {
+      void PhoneNumber(const std::string& phoneNumber) {
          m_phoneNumber = phoneNumber;
       }
-      QString UserType() const {
+      [[nodiscard]] const std::string& UserType() const {
          return m_userType;
       }
-      void UserType(const QString& userType) {
+      void UserType(const std::string& userType) {
          m_userType = userType;
       }
-      uint64_t RegisterTime() const {
+      [[nodiscard]] uint64_t RegisterTime() const {
          return m_registerTime;
       }
-      void RegisterTime(const uint64_t& registerTime) {
+      void RegisterTime(uint64_t registerTime) {
          m_registerTime = registerTime;
       }
 
-    protected:
-      QString m_userName{"admin"};
-      QString m_password{"admin"};
-      QString m_firstName{"admin"};
-      QString m_lastName{"admin"};
-      QString m_address;
-      QString m_phoneNumber;
-      QString m_userType{UserTypes::EMPLOEE};
+     protected:
+      std::string m_userName{"admin"};
+      std::string m_passWord{"admin"};
+      std::string m_firstName{"admin"};
+      std::string m_lastName{"admin"};
+      std::string m_address;
+      std::string m_phoneNumber;
+      std::string m_userType{UserTypes::EMPLOYER};
       uint64_t m_registerTime{0};
-
-      // Jsonable interface
-   public:
-      bool FromJson(const QVariantMap &json) override;
-      const QVariantMap ToJson() const override;
    };
-} // namespace parspark::model
+}  // namespace anar::model
 
-#endif // MODEL_USER_H
+#endif  // ANAR_USER_H

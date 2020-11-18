@@ -1,28 +1,27 @@
 #include "base-model.hpp"
 
-#include <QJsonValue>
-#include <QUuid>
-#include <QtDebug>
+#include <memory>
 
-namespace parspark::model {
-   BaseModelPtr BaseModel::Create(const QString& name) {
+#include "Poco/UUIDGenerator.h"
+
+namespace anar::model {
+   BaseModelPtr BaseModel::Create(const std::string& name) {
       return std::make_shared<BaseModel>(name);
    }
-
-   BaseModel::BaseModel(const QString& name)
-       : m_name(name) {
-      m_id = QUuid().createUuid().toString();
+   BaseModel::BaseModel(std::string name)
+       : m_name(std::move(name)) {
+      m_id = Poco::UUIDGenerator::defaultGenerator().create().toString();
    }
 
-   bool BaseModel::FromJson(const QVariantMap& json) {
-      m_id = json["id"].toString();
-      m_name = json["name"].toString();
+   bool BaseModel::FromJson(const json_nlohmann& json) {
+      m_id = json["id"];
+      m_name = json["name"];
       return true;
    }
-   const QVariantMap BaseModel::ToJson() const {
-      QVariantMap json;
+   json_nlohmann BaseModel::ToJson() {
+      json_nlohmann json;
       json["id"] = m_id;
       json["name"] = m_name;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

@@ -18,9 +18,10 @@ Column{
             labelText: qsTr("Parking Name:")
             labelWidth: 100
             placeholderTextText:qsTr("Input parking name")
-            textFieldWidth: 500
+            textFieldWidth: 480
             textFieldText: parkingSettings.parkingName
             onTextFieldTextChanged: {parkingSettings.parkingName = textFieldText}
+            textFieldValdator: RegExpValidator { regExp: /^[0-9A-F]{5,20}$/ }
          }
          CommonSpinBox {
             id: parkingCapacitySpinBoxId
@@ -59,7 +60,7 @@ Column{
          }
          CommonSpinBox{
             labelText: qsTr("First Hour(Tomans):")
-            labelWidth: 100
+            labelWidth: 110
             id: dayFirstHoureSpinBoxId
             minimumValueValue: 0
             maximumValueValue: 999999
@@ -69,7 +70,7 @@ Column{
          CommonSpinBox{
             id: dayNextHoursSpinBoxId
             labelText: qsTr("Next Hours(Tomans):")
-            labelWidth: 100
+            labelWidth: 110
             minimumValueValue: 0
             maximumValueValue: 999999
             spinBoxValue: parkingSettings.dayTariff.nextHour
@@ -103,7 +104,7 @@ Column{
          }
          CommonSpinBox{
             labelText: qsTr("First Hour(Tomans):")
-            labelWidth: 100
+            labelWidth: 110
             id: nightFirstHoureSpinBoxId
             minimumValueValue: 0
             maximumValueValue: 999999
@@ -113,7 +114,7 @@ Column{
          CommonSpinBox{
             id: nightNextHoursSpinBoxId
             labelText: qsTr("Next Hours(Tomans):")
-            labelWidth: 100
+            labelWidth: 110
             minimumValueValue: 0
             maximumValueValue: 999999
             spinBoxValue: parkingSettings.nightTariff.nextHour

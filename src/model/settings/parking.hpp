@@ -1,55 +1,53 @@
-#ifndef MODEL_PARKING_HPP
-#define MODEL_PARKING_HPP
+#ifndef ANAR_PARKING_HPP
+#define ANAR_PARKING_HPP
 
 #include <cstdint>
 #include <memory>
-#include <model/base-model.hpp>
 #include <string>
 
-namespace parspark::model {
+#include "model/base-model.hpp"
+
+namespace anar::model {
    class Tariff;
    using TariffPtr = std::shared_ptr<Tariff>;
    class Tariff : public BaseModel {
-    public:
+     public:
       static TariffPtr Create();
-      static TariffPtr Create(const uint8_t& fromHour,
-                              const uint32_t& firstHour,
-                              const uint32_t& nextHour);
+      static TariffPtr Create(const uint8_t& fromHour, const uint32_t& firstHour, const uint32_t& nextHour);
       Tariff();
-      Tariff(const uint8_t& fromHour, const uint32_t& firstHour,
-             const uint32_t& nextHour);
+      Tariff(const uint8_t& fromHour, const uint32_t& firstHour, const uint32_t& nextHour);
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      uint8_t FromHour() const {
+      [[nodiscard]] uint8_t FromHour() const {
          return m_fromHour;
       }
-      void FromHour(const uint8_t& fromHour) {
+      void FromHour(uint8_t fromHour) {
          m_fromHour = fromHour;
       }
-      uint8_t ToHoure() const {
-         return m_toHoure;
+      [[nodiscard]] uint8_t ToHour() const {
+         return m_toHour;
       }
-      void ToHoure(const uint8_t& toHoure) {
-         m_toHoure = toHoure;
+      void ToHour(uint8_t toHour) {
+         m_toHour = toHour;
       }
-      uint32_t FirstHour() const {
+      [[nodiscard]] uint32_t FirstHour() const {
          return m_firstHour;
       }
-      void FirstHour(const uint32_t& firstHour) {
+      void FirstHour(uint32_t firstHour) {
          m_firstHour = firstHour;
       }
-      uint32_t NextHour() const {
+      [[nodiscard]] uint32_t NextHour() const {
          return m_nextHour;
       }
-      void NextHour(const uint32_t& nextHour) {
+      void NextHour(uint32_t nextHour) {
          m_nextHour = nextHour;
       }
 
-    private:
+     private:
       uint8_t m_fromHour{7};
-      uint8_t m_toHoure{22};
+      uint8_t m_toHour{22};
       uint32_t m_firstHour{1800};
       uint32_t m_nextHour{2400};
    };
@@ -57,58 +55,58 @@ namespace parspark::model {
    class Parking;
    using ParkingPtr = std::shared_ptr<Parking>;
    class Parking : public BaseModel {
-    public:
+     public:
       static ParkingPtr Create();
       Parking();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      QString ParkingName() const {
+      [[nodiscard]] const std::string& ParkingName() const {
          return m_parkingName;
       }
-      void ParkingName(const QString& parkingName) {
+      void ParkingName(const std::string& parkingName) {
          m_parkingName = parkingName;
       }
-      uint16_t Capacity() const {
+      [[nodiscard]] uint16_t Capacity() const {
          return m_capacity;
       }
-      void Capacity(const uint16_t& capacity) {
+      void Capacity(uint16_t capacity) {
          m_capacity = capacity;
       }
-      TariffPtr DayTariff() const {
+      [[nodiscard]] const TariffPtr& DayTariff() const {
          return m_dayTariff;
       }
       void DayTariff(const TariffPtr& dayTariff) {
          m_dayTariff = dayTariff;
       }
-      TariffPtr NightTariff() const {
+      [[nodiscard]] const TariffPtr& NightTariff() const {
          return m_nightTariff;
       }
       void NightTariff(const TariffPtr& nightTariff) {
          m_nightTariff = nightTariff;
       }
-      uint32_t ADayTariff() const {
+      [[nodiscard]] uint32_t ADayTariff() const {
          return m_aDayTariff;
       }
-      void ADayTariff(const uint32_t& aDayTariff) {
+      void ADayTariff(uint32_t aDayTariff) {
          m_aDayTariff = aDayTariff;
       }
-      uint16_t FreeTime() const {
+      [[nodiscard]] uint16_t FreeTime() const {
          return m_freeTime;
       }
-      void FreeTime(const uint16_t& freeTime) {
+      void FreeTime(uint16_t freeTime) {
          m_freeTime = freeTime;
       }
-      uint8_t LastHourFreeTime() const {
+      [[nodiscard]] uint8_t LastHourFreeTime() const {
          return m_lastHourFreeTime;
       }
-      void LastHourFreeTime(const uint8_t& lastHourFreeTime) {
+      void LastHourFreeTime(uint8_t lastHourFreeTime) {
          m_lastHourFreeTime = lastHourFreeTime;
       }
 
-    private:
-      QString m_parkingName{"My Parking"};
+     private:
+      std::string m_parkingName{"My Parking"};
       uint16_t m_capacity{100};
       TariffPtr m_dayTariff{new Tariff{7, 2000, 2400}};
       TariffPtr m_nightTariff{new Tariff{22, 2400, 3000}};
@@ -116,5 +114,5 @@ namespace parspark::model {
       uint16_t m_freeTime{0};
       uint8_t m_lastHourFreeTime{0};
    };
-} // namespace parspark::model
-#endif // MODEL_PARKING_HPP
+}  // namespace anar::model
+#endif  // ANAR_PARKING_HPP

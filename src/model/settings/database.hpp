@@ -1,56 +1,57 @@
-#ifndef MODEL_DATABASE_HPP
-#define MODEL_DATABASE_HPP
+#ifndef ANAR_DATABASE_HPP
+#define ANAR_DATABASE_HPP
 
-#include <model/base-model.hpp>
+#include "model/base-model.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    class DataBase;
    using DataBasePtr = std::shared_ptr<DataBase>;
    class DataBase : public BaseModel {
-    public:
+     public:
       static DataBasePtr Create();
       DataBase();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      QString Address() const {
-         return m_address;
+      [[nodiscard]] const std::string& HostAddress() const {
+         return m_hostAddress;
       }
-      void Address(const QString& address) {
-         m_address = address;
+      void HostAddress(const std::string& hostAddress) {
+         m_hostAddress = hostAddress;
       }
-      QString UserName() const {
+      [[nodiscard]] const std::string& UserName() const {
          return m_userName;
       }
-      void UserName(const QString& userName) {
+      void UserName(const std::string& userName) {
          m_userName = userName;
       }
-      QString Password() const {
-         return m_password;
+      [[nodiscard]] const std::string& PassWord() const {
+         return m_passWord;
       }
-      void Password(const QString& password) {
-         m_password = password;
+      void Password(const std::string& passWord) {
+         m_passWord = passWord;
       }
-      uint16_t Port() const {
+      [[nodiscard]] uint16_t Port() const {
          return m_port;
       }
-      void Port(const uint16_t& port) {
+      void Port(uint16_t port) {
          m_port = port;
       }
-      QString DatabaseName() const {
+      [[nodiscard]] const std::string& DatabaseName() const {
          return m_databaseName;
       }
-      void DatabaseName(const QString& databaseName) {
+      void DatabaseName(const std::string& databaseName) {
          m_databaseName = databaseName;
       }
 
-    protected:
-      QString m_address{"localhost"};
-      QString m_userName{"root"};
-      QString m_password{"root"};
-      uint16_t m_port{3306}; // Mysql default port
-      QString m_databaseName{"parspark"};
+     protected:
+      std::string m_engineName{};
+      std::string m_hostAddress{"localhost"};
+      std::string m_userName{"root"};
+      std::string m_passWord{"root"};
+      uint16_t m_port{3306};  // Mysql default port
+      std::string m_databaseName{"parspark"};
    };
-} // namespace parspark::model
-#endif // MODEL_DATABASE_HPP
+}  // namespace anar::model
+#endif  // ANAR_DATABASE_HPP

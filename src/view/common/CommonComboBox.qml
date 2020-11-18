@@ -8,7 +8,7 @@ Row {
    property int labelWidth: 100
    property int comboBoxCurrentIndex: -1
    property string comboBoxCurrentText: ""
-   property int comboBoxWidth: 120
+   property int comboBoxWidth: 150
 
    spacing: 2
    Label{

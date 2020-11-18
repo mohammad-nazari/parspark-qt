@@ -1,27 +1,31 @@
 #include "s-settings.hpp"
 
-#include <QFile>
+#include <fstream>
+#include <memory>
 
-namespace parspark::service {
-   SSettingsUPtr SSettings::_instance = nullptr;
+namespace anar::service {
+   SSettingsPtr SSettings::_instance = nullptr;
 
-   SSettings& SSettings::Instance() {
+   SSettings::SSettings() {
+   }
+   SSettingsPtr SSettings::Instance() {
       if (_instance == nullptr) {
          _instance.reset(new SSettings);
+         _instance->Load();
       }
-      return *_instance;
+      return _instance;
    }
    void SSettings::Destroy() {
       if (_instance != nullptr) {
-         _instance.reset(nullptr);
+         _instance = nullptr;
       }
    }
 
-   bool SSettings::Load(const QString& address) {
+   bool SSettings::Load(const std::string& address) {
       try {
-         QFile file(address);
-         if (file.open(QFile::ReadOnly)) {
-            QString data = file.readAll();
+         std::ifstream file(address, std::ios::in);
+         if (file.is_open()) {
+            std::string data = std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
             if (!m_settings->FromString(data)) {
                m_error = "Error on parse settings data";
             }
@@ -31,26 +35,20 @@ namespace parspark::service {
       } catch (std::exception& exception) {
          m_error = "Error on read settings file";
       }
-      return m_error.isEmpty();
+      return m_error.empty();
    }
-   bool SSettings::Save(const QString& address) {
+   bool SSettings::Save(const std::string& address) {
       try {
          m_error.clear();
-         QFile file(address);
-         if (file.open(QFile::WriteOnly)) {
-            if (file.write(m_settings->ToString().toStdString().c_str()) <= 0) {
-               m_error = "Error on save settings data";
-            }
+         std::ofstream file(address, std::ios::out);
+         if (file.is_open()) {
+            file << m_settings->ToString();
          } else {
             m_error = "Error on open settings file";
          }
       } catch (std::exception& exception) {
-         m_error = "Error on write settings file";
+         m_error = "Error on write settings file: " + std::string(exception.what());
       }
-      return m_error.isEmpty();
+      return m_error.empty();
    }
-
-   SSettings::SSettings() {
-      Load();
-   }
-} // namespace parspark::service
+}  // namespace anar::service

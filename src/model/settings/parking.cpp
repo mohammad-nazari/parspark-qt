@@ -1,36 +1,34 @@
 #include "parking.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    TariffPtr Tariff::Create() {
       return std::make_shared<Tariff>();
    }
-   TariffPtr Tariff::Create(const uint8_t& fromHour, const uint32_t& firstHour,
-                            const uint32_t& nextHour) {
+   TariffPtr Tariff::Create(const uint8_t& fromHour, const uint32_t& firstHour, const uint32_t& nextHour) {
       return std::make_shared<Tariff>(fromHour, firstHour, nextHour);
    }
    Tariff::Tariff()
        : BaseModel("Tariff") {
    }
-   Tariff::Tariff(const uint8_t& fromHour, const uint32_t& firstHour,
-                  const uint32_t& nextHour)
+   Tariff::Tariff(const uint8_t& fromHour, const uint32_t& firstHour, const uint32_t& nextHour)
        : BaseModel("Tariff")
        , m_fromHour(fromHour)
        , m_firstHour(firstHour)
        , m_nextHour(nextHour) {
    }
 
-   bool Tariff::FromJson(const QVariantMap& json) {
+   bool Tariff::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_fromHour = json["fromHour"].toUInt();
-      m_toHoure = json["toHoure"].toUInt();
-      m_firstHour = json["firstHour"].toUInt();
-      m_nextHour = json["nextHour"].toUInt();
+      m_fromHour = json["fromHour"];
+      m_toHour = json["toHour"];
+      m_firstHour = json["firstHour"];
+      m_nextHour = json["nextHour"];
       return true;
    }
-   const QVariantMap Tariff::ToJson() const {
-      QVariantMap json;
+   json_nlohmann Tariff::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["fromHour"] = m_fromHour;
-      json["toHoure"] = m_toHoure;
+      json["toHour"] = m_toHour;
       json["firstHour"] = m_firstHour;
       json["nextHour"] = m_nextHour;
       return json;
@@ -43,19 +41,19 @@ namespace parspark::model {
        : BaseModel("Parking") {
    }
 
-   bool Parking::FromJson(const QVariantMap& json) {
+   bool Parking::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_parkingName = json["parkingName"].toString();
-      m_capacity = json["capacity"].toUInt();
-      m_dayTariff->FromJson(json["dayTariff"].toMap());
-      m_nightTariff->FromJson(json["nightTariff"].toMap());
-      m_aDayTariff = json["aDayTariff"].toUInt();
-      m_freeTime = json["freeTime"].toUInt();
-      m_lastHourFreeTime = json["lastHourFreeTime"].toUInt();
+      m_parkingName = json["parkingName"];
+      m_capacity = json["capacity"];
+      m_dayTariff->FromJson(json["dayTariff"]);
+      m_nightTariff->FromJson(json["nightTariff"]);
+      m_aDayTariff = json["aDayTariff"];
+      m_freeTime = json["freeTime"];
+      m_lastHourFreeTime = json["lastHourFreeTime"];
       return true;
    }
-   const QVariantMap Parking::ToJson() const {
-      QVariantMap json;
+   json_nlohmann Parking::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["parkingName"] = m_parkingName;
       json["capacity"] = m_capacity;
       json["dayTariff"] = m_dayTariff->ToJson();
@@ -65,4 +63,4 @@ namespace parspark::model {
       json["lastHourFreeTime"] = m_lastHourFreeTime;
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

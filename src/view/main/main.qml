@@ -7,7 +7,7 @@ import "../common"
 
 ApplicationWindow  {
    property real relativeSize: 1.333334
-    property var settings: ({})
+   property var settings: ({})
    property bool closing: false
 
    MessageDialog {

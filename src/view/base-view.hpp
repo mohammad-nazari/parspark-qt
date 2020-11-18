@@ -4,7 +4,7 @@
 #include <QObject>
 #include <memory>
 
-namespace parspark::view {
+namespace anar::view {
    class BaseView;
    using BaseViewPtr = std::shared_ptr<BaseView>;
    class BaseView : public QObject {
@@ -38,6 +38,6 @@ namespace parspark::view {
       QString m_error;
       bool m_done{false};
    };
-} // namespace parspark::view
+} // namespace anar::view
 
 #endif // VIEW_BASE_VIEW_HPP

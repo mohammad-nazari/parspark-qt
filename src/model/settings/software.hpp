@@ -1,57 +1,57 @@
-#ifndef MODEL_SOFTWARE_HPP
-#define MODEL_SOFTWARE_HPP
+#ifndef ANAR_SOFTWARE_HPP
+#define ANAR_SOFTWARE_HPP
 
+#include "model/base-model.hpp"
 #include "server.hpp"
-#include <model/base-model.hpp>
 
-namespace parspark::model {
+namespace anar::model {
    class Software;
    using SoftwarePtr = std::shared_ptr<Software>;
    class Software : public BaseModel {
-    public:
+     public:
       static SoftwarePtr Create();
       Software();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      bool ActiveEnter() const {
+      [[nodiscard]] bool ActiveEnter() const {
          return m_activeEnter;
       }
       void ActiveEnter(bool activeEnter) {
          m_activeEnter = activeEnter;
       }
-      bool ActiveExit() const {
+      [[nodiscard]] bool ActiveExit() const {
          return m_activeExit;
       }
       void ActiveExit(bool activeExit) {
          m_activeExit = activeExit;
       }
-      bool AsServer() const {
+      [[nodiscard]] bool AsServer() const {
          return m_asServer;
       }
       void AsServer(bool asServer) {
          m_asServer = asServer;
       }
-      uint16_t Port() const {
+      [[nodiscard]] uint16_t Port() const {
          return m_port;
       }
-      void Port(const uint16_t& port) {
+      void Port(uint16_t port) {
          m_port = port;
       }
-      ServerPtr ServerAddress() const {
+      [[nodiscard]] const ServerPtr& ServerAddress() const {
          return m_serverAddress;
       }
       void ServerAddress(const ServerPtr& serverAddress) {
          m_serverAddress = serverAddress;
       }
 
-    private:
+     private:
       bool m_activeEnter{false};
       bool m_activeExit{false};
       bool m_asServer{true};
       uint16_t m_port{50001};
       ServerPtr m_serverAddress{new Server};
    };
-} // namespace parspark::model
-#endif // MODEL_SOFTWARE_HPP
+}  // namespace anar::model
+#endif  // ANAR_SOFTWARE_HPP

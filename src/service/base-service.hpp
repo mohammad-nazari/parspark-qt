@@ -1,14 +1,14 @@
-#ifndef SERVICE_BASE_SERVICE_HPP
-#define SERVICE_BASE_SERVICE_HPP
+#ifndef ANAR_BASE_SERVICE_HPP
+#define ANAR_BASE_SERVICE_HPP
 
 #include <QString>
 #include <memory>
 
-namespace parspark::control {
+namespace anar::service {
    class BaseService;
    using BaseServicePtr = std::shared_ptr<BaseService>;
    class BaseService {
-    public:
+     public:
       static BaseServicePtr Create();
       explicit BaseService();
 
@@ -19,9 +19,9 @@ namespace parspark::control {
          m_error = error;
       }
 
-    protected:
+     protected:
       QString m_error;
    };
-} // namespace parspark::control
+}  // namespace anar::service
 
-#endif // SERVICE_BASE_SERVICE_HPP
+#endif  // ANAR_BASE_SERVICE_HPP

@@ -1,6 +1,6 @@
 #include "settings.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    SettingsPtr Settings::Create() {
       return std::make_shared<Settings>();
    }
@@ -8,22 +8,22 @@ namespace parspark::model {
        : BaseModel("Setting") {
    }
 
-   bool Settings::FromJson(const QVariantMap& json) {
+   bool Settings::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_settingAlpr->FromJson(json["alpr"].toMap());
-      m_settingBoard->FromJson(json["board"].toMap());
-      m_settingCamera->FromJson(json["camera"].toMap());
-      m_settingCardReader->FromJson(json["cardReader"].toMap());
-      m_settingDataBase->FromJson(json["dataBase"].toMap());
-      m_settingGate->FromJson(json["gate"].toMap());
-      m_settingParking->FromJson(json["parking"].toMap());
-      m_settingPayment->FromJson(json["payment"].toMap());
-      m_settingSoftware->FromJson(json["software"].toMap());
-      m_settingPrinter->FromJson(json["printer"].toMap());
+      m_settingAlpr->FromJson(json["alpr"]);
+      m_settingBoard->FromJson(json["board"]);
+      m_settingCamera->FromJson(json["camera"]);
+      m_settingCardReader->FromJson(json["cardReader"]);
+      m_settingDataBase->FromJson(json["dataBase"]);
+      m_settingGate->FromJson(json["gate"]);
+      m_settingParking->FromJson(json["parking"]);
+      m_settingPayment->FromJson(json["payment"]);
+      m_settingSoftware->FromJson(json["software"]);
+      m_settingPrinter->FromJson(json["printer"]);
       return true;
    }
-   const QVariantMap Settings::ToJson() const {
-      QVariantMap json = BaseModel::ToJson();
+   json_nlohmann Settings::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["alpr"] = m_settingAlpr->ToJson();
       json["board"] = m_settingBoard->ToJson();
       json["camera"] = m_settingCamera->ToJson();
@@ -36,4 +36,4 @@ namespace parspark::model {
       json["printer"] = m_settingPrinter->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

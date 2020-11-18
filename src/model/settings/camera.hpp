@@ -1,63 +1,63 @@
-#ifndef MODEL_CAMERA_HPP
-#define MODEL_CAMERA_HPP
+#ifndef ANAR_CAMERA_HPP
+#define ANAR_CAMERA_HPP
 
-#include <model/base-model.hpp>
+#include "model/base-model.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    class CameraInfo;
    using CameraInfoPtr = std::shared_ptr<CameraInfo>;
    class CameraInfo : public BaseModel {
-    public:
+     public:
       static CameraInfoPtr Create();
       CameraInfo();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      bool Enable() const {
+      [[nodiscard]] bool Enable() const {
          return m_enable;
       }
       void Enable(bool enable) {
          m_enable = enable;
       }
-      QString Address() const {
+      [[nodiscard]] const std::string& Address() const {
          return m_address;
       }
-      void Address(const QString& address) {
+      void Address(const std::string& address) {
          m_address = address;
       }
 
-    private:
+     private:
       bool m_enable{false};
-      QString m_address;
+      std::string m_address;
    };
 
    class Camera;
    using CameraPtr = std::shared_ptr<Camera>;
    class Camera : public BaseModel {
-    public:
+     public:
       static CameraPtr Create();
       Camera();
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      CameraInfoPtr Enter() const {
+      [[nodiscard]] const CameraInfoPtr& Enter() const {
          return m_enter;
       }
       void Enter(const CameraInfoPtr& enter) {
          m_enter = enter;
       }
-      CameraInfoPtr Exit() const {
+      [[nodiscard]] const CameraInfoPtr& Exit() const {
          return m_exit;
       }
       void Exit(const CameraInfoPtr& exit) {
          m_exit = exit;
       }
 
-    private:
+     private:
       CameraInfoPtr m_enter{new CameraInfo};
       CameraInfoPtr m_exit{new CameraInfo};
    };
-} // namespace parspark::model
-#endif // MODEL_CAMERA_HPP
+}  // namespace anar::model
+#endif  // ANAR_CAMERA_HPP

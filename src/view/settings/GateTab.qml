@@ -5,7 +5,6 @@ import "../common"
 
 Column {
    property var gateSettings: ({})
-   property var gateSerialPortsModel: []
 
    id: gateId
    padding: 10
@@ -21,7 +20,6 @@ Column {
          spacing: 5
          CommonCOMPort {
             id:  enterGateCompPortId
-            comPortModel: gateSerialPortsModel
             address: gateSettings.enter.address.portName
             onAddressChanged: {gateSettings.enter.address.portName = address}
             baudRate: gateSettings.enter.address.baudRate
@@ -95,12 +93,13 @@ Column {
        id: controlExitGateGroupBoxId
       title: qsTr("Control Exit Gate")
       checkable: true
+      checked: gateSettings.exit.enable
+      onCheckedChanged: {gateSettings.exit.enable = checked}
       Row {
          leftPadding: 5
          spacing: 5
          CommonCOMPort {
             id:  exitGateCompPortId
-            comPortModel: gateSerialPortsModel
             address: gateSettings.exit.address.portName
             onAddressChanged: {gateSettings.exit.address.portName = address}
             baudRate: gateSettings.exit.address.baudRate

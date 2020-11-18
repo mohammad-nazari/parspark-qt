@@ -1,44 +1,45 @@
-#ifndef MODEL_BASE_MODEL_HPP
-#define MODEL_BASE_MODEL_HPP
+#ifndef ANAR_BASE_MODEL_HPP
+#define ANAR_BASE_MODEL_HPP
 
-#include "jsonable.hpp"
 #include <memory>
-#include <qstring.h>
+#include <string>
 
-namespace parspark::model {
+#include "interface/i-a-jsonable.hpp"
+
+namespace anar::model {
    class BaseModel;
    using BaseModelPtr = std::shared_ptr<BaseModel>;
-   class BaseModel : public Jsonable {
-    public:
-      static BaseModelPtr Create(const QString& name);
-      BaseModel(const QString& name);
+   class BaseModel : public interfaces::IAJsonable {
+     public:
+      static BaseModelPtr Create(const std::string& name);
+      BaseModel(std::string name);
 
-      bool FromJson(const QVariantMap& json) override;
-      const QVariantMap ToJson() const override;
+      bool FromJson(const json_nlohmann& json) override;
+      json_nlohmann ToJson() override;
 
-      QString Id() const {
+      [[nodiscard]] const std::string& Id() const {
          return m_id;
       }
-      void Id(const QString& id) {
+      void Id(const std::string& id) {
          m_id = id;
       }
-      QString Name() const {
-          return m_name;
+      [[nodiscard]] const std::string& Name() const {
+         return m_name;
       }
-      void Name(const QString& name) {
-          m_name = name;
+      void Name(const std::string& name) {
+         m_name = name;
       }
-      QString Error() const {
-          return m_error;
+      [[nodiscard]] const std::string& Error() const {
+         return m_error;
       }
-      void Error(const QString& error) {
-          m_error = error;
+      void Error(const std::string& error) {
+         m_error = error;
       }
 
-    protected:
-      QString m_id;
-      QString m_name;
-      QString m_error;
+     protected:
+      std::string m_id;
+      std::string m_name;
+      std::string m_error;
    };
-} // namespace parspark::model
-#endif // MODEL_BASE_MODEL_HPP
+}  // namespace anar::model
+#endif  // ANAR_BASE_MODEL_HPP

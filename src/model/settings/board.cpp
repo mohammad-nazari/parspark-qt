@@ -1,6 +1,6 @@
 #include "board.hpp"
 
-namespace parspark::model {
+namespace anar::model {
    PriceBoardPtr PriceBoard::Create() {
       return std::make_shared<PriceBoard>();
    }
@@ -8,14 +8,14 @@ namespace parspark::model {
        : BaseModel("PriceBoard") {
    }
 
-   bool PriceBoard::FromJson(const QVariantMap& json) {
+   bool PriceBoard::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_address->FromJson(json["address"].toMap());
+      m_enable = json["enable"];
+      m_address->FromJson(json["address"]);
       return true;
    }
-   const QVariantMap PriceBoard::ToJson() const {
-      QVariantMap json;
+   json_nlohmann PriceBoard::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address->ToJson();
       return json;
@@ -28,17 +28,17 @@ namespace parspark::model {
        : BaseModel("PriceBoard") {
    }
 
-   bool CapacityBoard::FromJson(const QVariantMap& json) {
+   bool CapacityBoard::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_enable = json["enable"].toBool();
-      m_sendToBoard = json["sendToBoard"].toBool();
-      m_address->FromJson(json["address"].toMap());
-      m_serverAddress->FromJson(json["serverAddress"].toMap());
-      m_parkingName = json["parkingName"].toString();
+      m_enable = json["enable"];
+      m_sendToBoard = json["sendToBoard"];
+      m_address->FromJson(json["address"]);
+      m_serverAddress->FromJson(json["serverAddress"]);
+      m_parkingName = json["parkingName"];
       return true;
    }
-   const QVariantMap CapacityBoard::ToJson() const {
-      QVariantMap json;
+   json_nlohmann CapacityBoard::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["enable"] = m_enable;
       json["sendToBoard"] = m_sendToBoard;
       json["address"] = m_address->ToJson();
@@ -54,16 +54,16 @@ namespace parspark::model {
        : BaseModel("Board") {
    }
 
-   bool Board::FromJson(const QVariantMap& json) {
+   bool Board::FromJson(const json_nlohmann& json) {
       BaseModel::FromJson(json);
-      m_price->FromJson(json["price"].toMap());
-      m_capacity->FromJson(json["capacity"].toMap());
+      m_price->FromJson(json["price"]);
+      m_capacity->FromJson(json["capacity"]);
       return true;
    }
-   const QVariantMap Board::ToJson() const {
-      QVariantMap json;
+   json_nlohmann Board::ToJson() {
+      json_nlohmann json = BaseModel::ToJson();
       json["price"] = m_price->ToJson();
       json["capacity"] = m_capacity->ToJson();
       return json;
    }
-} // namespace parspark::model
+}  // namespace anar::model

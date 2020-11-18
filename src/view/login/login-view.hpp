@@ -4,23 +4,21 @@
 #include <QJSEngine>
 #include <QQmlEngine>
 #include <QVariantMap>
-#include <control/login-controller.hpp>
+#include <controller/login-controller.hpp>
 #include <model/user.hpp>
 #include <view/base-view.hpp>
 
-namespace parspark::view {
+namespace anar::view {
    class LoginView;
    using LoginViewPtr = std::shared_ptr<LoginView>;
    class LoginView : public BaseView {
       Q_OBJECT
-      Q_PROPERTY(
-          QVariantMap loginInfo MEMBER m_loginInfo NOTIFY loginInfoChanged)
+      Q_PROPERTY(QVariantMap loginInfo MEMBER m_loginInfo NOTIFY loginInfoChanged)
 
-    public:
+     public:
       static LoginViewPtr Create();
       explicit LoginView(QObject* parent = nullptr);
-      static LoginView* LoginViewObjectProvider(QQmlEngine* engine,
-                                              QJSEngine* scriptEngine);
+      static LoginView* LoginViewObjectProvider(QQmlEngine* engine, QJSEngine* scriptEngine);
 
       QVariantMap loginInfo() const {
          return m_loginInfo;
@@ -28,21 +26,20 @@ namespace parspark::view {
       void setLoginInfo(QVariantMap loginInfo) {
          m_loginInfo = loginInfo;
       }
-     Q_INVOKABLE bool IsLoggedin() {
+      Q_INVOKABLE bool IsLoggedin() {
          return m_done;
       }
 
-    signals:
+     signals:
       void loginInfoChanged(QVariantMap loginInfo);
 
-    public slots:
+     public slots:
       void loadLoginInfo();
       void doLogin(QVariantMap loginInfo);
 
-    private:
+     private:
       QVariantMap m_loginInfo;
-      control::LoginControllerPtr m_loginController{
-          new control::LoginController};
+      controller::LoginControllerPtr m_loginController{new controller::LoginController};
    };
-} // namespace parspark::view
-#endif // VIEW_LOGIN_VIEW_HPP
+}  // namespace anar::view
+#endif  // VIEW_LOGIN_VIEW_HPP
