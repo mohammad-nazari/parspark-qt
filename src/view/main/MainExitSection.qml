@@ -1,6 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
-import "../common"
+import "qrc:/src/view/common"
 
 Rectangle{
    id: exitRectangleId

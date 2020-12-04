@@ -1,6 +1,5 @@
 import QtQuick 2.13
 import QtQuick.Controls 1.4
-
 import ParsPark.View 1.0
 
 Column {

@@ -4,22 +4,21 @@
 #include <QJSEngine>
 #include <QQmlEngine>
 #include <QVariantMap>
-#include <controller/settings-controller.hpp>
-#include <view/base-view.hpp>
+
+#include "controller/settings-controller.hpp"
+#include "view/base-view.hpp"
 
 namespace anar::view {
    class SettingsView;
    using SettingsViewPtr = std::shared_ptr<SettingsView>;
    class SettingsView : public BaseView {
       Q_OBJECT
-      Q_PROPERTY(QVariantMap settingsInfo MEMBER m_settingsInfo NOTIFY
-                     settingsInfoChanged)
+      Q_PROPERTY(QVariantMap settingsInfo MEMBER m_settingsInfo NOTIFY settingsInfoChanged)
 
-    public:
+     public:
       static SettingsViewPtr Create();
       explicit SettingsView(QObject* parent = nullptr);
-      static QObject* SettingViewObjectProvider(QQmlEngine* engine,
-                                              QJSEngine* scriptEngine);
+      static QObject* SettingViewObjectProvider(QQmlEngine* engine, QJSEngine* scriptEngine);
 
       QVariantMap settingsInfo() const {
          return m_settingsInfo;
@@ -28,17 +27,16 @@ namespace anar::view {
          m_settingsInfo = settingsInfo;
       }
 
-    signals:
-        void settingsInfoChanged(QVariantMap settingsInfo);
+     signals:
+      void settingsInfoChanged(QVariantMap settingsInfo);
 
-    public slots:
+     public slots:
       void loadSettings();
       void saveSettings(QVariantMap settingsInfo);
 
-    private:
+     private:
       QVariantMap m_settingsInfo;
-      controller::SettingsControllerPtr m_settingsController{
-          new controller::SettingsController};
+      controller::SettingsControllerPtr m_settingsController{new controller::SettingsController};
    };
-} // namespace anar::view
-#endif // VIEW_SETTING_VIEW_HPP
+}  // namespace anar::view
+#endif  // VIEW_SETTING_VIEW_HPP

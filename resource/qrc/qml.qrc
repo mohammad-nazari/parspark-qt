@@ -131,6 +131,7 @@
         <file>../../src/view/settings/ParkingInfoTab.qml</file>
         <file>../../src/view/settings/PaymentTab.qml</file>
         <file>../../src/view/settings/PrinterTab.qml</file>
+        <file>../../src/view/settings/SoftwareTab.qml</file>
         <file>../../src/view/settings/settings.qml</file>
     </qresource>
 </RCC>

@@ -51,7 +51,7 @@ Rectangle{
          Image {
             id: platePictureId
             anchors.fill: parent
-            source: "qrc:/resource/image/png/plate.png"
+            source: "qrc:/image/png/plate.png"
          }
          TextInput  {
             id: firstNoId

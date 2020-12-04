@@ -1,6 +1,8 @@
 #include "qt-std-converter.hpp"
 
+#include <QDebug>
 #include <QJsonDocument>
+#include <iostream>
 
 namespace anar::service {
    QtStdConverter::QtStdConverter() = default;
@@ -20,21 +22,20 @@ namespace anar::service {
       }
       return qVector;
    }
-   QVariant QtStdConverter::JsonToQVariant(const nlohmann::basic_json<>& json) {
-      QJsonDocument qJsonDocument = QJsonDocument::fromJson(json.dump().c_str());
-      return QVariant(qJsonDocument);
+   QVariant QtStdConverter::JsonToQVariant(const json_nlohmann& json) {
+      QJsonParseError* jsonParseError = nullptr;
+      QJsonDocument qJsonDocument = QJsonDocument::fromJson(json.dump().c_str(), jsonParseError);
+      return qJsonDocument.toVariant();
    }
-   nlohmann::basic_json<> QtStdConverter::QVariantToJson(const QVariant& qVariant) {
-      return nlohmann::basic_json<>::parse(qVariant.toJsonDocument().toJson().toStdString());
+   json_nlohmann QtStdConverter::QVariantToJson(const QVariant& qVariant) {
+      return json_nlohmann::parse(qVariant.toJsonDocument().toJson().toStdString());
    }
-   QVariantMap QtStdConverter::JsonToQVariantMap(const nlohmann::basic_json<>& json) {
+   QVariantMap QtStdConverter::JsonToQVariantMap(const json_nlohmann& json) {
       return JsonToQVariant(json).toMap();
    }
-   nlohmann::basic_json<> QtStdConverter::QVariantMapToJson(const QVariantMap& qVariantMap) {
-      nlohmann::basic_json<> json;
-      for(const auto& variant: qVariantMap.toStdMap()){
-         json[variant.first.toStdString()] = QVariantToJson(variant.second);
-      }
+   json_nlohmann QtStdConverter::QVariantMapToJson(const QVariantMap& qVariantMap) {
+      QJsonDocument qJson = QJsonDocument::fromVariant(qVariantMap);
+      json_nlohmann json = json_nlohmann::parse(qJson.toJson().toStdString());
       return json;
    }
-}  // namespace anar::common
+}  // namespace anar::service

@@ -1,7 +1,7 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 1.4
-import "../common"
+import "qrc:/src/view/common"
 
 Column{
    property var dataBaseSettings: ({})
@@ -15,8 +15,8 @@ Column{
       labelWidth: 100
       placeholderTextText:qsTr("Input database server address")
       textFieldWidth: 500
-      textFieldText: dataBaseSettings.address
-      onTextFieldTextChanged: {dataBaseSettings.address = textFieldText}
+      textFieldText: dataBaseSettings.hostAddress
+      onTextFieldTextChanged: {dataBaseSettings.hostAddress = textFieldText}
    }
    CommonTextField {
       id: serverUserTextFieldlId
@@ -34,8 +34,8 @@ Column{
       placeholderTextText:qsTr("Input database server user password")
       textFieldWidth: 500
       textFieldEchoMode: TextInput.Password
-      textFieldText: dataBaseSettings.password
-      onTextFieldTextChanged: {dataBaseSettings.password = textFieldText}
+      textFieldText: dataBaseSettings.passWord
+      onTextFieldTextChanged: {dataBaseSettings.passWord = textFieldText}
    }
    CommonSpinBox {
       id: serverPortSpinBoxId

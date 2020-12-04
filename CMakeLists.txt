@@ -18,6 +18,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+message("Generator: ${CMAKE_GENERATOR}")
+message("C++ standard: ${CMAKE_CXX_STANDARD}")
+
 #set(DCMAKE_SH "CMAKE_SH-NOTFOUND")
 
 # For Poco
@@ -181,7 +184,7 @@ set(
         src/controller/settings-controller.cpp
 
         src/main.cpp
-        src/common/binary.cpp src/common/binary.hpp)
+        src/common/binary.cpp src/common/binary.hpp src/const/view-const.hpp)
 
 add_executable(
         ${PROJECT_NAME}
@@ -221,3 +224,5 @@ elseif (UNIX)
     file(COPY "${ANAR_MYSQL_DIR}/lib/libmysql.so"
             DESTINATION "${CMAKE_BINARY_DIR}/bin")
 endif ()
+add_executable( .clang-format)
+add_executable(main src/main.cpp)

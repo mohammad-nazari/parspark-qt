@@ -2,7 +2,7 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 
 Rectangle {
-    property string imageSource: qsTr("qrc:/resource/image/png/car2.png")
+    property string imageSource: qsTr("qrc:/image/png/car2.png")
 
     id: platePictureRectangleId
     color: "transparent"

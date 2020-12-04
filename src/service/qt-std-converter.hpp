@@ -6,7 +6,7 @@
 #include <QVector>
 #include <vector>
 
-#include "nlohmann/json.hpp"
+#include "interface/i-a-jsonable.hpp"
 
 namespace anar::service {
    class QtStdConverter {
@@ -22,10 +22,10 @@ namespace anar::service {
       static std::vector<std::string> QStringListToVector(const QStringList& qVector);
       static QStringList VectorToQStringList(const std::vector<std::string>& stdVector);
 
-      static QVariant JsonToQVariant(const nlohmann::basic_json<>& json);
-      static nlohmann::basic_json<> QVariantToJson(const QVariant& qVariant);
-      static QVariantMap JsonToQVariantMap(const nlohmann::basic_json<>& json);
-      static nlohmann::basic_json<> QVariantMapToJson(const QVariantMap& qVariantMap);
+      static QVariant JsonToQVariant(const json_nlohmann& json);
+      static json_nlohmann QVariantToJson(const QVariant& qVariant);
+      static QVariantMap JsonToQVariantMap(const json_nlohmann& json);
+      static json_nlohmann QVariantMapToJson(const QVariantMap& qVariantMap);
    };
    template <typename Temp>
    std::vector<Temp> QtStdConverter::QVectorToVector(const QVector<Temp>& qVector) {

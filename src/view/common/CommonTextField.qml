@@ -9,8 +9,8 @@ Row {
    property string textFieldText: qsTr("")
    property var textFieldEchoMode: TextInput.Normal
    property var textFieldValdator: RegExpValidator {}
-   property string imageSourceTrue: qsTr("qrc:/resource/image/png/hotovo.png")
-   property string imageSourceFalse: qsTr("qrc:/resource/image/png/check.png")
+   property string imageSourceTrue: qsTr("qrc:/image/png/hotovo.png")
+   property string imageSourceFalse: qsTr("qrc:/image/png/check.png")
 
    leftPadding: 5
    spacing: 2

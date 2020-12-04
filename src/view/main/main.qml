@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.3
-import "../common"
+import "qrc:/src/view/common"
 
 ApplicationWindow  {
    property real relativeSize: 1.333334

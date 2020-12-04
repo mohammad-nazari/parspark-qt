@@ -31,7 +31,6 @@ namespace anar::view {
    void LoginView::doLogin(QVariantMap loginInfo) {
       m_loginInfo = loginInfo;
       model::LoginPtr login{new model::Login};
-      qDebug() << "Login----->1";
       login->UserName(m_loginInfo["userName"].toString().toStdString());
       login->PassWord(m_loginInfo["passWord"].toString().toStdString());
       login->DBAddress(m_loginInfo["serverAddress"].toString().toStdString());

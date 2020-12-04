@@ -1,6 +1,7 @@
 #include "settings-view.hpp"
 
 #include <QDebug>
+#include <utility>
 
 #include "service/qt-std-converter.hpp"
 
@@ -22,7 +23,7 @@ namespace anar::view {
       m_settingsInfo = service::QtStdConverter::JsonToQVariantMap(m_settingsController->Load()->ToJson());
    }
    void SettingsView::saveSettings(QVariantMap settingsInfo) {
-      m_settingsInfo = settingsInfo;
+      m_settingsInfo = std::move(settingsInfo);
       // ToDO: validate settings
       // Save settings
       model::SettingsPtr settings{new model::Settings};

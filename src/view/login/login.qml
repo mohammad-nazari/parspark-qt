@@ -2,7 +2,7 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.3
-import "../common"
+import "qrc:/src/view/common"
 
 import ParsPark.View 1.0
 
