@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(ParsPark VERSION 1.0.0)
+project(ParsPark)
 
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
@@ -50,6 +50,9 @@ set(ANAR_ODB_LIB odb)
 set(ANAR_ODB_MYSQL_LIB odb-mysql)
 set(ANAR_RS232_LIB rs232)
 set(ANAR_MYSQL_LIB mysql)
+set(ANAR_LIB_MYSQL_LIB libmysql)
+set(ANAR_MYSQL_CLIENT_LIB mysqlclient)
+set(ANAR_MYSQL_CONNECTOR_C_LIB mysqlconnectorc)
 
 set(ANAR_POCO_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_LIB}")
 set(ANAR_POCO_FOUNDATION_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_LIB}/Foundation/include")
@@ -66,10 +69,11 @@ set(ANAR_ODB_DIR "${ANAR_LIB_DIR}/odb/${ANAR_ODB_LIB}")
 set(ANAR_ODB_MYSQL_DIR "${ANAR_LIB_DIR}/odb/${ANAR_ODB_MYSQL_LIB}")
 set(ANAR_RS232_DIR "${ANAR_LIB_DIR}/${ANAR_RS232_LIB}")
 if (WIN32)
-    set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/win/x64")
+    set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/win/x64")
 elseif (UNIX)
-    set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/unix/x64")
+    set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/unix/x64")
 endif ()
+set(ANAR_MYSQL_CONNECTOR_C_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysqlconnectorc")
 
 set(ANAR_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
 set(ANAR_POCO_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_POCO_LIB}")
@@ -83,6 +87,7 @@ set(ANAR_OATPP_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_OATPP_LIB}")
 set(ANAR_ODB_BIN_DIR "${ANAR_LIB_BIN_DIR}/odb/${ANAR_ODB_LIB}")
 set(ANAR_ODB_MYSQL_BIN_DIR "${ANAR_LIB_BIN_DIR}/odb/${ANAR_ODB_MYSQL_LIB}")
 set(ANAR_RS232_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_RS232_LIB}")
+set(ANAR_MYSQL_CONNECTOR_C_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_RS232_LIB}")
 
 #set(MYSQL_ROOT_DIR "${ANAR_MYSQL_DIR}") # POCO Set root installation path where to find include path and libraries of MySQL or MariaDB or
 #set(MYSQL_ROOT_INCLUDE_DIRS "${ANAR_MYSQL_DIR}/include") # POCO Set include paths where to find MySQL or MariaDB headers
@@ -105,6 +110,7 @@ link_directories(
 include_directories(
         "${ANAR_LIB_DIR}"
         "${ANAR_MYSQL_DIR}/include"
+#        "${ANAR_MYSQL_CONNECTOR_C_DIR}"
         "${ANAR_NLOHMANN_DIR}/include"
         "${ANAR_POCO_FOUNDATION_DIR}"
         "${ANAR_POCO_DATA_DIR}"
@@ -114,12 +120,13 @@ include_directories(
         "${ANAR_SOURCE_DIR}"
 )
 
-add_subdirectory("${ANAR_POCO_DIR}")
-add_subdirectory("${ANAR_LIMEREPORT_DIR}")
 add_subdirectory("${ANAR_PNG_DIR}")
 add_subdirectory("${ANAR_ZLIB_DIR}")
 add_subdirectory("${ANAR_ZINT_DIR}")
 add_subdirectory("${ANAR_QZINT_DIR}")
+#add_subdirectory("${ANAR_MYSQL_CONNECTOR_C_DIR}")
+add_subdirectory("${ANAR_POCO_DIR}")
+add_subdirectory("${ANAR_LIMEREPORT_DIR}")
 add_subdirectory("${ANAR_NLOHMANN_DIR}")
 add_subdirectory("${ANAR_OATPP_DIR}")
 add_subdirectory("${ANAR_ODB_DIR}")
@@ -138,6 +145,7 @@ set(
         resource/qrc/qml.qrc
 
         src/common/string.cpp
+        src/common/binary.cpp
 
         src/interface/i-fileable.cpp
         src/interface/i-stringable.cpp
@@ -182,9 +190,10 @@ set(
         src/controller/common-controller.cpp
         src/controller/login-controller.cpp
         src/controller/settings-controller.cpp
+        src/nazari-test.cpp
 
         src/main.cpp
-        src/common/binary.cpp src/common/binary.hpp src/const/view-const.hpp)
+)
 
 add_executable(
         ${PROJECT_NAME}
@@ -224,5 +233,5 @@ elseif (UNIX)
     file(COPY "${ANAR_MYSQL_DIR}/lib/libmysql.so"
             DESTINATION "${CMAKE_BINARY_DIR}/bin")
 endif ()
-add_executable( .clang-format)
-add_executable(main src/main.cpp)
+add_executable(.clang-format)
+add_executable(main src/main.cpp src/nazari-test.cpp src/nazari-test.hpp)

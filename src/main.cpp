@@ -5,11 +5,15 @@
 #include "Poco/Data/Session.h"
 #include "Poco/Data/SessionFactory.h"
 #include "const/view-const.hpp"
+#include "nazari-test.hpp"
+#include <filesystem>
 #include "view/common-view.hpp"
 #include "view/login/login-view.hpp"
 #include "view/settings/settings-view.hpp"
 
 int main(int argc, char* argv[]) {
+//   anar::NazariTest::TestPocoReadAndWrite();
+//   return 0;
    //   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
    QGuiApplication app(argc, argv);
    // Register the singleton type provider with QML by calling this

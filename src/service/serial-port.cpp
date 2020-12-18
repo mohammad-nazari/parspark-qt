@@ -1,6 +1,7 @@
 #include "serial-port.hpp"
 
 #include "lib/rs232/rs232.h"
+#include <string>
 
 namespace anar::service {
    const std::vector<uint32_t> SerialPort::m_baudRates = {
