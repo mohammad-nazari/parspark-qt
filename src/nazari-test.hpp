@@ -5,6 +5,7 @@ namespace anar {
    class NazariTest {
      public:
       static void TestPocoReadAndWrite();
+      static void TestPocoMySQL();
    };
 }  // namespace parspark
 

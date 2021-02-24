@@ -18,6 +18,7 @@
 #define Data_MySQL_ResultMetadata_INCLUDED
 
 
+#include "Poco/Data/MySQL/MySQLException.h"
 #include <mysql.h>
 #include <vector>
 #include "Poco/Data/MetaColumn.h"

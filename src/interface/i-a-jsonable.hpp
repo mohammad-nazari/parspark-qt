@@ -5,8 +5,8 @@
 
 #include "i-fileable.hpp"
 #include "i-stringable.hpp"
-#include "lib/nlohmann/fifo_map/src/fifo_map.hpp"
-#include "lib/nlohmann/nlohmann_json/include/nlohmann/json.hpp"
+#include "lib/nlohmann/fifo-map/src/fifo_map.hpp"
+#include "lib/nlohmann/nlohmann-json/include/nlohmann/json.hpp"
 
 template <class K, class V, class dummy_compare, class A>
 using my_workaround_fifo_map = nlohmann::fifo_map<K, V, nlohmann::fifo_map_compare<K>, A>;

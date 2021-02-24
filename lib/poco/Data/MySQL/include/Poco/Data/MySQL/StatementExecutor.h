@@ -18,8 +18,8 @@
 #define Data_MySQL_StatementHandle_INCLUDED
 
 
-#include <mysql.h>
 #include "Poco/Data/MySQL/MySQLException.h"
+#include <mysql.h>
 
 
 namespace Poco {

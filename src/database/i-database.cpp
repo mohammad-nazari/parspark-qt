@@ -9,10 +9,10 @@ namespace anar::database {
    }
    IDatabase::~IDatabase() = default;
 
-   bool IDatabase::Connect() {
+   bool IDatabase::Initialize() {
       return true;
    }
-   bool IDatabase::Initialize() {
+   bool IDatabase::Connect() {
       return true;
    }
    bool IDatabase::Insert(const std::map<std::string, std::string>& dataInfos) {

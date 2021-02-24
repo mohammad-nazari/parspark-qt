@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.10)
 
 project(odb-mysql VERSION 2.4.0 LANGUAGES CXX)
 
+set(ODB_PROJECT_NAME                   ODB)
+set(ODB_MYSQL_LIB_ALIAS_NAME           MySQL)
+
 set(sources
         odb/mysql/connection.hxx
         odb/mysql/connection.ixx
@@ -88,6 +91,7 @@ add_library(
         SHARED
         ${sources}
 )
+add_library(${ODB_PROJECT_NAME}::${ODB_MYSQL_LIB_ALIAS_NAME} ALIAS ${PROJECT_NAME})
 
 target_link_libraries(
         ${PROJECT_NAME}

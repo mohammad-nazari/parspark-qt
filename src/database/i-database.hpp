@@ -18,8 +18,8 @@ namespace anar::database {
       IDatabase(model::DataBasePtr dataBase);
       virtual ~IDatabase();
 
-      bool Connect();
       bool Initialize();
+      bool Connect();
       bool Insert(const std::map<std::string, std::string>& dataInfos);
       template <typename TableTemp>
       std::vector<TableTemp> Select(const odb::query<TableTemp>& query) {

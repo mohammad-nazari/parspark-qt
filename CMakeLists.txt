@@ -2,6 +2,14 @@ cmake_minimum_required(VERSION 3.16)
 
 project(ParsPark)
 
+if(${WIN32})
+    # Set minimum windows version to windows 7
+    #this method adds the necessary compiler flag
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_WIN32_WINNT=0x0601")
+    #Or this adds a preprocessor definition to the project
+#    add_definitions(-D_WIN32_WINNT=0x0601)
+endif()
+
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
 set(PROJECT_VERSION_PATCH 0)
@@ -30,68 +38,76 @@ if (CMAKE_COMPILER_IS_MINGW)
     add_compile_options(-Wa,-mbig-obj)   # Note: new - fixes "file too big"
 endif ()
 
-#option(ENABLE_DATA_MYSQL "Enable mysql option for find mysql package" ON)
+set(ENABLE_DATA_MYSQL true)
+set(MYSQL_FOUND true)
 
 set(ANAR_LIB_DIR "${CMAKE_SOURCE_DIR}/lib")
 set(ANAR_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
 
-set(ANAR_POCO_LIB poco)
 set(ANAR_POCO_FOUNDATION_LIB Poco::Foundation)
 set(ANAR_POCO_DATA_LIB Poco::Data)
-#set(ANAR_POCO_DATA_MYSQL_LIB Poco::DataMySQL)
+set(ANAR_POCO_DATA_MYSQL_LIB Poco::DataMySQL)
+set(ANAR_POCO_DATA_SQLITE_LIB Poco::DataSQLite)
 set(ANAR_LIMEREPORT_LIB limereport)
 set(ANAR_PNG_LIB png)
 set(ANAR_ZLIB_LIB zlib)
 set(ANAR_ZINT_LIB zint)
 set(ANAR_QZINT_LIB qzint)
-set(ANAR_NLOHMANN_LIB nlohmann_json)
+set(ANAR_NLOHMANN_JSON_LIB nlohman::json)
 set(ANAR_OATPP_LIB oatpp)
 set(ANAR_ODB_LIB odb)
-set(ANAR_ODB_MYSQL_LIB odb-mysql)
+set(ANAR_ODB_MYSQL_LIB ODB::MySQL)
 set(ANAR_RS232_LIB rs232)
 set(ANAR_MYSQL_LIB mysql)
-set(ANAR_LIB_MYSQL_LIB libmysql)
-set(ANAR_MYSQL_CLIENT_LIB mysqlclient)
-set(ANAR_MYSQL_CONNECTOR_C_LIB mysqlconnectorc)
 
-set(ANAR_POCO_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_LIB}")
-set(ANAR_POCO_FOUNDATION_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_LIB}/Foundation/include")
-set(ANAR_POCO_DATA_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_LIB}/Data/include")
-#set(ANAR_POCO_DATA_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_LIB}/Data/MySQL/include")
-set(ANAR_LIMEREPORT_DIR "${ANAR_LIB_DIR}/${ANAR_LIMEREPORT_LIB}")
-set(ANAR_PNG_DIR "${ANAR_LIB_DIR}/${ANAR_PNG_LIB}")
-set(ANAR_ZLIB_DIR "${ANAR_LIB_DIR}/${ANAR_ZLIB_LIB}")
-set(ANAR_ZINT_DIR "${ANAR_LIB_DIR}/${ANAR_ZINT_LIB}")
-set(ANAR_QZINT_DIR "${ANAR_LIB_DIR}/${ANAR_QZINT_LIB}")
-set(ANAR_NLOHMANN_DIR "${ANAR_LIB_DIR}/nlohmann/${ANAR_NLOHMANN_LIB}")
-set(ANAR_OATPP_DIR "${ANAR_LIB_DIR}/${ANAR_OATPP_LIB}")
-set(ANAR_ODB_DIR "${ANAR_LIB_DIR}/odb/${ANAR_ODB_LIB}")
-set(ANAR_ODB_MYSQL_DIR "${ANAR_LIB_DIR}/odb/${ANAR_ODB_MYSQL_LIB}")
+set(ANAR_POCO_FOLDER poco)
+set(ANAR_LIMEREPORT_FOLDER lime-report)
+set(ANAR_PNG_FOLDER png)
+set(ANAR_ZLIB_FOLDER zlib)
+set(ANAR_ZINT_FOLDER zint)
+set(ANAR_QZINT_FOLDER qzint)
+set(ANAR_NLOHMANN_FOLDER nlohmann)
+set(ANAR_NLOHMANN_JSON_FOLDER nlohmann-json)
+set(ANAR_OATPP_FOLDER oatpp)
+set(ANAR_ODB_FOLDER odb)
+set(ANAR_ODB_MYSQL_FOLDER odb-mysql)
+set(ANAR_RS232_FOLDER rs232)
+set(ANAR_MYSQL_FOLDER mysql)
+
+set(ANAR_POCO_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}")
+set(ANAR_POCO_FOUNDATION_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Foundation/include")
+set(ANAR_POCO_DATA_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Data/include")
+set(ANAR_POCO_DATA_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Data/MySQL/include")
+set(ANAR_POCO_DATA_SQLITE_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Data/SQLite/include")
+set(ANAR_LIMEREPORT_DIR "${ANAR_LIB_DIR}/${ANAR_LIMEREPORT_FOLDER}")
+set(ANAR_PNG_DIR "${ANAR_LIB_DIR}/${ANAR_PNG_FOLDER}")
+set(ANAR_ZLIB_DIR "${ANAR_LIB_DIR}/${ANAR_ZLIB_FOLDER}")
+set(ANAR_ZINT_DIR "${ANAR_LIB_DIR}/${ANAR_ZINT_FOLDER}")
+set(ANAR_QZINT_DIR "${ANAR_LIB_DIR}/${ANAR_QZINT_FOLDER}")
+set(ANAR_NLOHMANN_DIR "${ANAR_LIB_DIR}/${ANAR_NLOHMANN_FOLDER}")
+set(ANAR_NLOHMANN_JSON_DIR "${ANAR_NLOHMANN_DIR}/${ANAR_NLOHMANN_JSON_FOLDER}")
+set(ANAR_OATPP_DIR "${ANAR_LIB_DIR}/${ANAR_OATPP_FOLDER}")
+set(ANAR_ODB_DIR "${ANAR_LIB_DIR}/${ANAR_ODB_FOLDER}/${ANAR_ODB_FOLDER}")
+set(ANAR_ODB_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_ODB_FOLDER}/${ANAR_ODB_MYSQL_FOLDER}")
 set(ANAR_RS232_DIR "${ANAR_LIB_DIR}/${ANAR_RS232_LIB}")
 if (WIN32)
     set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/win/x64")
 elseif (UNIX)
     set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/unix/x64")
 endif ()
-set(ANAR_MYSQL_CONNECTOR_C_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysqlconnectorc")
 
 set(ANAR_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
-set(ANAR_POCO_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_POCO_LIB}")
-#set(ANAR_LIMEREPORT_BIN_DIR "${ANAR_LIB_BIN_DIR}/nlohmann/${ANAR_LIMEREPORT_LIB}")
 set(ANAR_PNG_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_PNG_LIB}")
 set(ANAR_ZLIB_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_ZLIB_LIB}")
 set(ANAR_ZINT_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_ZINT_LIB}")
 set(ANAR_QZINT_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_QZINT_LIB}")
-set(ANAR_NLOHMANN_BIN_DIR "${ANAR_LIB_BIN_DIR}/nlohmann/${ANAR_NLOHMANN_LIB}")
-set(ANAR_OATPP_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_OATPP_LIB}")
-set(ANAR_ODB_BIN_DIR "${ANAR_LIB_BIN_DIR}/odb/${ANAR_ODB_LIB}")
-set(ANAR_ODB_MYSQL_BIN_DIR "${ANAR_LIB_BIN_DIR}/odb/${ANAR_ODB_MYSQL_LIB}")
-set(ANAR_RS232_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_RS232_LIB}")
-set(ANAR_MYSQL_CONNECTOR_C_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_RS232_LIB}")
 
-#set(MYSQL_ROOT_DIR "${ANAR_MYSQL_DIR}") # POCO Set root installation path where to find include path and libraries of MySQL or MariaDB or
-#set(MYSQL_ROOT_INCLUDE_DIRS "${ANAR_MYSQL_DIR}/include") # POCO Set include paths where to find MySQL or MariaDB headers
-#set(MYSQL_ROOT_LIBRARY_DIRS "${ANAR_MYSQL_DIR}/lib") # POCO Set library paths where to find MySQL or MariaDB libraries
+set(MYSQL_ROOT_DIR "${ANAR_MYSQL_DIR}") # POCO Set root installation path where to find include path and libraries of MySQL or MariaDB or
+set(PC_MYSQL_DIR "${ANAR_MYSQL_DIR}") # POCO Set root installation path where to find include path and libraries of MySQL or MariaDB or
+set(MYSQL_ROOT_INCLUDE_DIRS "${ANAR_MYSQL_DIR}/include") # POCO Set include paths where to find MySQL or MariaDB headers
+set(PC_MYSQL_INCLUDE_DIRS "${ANAR_MYSQL_DIR}/include") # POCO Set include paths where to find MySQL or MariaDB headers
+set(MYSQL_ROOT_LIBRARY_DIRS "${ANAR_MYSQL_DIR}/lib") # POCO Set library paths where to find MySQL or MariaDB libraries
+set(PC_MYSQL_LIBRARY_DIRS "${ANAR_MYSQL_DIR}/lib") # POCO Set library paths where to find MySQL or MariaDB libraries
 
 find_package(
         Qt5
@@ -110,11 +126,11 @@ link_directories(
 include_directories(
         "${ANAR_LIB_DIR}"
         "${ANAR_MYSQL_DIR}/include"
-#        "${ANAR_MYSQL_CONNECTOR_C_DIR}"
-        "${ANAR_NLOHMANN_DIR}/include"
+        "${ANAR_NLOHMANN_JSON_DIR}/include"
         "${ANAR_POCO_FOUNDATION_DIR}"
         "${ANAR_POCO_DATA_DIR}"
-        #        "${ANAR_POCO_DATA_MYSQL_DIR}"
+        "${ANAR_POCO_DATA_MYSQL_DIR}"
+        "${ANAR_POCO_DATA_SQLITE_DIR}"
         "${ANAR_ODB_DIR}"
         "${ANAR_ODB_MYSQL_DIR}"
         "${ANAR_SOURCE_DIR}"
@@ -124,10 +140,9 @@ add_subdirectory("${ANAR_PNG_DIR}")
 add_subdirectory("${ANAR_ZLIB_DIR}")
 add_subdirectory("${ANAR_ZINT_DIR}")
 add_subdirectory("${ANAR_QZINT_DIR}")
-#add_subdirectory("${ANAR_MYSQL_CONNECTOR_C_DIR}")
 add_subdirectory("${ANAR_POCO_DIR}")
 add_subdirectory("${ANAR_LIMEREPORT_DIR}")
-add_subdirectory("${ANAR_NLOHMANN_DIR}")
+add_subdirectory("${ANAR_NLOHMANN_JSON_DIR}")
 add_subdirectory("${ANAR_OATPP_DIR}")
 add_subdirectory("${ANAR_ODB_DIR}")
 add_subdirectory("${ANAR_ODB_MYSQL_DIR}")
@@ -200,25 +215,27 @@ add_executable(
         ${PARSPARK_SOURCES}
 )
 
-target_compile_definitions(
-        ${PROJECT_NAME}
-        PRIVATE
-        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-)
+#target_compile_definitions(
+#        ${PROJECT_NAME}
+#        PRIVATE
+#        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+#)
 
 target_link_libraries(
         ${PROJECT_NAME}
         Qt5::Core
         Qt5::Qml
         Qt5::Quick
-        ${ANAR_ODB_LIB}
-        ${ANAR_LIMEREPORT_LIB}
-        ${ANAR_NLOHMANN_LIB}
         ${ANAR_MYSQL_LIB}
-        ${ANAR_ODB_MYSQL_LIB}
         ${ANAR_POCO_FOUNDATION_LIB}
         ${ANAR_POCO_DATA_LIB}
-        #        ${ANAR_POCO_DATA_MYSQL_LIB}
+        ${ANAR_POCO_DATA_MYSQL_LIB}
+        ${ANAR_POCO_DATA_SQLITE_LIB}
+        ${ANAR_LIMEREPORT_LIB}
+        ${ANAR_NLOHMANN_JSON_LIB}
+        ${ANAR_ODB_LIB}
+        ${ANAR_ODB_MYSQL_LIB}
+        ${ANAR_OATPP_LIB}
 )
 
 qt5_create_translation(
@@ -233,5 +250,3 @@ elseif (UNIX)
     file(COPY "${ANAR_MYSQL_DIR}/lib/libmysql.so"
             DESTINATION "${CMAKE_BINARY_DIR}/bin")
 endif ()
-add_executable(.clang-format)
-add_executable(main src/main.cpp src/nazari-test.cpp src/nazari-test.hpp)

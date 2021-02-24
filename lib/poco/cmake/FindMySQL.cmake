@@ -104,7 +104,7 @@ endif()
 
 set(MYSQL_VERSION ${PC_MYSQL_VERSION})
 
-find_package_handle_standard_args(MySQL
+find_package_handle_standard_args(MYSQL
   FOUND_VAR MYSQL_FOUND
   REQUIRED_VARS
 	MYSQL_INCLUDE_DIR

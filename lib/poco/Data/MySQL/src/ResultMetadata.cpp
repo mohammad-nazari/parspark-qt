@@ -13,7 +13,6 @@
 
 
 #include "Poco/Data/MySQL/ResultMetadata.h"
-#include "Poco/Data/MySQL/MySQLException.h"
 #include <cstring>
 
 
@@ -76,16 +75,16 @@ namespace
 		default:
 			throw Poco::Data::MySQL::StatementException("unknown field type");
 		}
-	}	
+	}
 
 	Poco::Data::MetaColumn::ColumnDataType fieldType(const MYSQL_FIELD& field)
-		/// Convert field MySQL-type to Poco-type	
+		/// Convert field MySQL-type to Poco-type
 	{
 		bool unsig = ((field.flags & UNSIGNED_FLAG) == UNSIGNED_FLAG);
 
 		switch (field.type)
 		{
-		case MYSQL_TYPE_TINY:     
+		case MYSQL_TYPE_TINY:
 			if (unsig) return Poco::Data::MetaColumn::FDT_UINT8;
 			return Poco::Data::MetaColumn::FDT_INT8;
 
@@ -94,31 +93,31 @@ namespace
 			return Poco::Data::MetaColumn::FDT_INT16;
 
 		case MYSQL_TYPE_INT24:
-		case MYSQL_TYPE_LONG:     
+		case MYSQL_TYPE_LONG:
 			if (unsig) return Poco::Data::MetaColumn::FDT_UINT32;
 			return Poco::Data::MetaColumn::FDT_INT32;
 
-		case MYSQL_TYPE_FLOAT:    
+		case MYSQL_TYPE_FLOAT:
 			return Poco::Data::MetaColumn::FDT_FLOAT;
 
 		case MYSQL_TYPE_DECIMAL:
 		case MYSQL_TYPE_NEWDECIMAL:
-		case MYSQL_TYPE_DOUBLE:   
+		case MYSQL_TYPE_DOUBLE:
 			return Poco::Data::MetaColumn::FDT_DOUBLE;
 
-		case MYSQL_TYPE_LONGLONG: 
+		case MYSQL_TYPE_LONGLONG:
 			if (unsig) return Poco::Data::MetaColumn::FDT_UINT64;
 			return Poco::Data::MetaColumn::FDT_INT64;
-			
+
 		case MYSQL_TYPE_DATE:
 			return Poco::Data::MetaColumn::FDT_DATE;
-			
+
 		case MYSQL_TYPE_TIME:
 			return Poco::Data::MetaColumn::FDT_TIME;
-			
+
 		case MYSQL_TYPE_DATETIME:
 			return Poco::Data::MetaColumn::FDT_TIMESTAMP;
-			
+
 		case MYSQL_TYPE_STRING:
 		case MYSQL_TYPE_VAR_STRING:
 			return Poco::Data::MetaColumn::FDT_STRING;
@@ -202,7 +201,7 @@ void ResultMetadata::init(MYSQL_STMT* stmt)
 		_row[i].length        = &_lengths[i];
 		_row[i].is_null       = reinterpret_cast<my_bool*>(&_isNull[i]); // workaround to make it work with both MySQL 8 and earlier
 		_row[i].is_unsigned   = (fields[i].flags & UNSIGNED_FLAG) > 0;
-		
+
 		offset += _row[i].buffer_length;
 	}
 }
@@ -232,13 +231,13 @@ std::size_t ResultMetadata::length(std::size_t pos) const
 }
 
 
-const unsigned char* ResultMetadata::rawData(std::size_t pos) const 
+const unsigned char* ResultMetadata::rawData(std::size_t pos) const
 {
 	return reinterpret_cast<const unsigned char*>(_row[pos].buffer);
 }
 
 
-bool ResultMetadata::isNull(std::size_t pos) const 
+bool ResultMetadata::isNull(std::size_t pos) const
 {
 	return (_isNull[pos] != 0);
 }

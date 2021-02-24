@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 
 RowLayout{
     property int capacity: 1000
-    property int empty: capacity
+    property int empty: 1000
 
    id: capacityRowLayoutId
    Layout.margins: 2
