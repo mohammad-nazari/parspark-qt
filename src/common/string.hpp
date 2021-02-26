@@ -1,10 +1,11 @@
-#ifndef ANAR_STRING_HPP
-#define ANAR_STRING_HPP
+#ifndef ANAR_STRING_COMMON_HPP
+#define ANAR_STRING_COMMON_HPP
 
-#include <lib/poco/Foundation/include/Poco/DigestStream.h>
-#include <lib/poco/Foundation/include/Poco/MD5Engine.h>
+#include <Poco/DigestStream.h>
+#include <Poco/MD5Engine.h>
 
 #include <string>
+
 namespace anar::common {
    class String {
      public:
@@ -14,4 +15,4 @@ namespace anar::common {
       static std::string MD5(const std::string& rawValue);
    };
 }  // namespace anar::common
-#endif  // ANAR_STRING_HPP
+#endif  // ANAR_STRING_COMMON_HPP

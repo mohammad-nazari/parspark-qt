@@ -1,5 +1,5 @@
-#ifndef PARSPARK_DATABASE_CONST_HPP
-#define PARSPARK_DATABASE_CONST_HPP
+#ifndef ANAR_DATABASE_CONST_HPP
+#define ANAR_DATABASE_CONST_HPP
 
 namespace anar::constant {
    namespace DatabaseEngines {
@@ -12,4 +12,4 @@ namespace anar::constant {
       constexpr char AN_MONGODB[]{"mongodb"};
    }  // namespace DatabaseEngines
 }  // namespace anar::constant
-#endif  // PARSPARK_DATABASE_CONST_HPP
+#endif  // ANAR_DATABASE_CONST_HPP

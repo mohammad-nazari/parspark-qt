@@ -1,12 +1,12 @@
-#ifndef PARSPARK_NAZARI_TEST_HPP
-#define PARSPARK_NAZARI_TEST_HPP
+#ifndef ANAR_PARSPARK_NAZARI_TEST_HPP
+#define ANAR_PARSPARK_NAZARI_TEST_HPP
 
-namespace anar {
+namespace anar::test {
    class NazariTest {
      public:
       static void TestPocoReadAndWrite();
       static void TestPocoMySQL();
    };
-}  // namespace parspark
+}  // namespace anar::test
 
-#endif  // PARSPARK_NAZARI_TEST_HPP
+#endif  // ANAR_PARSPARK_NAZARI_TEST_HPP

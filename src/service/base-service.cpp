@@ -4,6 +4,5 @@ namespace anar::service {
    BaseServicePtr BaseService::Create() {
       return std::make_shared<BaseService>();
    }
-   BaseService::BaseService() {
-   }
+   BaseService::BaseService() = default;
 }  // namespace anar::service

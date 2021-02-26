@@ -17,7 +17,7 @@ Rectangle{
       width: exitRectangleId.width
       CommonStatus{
          id: exitStatusId
-         statusString: qsTr("Initilaizing exit section")
+         statusString: qsTr("Initializing exit section")
       }
       CommonPlate{
          id: exitEnterPlateId

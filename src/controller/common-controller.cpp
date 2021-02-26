@@ -12,10 +12,10 @@ namespace anar::controller {
    }
 
    std::vector<std::string> CommonController::GetSerialPortListNames() {
-      return service::SerialPort::GetListNames();
+      return service::SerialPort::GetSerialPortNames();
    }
    std::vector<std::string> CommonController::GetSerialPortBaudRates() {
-      return service::SerialPort::GetListBaudRatesStr();
+      return service::SerialPort::GetSerialPortBaudRatesStr();
    }
    std::vector<std::string> CommonController::GetPrinterListNames() {
       return service::Printer::GetListNames();

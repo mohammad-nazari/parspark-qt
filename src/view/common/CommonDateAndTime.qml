@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.12
 
 Rectangle {
    property string dateAndTimeString: getDateAndTime()
+   property int fontSize: dateAndTimeId.height / 4
+
    function getDateAndTime() {
       var currentDate = new Date;
       dateAndTimeString = currentDate.toLocaleDateString() + " " + currentDate.toTimeString();
@@ -29,6 +31,6 @@ Rectangle {
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       text: dateAndTimeString
-      font.pointSize: dateAndTimeId.height / 4
+      font.pointSize: fontSize > 1 ? fontSize : 1
    }
 }

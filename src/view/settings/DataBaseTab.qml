@@ -10,7 +10,7 @@ Column{
    padding: 10
    spacing: 10
    CommonTextField {
-      id: serverAddressTextFieldlId
+      id: serverAddressTextFieldId
       labelText: qsTr("Server Address:")
       labelWidth: 100
       placeholderTextText:qsTr("Input database server address")
@@ -19,7 +19,7 @@ Column{
       onTextFieldTextChanged: {dataBaseSettings.hostAddress = textFieldText}
    }
    CommonTextField {
-      id: serverUserTextFieldlId
+      id: serverUserTextFieldId
       labelText: qsTr("User Name:")
       labelWidth: 100
       placeholderTextText:qsTr("Input database server user name")
@@ -28,7 +28,7 @@ Column{
       onTextFieldTextChanged: {dataBaseSettings.userName = textFieldText}
    }
    CommonTextField {
-      id: serverPasswordTextFieldlId
+      id: serverPasswordTextFieldId
       labelText: qsTr("Password:")
       labelWidth: 100
       placeholderTextText:qsTr("Input database server user password")
@@ -47,7 +47,7 @@ Column{
       onSpinBoxValueChanged: {dataBaseSettings.port = spinBoxValue}
    }
    CommonTextField {
-      id: serverDBNameTextFieldlId
+      id: serverDBNameTextFieldId
       labelText: qsTr("Database Name:")
       labelWidth: 100
       placeholderTextText:qsTr("Input database name")

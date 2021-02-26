@@ -3,12 +3,12 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Rectangle {
-   id: detailesTableRectangleId
+   id: detailsTableRectangleId
    color: 'teal'
    implicitWidth: parent.width
    implicitHeight: parent.height
    TableView {
-      id: detailesTableId
+      id: detailsTableId
       width: parent.width
       height: parent.height
 //      LayoutMirroring.enabled: true

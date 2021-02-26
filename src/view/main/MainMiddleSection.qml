@@ -7,7 +7,7 @@ import "qrc:/src/view/settings"
 import ParsPark.View 1.0
 
 Rectangle{
-   id: middelRectangleId
+   id: middleRectangleId
    color: "transparent"
    Layout.fillWidth: true
    Layout.fillHeight: true
@@ -15,7 +15,7 @@ Rectangle{
    Layout.preferredWidth: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 3 / 8 : mainWindowId.width - (2 * (mainWindowId.height * relativeSize * 5 / 16))
    Layout.preferredHeight: parent.height
    ColumnLayout{
-      id: middelColumnLayoutId
+      id: middleColumnLayoutId
       spacing: 0
       anchors.fill: parent
       Rectangle{
@@ -25,13 +25,13 @@ Rectangle{
             var window = component.createObject(parent);
          }
 
-         id: menueRectangleId
+         id: menuRectangleId
          Layout.fillWidth: true
          Layout.fillHeight: true
          Layout.preferredWidth: parent.width
          Layout.preferredHeight: width / 8
          RowLayout{
-            id: menueRowLayoutId
+            id: menuRowLayoutId
             spacing: 5
             anchors.fill: parent
                         layoutDirection: Qt.RightToLeft
@@ -55,7 +55,7 @@ Rectangle{
             id: menuItemId
             CommonButton{
                onClicked: {
-                  menueRectangleId.openForm(formName);
+                  menuRectangleId.openForm(formName);
                }
                buttonText: menuButtonText
                buttonToolTipText: menuButtonToolTipText
@@ -64,11 +64,11 @@ Rectangle{
          }
       }
       Rectangle{
-         id: detailesRecangleId
+         id: detailsRectangleId
          Layout.fillWidth: true
          Layout.fillHeight: true
          Layout.preferredWidth: parent.width
-         Layout.preferredHeight: parent.height - (costInfoRectangleId.height + menueRectangleId.height)
+         Layout.preferredHeight: parent.height - (costInfoRectangleId.height + menuRectangleId.height)
          TabBar {
             id: tabBarId
             width: parent.width
@@ -175,7 +175,7 @@ Rectangle{
                   spacing: 0
                   anchors.fill: parent
                   Rectangle{
-                     id: durationAndPrintRecangleId
+                     id: durationAndPrintRectangleId
                      color: "transparent"
                      Layout.fillWidth: true
                      Layout.fillHeight: true
@@ -188,20 +188,20 @@ Rectangle{
                            id: durationStatusId
                            Layout.fillWidth: true
                            Layout.fillHeight: true
-                           Layout.preferredWidth: parent.width - printReciptButtonId.width
+                           Layout.preferredWidth: parent.width - printReceiptButtonId.width
                            Layout.preferredHeight: parent.height
                            statusString: qsTr("00 00:00:00")
                         }
                         CommonButton{
-                           id: printReciptButtonId
+                           id: printReceiptButtonId
                            Layout.fillWidth: true
                            Layout.fillHeight: true
                            Layout.preferredWidth: height
                            Layout.preferredHeight: parent.height
                            buttonText: ""
-                           buttonToolTipText: qsTr("Print recipt")
+                           buttonToolTipText: qsTr("Print receipt")
                            Image {
-                              id: printReciptImageId
+                              id: printReceiptImageId
                               anchors.fill: parent
                               source: "qrc:/image/png/Printer64.png"
                            }

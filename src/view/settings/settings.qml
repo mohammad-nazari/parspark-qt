@@ -64,7 +64,7 @@ ApplicationWindow  {
    modality: Qt.WindowModal
    flags: Qt.Dialog
    ColumnLayout{
-      id: middelColumnLayoutId
+      id: middleColumnLayoutId
       spacing: 0
       anchors.fill: parent
       TabBar {

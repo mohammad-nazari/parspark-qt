@@ -53,7 +53,7 @@ ApplicationWindow  {
       padding: 5
       spacing: 5
       CommonTextField {
-         id: userTextFieldlId
+         id: userTextFieldId
          labelText: qsTr("User Name:")
          textFieldText: qsTr("admin")
          labelWidth: 100
@@ -63,7 +63,7 @@ ApplicationWindow  {
          onTextFieldTextChanged: {settingWindowId.loginInfo.userName = textFieldText}
       }
       CommonTextField {
-         id: passwordTextFieldlId
+         id: passwordTextFieldId
          labelText: qsTr("Password:")
          textFieldText: qsTr("admin")
          labelWidth: 100
@@ -82,7 +82,7 @@ ApplicationWindow  {
             padding: 5
             spacing: 5
             CommonTextField {
-               id: serverAddressTextFieldlId
+               id: serverAddressTextFieldId
                labelText: qsTr("Server Address:")
                labelWidth: 100
                placeholderTextText:qsTr("Input database server address")
@@ -91,7 +91,7 @@ ApplicationWindow  {
                onTextFieldTextChanged: {settingWindowId.loginInfo.serverAddress = textFieldText}
             }
             CommonTextField {
-               id: serverUserTextFieldlId
+               id: serverUserTextFieldId
                labelText: qsTr("User Name:")
                labelWidth: 100
                placeholderTextText:qsTr("Input database server user name")
@@ -100,7 +100,7 @@ ApplicationWindow  {
                onTextFieldTextChanged: {settingWindowId.loginInfo.serverUser = textFieldText}
             }
             CommonTextField {
-               id: serverPasswordTextFieldlId
+               id: serverPasswordTextFieldId
                labelText: qsTr("Password:")
                labelWidth: 100
                placeholderTextText:qsTr("Input database server user password")
@@ -119,7 +119,7 @@ ApplicationWindow  {
                onSpinBoxValueChanged: {settingWindowId.loginInfo.serverPort = spinBoxValue}
             }
             CommonTextField {
-               id: serverDBNameTextFieldlId
+               id: serverDBNameTextFieldId
                labelText: qsTr("Database Name:")
                labelWidth: 100
                placeholderTextText:qsTr("Input database name")

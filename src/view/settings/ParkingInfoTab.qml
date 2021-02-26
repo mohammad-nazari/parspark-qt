@@ -21,7 +21,7 @@ Column{
             textFieldWidth: 480
             textFieldText: parkingSettings.parkingName
             onTextFieldTextChanged: {parkingSettings.parkingName = textFieldText}
-            textFieldValdator: RegExpValidator { regExp: /^[0-9A-F]{5,20}$/ }
+            textFieldValidator: RegExpValidator { regExp: /^[0-9A-F]{5,20}$/ }
          }
          CommonSpinBox {
             id: parkingCapacitySpinBoxId
@@ -61,7 +61,7 @@ Column{
          CommonSpinBox{
             labelText: qsTr("First Hour(Tomans):")
             labelWidth: 110
-            id: dayFirstHoureSpinBoxId
+            id: dayFirstHourSpinBoxId
             minimumValueValue: 0
             maximumValueValue: 999999
             spinBoxValue: parkingSettings.dayTariff.firstHour
@@ -105,7 +105,7 @@ Column{
          CommonSpinBox{
             labelText: qsTr("First Hour(Tomans):")
             labelWidth: 110
-            id: nightFirstHoureSpinBoxId
+            id: nightFirstHourSpinBoxId
             minimumValueValue: 0
             maximumValueValue: 999999
             spinBoxValue: parkingSettings.nightTariff.firstHour

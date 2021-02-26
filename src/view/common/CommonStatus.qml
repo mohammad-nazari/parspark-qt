@@ -4,6 +4,7 @@ import QtQuick.Controls 2.13
 
 Rectangle {
    property string statusString: qsTr("Status")
+   property int fontSize: parent.width / 2
 
    id: statusRectangleId
    color: "transparent"
@@ -26,6 +27,6 @@ Rectangle {
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       text: statusString
-      font.pixelSize: statusRectangleId.height / 2
+      font.pixelSize: fontSize > 1 ? fontSize : 1
    }
 }

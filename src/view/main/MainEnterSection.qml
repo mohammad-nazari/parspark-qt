@@ -17,7 +17,7 @@ Rectangle{
       width: enterRectangleId.width
       CommonStatus{
          id: enterStatusId
-         statusString: "Initilaizing enter section"
+         statusString: "Initializing enter section"
       }
       CommonPlate{
          id: enterPlateId

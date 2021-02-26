@@ -2,13 +2,18 @@ cmake_minimum_required(VERSION 3.16)
 
 project(ParsPark)
 
-if(${WIN32})
+option(DEPLOYMENT "In development state show console for debug and see warnings and other console data" OFF)
+
+if (WIN32)
+    if (DEPLOYMENT)
+        set(DONT_SHOW_CONSOLE WIN32)
+    endif ()
     # Set minimum windows version to windows 7
     #this method adds the necessary compiler flag
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_WIN32_WINNT=0x0601")
     #Or this adds a preprocessor definition to the project
-#    add_definitions(-D_WIN32_WINNT=0x0601)
-endif()
+    #    add_definitions(-D_WIN32_WINNT=0x0601)
+endif ()
 
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
@@ -57,7 +62,7 @@ set(ANAR_NLOHMANN_JSON_LIB nlohman::json)
 set(ANAR_OATPP_LIB oatpp)
 set(ANAR_ODB_LIB odb)
 set(ANAR_ODB_MYSQL_LIB ODB::MySQL)
-set(ANAR_RS232_LIB rs232)
+set(ANAR_SERIAL_LIB serial)
 set(ANAR_MYSQL_LIB mysql)
 
 set(ANAR_POCO_FOLDER poco)
@@ -71,7 +76,7 @@ set(ANAR_NLOHMANN_JSON_FOLDER nlohmann-json)
 set(ANAR_OATPP_FOLDER oatpp)
 set(ANAR_ODB_FOLDER odb)
 set(ANAR_ODB_MYSQL_FOLDER odb-mysql)
-set(ANAR_RS232_FOLDER rs232)
+set(ANAR_SERIAL_FOLDER serial)
 set(ANAR_MYSQL_FOLDER mysql)
 
 set(ANAR_POCO_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}")
@@ -89,7 +94,7 @@ set(ANAR_NLOHMANN_JSON_DIR "${ANAR_NLOHMANN_DIR}/${ANAR_NLOHMANN_JSON_FOLDER}")
 set(ANAR_OATPP_DIR "${ANAR_LIB_DIR}/${ANAR_OATPP_FOLDER}")
 set(ANAR_ODB_DIR "${ANAR_LIB_DIR}/${ANAR_ODB_FOLDER}/${ANAR_ODB_FOLDER}")
 set(ANAR_ODB_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_ODB_FOLDER}/${ANAR_ODB_MYSQL_FOLDER}")
-set(ANAR_RS232_DIR "${ANAR_LIB_DIR}/${ANAR_RS232_LIB}")
+set(ANAR_SERIAL_DIR "${ANAR_LIB_DIR}/${ANAR_SERIAL_FOLDER}")
 if (WIN32)
     set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/win/x64")
 elseif (UNIX)
@@ -133,6 +138,7 @@ include_directories(
         "${ANAR_POCO_DATA_SQLITE_DIR}"
         "${ANAR_ODB_DIR}"
         "${ANAR_ODB_MYSQL_DIR}"
+        "${ANAR_SERIAL_DIR}/include"
         "${ANAR_SOURCE_DIR}"
 )
 
@@ -146,7 +152,7 @@ add_subdirectory("${ANAR_NLOHMANN_JSON_DIR}")
 add_subdirectory("${ANAR_OATPP_DIR}")
 add_subdirectory("${ANAR_ODB_DIR}")
 add_subdirectory("${ANAR_ODB_MYSQL_DIR}")
-add_subdirectory("${ANAR_RS232_DIR}")
+add_subdirectory("${ANAR_SERIAL_DIR}")
 
 set(
         TS_FILES
@@ -210,16 +216,24 @@ set(
         src/main.cpp
 )
 
-add_executable(
-        ${PROJECT_NAME}
-        ${PARSPARK_SOURCES}
-)
+if (WIN32)
+    add_executable(
+            ${PROJECT_NAME}
+            ${DONT_SHOW_CONSOLE}
+            ${PARSPARK_SOURCES}
+    )
+else ()
+    add_executable(
+            ${PROJECT_NAME}
+            ${PARSPARK_SOURCES}
+    )
+endif ()
 
-#target_compile_definitions(
-#        ${PROJECT_NAME}
-#        PRIVATE
-#        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-#)
+target_compile_definitions(
+        ${PROJECT_NAME}
+        PRIVATE
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:Release>>:QT_QML_DEBUG>
+)
 
 target_link_libraries(
         ${PROJECT_NAME}
@@ -236,6 +250,7 @@ target_link_libraries(
         ${ANAR_ODB_LIB}
         ${ANAR_ODB_MYSQL_LIB}
         ${ANAR_OATPP_LIB}
+        ${ANAR_SERIAL_LIB}
 )
 
 qt5_create_translation(

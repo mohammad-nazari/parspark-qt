@@ -1,6 +1,5 @@
 #include "serial-port.hpp"
 
-#include "lib/rs232/rs232.h"
 #include <string>
 
 namespace anar::service {
@@ -19,31 +18,34 @@ namespace anar::service {
    }
    SerialPort::SerialPort() = default;
 
-   //   std::vector<QSerialPortInfo> SerialPort::GetList() {
-   //      return QSerialPortInfo::availablePorts();
-   //   }
-   std::vector<std::string> SerialPort::GetListNames() {
+   std::vector<serial::PortInfo> SerialPort::GetSerialPorts() {
+      return serial::list_ports();
+   }
+   std::vector<std::string> SerialPort::GetSerialPortNames() {
       std::vector<std::string> serialPortNames;
-      //      auto serialPorts = GetList();
-      //      for (const auto& serialPort : serialPorts) {
-      //         serialPortNames.push_back(serialPort.portName());
-      //      }
+      auto serialPorts = GetSerialPorts();
+      serialPortNames.reserve(serialPorts.size());
+      for (const auto& serialPort : serialPorts) {
+         serialPortNames.emplace_back(serialPort.description);
+      }
       return serialPortNames;
    }
-   std::vector<std::string> SerialPort::GetListSerialNumbers() {
+   std::vector<std::string> SerialPort::GetSerialPortNumbers() {
       std::vector<std::string> serialPortSerialNumber;
-      //      auto serialPorts = GetList();
-      //      for (const auto& serialPort : serialPorts) {
-      //         serialPortSerialNumber.push_back(serialPort.serialNumber());
-      //      }
+      auto serialPorts = GetSerialPorts();
+      serialPortSerialNumber.reserve(serialPorts.size());
+      for (const auto& serialPort : serialPorts) {
+         serialPortSerialNumber.push_back(serialPort.port);
+      }
       return serialPortSerialNumber;
    }
-   std::vector<uint32_t> SerialPort::GetListBaudRates() {
+   std::vector<uint32_t> SerialPort::GetSerialPortBaudRates() {
       return m_baudRates;
    }
-   std::vector<std::string> SerialPort::GetListBaudRatesStr() {
+   std::vector<std::string> SerialPort::GetSerialPortBaudRatesStr() {
       std::vector<std::string> baudRatesStr;
-      for (const auto baudRate : m_baudRates) {
+      baudRatesStr.reserve(m_baudRates.size());
+      for (const auto& baudRate : m_baudRates) {
          baudRatesStr.push_back(std::to_string(baudRate));
       }
       return baudRatesStr;

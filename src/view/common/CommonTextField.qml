@@ -8,7 +8,7 @@ Row {
    property int textFieldWidth: 200
    property string textFieldText: qsTr("")
    property var textFieldEchoMode: TextInput.Normal
-   property var textFieldValdator: RegExpValidator {}
+   property var textFieldValidator: RegExpValidator {}
    property string imageSourceTrue: qsTr("qrc:/image/png/hotovo.png")
    property string imageSourceFalse: qsTr("qrc:/image/png/check.png")
 
@@ -27,7 +27,7 @@ Row {
       text: textFieldText
       onTextChanged: {textFieldText = text}
       echoMode: textFieldEchoMode
-      validator: textFieldValdator
+      validator: textFieldValidator
    }
    Image {
       id: platePictureImageId

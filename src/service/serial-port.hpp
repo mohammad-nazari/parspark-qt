@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <serial/serial.h>
 
 namespace anar::service {
    class SerialPort;
@@ -12,11 +13,11 @@ namespace anar::service {
       static SerialPortPtr Create();
       SerialPort();
 
-      //      static std::vector<QSerialPortInfo> GetList();
-      static std::vector<std::string> GetListNames();
-      static std::vector<std::string> GetListSerialNumbers();
-      static std::vector<uint32_t> GetListBaudRates();
-      static std::vector<std::string> GetListBaudRatesStr();
+      static std::vector<serial::PortInfo> GetSerialPorts();
+      static std::vector<std::string> GetSerialPortNames();
+      static std::vector<std::string> GetSerialPortNumbers();
+      static std::vector<uint32_t> GetSerialPortBaudRates();
+      static std::vector<std::string> GetSerialPortBaudRatesStr();
 
      private:
       static const std::vector<uint32_t> m_baudRates;

@@ -1,7 +1,8 @@
-#ifndef PARSPARK_VIEW_CONST_HPP
-#define PARSPARK_VIEW_CONST_HPP
+#ifndef ANAR_VIEW_CONST_HPP
+#define ANAR_VIEW_CONST_HPP
 
 #include <cstdint>
+
 namespace anar::constant {
    namespace RegisterPackets {
       constexpr char PARS_PARK_PACKAGE_NAME[]{"ParsPark.View"};
@@ -10,4 +11,4 @@ namespace anar::constant {
    }  // namespace RegisterPackets
 }  // namespace anar::constant
 
-#endif  // PARSPARK_VIEW_CONST_HPP
+#endif  // ANAR_VIEW_CONST_HPP

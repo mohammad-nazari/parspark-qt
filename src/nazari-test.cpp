@@ -14,7 +14,7 @@ using namespace Poco::Data::Keywords;
 using Poco::Data::Session;
 using Poco::Data::Statement;
 
-namespace anar {
+namespace anar::test {
    void NazariTest::TestPocoReadAndWrite() {
       Poco::FileStream oFileStream;
       oFileStream.open("test.txt", std::ios::out);

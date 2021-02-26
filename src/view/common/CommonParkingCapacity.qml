@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.12
 RowLayout{
     property int capacity: 1000
     property int empty: 1000
+   property int fontSize: dateAndTimeId.height / 2
 
    id: capacityRowLayoutId
    Layout.margins: 2
@@ -34,7 +35,7 @@ RowLayout{
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
           text: capacity
-          font.pointSize: parent.height / 2
+          font.pointSize: fontSize > 1 ? fontSize : 1
       }
    }
    Rectangle {
@@ -59,7 +60,7 @@ RowLayout{
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
           text: empty
-          font.pointSize: parent.height / 2
+          font.pointSize: fontSize > 1 ? fontSize : 1
       }
    }
 }

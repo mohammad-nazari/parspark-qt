@@ -5,8 +5,10 @@ Rectangle{
    property string buttonText: qsTr("Edit")
    property string buttonToolTipText: qsTr("Edit plate number")
    property bool readOnlyText: false
+   property int fontSize: parent.width / 7
+   property int fontSize2: parent.width / 10
 
-   id: plateRectanglId
+   id: plateRectangleId
    color: "transparent"
    Layout.fillWidth: true
    Layout.fillHeight: true
@@ -19,8 +21,8 @@ Rectangle{
 //      layoutDirection: Qt.RightToLeft
       CommonButton{
          onClicked: {
-            plateRectanglId.readOnlyText = !plateRectanglId.readOnlyText
-            if(plateRectanglId.readOnlyText){
+            plateRectangleId.readOnlyText = !plateRectangleId.readOnlyText
+            if(plateRectangleId.readOnlyText){
                firstNoId.selectAll()
             }else{
                firstNoId.select(0,0)
@@ -30,12 +32,12 @@ Rectangle{
          id: plateButtonId
          Layout.preferredWidth: height
          Layout.preferredHeight: parent.height
-         buttonText: plateRectanglId.buttonText
-         buttonToolTipText: plateRectanglId.buttonToolTipText
+         buttonText: plateRectangleId.buttonText
+         buttonToolTipText: plateRectangleId.buttonToolTipText
       }
       Rectangle {
          id: plateId
-         enabled: plateRectanglId.readOnlyText
+         enabled: plateRectangleId.readOnlyText
          color: "transparent"
          border{
             color: "black"
@@ -57,17 +59,17 @@ Rectangle{
             id: firstNoId
             text: qsTr("68")
             x: parent.width / 40 * 5
-            font.pixelSize: parent.width / 7
+            font.pixelSize: fontSize > 1 ? fontSize : 1
             maximumLength: 2
             selectByMouse: true
-            focus: plateRectanglId.readOnlyText
+            focus: plateRectangleId.readOnlyText
          }
          TextInput  {
             id: alphaId
             text: qsTr("T")
             x: parent.width / 40 * 14
             maximumLength: 1
-            font.pixelSize: parent.width / 7
+            font.pixelSize: fontSize > 1 ? fontSize : 1
             selectByMouse: true
          }
          TextInput  {
@@ -75,7 +77,7 @@ Rectangle{
             text: qsTr("269")
             x: parent.width / 40 * 20
             maximumLength: 3
-            font.pixelSize: parent.width / 7
+            font.pixelSize: fontSize > 1 ? fontSize : 1
             selectByMouse: true
          }
          TextInput  {
@@ -83,7 +85,7 @@ Rectangle{
             text: qsTr("93")
             x: parent.width / 40 * 33
             maximumLength: 2
-            font.pixelSize: parent.width / 10
+            font.pixelSize: fontSize2 > 1 ? fontSize2 : 1
             topPadding: parent.height / 4
             selectByMouse: true
          }

@@ -15,13 +15,13 @@ Row{
          leftPadding: 5
          spacing: 5
          CheckBox{
-            id: activeEnterSectionCheckBoxid
+            id: activeEnterSectionCheckBoxId
             text: qsTr("Active enter section")
             checked: softwareSettings.activeEnter
             onCheckedChanged: {softwareSettings.activeEnter = checked}
          }
          CheckBox{
-            id: activeExieSectionCheckBoxid
+            id: activeExitSectionCheckBoxId
             text: qsTr("Active exit section")
             checked: softwareSettings.activeExit
             onCheckedChanged: {softwareSettings.activeExit = checked}

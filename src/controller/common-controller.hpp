@@ -13,9 +13,9 @@ namespace anar::controller {
       static CommonControllerPtr Create();
       CommonController();
 
-      std::vector<std::string> GetSerialPortListNames();
-      std::vector<std::string> GetSerialPortBaudRates();
-      std::vector<std::string> GetPrinterListNames();
+      static std::vector<std::string> GetSerialPortListNames();
+      static std::vector<std::string> GetSerialPortBaudRates();
+      static std::vector<std::string> GetPrinterListNames();
    };
 }  // namespace anar::controller
 #endif  // ANAR_COMMON_CONTROLLER_HPP
