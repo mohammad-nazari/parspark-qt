@@ -4,7 +4,6 @@ import QtQuick.Layouts 1.12
 RowLayout{
     property int capacity: 1000
     property int empty: 1000
-   property int fontSize: dateAndTimeId.height / 2
 
    id: capacityRowLayoutId
    Layout.margins: 2
@@ -30,12 +29,12 @@ RowLayout{
       Text {
           id: fullCapacityTextId
           anchors.fill: parent
-          minimumPixelSize: 2
+          minimumPixelSize: 1
           fontSizeMode: Text.Fit
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
           text: capacity
-          font.pointSize: fontSize > 1 ? fontSize : 1
+          font.pixelSize: parent.width / 3 > 1 ? parent.width / 3 : 1
       }
    }
    Rectangle {
@@ -55,12 +54,12 @@ RowLayout{
       Text {
           id: emptyCapacityTextId
           anchors.fill: parent
-          minimumPixelSize: 2
+          minimumPixelSize: 1
           fontSizeMode: Text.Fit
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
           text: empty
-          font.pointSize: fontSize > 1 ? fontSize : 1
+          font.pixelSize: parent.width / 3 > 1 ? parent.width / 3 : 1
       }
    }
 }

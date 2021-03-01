@@ -64,6 +64,8 @@ set(ANAR_ODB_LIB odb)
 set(ANAR_ODB_MYSQL_LIB ODB::MySQL)
 set(ANAR_SERIAL_LIB serial)
 set(ANAR_MYSQL_LIB mysql)
+set(ANAR_GOOGLE_LOG_LIB glog)
+set(ANAR_GOOGLE_TEST_LIB gtest)
 
 set(ANAR_POCO_FOLDER poco)
 set(ANAR_LIMEREPORT_FOLDER lime-report)
@@ -78,6 +80,8 @@ set(ANAR_ODB_FOLDER odb)
 set(ANAR_ODB_MYSQL_FOLDER odb-mysql)
 set(ANAR_SERIAL_FOLDER serial)
 set(ANAR_MYSQL_FOLDER mysql)
+set(ANAR_GOOGLE_LOG_FOLDER googlelog)
+set(ANAR_GOOGLE_TEST_FOLDER googletest)
 
 set(ANAR_POCO_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}")
 set(ANAR_POCO_FOUNDATION_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Foundation/include")
@@ -100,6 +104,8 @@ if (WIN32)
 elseif (UNIX)
     set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/unix/x64")
 endif ()
+set(ANAR_GOOGLE_LOG_DIR "${ANAR_LIB_DIR}/${ANAR_GOOGLE_LOG_FOLDER}")
+set(ANAR_GOOGLE_TEST_DIR "${ANAR_LIB_DIR}/${ANAR_GOOGLE_TEST_FOLDER}")
 
 set(ANAR_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
 set(ANAR_PNG_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_PNG_LIB}")
@@ -139,6 +145,8 @@ include_directories(
         "${ANAR_ODB_DIR}"
         "${ANAR_ODB_MYSQL_DIR}"
         "${ANAR_SERIAL_DIR}/include"
+        "${ANAR_GOOGLE_LOG_DIR}/src"
+        "${ANAR_GOOGLE_TEST_DIR}/${ANAR_GOOGLE_TEST_DIR}/include"
         "${ANAR_SOURCE_DIR}"
 )
 
@@ -153,6 +161,8 @@ add_subdirectory("${ANAR_OATPP_DIR}")
 add_subdirectory("${ANAR_ODB_DIR}")
 add_subdirectory("${ANAR_ODB_MYSQL_DIR}")
 add_subdirectory("${ANAR_SERIAL_DIR}")
+add_subdirectory("${ANAR_GOOGLE_LOG_DIR}")
+add_subdirectory("${ANAR_GOOGLE_TEST_DIR}")
 
 set(
         TS_FILES
@@ -213,24 +223,48 @@ set(
         src/controller/settings-controller.cpp
         src/nazari-test.cpp
 
-        src/main.cpp
+)
+
+set(
+        PARSPARK_TEST_SOURCES
+
 )
 
 if (WIN32)
     add_executable(
             ${PROJECT_NAME}
             ${DONT_SHOW_CONSOLE}
+            src/main.cpp
             ${PARSPARK_SOURCES}
+    )
+    add_executable(
+            ${PROJECT_NAME}_Unit_Test
+            ${DONT_SHOW_CONSOLE}
+            ${PARSPARK_SOURCES}
+            ${PARSPARK_TEST_SOURCES}
+            test/main.cpp
     )
 else ()
     add_executable(
             ${PROJECT_NAME}
             ${PARSPARK_SOURCES}
+            src/main.cpp
+    )
+    add_executable(
+            ${PROJECT_NAME}_Unit_Test
+            ${PARSPARK_SOURCES}
+            ${PARSPARK_TEST_SOURCES}
+            test/main.cpp
     )
 endif ()
 
 target_compile_definitions(
         ${PROJECT_NAME}
+        PRIVATE
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:Release>>:QT_QML_DEBUG>
+)
+target_compile_definitions(
+        ${PROJECT_NAME}_Unit_Test
         PRIVATE
         $<$<OR:$<CONFIG:Debug>,$<CONFIG:Release>>:QT_QML_DEBUG>
 )
@@ -251,6 +285,27 @@ target_link_libraries(
         ${ANAR_ODB_MYSQL_LIB}
         ${ANAR_OATPP_LIB}
         ${ANAR_SERIAL_LIB}
+        ${ANAR_GOOGLE_LOG_LIB}
+        ${ANAR_GOOGLE_TEST_LIB}
+)
+target_link_libraries(
+        ${PROJECT_NAME}_Unit_Test
+        Qt5::Core
+        Qt5::Qml
+        Qt5::Quick
+        ${ANAR_MYSQL_LIB}
+        ${ANAR_POCO_FOUNDATION_LIB}
+        ${ANAR_POCO_DATA_LIB}
+        ${ANAR_POCO_DATA_MYSQL_LIB}
+        ${ANAR_POCO_DATA_SQLITE_LIB}
+        ${ANAR_LIMEREPORT_LIB}
+        ${ANAR_NLOHMANN_JSON_LIB}
+        ${ANAR_ODB_LIB}
+        ${ANAR_ODB_MYSQL_LIB}
+        ${ANAR_OATPP_LIB}
+        ${ANAR_SERIAL_LIB}
+        ${ANAR_GOOGLE_LOG_LIB}
+        ${ANAR_GOOGLE_TEST_LIB}
 )
 
 qt5_create_translation(

@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.12
 
 Rectangle {
    property string dateAndTimeString: getDateAndTime()
-   property int fontSize: dateAndTimeId.height / 4
 
    function getDateAndTime() {
       var currentDate = new Date;
@@ -26,11 +25,11 @@ Rectangle {
    Text {
       id: dateAndTimeTextId
       anchors.fill: parent
-      minimumPixelSize: 2
+      minimumPixelSize: 1
       fontSizeMode: Text.Fit
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       text: dateAndTimeString
-      font.pointSize: fontSize > 1 ? fontSize : 1
+      font.pixelSize: (parent.width / 17) > 1 ? (parent.width / 17) : 1
    }
 }

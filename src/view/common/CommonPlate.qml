@@ -5,8 +5,6 @@ Rectangle{
    property string buttonText: qsTr("Edit")
    property string buttonToolTipText: qsTr("Edit plate number")
    property bool readOnlyText: false
-   property int fontSize: parent.width / 7
-   property int fontSize2: parent.width / 10
 
    id: plateRectangleId
    color: "transparent"
@@ -59,7 +57,7 @@ Rectangle{
             id: firstNoId
             text: qsTr("68")
             x: parent.width / 40 * 5
-            font.pixelSize: fontSize > 1 ? fontSize : 1
+            font.pixelSize: parent.width / 7 > 1 ? parent.width / 7 : 1
             maximumLength: 2
             selectByMouse: true
             focus: plateRectangleId.readOnlyText
@@ -69,7 +67,7 @@ Rectangle{
             text: qsTr("T")
             x: parent.width / 40 * 14
             maximumLength: 1
-            font.pixelSize: fontSize > 1 ? fontSize : 1
+            font.pixelSize: parent.width / 7 > 1 ? parent.width / 7 : 1
             selectByMouse: true
          }
          TextInput  {
@@ -77,7 +75,7 @@ Rectangle{
             text: qsTr("269")
             x: parent.width / 40 * 20
             maximumLength: 3
-            font.pixelSize: fontSize > 1 ? fontSize : 1
+            font.pixelSize: parent.width / 7 > 1 ? parent.width / 7 : 1
             selectByMouse: true
          }
          TextInput  {
@@ -85,7 +83,7 @@ Rectangle{
             text: qsTr("93")
             x: parent.width / 40 * 33
             maximumLength: 2
-            font.pixelSize: fontSize2 > 1 ? fontSize2 : 1
+            font.pixelSize: parent.width / 10 > 1 ? parent.width / 10 : 1
             topPadding: parent.height / 4
             selectByMouse: true
          }
