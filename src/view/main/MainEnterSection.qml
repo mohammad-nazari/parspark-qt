@@ -3,18 +3,17 @@ import QtQuick.Layouts 1.12
 import "qrc:/src/view/common"
 
 Rectangle{
-   id: enterRectangleId
+   id: rectEnterId
    color: "transparent"
    Layout.fillWidth: true
    Layout.fillHeight: true
    // Width is provided by 200px from 640px relation from main window Width
-   Layout.preferredWidth: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 5 / 16 : mainWindowId.height * relativeSize * 5 / 16
-   Layout.preferredHeight: parent.height
-   Layout.maximumWidth: 300
-   ColumnLayout{
-      id: enterColumnLayoutId
-      spacing: 0
-      width: enterRectangleId.width
+   width: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 5 / 16 : mainWindowId.height * relativeSize * 5 / 16
+   height: parent.height
+   Column{
+      id: colEnterId
+      spacing: 5
+      width: parent.width
       CommonStatus{
          id: enterStatusId
          statusString: "Initializing enter section"
@@ -29,35 +28,51 @@ Rectangle{
       CommonDateAndTime{
          id: enterDateAndTimeId
       }
-      GridLayout{
-         id: enterButtonsGridLayoutId
+      Column{
+         id: colButtonsId
          Layout.margins: 2
          Layout.fillWidth: true
          Layout.fillHeight: true
          // It is provided by 180 in 45 relation between width and height
-         Layout.preferredWidth:(parent.width / 2) - 4
-         Layout.preferredHeight: width / 4
-         rows: 2
-         columns: 2
-         CommonButton{
-            id:enterEnterButtonId
-            buttonText: "Enter"
-            buttonToolTipText: ""
+         width: parent.width
+         height: width / 4
+          Row{
+            spacing: parent.width / 30
+             height: parent.height / 2
+             anchors.horizontalCenter: parent.horizontalCenter
+             CommonButton{
+                id:enterEnterButtonId
+                buttonText: "Enter"
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
+             CommonButton{
+                id:enterBlackListButtonId
+                buttonText: "Black List"
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
          }
-         CommonButton{
-            id:enterBlackListButtonId
-            buttonText: "Black List"
-            buttonToolTipText: ""
-         }
-         CommonButton{
-            id:enterOpenRoadBlockButtonId
-            buttonText: "Open Gate"
-            buttonToolTipText: ""
-         }
-         CommonButton{
-            id:enterCloseRoadBlockButtonId
-            buttonText: "Close Gate"
-            buttonToolTipText: ""
+          Row{
+            spacing: parent.width / 30
+             height: parent.height / 2
+             anchors.horizontalCenter: parent.horizontalCenter
+             CommonButton{
+                id:enterOpenRoadBlockButtonId
+                buttonText: "Open Gate"
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
+             CommonButton{
+                id:enterCloseRoadBlockButtonId
+                buttonText: "Close Gate"
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
          }
       }
       CommonParkingCapacity{

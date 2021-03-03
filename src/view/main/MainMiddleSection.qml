@@ -12,12 +12,13 @@ Rectangle{
    Layout.fillWidth: true
    Layout.fillHeight: true
    // Width is provided by 240px from 640px relation from main window Width
-   Layout.preferredWidth: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 3 / 8 : mainWindowId.width - (2 * (mainWindowId.height * relativeSize * 5 / 16))
-   Layout.preferredHeight: parent.height
-   ColumnLayout{
+   width: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 3 / 8 : mainWindowId.width - (2 * (mainWindowId.height * relativeSize * 5 / 16))
+   height: parent.height - 20
+   Column{
       id: middleColumnLayoutId
-      spacing: 0
-      anchors.fill: parent
+      spacing: 5
+      width: middleRectangleId.width
+      height: middleRectangleId.height
       Rectangle{
          function openForm(formName) {
             var formAddress = "/src/view/" + formName + "/" + formName + ".qml";
@@ -28,13 +29,13 @@ Rectangle{
          id: menuRectangleId
          Layout.fillWidth: true
          Layout.fillHeight: true
-         Layout.preferredWidth: parent.width
-         Layout.preferredHeight: width / 8
-         RowLayout{
+         width: parent.width
+         height: width / 8
+         Row{
             id: menuRowLayoutId
-            spacing: 5
-            anchors.fill: parent
-                        layoutDirection: Qt.RightToLeft
+            spacing: parent.width / 50
+            height: parent.height
+            anchors.horizontalCenter: parent.horizontalCenter
             ListModel{
                id: menuItemsId
                ListElement{formName: qsTr("settings"); menuButtonText: qsTr(""); menuButtonToolTipText: qsTr("Change settings"); menuImageSource: qsTr("qrc:/image/png/Settings32.png")}
@@ -60,6 +61,9 @@ Rectangle{
                buttonText: menuButtonText
                buttonToolTipText: menuButtonToolTipText
                imageSource: menuImageSource
+               height: parent.height * 4 / 5
+               width: height
+               anchors.verticalCenter: parent.verticalCenter
             }
          }
       }
@@ -67,8 +71,8 @@ Rectangle{
          id: detailsRectangleId
          Layout.fillWidth: true
          Layout.fillHeight: true
-         Layout.preferredWidth: parent.width
-         Layout.preferredHeight: parent.height - (costInfoRectangleId.height + menuRectangleId.height)
+         width: parent.width
+         height: parent.height - (costInfoRectangleId.height + menuRectangleId.height)
          TabBar {
             id: tabBarId
             width: parent.width
@@ -148,20 +152,20 @@ Rectangle{
          color: "transparent"
          Layout.fillWidth: true
          Layout.fillHeight: true
-         Layout.preferredWidth: parent.width
-         Layout.preferredHeight: parent.height / 10
-         Layout.maximumHeight: 200
-         RowLayout{
+         width: parent.width
+         height: parent.height / 10
+         Row{
             id: costInfoColumnLayoutId
-            spacing: 0
-            anchors.fill: parent
-                        layoutDirection: Qt.RightToLeft
+            width: parent.width
+            height: parent.height
+            spacing: 2
+//            layoutDirection: Qt.RightToLeft
             CommonStatus{
                id: costValueId
                Layout.fillWidth: true
                Layout.fillHeight: true
-               Layout.preferredWidth: parent.width * 0.6
-               Layout.preferredHeight: parent.height
+               width: parent.width * 0.6
+               height: parent.height
                statusString: qsTr("Waiting for new exit")
             }
             Rectangle{
@@ -169,42 +173,52 @@ Rectangle{
                color: "transparent"
                Layout.fillWidth: true
                Layout.fillHeight: true
-               Layout.preferredWidth: parent.width * 0.3
-               Layout.preferredHeight: parent.height
-               ColumnLayout{
-                  spacing: 0
-                  anchors.fill: parent
+               width: parent.width * 0.4
+               height: parent.height
+               Column{
+                  spacing: 2
+                  width: parent.width
+                  height: parent.height
                   Rectangle{
                      id: durationAndPrintRectangleId
                      color: "transparent"
                      Layout.fillWidth: true
                      Layout.fillHeight: true
-                     RowLayout{
+                     width: parent.width
+                     height: parent.height / 2
+                     Row{
                         id: durationAndPrintRowLayoutId
-                        spacing: 0
-                        anchors.fill: parent
-                                                layoutDirection: Qt.RightToLeft
+                        spacing: 2
+                        height: parent.height
+                        anchors.horizontalCenter: durationAndPrintRectangleId.horizontalCenter
+//                        layoutDirection: Qt.RightToLeft
                         CommonStatus{
                            id: durationStatusId
-                           Layout.fillWidth: true
-                           Layout.fillHeight: true
-                           Layout.preferredWidth: parent.width - printReceiptButtonId.width
-                           Layout.preferredHeight: parent.height
+                           width: durationAndPrintRectangleId.width * 0.6
+                           height: parent.height
                            statusString: qsTr("00 00:00:00")
                         }
-                        CommonButton{
-                           id: printReceiptButtonId
+                        Rectangle{
+                           color: "transparent"
                            Layout.fillWidth: true
                            Layout.fillHeight: true
-                           Layout.preferredWidth: height
-                           Layout.preferredHeight: parent.height
-                           buttonText: ""
-                           buttonToolTipText: qsTr("Print receipt")
-                           Image {
-                              id: printReceiptImageId
-                              anchors.fill: parent
-                              source: "qrc:/image/png/Printer64.png"
-                           }
+                           width: durationAndPrintRectangleId.width * 0.4
+                           height: parent.height
+                            CommonButton{
+                               id: printReceiptButtonId
+                               Layout.fillWidth: true
+                               Layout.fillHeight: true
+                               height: parent.height
+                               width: height
+                               buttonText: ""
+                               buttonToolTipText: qsTr("Print receipt")
+                                anchors.horizontalCenter: parent.horizontalCenter
+                               Image {
+                                  id: printReceiptImageId
+                                  anchors.fill: parent
+                                  source: "qrc:/image/png/Printer64.png"
+                               }
+                            }
                         }
                      }
                   }
@@ -212,19 +226,26 @@ Rectangle{
                      color: "transparent"
                      Layout.fillWidth: true
                      Layout.fillHeight: true
-                     RowLayout{
-                        spacing: 0
-                        anchors.fill: parent
-                                                layoutDirection: Qt.RightToLeft
+                     width: parent.width
+                     height: parent.height / 2
+                     Row{
+                        spacing: 2
+//                      layoutDirection: Qt.RightToLeft
+                        width: parent.width
+                        height: parent.height
                         CommonButton{
                            Layout.fillWidth: true
                            Layout.fillHeight: true
+                           width: parent.width / 2
+                           height: parent.height
                            buttonText: qsTr("EPay")
                            buttonToolTipText: qsTr("Pay by ECart")
                         }
                         CommonButton{
                            Layout.fillWidth: true
                            Layout.fillHeight: true
+                           width: parent.width / 2
+                           height: parent.height
                            buttonText: qsTr("POS")
                            buttonToolTipText: qsTr("Pay by POS")
                         }

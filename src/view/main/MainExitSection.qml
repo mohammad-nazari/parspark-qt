@@ -3,18 +3,17 @@ import QtQuick.Layouts 1.12
 import "qrc:/src/view/common"
 
 Rectangle{
-   id: exitRectangleId
+   id: rectExitId
    color: "transparent"
    Layout.fillWidth: true
    Layout.fillHeight: true
    // Width is provided by 200px from 640px relation from main window Width
-   Layout.preferredWidth: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 5 / 16 : mainWindowId.height * relativeSize * 5 / 16
-   Layout.preferredHeight: parent.height
-   Layout.maximumWidth: 300
-   ColumnLayout{
-      id: exitColumnLayoutId
-      spacing: 0
-      width: exitRectangleId.width
+   width: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 5 / 16 : mainWindowId.height * relativeSize * 5 / 16
+   height: parent.height
+   Column{
+      id: colExitId
+      spacing: 5
+      width: parent.width
       CommonStatus{
          id: exitStatusId
          statusString: qsTr("Initializing exit section")
@@ -31,35 +30,51 @@ Rectangle{
       CommonDateAndTime{
          id: exitEnterDateAndTimeId
       }
-      GridLayout{
-         id: enterButtonsGridLayoutId
-         Layout.margins: 1
+      Column{
+         id: colButtonsId
+         Layout.margins: 2
          Layout.fillWidth: true
          Layout.fillHeight: true
          // It is provided by 180 in 45 relation between width and height
-         Layout.preferredWidth:(parent.width / 2) - 4
-         Layout.preferredHeight: width / 4
-         rows: 2
-         columns: 2
-         CommonButton{
-            id:exitExitButtonId
-            buttonText: qsTr("Exit")
-            buttonToolTipText: ""
+         width: parent.width
+         height: width / 4
+         Row{
+            spacing: parent.width / 30
+             height: parent.height / 2
+             anchors.horizontalCenter: parent.horizontalCenter
+             CommonButton{
+                id:exitExitButtonId
+                buttonText: qsTr("Exit")
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
+             CommonButton{
+                id:exitBlackListButtonId
+                buttonText: qsTr("Black List")
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
          }
-         CommonButton{
-            id:exitBlackListButtonId
-            buttonText: qsTr("Black List")
-            buttonToolTipText: ""
-         }
-         CommonButton{
-            id:exitOpenRoadBlockButtonId
-            buttonText: qsTr("Open Gate")
-            buttonToolTipText: ""
-         }
-         CommonButton{
-            id:exitCloseRoadBlockButtonId
-            buttonText: qsTr("Close Gate")
-            buttonToolTipText: ""
+         Row{
+            spacing: parent.width / 30
+             height: parent.height / 2
+             anchors.horizontalCenter: parent.horizontalCenter
+             CommonButton{
+                id:exitOpenRoadBlockButtonId
+                buttonText: qsTr("Open Gate")
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
+             CommonButton{
+                id:exitCloseRoadBlockButtonId
+                buttonText: qsTr("Close Gate")
+                buttonToolTipText: ""
+                width: (colButtonsId.width / 5) * 2
+                height: parent.height
+             }
          }
       }
       CommonPlate{

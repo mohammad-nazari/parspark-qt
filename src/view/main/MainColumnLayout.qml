@@ -1,7 +1,7 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
 
-RowLayout {
+Row {
    id: rowLayoutId
    anchors.fill: parent
    spacing: 0

@@ -16,8 +16,8 @@ Rectangle {
    Layout.fillWidth: true
    Layout.fillHeight: true
    // It is provided by 180 in 30 relation between width and height
-   Layout.preferredWidth: parent.width - 20
-   Layout.preferredHeight: width / 6
+   width: parent.width
+   height: width / 6
    Text {
       id: statusTextId
       anchors.fill: parent
