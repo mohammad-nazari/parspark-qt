@@ -8,7 +8,7 @@ namespace anar::controller {
       return std::make_shared<CommonController>();
    }
    CommonController::CommonController()
-       : BaseController() {
+       : Controller() {
    }
 
    std::vector<std::string> CommonController::GetSerialPortListNames() {

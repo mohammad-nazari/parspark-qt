@@ -8,17 +8,17 @@ namespace anar::model {
       return std::make_shared<Tariff>(fromHour, firstHour, nextHour);
    }
    Tariff::Tariff()
-       : BaseModel("Tariff") {
+       : Model("Tariff", "Tariff") {
    }
    Tariff::Tariff(const uint8_t& fromHour, const uint32_t& firstHour, const uint32_t& nextHour)
-       : BaseModel("Tariff")
+       : Model("Tariff", "Tariff")
        , m_fromHour(fromHour)
        , m_firstHour(firstHour)
        , m_nextHour(nextHour) {
    }
 
    bool Tariff::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_fromHour = json["fromHour"];
       m_toHour = json["toHour"];
       m_firstHour = json["firstHour"];
@@ -26,7 +26,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann Tariff::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["fromHour"] = m_fromHour;
       json["toHour"] = m_toHour;
       json["firstHour"] = m_firstHour;
@@ -38,11 +38,11 @@ namespace anar::model {
       return std::make_shared<Parking>();
    }
    Parking::Parking()
-       : BaseModel("Parking") {
+       : Model("Parking", "Parking") {
    }
 
    bool Parking::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_parkingName = json["parkingName"];
       m_capacity = json["capacity"];
       m_dayTariff->FromJson(json["dayTariff"]);
@@ -53,7 +53,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann Parking::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["parkingName"] = m_parkingName;
       json["capacity"] = m_capacity;
       json["dayTariff"] = m_dayTariff->ToJson();

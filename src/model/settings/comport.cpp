@@ -5,17 +5,17 @@ namespace anar::model {
       return std::make_shared<ComPort>();
    }
    ComPort::ComPort()
-       : BaseModel("Com1") {
+       : Model("Comport", "Comport") {
    }
 
    bool ComPort::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_portName = json["portName"];
       m_baudRate = json["baudRate"];
       return true;
    }
    json_nlohmann ComPort::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["portName"] = m_portName;
       json["baudRate"] = m_baudRate;
       return json;

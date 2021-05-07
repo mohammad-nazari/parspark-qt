@@ -15,7 +15,7 @@
 namespace anar::model {
    class Settings;
    using SettingsPtr = std::shared_ptr<Settings>;
-   class Settings : public BaseModel {
+   class Settings : public Model {
     public:
       static SettingsPtr Create();
       Settings();

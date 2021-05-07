@@ -1,7 +1,7 @@
 #ifndef ANAR_TRAFFIC_HPP
 #define ANAR_TRAFFIC_HPP
 
-#include "base-model.hpp"
+#include "model.hpp"
 #include "user.hpp"
 
 namespace anar::model {
@@ -12,7 +12,7 @@ namespace anar::model {
 
    class TrafficSection;
    using TrafficSectionPtr = std::shared_ptr<TrafficSection>;
-   class TrafficSection : public BaseModel {
+   class TrafficSection : public Model {
      public:
       static TrafficSectionPtr Create();
       TrafficSection();
@@ -58,7 +58,7 @@ namespace anar::model {
 
    class Traffic;
    using TrafficPtr = std::shared_ptr<Traffic>;
-   class Traffic : public BaseModel {
+   class Traffic : public Model {
      public:
       static TrafficPtr Create();
       Traffic();

@@ -5,11 +5,11 @@ namespace anar::model {
       return std::make_shared<Settings>();
    }
    Settings::Settings()
-       : BaseModel("Setting") {
+       : Model("Setting") {
    }
 
    bool Settings::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_settingAlpr->FromJson(json["alpr"]);
       m_settingBoard->FromJson(json["board"]);
       m_settingCamera->FromJson(json["camera"]);
@@ -23,7 +23,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann Settings::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["alpr"] = m_settingAlpr->ToJson();
       json["board"] = m_settingBoard->ToJson();
       json["camera"] = m_settingCamera->ToJson();

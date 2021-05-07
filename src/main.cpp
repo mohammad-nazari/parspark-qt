@@ -1,18 +1,19 @@
 #include <QApplication>
 #include <QDebug>
 #include <QQmlComponent>
-#include <lib/googlelog/glog/logging.h>
 
-#include "Poco/Data/Session.h"
 #include "const/view-const.hpp"
+#include "glog/logging.h"
 #include "nazari-test.hpp"
 #include "view/common-view.hpp"
 #include "view/login/login-view.hpp"
 #include "view/settings/settings-view.hpp"
 
 int main(int argc, char* argv[]) {
-   int appCode{-1};
-//   FLAGS_logtostderr = true;
+   anar::test::NazariTest::RunTest();
+   return 0;
+   int appCode;
+   //   FLAGS_logtostderr = true;
    FLAGS_log_dir = "logs";
    google::EnableLogCleaner(3);
    google::InitGoogleLogging(argv[0]);

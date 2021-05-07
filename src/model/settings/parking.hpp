@@ -5,12 +5,12 @@
 #include <memory>
 #include <string>
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class Tariff;
    using TariffPtr = std::shared_ptr<Tariff>;
-   class Tariff : public BaseModel {
+   class Tariff : public Model {
      public:
       static TariffPtr Create();
       static TariffPtr Create(const uint8_t& fromHour, const uint32_t& firstHour, const uint32_t& nextHour);
@@ -54,7 +54,7 @@ namespace anar::model {
 
    class Parking;
    using ParkingPtr = std::shared_ptr<Parking>;
-   class Parking : public BaseModel {
+   class Parking : public Model {
      public:
       static ParkingPtr Create();
       Parking();

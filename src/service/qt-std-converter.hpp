@@ -6,7 +6,7 @@
 #include <QVector>
 #include <vector>
 
-#include "interface/i-a-jsonable.hpp"
+#include "interface/a-jsonable.hpp"
 
 namespace anar::service {
    class QtStdConverter {

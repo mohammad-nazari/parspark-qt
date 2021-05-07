@@ -6,31 +6,16 @@
       <w>automoc</w>
       <w>autorcc</w>
       <w>autouic</w>
-      <w>carusers</w>
-      <w>checkable</w>
-      <w>cout</w>
-      <w>endl</w>
-      <w>fileable</w>
       <w>glog</w>
       <w>googlelog</w>
-      <w>hotovo</w>
       <w>jsonable</w>
       <w>limereport</w>
-      <w>lohman</w>
-      <w>mainwindow</w>
-      <w>mypassword</w>
-      <w>mysqlclient</w>
-      <w>mysqlconnectorc</w>
       <w>nazari</w>
       <w>nlohman</w>
       <w>oatpp</w>
+      <w>odbcver</w>
       <w>parspark</w>
-      <w>qmysql</w>
-      <w>qsqlite</w>
       <w>qzint</w>
-      <w>statistica</w>
-      <w>stringable</w>
-      <w>tomans</w>
       <w>zint</w>
     </words>
   </dictionary>

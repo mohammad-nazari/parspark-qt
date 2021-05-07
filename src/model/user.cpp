@@ -5,11 +5,11 @@ namespace anar::model {
       return std::make_shared<User>();
    }
    User::User()
-       : BaseModel("User") {
+       : Model("User", "User") {
    }
 
    bool User::FromJson(const json_nlohmann &json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_userName = json["userName"];
       m_passWord = json["passWord"];
       m_firstName = json["firstName"];
@@ -21,7 +21,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann User::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["userName"] = m_userName;
       json["passWord"] = m_passWord;
       json["firstName"] = m_firstName;

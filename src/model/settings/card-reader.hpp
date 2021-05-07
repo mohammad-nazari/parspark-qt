@@ -6,7 +6,7 @@
 namespace anar::model {
    class CardReader;
    using CardReaderPtr = std::shared_ptr<CardReader>;
-   class CardReader : public BaseModel {
+   class CardReader : public Model {
      public:
       static CardReaderPtr Create();
       CardReader();

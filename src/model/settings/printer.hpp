@@ -5,12 +5,12 @@
 #include <memory>
 #include <string>
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class Printer;
    using PrinterPtr = std::shared_ptr<Printer>;
-   class Printer : public BaseModel {
+   class Printer : public Model {
      public:
       static PrinterPtr Create();
       Printer();

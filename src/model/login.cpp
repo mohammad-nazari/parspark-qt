@@ -5,19 +5,19 @@ namespace anar::model {
       return std::make_shared<Login>();
    }
    Login::Login()
-       : BaseModel("Login") {
+       : Model("Login") {
    }
 
    bool Login::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
-      m_user->FromJson(json["user"]);
-      m_dataBase->FromJson(json["dataBase"]);
+      Model::FromJson(json);
+      m_user.FromJson(json["user"]);
+      m_dataBase.FromJson(json["dataBase"]);
       return true;
    }
    json_nlohmann Login::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
-      json["user"] = m_user->ToJson();
-      json["database"] = m_dataBase->ToJson();
+      json_nlohmann json = Model::ToJson();
+      json["user"] = m_user.ToJson();
+      json["database"] = m_dataBase.ToJson();
       return json;
    }
 }  // namespace anar::model

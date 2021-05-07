@@ -7,7 +7,7 @@
 namespace anar::model {
    class PriceBoard;
    using PriceBoardPtr = std::shared_ptr<PriceBoard>;
-   class PriceBoard : public BaseModel {
+   class PriceBoard : public Model {
      public:
       static PriceBoardPtr Create();
       PriceBoard();
@@ -35,7 +35,7 @@ namespace anar::model {
 
    class CapacityBoard;
    using CapacityBoardPtr = std::shared_ptr<CapacityBoard>;
-   class CapacityBoard : public BaseModel {
+   class CapacityBoard : public Model {
      public:
       static CapacityBoardPtr Create();
       CapacityBoard();
@@ -84,7 +84,7 @@ namespace anar::model {
 
    class Board;
    using BoardPtr = std::shared_ptr<Board>;
-   class Board : public BaseModel {
+   class Board : public Model {
      public:
       static BoardPtr Create();
       Board();

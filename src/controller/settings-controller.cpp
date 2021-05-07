@@ -7,7 +7,7 @@ namespace anar::controller {
    SettingsControllerPtr SettingsController::Create() {
       return std::make_shared<SettingsController>();
    }
-   SettingsController::SettingsController() : BaseController() {
+   SettingsController::SettingsController() : Controller() {
    }
 
    model::SettingsPtr SettingsController::Load() {

@@ -9,7 +9,7 @@ namespace anar::view {
       return std::make_shared<LoginView>();
    }
    LoginView::LoginView(QObject* parent)
-       : BaseView(parent) {
+       : View(parent) {
    }
    LoginView* LoginView::LoginViewObjectProvider(QQmlEngine* engine, QJSEngine* scriptEngine) {
       Q_UNUSED(engine)
@@ -31,13 +31,13 @@ namespace anar::view {
    void LoginView::doLogin(QVariantMap loginInfo) {
       m_loginInfo = loginInfo;
       model::LoginPtr login{new model::Login};
-      login->UserName(m_loginInfo["userName"].toString().toStdString());
-      login->PassWord(m_loginInfo["passWord"].toString().toStdString());
-      login->DBAddress(m_loginInfo["serverAddress"].toString().toStdString());
-      login->DBUserName(m_loginInfo["serverUser"].toString().toStdString());
-      login->DBPassword(m_loginInfo["serverPassword"].toString().toStdString());
-      login->DBPort(m_loginInfo["serverPort"].toInt());
-      login->DatabaseName(m_loginInfo["serverDBName"].toString().toStdString());
+      login->User().UserName(m_loginInfo["userName"].toString().toStdString());
+//      login->PassWord(m_loginInfo["passWord"].toString().toStdString());
+//      login->DBAddress(m_loginInfo["serverAddress"].toString().toStdString());
+//      login->DBUserName(m_loginInfo["serverUser"].toString().toStdString());
+//      login->DBPassword(m_loginInfo["serverPassword"].toString().toStdString());
+//      login->DBPort(m_loginInfo["serverPort"].toInt());
+//      login->DatabaseName(m_loginInfo["serverDBName"].toString().toStdString());
       m_done = m_loginController->DoLogin(login);
       m_error = std::string("Error: " + m_loginController->Error()).c_str();
       // Save new database setting if done successfully

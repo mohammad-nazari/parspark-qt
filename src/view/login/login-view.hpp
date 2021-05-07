@@ -6,12 +6,12 @@
 #include <QVariantMap>
 #include <controller/login-controller.hpp>
 #include <model/user.hpp>
-#include <view/base-view.hpp>
+#include <view/view.hpp>
 
 namespace anar::view {
    class LoginView;
    using LoginViewPtr = std::shared_ptr<LoginView>;
-   class LoginView : public BaseView {
+   class LoginView : public View {
       Q_OBJECT
       Q_PROPERTY(QVariantMap loginInfo MEMBER m_loginInfo NOTIFY loginInfoChanged)
 

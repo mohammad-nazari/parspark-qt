@@ -1,14 +1,14 @@
 #ifndef ANAR_PAYMENT_HPP
 #define ANAR_PAYMENT_HPP
 
-#include <model/base-model.hpp>
+#include <model/model.hpp>
 
 #include "comport.hpp"
 
 namespace anar::model {
    class PaymentInfo;
    using PaymentInfoPtr = std::shared_ptr<PaymentInfo>;
-   class PaymentInfo : public BaseModel {
+   class PaymentInfo : public Model {
      public:
       static PaymentInfoPtr Create();
       PaymentInfo();
@@ -36,7 +36,7 @@ namespace anar::model {
    };
    class Payment;
    using PaymentPtr = std::shared_ptr<Payment>;
-   class Payment : public BaseModel {
+   class Payment : public Model {
      public:
       static PaymentPtr Create();
       Payment();

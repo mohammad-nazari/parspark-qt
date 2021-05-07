@@ -1,12 +1,12 @@
 #ifndef ANAR_SERVER_HPP
 #define ANAR_SERVER_HPP
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class Server;
    using ServerPtr = std::shared_ptr<Server>;
-   class Server : public BaseModel {
+   class Server : public Model {
      public:
       static ServerPtr Create();
       Server();

@@ -1,12 +1,12 @@
 #ifndef ANAR_COMPORT_HPP
 #define ANAR_COMPORT_HPP
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class ComPort;
    using ComPortPtr = std::shared_ptr<ComPort>;
-   class ComPort : public BaseModel {
+   class ComPort : public Model {
      public:
       static ComPortPtr Create();
       ComPort();

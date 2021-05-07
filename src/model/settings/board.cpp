@@ -5,17 +5,17 @@ namespace anar::model {
       return std::make_shared<PriceBoard>();
    }
    PriceBoard::PriceBoard()
-       : BaseModel("PriceBoard") {
+       : Model("PriceBoard") {
    }
 
    bool PriceBoard::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enable = json["enable"];
       m_address->FromJson(json["address"]);
       return true;
    }
    json_nlohmann PriceBoard::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address->ToJson();
       return json;
@@ -25,11 +25,11 @@ namespace anar::model {
       return std::make_shared<CapacityBoard>();
    }
    CapacityBoard::CapacityBoard()
-       : BaseModel("PriceBoard") {
+       : Model("PriceBoard") {
    }
 
    bool CapacityBoard::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enable = json["enable"];
       m_sendToBoard = json["sendToBoard"];
       m_address->FromJson(json["address"]);
@@ -38,7 +38,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann CapacityBoard::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enable"] = m_enable;
       json["sendToBoard"] = m_sendToBoard;
       json["address"] = m_address->ToJson();
@@ -51,17 +51,17 @@ namespace anar::model {
       return std::make_shared<Board>();
    }
    Board::Board()
-       : BaseModel("Board") {
+       : Model("Board") {
    }
 
    bool Board::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_price->FromJson(json["price"]);
       m_capacity->FromJson(json["capacity"]);
       return true;
    }
    json_nlohmann Board::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["price"] = m_price->ToJson();
       json["capacity"] = m_capacity->ToJson();
       return json;

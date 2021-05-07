@@ -1,13 +1,13 @@
 #ifndef ANAR_COMMON_VIEW_H
 #define ANAR_COMMON_VIEW_H
 
-#include "base-view.hpp"
 #include "controller/common-controller.hpp"
+#include "view.hpp"
 
 namespace anar::view {
    class CommonView;
    using CommonViewPtr = std::shared_ptr<CommonView>;
-   class CommonView : public BaseView {
+   class CommonView : public View {
       Q_OBJECT
       Q_PROPERTY(QStringList serialPorts MEMBER m_serialPorts NOTIFY serialPortsChanged)
       Q_PROPERTY(QStringList baudRates MEMBER m_baudRates NOTIFY baudRatesChanged)

@@ -5,18 +5,18 @@ namespace anar::model {
       return std::make_shared<Printer>();
    }
    Printer::Printer()
-       : BaseModel("Printer") {
+       : Model("Printer") {
    }
 
    bool Printer::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enable = json["enable"];
       m_name = json["name"];
       m_title = json["title"];
       return true;
    }
    json_nlohmann Printer::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enable"] = m_enable;
       json["name"] = m_name;
       json["title"] = m_title;

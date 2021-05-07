@@ -1,12 +1,12 @@
 #ifndef ANAR_CAMERA_HPP
 #define ANAR_CAMERA_HPP
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class CameraInfo;
    using CameraInfoPtr = std::shared_ptr<CameraInfo>;
-   class CameraInfo : public BaseModel {
+   class CameraInfo : public Model {
      public:
       static CameraInfoPtr Create();
       CameraInfo();
@@ -34,7 +34,7 @@ namespace anar::model {
 
    class Camera;
    using CameraPtr = std::shared_ptr<Camera>;
-   class Camera : public BaseModel {
+   class Camera : public Model {
      public:
       static CameraPtr Create();
       Camera();

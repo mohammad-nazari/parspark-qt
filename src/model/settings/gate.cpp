@@ -5,11 +5,11 @@ namespace anar::model {
       return anar::model::GateInfoPtr();
    }
    GateInfo::GateInfo()
-       : BaseModel("Gate") {
+       : Model("Gate") {
    }
 
    bool GateInfo::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enable = json["enable"];
       m_address->FromJson(json["address"]);
       m_openAuto = json["openAuto"];
@@ -18,7 +18,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann GateInfo::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address->ToJson();
       json["openAuto"] = m_openAuto;
@@ -31,17 +31,17 @@ namespace anar::model {
       return anar::model::GatePtr();
    }
    Gate::Gate()
-       : BaseModel("Gate") {
+       : Model("Gate") {
    }
 
    bool Gate::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enter->FromJson(json["enter"]);
       m_exit->FromJson(json["exit"]);
       return true;
    }
    json_nlohmann Gate::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enter"] = m_enter->ToJson();
       json["exit"] = m_exit->ToJson();
       return json;

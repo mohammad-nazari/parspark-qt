@@ -1,13 +1,13 @@
 #ifndef ANAR_SETTINGS_CONTROLLER_HPP
 #define ANAR_SETTINGS_CONTROLLER_HPP
 
-#include "base-controller.hpp"
+#include "controller.hpp"
 #include "model/settings/settings.hpp"
 
 namespace anar::controller {
    class SettingsController;
    using SettingsControllerPtr = std::shared_ptr<SettingsController>;
-   class SettingsController : public BaseController {
+   class SettingsController : public Controller {
      public:
       static SettingsControllerPtr Create();
       explicit SettingsController();

@@ -5,14 +5,14 @@ namespace anar::model {
       return std::make_shared<TrafficSection>();
    }
    TrafficSection::TrafficSection()
-       : BaseModel("TrafficSection") {
+       : Model("TrafficSection") {
    }
 
    TrafficPtr Traffic::Create() {
       return std::make_shared<Traffic>();
    }
    Traffic::Traffic()
-       : BaseModel("Traffic") {
+       : Model("Traffic") {
    }
 
 } // namespace anar::model

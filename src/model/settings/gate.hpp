@@ -6,7 +6,7 @@
 namespace anar::model {
    class GateInfo;
    using GateInfoPtr = std::shared_ptr<GateInfo>;
-   class GateInfo : public BaseModel {
+   class GateInfo : public Model {
      public:
       static GateInfoPtr Create();
       GateInfo();
@@ -55,7 +55,7 @@ namespace anar::model {
 
    class Gate;
    using GatePtr = std::shared_ptr<Gate>;
-   class Gate : public BaseModel {
+   class Gate : public Model {
      public:
       static GatePtr Create();
       Gate();

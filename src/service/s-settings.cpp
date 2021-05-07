@@ -6,8 +6,7 @@
 namespace anar::service {
    SSettingsPtr SSettings::_instance = nullptr;
 
-   SSettings::SSettings() {
-   }
+   SSettings::SSettings() = default;
    SSettingsPtr SSettings::Instance() {
       if (_instance == nullptr) {
          _instance.reset(new SSettings);
@@ -26,7 +25,7 @@ namespace anar::service {
          std::ifstream file(address, std::ios::in);
          if (file.is_open()) {
             std::string data = std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-            if (!m_settings->FromString(data)) {
+            if (!m_settings->FromJsonString(data)) {
                m_error = "Error on parse settings data";
             }
          } else {
@@ -42,7 +41,7 @@ namespace anar::service {
          m_error.clear();
          std::ofstream file(address, std::ios::out);
          if (file.is_open()) {
-            file << m_settings->ToString();
+            file << m_settings->ToJsonString();
          } else {
             m_error = "Error on open settings file";
          }

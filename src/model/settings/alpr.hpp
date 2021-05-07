@@ -5,12 +5,12 @@
 #include <memory>
 #include <string>
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class AlprByCamera;
    using AlprByCameraPtr = std::shared_ptr<AlprByCamera>;
-   class AlprByCamera : public BaseModel {
+   class AlprByCamera : public Model {
      public:
       static AlprByCameraPtr Create();
       AlprByCamera();
@@ -45,7 +45,7 @@ namespace anar::model {
 
    class Alpr;
    using AlprPtr = std::shared_ptr<Alpr>;
-   class Alpr : public BaseModel {
+   class Alpr : public Model {
      public:
       static AlprPtr Create();
       Alpr();

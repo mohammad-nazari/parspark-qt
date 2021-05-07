@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(ParsPark)
 
+add_definitions(-DDATABASE_MYSQL)
+
 option(DEPLOYMENT "In development state show console for debug and see warnings and other console data" OFF)
 
 if (WIN32)
@@ -135,6 +137,8 @@ link_directories(
 )
 
 include_directories(
+        "${ANAR_ZLIB_BIN_DIR}"
+        "${ANAR_ZLIB_DIR}"
         "${ANAR_LIB_DIR}"
         "${ANAR_MYSQL_DIR}/include"
         "${ANAR_NLOHMANN_JSON_DIR}/include"
@@ -170,18 +174,15 @@ set(
 )
 
 set(
-        PARSPARK_SOURCES
+        PARS_PARK_SOURCES
 
         resource/rc/icon.rc
         resource/qrc/qml.qrc
 
-        src/common/string.cpp
-        src/common/binary.cpp
+        src/interface/a-jsonable.cpp
 
-        src/interface/i-fileable.cpp
-        src/interface/i-stringable.cpp
-        src/interface/i-a-jsonable.cpp
-
+        src/model/error.cpp
+        src/model/model.cpp
         src/model/settings/database.cpp
         src/model/settings/alpr.cpp
         src/model/settings/parking.cpp
@@ -197,9 +198,13 @@ set(
         src/model/settings/settings.cpp
         src/model/user.cpp
         src/model/login.cpp
-        src/model/base-model.cpp
         src/model/traffic.cpp
-        src/model/database/person-odb.cxx
+        src/model/database/contact-model-odb.cxx
+        src/model/database/person-model-odb.cxx
+        src/model/database/user-model-odb.cxx
+
+        src/common/string.cpp
+        src/common/binary.cpp
 
         src/database/i-database.cpp
         src/database/s-database.cpp
@@ -212,22 +217,21 @@ set(
         src/service/serial-port.cpp
         src/service/printer.cpp
 
-        src/view/base-view.cpp
+        src/view/view.cpp
         src/view/common-view.cpp
         src/view/login/login-view.cpp
         src/view/settings/settings-view.cpp
+        src/view/s-view.cpp
 
-        src/controller/base-controller.cpp
+        src/controller/controller.cpp
         src/controller/common-controller.cpp
         src/controller/login-controller.cpp
         src/controller/settings-controller.cpp
         src/nazari-test.cpp
-
 )
 
 set(
-        PARSPARK_TEST_SOURCES
-
+        PARS_PARK_TEST_SOURCES
 )
 
 if (WIN32)
@@ -235,25 +239,25 @@ if (WIN32)
             ${PROJECT_NAME}
             ${DONT_SHOW_CONSOLE}
             src/main.cpp
-            ${PARSPARK_SOURCES}
+            ${PARS_PARK_SOURCES}
     )
     add_executable(
             ${PROJECT_NAME}_Unit_Test
             ${DONT_SHOW_CONSOLE}
-            ${PARSPARK_SOURCES}
-            ${PARSPARK_TEST_SOURCES}
+            ${PARS_PARK_SOURCES}
+            ${PARS_PARK_TEST_SOURCES}
             test/main.cpp
     )
 else ()
     add_executable(
             ${PROJECT_NAME}
-            ${PARSPARK_SOURCES}
+            ${PARS_PARK_SOURCES}
             src/main.cpp
     )
     add_executable(
             ${PROJECT_NAME}_Unit_Test
-            ${PARSPARK_SOURCES}
-            ${PARSPARK_TEST_SOURCES}
+            ${PARS_PARK_SOURCES}
+            ${PARS_PARK_TEST_SOURCES}
             test/main.cpp
     )
 endif ()
@@ -320,3 +324,6 @@ elseif (UNIX)
     file(COPY "${ANAR_MYSQL_DIR}/lib/libmysql.so"
             DESTINATION "${CMAKE_BINARY_DIR}/bin")
 endif ()
+
+#d:\Tools\ODB\odb-compiler\bin\odb.exe -d mysql --generate-query --generate-schema --std c++11 person.hxx
+#d:\Tools\ODB\odb-compiler\bin\odb.exe --std c++11 --database mysql --generate-schema --generate-query --hxx-prologue "#include \"traits.hxx\""  --table-prefix mapping_ person.hxx

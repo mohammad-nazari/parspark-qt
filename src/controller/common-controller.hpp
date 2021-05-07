@@ -3,12 +3,12 @@
 
 #include <vector>
 
-#include "base-controller.hpp"
+#include "controller.hpp"
 
 namespace anar::controller {
    class CommonController;
    using CommonControllerPtr = std::shared_ptr<CommonController>;
-   class CommonController : public BaseController {
+   class CommonController : public Controller {
      public:
       static CommonControllerPtr Create();
       CommonController();

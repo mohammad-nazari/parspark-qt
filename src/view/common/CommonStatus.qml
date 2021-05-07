@@ -26,6 +26,6 @@ Rectangle {
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       text: statusString
-      font.pixelSize: (parent.width / 15) > 1 ? (parent.width / 15) : 1
+      font.pixelSize: (parent.height / 2) > 1 ? (parent.height / 2) : 1
    }
 }

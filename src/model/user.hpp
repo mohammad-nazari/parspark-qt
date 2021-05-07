@@ -1,7 +1,7 @@
 #ifndef ANAR_USER_H
 #define ANAR_USER_H
 
-#include "base-model.hpp"
+#include "model.hpp"
 
 namespace anar::model {
    namespace UserTypes {
@@ -12,7 +12,7 @@ namespace anar::model {
 
    class User;
    using UserPtr = std::shared_ptr<User>;
-   class User : public BaseModel {
+   class User : public Model {
      public:
       static UserPtr Create();
       User();

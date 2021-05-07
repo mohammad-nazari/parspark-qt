@@ -6,11 +6,11 @@ namespace anar::model {
    }
 
    Software::Software()
-       : BaseModel("Software") {
+       : Model("Software") {
    }
 
    bool Software::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_activeEnter = json["activeEnter"];
       m_activeExit = json["activeExit"];
       m_asServer = json["asServer"];
@@ -19,7 +19,7 @@ namespace anar::model {
       return true;
    }
    json_nlohmann Software::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["activeEnter"] = m_activeEnter;
       json["activeExit"] = m_activeExit;
       json["asServer"] = m_asServer;

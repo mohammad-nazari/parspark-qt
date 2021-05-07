@@ -5,17 +5,17 @@ namespace anar::model {
       return std::make_shared<CameraInfo>();
    }
    CameraInfo::CameraInfo()
-       : BaseModel("Camera") {
+       : Model("Camera") {
    }
 
    bool CameraInfo::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enable = json["enable"];
       m_address = json["address"];
       return true;
    }
    json_nlohmann CameraInfo::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enable"] = m_enable;
       json["address"] = m_address;
       return json;
@@ -25,17 +25,17 @@ namespace anar::model {
       return std::make_shared<Camera>();
    }
    Camera::Camera()
-       : BaseModel("Camera") {
+       : Model("Camera") {
    }
 
    bool Camera::FromJson(const json_nlohmann& json) {
-      BaseModel::FromJson(json);
+      Model::FromJson(json);
       m_enter->FromJson(json["enterAddress"]);
       m_exit->FromJson(json["exitAddress"]);
       return true;
    }
    json_nlohmann Camera::ToJson() {
-      json_nlohmann json = BaseModel::ToJson();
+      json_nlohmann json = Model::ToJson();
       json["enterAddress"] = m_enter->ToJson();
       json["exitAddress"] = m_exit->ToJson();
       return json;

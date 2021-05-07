@@ -1,18 +1,18 @@
 #ifndef ANAR_DATABASE_HPP
 #define ANAR_DATABASE_HPP
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 
 namespace anar::model {
    class DataBase;
    using DataBasePtr = std::shared_ptr<DataBase>;
-   class DataBase : public BaseModel {
+   class DataBase : public Model {
      public:
       static DataBasePtr Create();
       DataBase();
 
-      bool FromJson(const json_nlohmann& json) override;
-      json_nlohmann ToJson() override;
+      bool FromJson(const json_nlohmann& json) final;
+      json_nlohmann ToJson() final;
 
       [[nodiscard]] const std::string& HostAddress() const {
          return m_hostAddress;

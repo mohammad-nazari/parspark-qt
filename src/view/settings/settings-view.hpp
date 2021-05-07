@@ -6,12 +6,12 @@
 #include <QVariantMap>
 
 #include "controller/settings-controller.hpp"
-#include "view/base-view.hpp"
+#include "view/view.hpp"
 
 namespace anar::view {
    class SettingsView;
    using SettingsViewPtr = std::shared_ptr<SettingsView>;
-   class SettingsView : public BaseView {
+   class SettingsView : public View {
       Q_OBJECT
       Q_PROPERTY(QVariantMap settingsInfo MEMBER m_settingsInfo NOTIFY settingsInfoChanged)
 

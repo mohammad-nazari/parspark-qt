@@ -10,7 +10,7 @@ namespace anar::view {
       return std::make_shared<SettingsView>();
    }
    SettingsView::SettingsView(QObject* parent)
-       : BaseView(parent) {
+       : View(parent) {
    }
    QObject* SettingsView::SettingViewObjectProvider(QQmlEngine* engine, QJSEngine* scriptEngine) {
       Q_UNUSED(engine)

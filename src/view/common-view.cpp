@@ -7,7 +7,7 @@ namespace anar::view {
       return std::make_shared<CommonView>();
    }
    CommonView::CommonView()
-       : BaseView() {
+       : View() {
    }
 
    void CommonView::getSerialPorts() {

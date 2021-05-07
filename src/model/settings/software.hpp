@@ -1,13 +1,13 @@
 #ifndef ANAR_SOFTWARE_HPP
 #define ANAR_SOFTWARE_HPP
 
-#include "model/base-model.hpp"
+#include "model/model.hpp"
 #include "server.hpp"
 
 namespace anar::model {
    class Software;
    using SoftwarePtr = std::shared_ptr<Software>;
-   class Software : public BaseModel {
+   class Software : public Model {
      public:
       static SoftwarePtr Create();
       Software();
