@@ -187,12 +187,12 @@ namespace odb
     // UpdatedTime
     //
     {
-      ::std::shared_ptr< long int > const& v =
+      ::std::shared_ptr< time_t > const& v =
         o.UpdatedTime;
 
       bool is_null (true);
       mysql::value_traits<
-          ::std::shared_ptr< long int >,
+          ::std::shared_ptr< time_t >,
           mysql::id_timestamp >::set_image (
         i.UpdatedTime_value, is_null, v);
       i.UpdatedTime_null = is_null;
@@ -289,11 +289,11 @@ namespace odb
     // UpdatedTime
     //
     {
-      ::std::shared_ptr< long int >& v =
+      ::std::shared_ptr< time_t >& v =
         o.UpdatedTime;
 
       mysql::value_traits<
-          ::std::shared_ptr< long int >,
+          ::std::shared_ptr< time_t >,
           mysql::id_timestamp >::set_value (
         v,
         i.UpdatedTime_value,

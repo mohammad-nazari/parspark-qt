@@ -2,7 +2,6 @@
 #define ANAR_TRAITS_MYSQL_HXX
 
 #include "Poco/DateTime.h"
-//#include "model/database/user-model.hxx"
 #include "odb/mysql/traits.hxx"
 
 namespace odb {
@@ -32,7 +31,7 @@ namespace odb {
             i.hour = dateTime.hour();
             i.minute = dateTime.minute();
             i.second = dateTime.second();
-            i.second_part = (dateTime.millisecond() * 10) + dateTime.microsecond();
+            i.second_part = (dateTime.millisecond() * 1000) + dateTime.microsecond();
          }
       };
 

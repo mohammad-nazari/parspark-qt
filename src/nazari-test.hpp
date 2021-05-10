@@ -7,6 +7,7 @@ namespace anar::test {
       static void RunTest();
       static void TestPocoReadAndWrite();
       static void TestPocoMySQL();
+      static void TestPocoSHA();
       static void TestODB();
    };
 }  // namespace anar::test

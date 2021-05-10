@@ -5,6 +5,12 @@
 #ifndef CREATE_MODIFY_DELETE_MODEL_ODB_HXX
 #define CREATE_MODIFY_DELETE_MODEL_ODB_HXX
 
+// Begin prologue.
+//
+#include "traits/traits.hxx"
+//
+// End prologue.
+
 #include <odb/version.hxx>
 
 #if (ODB_VERSION != 20400UL)

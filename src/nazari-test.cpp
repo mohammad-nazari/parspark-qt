@@ -10,6 +10,7 @@
 #include "Poco/Data/Session.h"
 #include "Poco/Data/SessionFactory.h"
 #include "Poco/FileStream.h"
+#include "common/string.hpp"
 #include "model/database/create-modify-delete-model-odb.hxx"
 #include "model/database/create-modify-delete-model.hxx"
 #include "model/database/user-model-odb.hxx"
@@ -24,8 +25,9 @@ using Poco::Data::Statement;
 
 namespace anar::test {
    void NazariTest::RunTest() {
-      TestODB();
+      TestPocoSHA();
    }
+
    void NazariTest::TestPocoReadAndWrite() {
       Poco::FileStream oFileStream;
       oFileStream.open("test.txt", std::ios::out);
@@ -44,6 +46,7 @@ namespace anar::test {
       std::cout << str << std::endl;
       iFileStream.close();
    }
+
    void NazariTest::TestPocoMySQL() {
       Poco::Data::MySQL::Connector::registerConnector();
       //      try {
@@ -92,6 +95,11 @@ namespace anar::test {
       //         std::cout << person.name << " " << person.address << " " << person.age << std::endl;
       //      }
    }
+
+   void NazariTest::TestPocoSHA() {
+      std::cout << common::String::SHA512("123456") << std::endl;
+   }
+
    void NazariTest::TestODB() {
       try {
          std::cout << "Set DataBase... " << std::endl;

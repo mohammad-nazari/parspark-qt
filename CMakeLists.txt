@@ -202,6 +202,16 @@ set(
         src/model/database/contact-model-odb.cxx
         src/model/database/person-model-odb.cxx
         src/model/database/user-model-odb.cxx
+        src/model/database/create-modify-delete-model-odb.cxx
+        src/model/database/card-model-odb.cxx
+        src/model/database/car-model-odb.cxx
+        src/model/database/black-list-model-odb.cxx
+        src/model/database/contact-model-odb.cxx
+        src/model/database/driver-model-odb.cxx
+        src/model/database/lost-card-model-odb.cxx
+        src/model/database/organization-model-odb.cxx
+        src/model/database/parking-log-model-odb.cxx
+        src/model/database/subscription-model-odb.cxx
 
         src/common/string.cpp
         src/common/binary.cpp

@@ -396,12 +396,12 @@ namespace odb
     // ExitedTime
     //
     {
-      ::std::shared_ptr< long int > const& v =
+      ::std::shared_ptr< time_t > const& v =
         o.ExitedTime;
 
       bool is_null (true);
       mysql::value_traits<
-          ::std::shared_ptr< long int >,
+          ::std::shared_ptr<time_t >,
           mysql::id_timestamp >::set_image (
         i.ExitedTime_value, is_null, v);
       i.ExitedTime_null = is_null;
@@ -596,11 +596,11 @@ namespace odb
     // ExitedTime
     //
     {
-      ::std::shared_ptr< long int >& v =
+      ::std::shared_ptr< time_t >& v =
         o.ExitedTime;
 
       mysql::value_traits<
-          ::std::shared_ptr< long int >,
+          ::std::shared_ptr< time_t >,
           mysql::id_timestamp >::set_value (
         v,
         i.ExitedTime_value,
