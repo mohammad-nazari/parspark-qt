@@ -22,7 +22,7 @@ cmake_minimum_required(VERSION 3.17)
 
 cmake_policy(VERSION 3.1)
 
-project(${ANAR_PNG_LIB} C ASM)
+project(png C ASM)
 enable_testing()
 
 set(PNGLIB_MAJOR 1)
@@ -512,7 +512,7 @@ if(PNG_DEBUG)
 endif()
 
 # NOW BUILD OUR TARGET
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${ANAR_ZLIB_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PARS_PARK_ZLIB_DIR})
 
 unset(PNG_LIB_TARGETS)
 
@@ -526,7 +526,7 @@ if(PNG_SHARED)
     set_target_properties(png PROPERTIES PREFIX "lib")
     set_target_properties(png PROPERTIES IMPORT_PREFIX "lib")
   endif()
-  target_link_libraries(png ${ANAR_ZLIB_LIB} ${M_LIBRARY})
+  target_link_libraries(png zlib ${M_LIBRARY})
 
   if(UNIX AND AWK)
     if(HAVE_LD_VERSION_SCRIPT)
@@ -561,7 +561,7 @@ if(PNG_STATIC)
     # msvc does not append 'lib' - do it here to have consistent name
     set_target_properties(png_static PROPERTIES PREFIX "lib")
   endif()
-  target_link_libraries(png_static ${ANAR_ZLIB_LIB} ${M_LIBRARY})
+  target_link_libraries(png_static zlib ${M_LIBRARY})
 endif()
 
 if(PNG_FRAMEWORK)
@@ -578,7 +578,7 @@ if(PNG_FRAMEWORK)
     XCODE_ATTRIBUTE_INSTALL_PATH "@rpath"
     PUBLIC_HEADER "${libpng_public_hdrs}"
     OUTPUT_NAME png)
-  target_link_libraries(png_framework ${ANAR_ZLIB_LIB} ${M_LIBRARY})
+  target_link_libraries(png_framework zlib ${M_LIBRARY})
 endif()
 
 if(NOT PNG_LIB_TARGETS)
@@ -743,7 +743,7 @@ if(PNG_SHARED)
   set(PNG_BIN_TARGETS pngfix)
 
   add_executable(png-fix-itxt ${png_fix_itxt_sources})
-  target_link_libraries(png-fix-itxt ${ANAR_ZLIB_LIB} ${M_LIBRARY})
+  target_link_libraries(png-fix-itxt zlib ${M_LIBRARY})
   list(APPEND PNG_BIN_TARGETS png-fix-itxt)
 endif()
 

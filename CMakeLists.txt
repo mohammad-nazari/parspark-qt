@@ -1,339 +1,259 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(ParsPark)
+project(ParsParkProject)
 
-add_definitions(-DDATABASE_MYSQL)
-
-option(DEPLOYMENT "In development state show console for debug and see warnings and other console data" OFF)
+set(PARS_PARK_MESSAGE "[[PARS_PARK]]")
+message("${PARS_PARK_MESSAGE} QT dir: ${QTDIR}")
 
 if (WIN32)
-    if (DEPLOYMENT)
-        set(DONT_SHOW_CONSOLE WIN32)
-    endif ()
     # Set minimum windows version to windows 7
-    #this method adds the necessary compiler flag
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_WIN32_WINNT=0x0601")
     #Or this adds a preprocessor definition to the project
     #    add_definitions(-D_WIN32_WINNT=0x0601)
 endif ()
 
-set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 0)
-set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
-set(VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-message("Generator: ${CMAKE_GENERATOR}")
-message("C++ standard: ${CMAKE_CXX_STANDARD}")
+message("${PARS_PARK_MESSAGE} Generator: ${CMAKE_GENERATOR}")
+message("${PARS_PARK_MESSAGE} C++ standard: ${CMAKE_CXX_STANDARD}")
 
-#set(DCMAKE_SH "CMAKE_SH-NOTFOUND")
+set(PARS_PARK_LIB_DIR "${CMAKE_SOURCE_DIR}/lib")
+set(PARS_PARK_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
+set(PARS_PARK_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
+set(PARS_PARK_ANAR_LIB_DIR "${PARS_PARK_SOURCE_DIR}/anar")
+set(PARS_PARK_APP_DIR "${PARS_PARK_SOURCE_DIR}/app")
 
-# For Poco
+#region QT
+set(CMAKE_PREFIX_PATH "$ENV{QTDIR}")
+#endregion
+
+#region MYSQL
+add_definitions(-DDATABASE_MYSQL)
+set(ENABLE_DATA_MYSQL true)
+set(MYSQL_FOUND true)
+set(PARS_PARK_MYSQL_LIB mysql)
+set(PARS_PARK_MYSQL_FOLDER mysql)
+if (WIN32)
+    set(PARS_PARK_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_MYSQL_FOLDER}/mysql-connector-c/win/x64")
+elseif (UNIX)
+    set(PARS_PARK_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_MYSQL_FOLDER}/mysql-connector-c/unix/x64")
+endif ()
+set(MYSQL_ROOT_DIR "${PARS_PARK_MYSQL_DIR}")
+set(PC_MYSQL_DIR "${PARS_PARK_MYSQL_DIR}")
+set(MYSQL_ROOT_INCLUDE_DIRS "${PARS_PARK_MYSQL_DIR}/include")
+set(PC_MYSQL_INCLUDE_DIRS "${PARS_PARK_MYSQL_DIR}/include")
+set(MYSQL_ROOT_LIBRARY_DIRS "${PARS_PARK_MYSQL_DIR}/lib")
+set(PC_MYSQL_LIBRARY_DIRS "${PARS_PARK_MYSQL_DIR}/lib")
+if (WIN32)
+    file(COPY "${PARS_PARK_MYSQL_DIR}/lib/libmysql.dll"
+            DESTINATION "${CMAKE_BINARY_DIR}/bin")
+elseif (UNIX)
+    file(COPY "${PARS_PARK_MYSQL_DIR}/lib/libmysql.so"
+            DESTINATION "${CMAKE_BINARY_DIR}/bin")
+endif ()
+#endregion
+
+#region PNG
+set(PARS_PARK_PNG_LIB png)
+set(PARS_PARK_PNG_FOLDER png)
+set(PARS_PARK_PNG_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_PNG_FOLDER}")
+set(PARS_PARK_PNG_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_PNG_FOLDER}")
+#endregion
+
+#region ZLIB
+set(PARS_PARK_ZLIB_LIB zlib)
+set(PARS_PARK_ZLIB_FOLDER zlib)
+set(PARS_PARK_ZLIB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ZLIB_FOLDER}")
+set(PARS_PARK_ZLIB_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_ZLIB_FOLDER}")
+#endregion
+
+#region ZINT
+set(PARS_PARK_ZINT_LIB zint)
+set(PARS_PARK_ZINT_FOLDER zint)
+set(PARS_PARK_ZINT_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ZINT_FOLDER}")
+set(PARS_PARK_ZINT_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_ZINT_LIB}")
+#endregion
+
+#region QZINT
+set(PARS_PARK_QZINT_LIB qzint)
+set(PARS_PARK_QZINT_FOLDER qzint)
+set(PARS_PARK_QZINT_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_QZINT_FOLDER}")
+set(PARS_PARK_QZINT_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_QZINT_FOLDER}")
+#endregion
+
+#region Poco
 if (CMAKE_COMPILER_IS_MINGW)
     add_definitions(-DWC_NO_BEST_FIT_CHARS=0x400)   # Note - removed -DPOCO_WIN32_UTF8
     add_definitions(-D_WIN32 -DMINGW32 -DWINVER=0x500 -DODBCVER=0x0300 -DPOCO_THREAD_STACK_SIZE)
     add_compile_options(-Wa,-mbig-obj)   # Note: new - fixes "file too big"
 endif ()
+set(PARS_PARK_POCO_LIB Poco)
+set(PARS_PARK_POCO_FOUNDATION_LIB ${PARS_PARK_POCO_LIB}::Foundation)
+set(PARS_PARK_POCO_DATA_LIB ${PARS_PARK_POCO_LIB}::Data)
+set(PARS_PARK_POCO_DATA_MYSQL_LIB ${PARS_PARK_POCO_LIB}::DataMySQL)
+set(PARS_PARK_POCO_DATA_SQLITE_LIB ${PARS_PARK_POCO_LIB}::DataSQLite)
+set(PARS_PARK_POCO_FOLDER poco)
+set(PARS_PARK_POCO_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_POCO_FOLDER}")
+set(PARS_PARK_POCO_FOUNDATION_DIR "${PARS_PARK_POCO_DIR}/Foundation/include")
+set(PARS_PARK_POCO_DATA_DIR "${PARS_PARK_POCO_DIR}/Data/include")
+set(PARS_PARK_POCO_DATA_MYSQL_DIR "${PARS_PARK_POCO_DIR}/Data/MySQL/include")
+set(PARS_PARK_POCO_DATA_SQLITE_DIR "${PARS_PARK_POCO_DIR}/Data/SQLite/include")
+#endregion
 
-set(ENABLE_DATA_MYSQL true)
-set(MYSQL_FOUND true)
+#region Lime Report
+set(PARS_PARK_LIMEREPORT_LIB limereport)
+set(PARS_PARK_LIMEREPORT_FOLDER lime-report)
+set(PARS_PARK_LIMEREPORT_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_LIMEREPORT_FOLDER}")
+#endregion
 
-set(ANAR_LIB_DIR "${CMAKE_SOURCE_DIR}/lib")
-set(ANAR_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
+#region nlohmann
+set(PARS_PARK_NLOHMANN_JSON_LIB nlohman::json)
+set(PARS_PARK_NLOHMANN_FOLDER nlohmann)
+set(PARS_PARK_NLOHMANN_JSON_FOLDER nlohmann-json)
+set(PARS_PARK_NLOHMANN_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_NLOHMANN_FOLDER}")
+set(PARS_PARK_NLOHMANN_JSON_DIR "${PARS_PARK_NLOHMANN_DIR}/${PARS_PARK_NLOHMANN_JSON_FOLDER}")
+#endregion
 
-set(ANAR_POCO_FOUNDATION_LIB Poco::Foundation)
-set(ANAR_POCO_DATA_LIB Poco::Data)
-set(ANAR_POCO_DATA_MYSQL_LIB Poco::DataMySQL)
-set(ANAR_POCO_DATA_SQLITE_LIB Poco::DataSQLite)
-set(ANAR_LIMEREPORT_LIB limereport)
-set(ANAR_PNG_LIB png)
-set(ANAR_ZLIB_LIB zlib)
-set(ANAR_ZINT_LIB zint)
-set(ANAR_QZINT_LIB qzint)
-set(ANAR_NLOHMANN_JSON_LIB nlohman::json)
-set(ANAR_OATPP_LIB oatpp)
-set(ANAR_ODB_LIB odb)
-set(ANAR_ODB_MYSQL_LIB ODB::MySQL)
-set(ANAR_SERIAL_LIB serial)
-set(ANAR_MYSQL_LIB mysql)
-set(ANAR_GOOGLE_LOG_LIB glog)
-set(ANAR_GOOGLE_TEST_LIB gtest)
+#region OATPP
+set(PARS_PARK_OATPP_LIB oatpp)
+set(PARS_PARK_OATPP_FOLDER oatpp)
+set(PARS_PARK_OATPP_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_OATPP_FOLDER}")
+#endregion
 
-set(ANAR_POCO_FOLDER poco)
-set(ANAR_LIMEREPORT_FOLDER lime-report)
-set(ANAR_PNG_FOLDER png)
-set(ANAR_ZLIB_FOLDER zlib)
-set(ANAR_ZINT_FOLDER zint)
-set(ANAR_QZINT_FOLDER qzint)
-set(ANAR_NLOHMANN_FOLDER nlohmann)
-set(ANAR_NLOHMANN_JSON_FOLDER nlohmann-json)
-set(ANAR_OATPP_FOLDER oatpp)
-set(ANAR_ODB_FOLDER odb)
-set(ANAR_ODB_MYSQL_FOLDER odb-mysql)
-set(ANAR_SERIAL_FOLDER serial)
-set(ANAR_MYSQL_FOLDER mysql)
-set(ANAR_GOOGLE_LOG_FOLDER googlelog)
-set(ANAR_GOOGLE_TEST_FOLDER googletest)
+#region ODB
+set(PARS_PARK_ODB_LIB odb)
+set(PARS_PARK_ODB_MYSQL_LIB ODB::MySQL)
+set(PARS_PARK_ODB_FOLDER odb)
+set(PARS_PARK_ODB_MYSQL_FOLDER odb-mysql)
+set(PARS_PARK_ODB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_FOLDER}/${PARS_PARK_ODB_FOLDER}")
+set(PARS_PARK_ODB_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_FOLDER}/${PARS_PARK_ODB_MYSQL_FOLDER}")
+#endregion
 
-set(ANAR_POCO_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}")
-set(ANAR_POCO_FOUNDATION_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Foundation/include")
-set(ANAR_POCO_DATA_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Data/include")
-set(ANAR_POCO_DATA_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Data/MySQL/include")
-set(ANAR_POCO_DATA_SQLITE_DIR "${ANAR_LIB_DIR}/${ANAR_POCO_FOLDER}/Data/SQLite/include")
-set(ANAR_LIMEREPORT_DIR "${ANAR_LIB_DIR}/${ANAR_LIMEREPORT_FOLDER}")
-set(ANAR_PNG_DIR "${ANAR_LIB_DIR}/${ANAR_PNG_FOLDER}")
-set(ANAR_ZLIB_DIR "${ANAR_LIB_DIR}/${ANAR_ZLIB_FOLDER}")
-set(ANAR_ZINT_DIR "${ANAR_LIB_DIR}/${ANAR_ZINT_FOLDER}")
-set(ANAR_QZINT_DIR "${ANAR_LIB_DIR}/${ANAR_QZINT_FOLDER}")
-set(ANAR_NLOHMANN_DIR "${ANAR_LIB_DIR}/${ANAR_NLOHMANN_FOLDER}")
-set(ANAR_NLOHMANN_JSON_DIR "${ANAR_NLOHMANN_DIR}/${ANAR_NLOHMANN_JSON_FOLDER}")
-set(ANAR_OATPP_DIR "${ANAR_LIB_DIR}/${ANAR_OATPP_FOLDER}")
-set(ANAR_ODB_DIR "${ANAR_LIB_DIR}/${ANAR_ODB_FOLDER}/${ANAR_ODB_FOLDER}")
-set(ANAR_ODB_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_ODB_FOLDER}/${ANAR_ODB_MYSQL_FOLDER}")
-set(ANAR_SERIAL_DIR "${ANAR_LIB_DIR}/${ANAR_SERIAL_FOLDER}")
-if (WIN32)
-    set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/win/x64")
-elseif (UNIX)
-    set(ANAR_MYSQL_DIR "${ANAR_LIB_DIR}/${ANAR_MYSQL_LIB}/mysql-connector-c/unix/x64")
-endif ()
-set(ANAR_GOOGLE_LOG_DIR "${ANAR_LIB_DIR}/${ANAR_GOOGLE_LOG_FOLDER}")
-set(ANAR_GOOGLE_TEST_DIR "${ANAR_LIB_DIR}/${ANAR_GOOGLE_TEST_FOLDER}")
+#region Serial
+set(PARS_PARK_SERIAL_LIB serial)
+set(PARS_PARK_SERIAL_FOLDER serial)
+set(PARS_PARK_SERIAL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_SERIAL_FOLDER}")
+#endregion
 
-set(ANAR_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
-set(ANAR_PNG_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_PNG_LIB}")
-set(ANAR_ZLIB_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_ZLIB_LIB}")
-set(ANAR_ZINT_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_ZINT_LIB}")
-set(ANAR_QZINT_BIN_DIR "${ANAR_LIB_BIN_DIR}/${ANAR_QZINT_LIB}")
+#region GLog
+set(PARS_PARK_GOOGLE_LOG_LIB glog)
+set(PARS_PARK_GOOGLE_LOG_FOLDER googlelog)
+set(PARS_PARK_GOOGLE_LOG_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_GOOGLE_LOG_FOLDER}")
+#endregion
 
-set(MYSQL_ROOT_DIR "${ANAR_MYSQL_DIR}") # POCO Set root installation path where to find include path and libraries of MySQL or MariaDB or
-set(PC_MYSQL_DIR "${ANAR_MYSQL_DIR}") # POCO Set root installation path where to find include path and libraries of MySQL or MariaDB or
-set(MYSQL_ROOT_INCLUDE_DIRS "${ANAR_MYSQL_DIR}/include") # POCO Set include paths where to find MySQL or MariaDB headers
-set(PC_MYSQL_INCLUDE_DIRS "${ANAR_MYSQL_DIR}/include") # POCO Set include paths where to find MySQL or MariaDB headers
-set(MYSQL_ROOT_LIBRARY_DIRS "${ANAR_MYSQL_DIR}/lib") # POCO Set library paths where to find MySQL or MariaDB libraries
-set(PC_MYSQL_LIBRARY_DIRS "${ANAR_MYSQL_DIR}/lib") # POCO Set library paths where to find MySQL or MariaDB libraries
+#region GTest
+set(PARS_PARK_GOOGLE_TEST_LIB gtest)
+set(PARS_PARK_GOOGLE_TEST_FOLDER googletest)
+set(PARS_PARK_GOOGLE_TEST_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_GOOGLE_TEST_FOLDER}")
+#endregion
 
-find_package(
-        Qt5
-        COMPONENTS
-        Core
-        LinguistTools
-        Qml
-        Quick
-        REQUIRED
-)
+#region ANAR lib
+set(PARS_PARK_ANAR_LIB Anar)
+
+#region ANAR Const lib
+set(PARS_PARK_ANAR_CONST_LIB ${PARS_PARK_ANAR_LIB}::Const)
+set(PARS_PARK_ANAR_CONST_LIB_FOLDER "const")
+set(PARS_PARK_ANAR_CONST_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_CONST_LIB_FOLDER}")
+#endregion ANAR Const lib
+
+#region ANAR Controller lib
+set(PARS_PARK_ANAR_CONTROLLER_LIB ${PARS_PARK_ANAR_LIB}::Controller)
+set(PARS_PARK_ANAR_CONTROLLER_LIB_FOLDER "controller")
+set(PARS_PARK_ANAR_CONTROLLER_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_CONTROLLER_LIB_FOLDER}")
+#endregion ANAR Controller lib
+
+#region ANAR Database lib
+set(PARS_PARK_ANAR_DATABASE_LIB ${PARS_PARK_ANAR_LIB}::Database)
+set(PARS_PARK_ANAR_DATABASE_LIB_FOLDER "database")
+set(PARS_PARK_ANAR_DATABASE_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_DATABASE_LIB_FOLDER}")
+#endregion ANAR Database lib
+
+#region ANAR Exception lib
+set(PARS_PARK_ANAR_EXCEPTION_LIB ${PARS_PARK_ANAR_LIB}::Exception)
+set(PARS_PARK_ANAR_EXCEPTION_LIB_FOLDER "exception")
+set(PARS_PARK_ANAR_EXCEPTION_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_EXCEPTION_LIB_FOLDER}")
+#endregion ANAR Exception lib
+
+#region ANAR Interface lib
+set(PARS_PARK_ANAR_INTERFACE_LIB ${PARS_PARK_ANAR_LIB}::Interface)
+set(PARS_PARK_ANAR_INTERFACE_LIB_FOLDER "interface")
+set(PARS_PARK_ANAR_INTERFACE_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_INTERFACE_LIB_FOLDER}")
+#endregion ANAR Interface lib
+
+#region ANAR Log lib
+set(PARS_PARK_ANAR_LOG_LIB ${PARS_PARK_ANAR_LIB}::Log)
+set(PARS_PARK_ANAR_LOG_LIB_FOLDER "log")
+set(PARS_PARK_ANAR_LOG_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_LOG_LIB_FOLDER}")
+#endregion ANAR Log lib
+
+#region ANAR Model lib
+set(PARS_PARK_ANAR_MODEL_LIB ${PARS_PARK_ANAR_LIB}::Model)
+set(PARS_PARK_ANAR_MODEL_LIB_FOLDER "model")
+set(PARS_PARK_ANAR_MODEL_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_MODEL_LIB_FOLDER}")
+#endregion ANAR Model lib
+
+#region Anar Service Lib
+set(PARS_PARK_ANAR_SERVICE_LIB ${PARS_PARK_ANAR_LIB}::Service)
+set(PARS_PARK_ANAR_SERVICE_LIB_FOLDER "service")
+set(PARS_PARK_ANAR_SERVICE_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_SERVICE_LIB}")
+#endregion Anar Service Lib
+
+#region ANAR Task lib
+set(PARS_PARK_ANAR_TASK_LIB ${PARS_PARK_ANAR_LIB}::Task)
+set(PARS_PARK_ANAR_TASK_LIB_FOLDER "task")
+set(PARS_PARK_ANAR_TASK_LIB_DIR "${PARS_PARK_ANAR_LIB_DIR}/${PARS_PARK_ANAR_TASK_LIB_FOLDER}")
+#endregion ANAR Task lib
+#endregion Anar Lib
+
+#region Anar Pars Park App
+set(PARS_PARK_PARS_PARK_APP ${PARS_PARK_ANAR_LIB}::ParsPark)
+set(PARS_PARK_PARS_PARK_APP_FOLDER "pars-park-app")
+set(PARS_PARK_PARS_PARK_APP_DIR "${PARS_PARK_APP_DIR}/${PARS_PARK_PARS_PARK_APP_FOLDER}")
+#endregion Anar Pars Park App
 
 link_directories(
-        "${ANAR_MYSQL_DIR}/lib"
+        "${PARS_PARK_MYSQL_DIR}/lib"
 )
 
 include_directories(
-        "${ANAR_ZLIB_BIN_DIR}"
-        "${ANAR_ZLIB_DIR}"
-        "${ANAR_LIB_DIR}"
-        "${ANAR_MYSQL_DIR}/include"
-        "${ANAR_NLOHMANN_JSON_DIR}/include"
-        "${ANAR_POCO_FOUNDATION_DIR}"
-        "${ANAR_POCO_DATA_DIR}"
-        "${ANAR_POCO_DATA_MYSQL_DIR}"
-        "${ANAR_POCO_DATA_SQLITE_DIR}"
-        "${ANAR_ODB_DIR}"
-        "${ANAR_ODB_MYSQL_DIR}"
-        "${ANAR_SERIAL_DIR}/include"
-        "${ANAR_GOOGLE_LOG_DIR}/src"
-        "${ANAR_GOOGLE_TEST_DIR}/${ANAR_GOOGLE_TEST_DIR}/include"
-        "${ANAR_SOURCE_DIR}"
+        "${PARS_PARK_PNG_BIN_DIR}"
+        "${PARS_PARK_PNG_DIR}"
+        "${PARS_PARK_ZLIB_BIN_DIR}"
+        "${PARS_PARK_ZLIB_DIR}"
+        "${PARS_PARK_LIB_DIR}"
+        "${PARS_PARK_MYSQL_DIR}/include"
+        "${PARS_PARK_NLOHMANN_JSON_DIR}/include"
+        "${PARS_PARK_POCO_FOUNDATION_DIR}"
+        "${PARS_PARK_POCO_DATA_DIR}"
+        "${PARS_PARK_POCO_DATA_MYSQL_DIR}"
+        "${PARS_PARK_POCO_DATA_SQLITE_DIR}"
+        "${PARS_PARK_ODB_DIR}"
+        "${PARS_PARK_ODB_MYSQL_DIR}"
+        "${PARS_PARK_SERIAL_DIR}/include"
+        "${PARS_PARK_GOOGLE_LOG_DIR}/src"
+        "${PARS_PARK_GOOGLE_TEST_DIR}/${PARS_PARK_GOOGLE_TEST_DIR}/include"
+        "${PARS_PARK_SOURCE_DIR}"
+        "${PARS_PARK_PARS_PARK_APP_DIR}"
 )
 
-add_subdirectory("${ANAR_PNG_DIR}")
-add_subdirectory("${ANAR_ZLIB_DIR}")
-add_subdirectory("${ANAR_ZINT_DIR}")
-add_subdirectory("${ANAR_QZINT_DIR}")
-add_subdirectory("${ANAR_POCO_DIR}")
-add_subdirectory("${ANAR_LIMEREPORT_DIR}")
-add_subdirectory("${ANAR_NLOHMANN_JSON_DIR}")
-add_subdirectory("${ANAR_OATPP_DIR}")
-add_subdirectory("${ANAR_ODB_DIR}")
-add_subdirectory("${ANAR_ODB_MYSQL_DIR}")
-add_subdirectory("${ANAR_SERIAL_DIR}")
-add_subdirectory("${ANAR_GOOGLE_LOG_DIR}")
-add_subdirectory("${ANAR_GOOGLE_TEST_DIR}")
-
-set(
-        TS_FILES
-        "${CMAKE_SOURCE_DIR}/locale/ParsPark_fa_IR.ts"
-)
-
-set(
-        PARS_PARK_SOURCES
-
-        resource/rc/icon.rc
-        resource/qrc/qml.qrc
-
-        src/interface/a-jsonable.cpp
-
-        src/model/error.cpp
-        src/model/model.cpp
-        src/model/settings/database.cpp
-        src/model/settings/alpr.cpp
-        src/model/settings/parking.cpp
-        src/model/settings/comport.cpp
-        src/model/settings/board.cpp
-        src/model/settings/server.cpp
-        src/model/settings/camera.cpp
-        src/model/settings/gate.cpp
-        src/model/settings/payment.cpp
-        src/model/settings/software.cpp
-        src/model/settings/card-reader.cpp
-        src/model/settings/printer.cpp
-        src/model/settings/settings.cpp
-        src/model/user.cpp
-        src/model/login.cpp
-        src/model/traffic.cpp
-        src/model/database/contact-model-odb.cxx
-        src/model/database/person-model-odb.cxx
-        src/model/database/user-model-odb.cxx
-        src/model/database/create-modify-delete-model-odb.cxx
-        src/model/database/card-model-odb.cxx
-        src/model/database/car-model-odb.cxx
-        src/model/database/black-list-model-odb.cxx
-        src/model/database/contact-model-odb.cxx
-        src/model/database/driver-model-odb.cxx
-        src/model/database/lost-card-model-odb.cxx
-        src/model/database/organization-model-odb.cxx
-        src/model/database/parking-log-model-odb.cxx
-        src/model/database/subscription-model-odb.cxx
-
-        src/common/string.cpp
-        src/common/binary.cpp
-
-        src/database/i-database.cpp
-        src/database/s-database.cpp
-        src/database/mysql/mysql-database.cpp
-        src/database/database-factory.cpp
-
-        src/service/qt-std-converter.cpp
-        src/service/base-service.cpp
-        src/service/s-settings.cpp
-        src/service/serial-port.cpp
-        src/service/printer.cpp
-
-        src/view/view.cpp
-        src/view/common-view.cpp
-        src/view/login/login-view.cpp
-        src/view/settings/settings-view.cpp
-        src/view/s-view.cpp
-
-        src/controller/controller.cpp
-        src/controller/common-controller.cpp
-        src/controller/login-controller.cpp
-        src/controller/settings-controller.cpp
-        src/nazari-test.cpp
-)
-
-set(
-        PARS_PARK_TEST_SOURCES
-)
-
-if (WIN32)
-    add_executable(
-            ${PROJECT_NAME}
-            ${DONT_SHOW_CONSOLE}
-            src/main.cpp
-            ${PARS_PARK_SOURCES}
-    )
-    add_executable(
-            ${PROJECT_NAME}_Unit_Test
-            ${DONT_SHOW_CONSOLE}
-            ${PARS_PARK_SOURCES}
-            ${PARS_PARK_TEST_SOURCES}
-            test/main.cpp
-    )
-else ()
-    add_executable(
-            ${PROJECT_NAME}
-            ${PARS_PARK_SOURCES}
-            src/main.cpp
-    )
-    add_executable(
-            ${PROJECT_NAME}_Unit_Test
-            ${PARS_PARK_SOURCES}
-            ${PARS_PARK_TEST_SOURCES}
-            test/main.cpp
-    )
-endif ()
-
-target_compile_definitions(
-        ${PROJECT_NAME}
-        PRIVATE
-        $<$<OR:$<CONFIG:Debug>,$<CONFIG:Release>>:QT_QML_DEBUG>
-)
-target_compile_definitions(
-        ${PROJECT_NAME}_Unit_Test
-        PRIVATE
-        $<$<OR:$<CONFIG:Debug>,$<CONFIG:Release>>:QT_QML_DEBUG>
-)
-
-target_link_libraries(
-        ${PROJECT_NAME}
-        Qt5::Core
-        Qt5::Qml
-        Qt5::Quick
-        ${ANAR_MYSQL_LIB}
-        ${ANAR_POCO_FOUNDATION_LIB}
-        ${ANAR_POCO_DATA_LIB}
-        ${ANAR_POCO_DATA_MYSQL_LIB}
-        ${ANAR_POCO_DATA_SQLITE_LIB}
-        ${ANAR_LIMEREPORT_LIB}
-        ${ANAR_NLOHMANN_JSON_LIB}
-        ${ANAR_ODB_LIB}
-        ${ANAR_ODB_MYSQL_LIB}
-        ${ANAR_OATPP_LIB}
-        ${ANAR_SERIAL_LIB}
-        ${ANAR_GOOGLE_LOG_LIB}
-        ${ANAR_GOOGLE_TEST_LIB}
-)
-target_link_libraries(
-        ${PROJECT_NAME}_Unit_Test
-        Qt5::Core
-        Qt5::Qml
-        Qt5::Quick
-        ${ANAR_MYSQL_LIB}
-        ${ANAR_POCO_FOUNDATION_LIB}
-        ${ANAR_POCO_DATA_LIB}
-        ${ANAR_POCO_DATA_MYSQL_LIB}
-        ${ANAR_POCO_DATA_SQLITE_LIB}
-        ${ANAR_LIMEREPORT_LIB}
-        ${ANAR_NLOHMANN_JSON_LIB}
-        ${ANAR_ODB_LIB}
-        ${ANAR_ODB_MYSQL_LIB}
-        ${ANAR_OATPP_LIB}
-        ${ANAR_SERIAL_LIB}
-        ${ANAR_GOOGLE_LOG_LIB}
-        ${ANAR_GOOGLE_TEST_LIB}
-)
-
-qt5_create_translation(
-        QM_FILES
-        ${TS_FILES}
-)
-
-if (WIN32)
-    file(COPY "${ANAR_MYSQL_DIR}/lib/libmysql.dll"
-            DESTINATION "${CMAKE_BINARY_DIR}/bin")
-elseif (UNIX)
-    file(COPY "${ANAR_MYSQL_DIR}/lib/libmysql.so"
-            DESTINATION "${CMAKE_BINARY_DIR}/bin")
-endif ()
+add_subdirectory("${PARS_PARK_PNG_DIR}")
+add_subdirectory("${PARS_PARK_ZLIB_DIR}")
+add_subdirectory("${PARS_PARK_ZINT_DIR}")
+add_subdirectory("${PARS_PARK_QZINT_DIR}")
+add_subdirectory("${PARS_PARK_LIMEREPORT_DIR}")
+add_subdirectory("${PARS_PARK_POCO_DIR}")
+add_subdirectory("${PARS_PARK_NLOHMANN_JSON_DIR}")
+add_subdirectory("${PARS_PARK_OATPP_DIR}")
+add_subdirectory("${PARS_PARK_ODB_DIR}")
+add_subdirectory("${PARS_PARK_ODB_MYSQL_DIR}")
+add_subdirectory("${PARS_PARK_SERIAL_DIR}")
+add_subdirectory("${PARS_PARK_GOOGLE_LOG_DIR}")
+add_subdirectory("${PARS_PARK_GOOGLE_TEST_DIR}")
+add_subdirectory("${PARS_PARK_ANAR_LIB_DIR}")
+add_subdirectory("${PARS_PARK_PARS_PARK_APP_DIR}")
 
 #d:\Tools\ODB\odb-compiler\bin\odb.exe -d mysql --generate-query --generate-schema --std c++11 person.hxx
 #d:\Tools\ODB\odb-compiler\bin\odb.exe --std c++11 --database mysql --generate-schema --generate-query --hxx-prologue "#include \"traits.hxx\""  --table-prefix mapping_ person.hxx

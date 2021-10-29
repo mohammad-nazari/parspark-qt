@@ -19,3 +19,4 @@ FixNamespaceComments: true
 IndentCaseLabels: true
 IndentPPDirectives: AfterHash
 NamespaceIndentation: All
+SortIncludes: CaseSensitive

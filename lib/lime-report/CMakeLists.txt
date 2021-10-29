@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(${ANAR_LIMEREPORT_LIB})
+project(limereport)
 
 find_package(Qt5Core)
 find_package(Qt5Widgets)
@@ -287,9 +287,9 @@ set(LIMEREPORT_SOURCES
 
 add_library(${PROJECT_NAME}_static STATIC ${LIMEREPORT_SOURCES})
 add_library(${PROJECT_NAME} SHARED ${LIMEREPORT_SOURCES})
-target_link_libraries(${PROJECT_NAME}_static ${ANAR_PNG_LIB} ${ANAR_QZINT_LIB} ${ANAR_ZINT_LIB} Qt5::Core Qt5::Qml Qt5::Widgets Qt5::Xml Qt5::Sql Qt5::PrintSupport Qt5::Script Qt5::Svg Qt5::UiTools)
-target_link_libraries(${PROJECT_NAME} ${ANAR_PNG_LIB} ${ANAR_QZINT_LIB} ${ANAR_ZINT_LIB} Qt5::Core Qt5::Widgets Qt5::Qml Qt5::Xml Qt5::Sql Qt5::PrintSupport Qt5::Script Qt5::Svg Qt5::UiTools)
+target_link_libraries(${PROJECT_NAME}_static png qzint zint Qt5::Core Qt5::Qml Qt5::Widgets Qt5::Xml Qt5::Sql Qt5::PrintSupport Qt5::Script Qt5::Svg Qt5::UiTools)
+target_link_libraries(${PROJECT_NAME} png qzint zint Qt5::Core Qt5::Widgets Qt5::Qml Qt5::Xml Qt5::Sql Qt5::PrintSupport Qt5::Script Qt5::Svg Qt5::UiTools)
 target_compile_definitions(${PROJECT_NAME}_static PUBLIC -DHAVE_QT5 -DHAVE_STATIC_BUILD -DLIMEREPORT_VERSION_STR="dev" -DHAVE_REPORT_DESIGNER -DUSE_QJSENGINE -DHAVE_UI_LOADER)
 target_compile_definitions(${PROJECT_NAME} PUBLIC -DHAVE_QT5 -DLIMEREPORT_VERSION_STR="dev" -DHAVE_REPORT_DESIGNER -DUSE_QJSENGINE -DLIMEREPORT_EXPORTS -DHAVE_UI_LOADER)
-target_include_directories(${PROJECT_NAME} PRIVATE limereport/ limereport/base limereport/bands limereport/databrowser limereport/items/editors limereport/items limereport/objectinspector limereport/scriptbrowser limereport/serializators ${ANAR_QZINT_DIR} ${ANAR_ZINT_DIR} limereport/scripteditor)
-target_include_directories(${PROJECT_NAME}_static PRIVATE limereport/ limereport/base limereport/bands limereport/databrowser limereport/items/editors limereport/items limereport/objectinspector limereport/scriptbrowser limereport/serializators ${ANAR_QZINT_DIR} ${ANAR_ZINT_DIR} limereport/scripteditor)
+target_include_directories(${PROJECT_NAME} PRIVATE limereport/ limereport/base limereport/bands limereport/databrowser limereport/items/editors limereport/items limereport/objectinspector limereport/scriptbrowser limereport/serializators ${PARS_PARK_QZINT_DIR} ${PARS_PARK_ZINT_DIR} limereport/scripteditor)
+target_include_directories(${PROJECT_NAME}_static PRIVATE limereport/ limereport/base limereport/bands limereport/databrowser limereport/items/editors limereport/items limereport/objectinspector limereport/scriptbrowser limereport/serializators ${PARS_PARK_QZINT_DIR} ${PARS_PARK_ZINT_DIR} limereport/scripteditor)

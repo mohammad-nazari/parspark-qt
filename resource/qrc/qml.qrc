@@ -102,36 +102,36 @@
         <file>../../image/png/users48.png</file>
         <file>../../image/icon/users64.ico</file>
         <file>../../image/png/users64.png</file>
-        <file>../../src/view/common/CommonButton.qml</file>
-        <file>../../src/view/common/CommonComboBox.qml</file>
-        <file>../../src/view/common/CommonCOMPort.qml</file>
-        <file>../../src/view/common/CommonDateAndTime.qml</file>
-        <file>../../src/view/common/CommonDetailsTable.qml</file>
-        <file>../../src/view/common/CommonDigitalClock.qml</file>
-        <file>../../src/view/common/CommonNumericComboBox.qml</file>
-        <file>../../src/view/common/CommonParkingCapacity.qml</file>
-        <file>../../src/view/common/CommonPicture.qml</file>
-        <file>../../src/view/common/CommonPlate.qml</file>
-        <file>../../src/view/common/CommonServer.qml</file>
-        <file>../../src/view/common/CommonSpinBox.qml</file>
-        <file>../../src/view/common/CommonStatus.qml</file>
-        <file>../../src/view/common/CommonTextField.qml</file>
-        <file>../../src/view/login/login.qml</file>
-        <file>../../src/view/main/main.qml</file>
-        <file>../../src/view/main/MainColumnLayout.qml</file>
-        <file>../../src/view/main/MainEnterSection.qml</file>
-        <file>../../src/view/main/MainExitSection.qml</file>
-        <file>../../src/view/main/MainMiddleSection.qml</file>
-        <file>../../src/view/settings/ALPRTab.qml</file>
-        <file>../../src/view/settings/BoardTab.qml</file>
-        <file>../../src/view/settings/CameraTab.qml</file>
-        <file>../../src/view/settings/CardReaderTab.qml</file>
-        <file>../../src/view/settings/DataBaseTab.qml</file>
-        <file>../../src/view/settings/GateTab.qml</file>
-        <file>../../src/view/settings/ParkingInfoTab.qml</file>
-        <file>../../src/view/settings/PaymentTab.qml</file>
-        <file>../../src/view/settings/PrinterTab.qml</file>
-        <file>../../src/view/settings/SoftwareTab.qml</file>
-        <file>../../src/view/settings/settings.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonButton.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonComboBox.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonCOMPort.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonDateAndTime.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonDetailsTable.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonDigitalClock.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonNumericComboBox.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonParkingCapacity.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonPicture.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonPlate.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonServer.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonSpinBox.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonStatus.qml</file>
+        <file>../../src/app/pars-park-app/view/common/CommonTextField.qml</file>
+        <file>../../src/app/pars-park-app/view/login/login.qml</file>
+        <file>../../src/app/pars-park-app/view/main/main.qml</file>
+        <file>../../src/app/pars-park-app/view/main/MainColumnLayout.qml</file>
+        <file>../../src/app/pars-park-app/view/main/MainEnterSection.qml</file>
+        <file>../../src/app/pars-park-app/view/main/MainExitSection.qml</file>
+        <file>../../src/app/pars-park-app/view/main/MainMiddleSection.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/ALPRTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/BoardTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/CameraTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/CardReaderTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/DataBaseTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/GateTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/ParkingInfoTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/PaymentTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/PrinterTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/SoftwareTab.qml</file>
+        <file>../../src/app/pars-park-app/view/settings/settings.qml</file>
     </qresource>
 </RCC>
