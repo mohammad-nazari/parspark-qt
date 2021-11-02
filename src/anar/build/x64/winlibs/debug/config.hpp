@@ -1,0 +1,10 @@
+#ifndef ANAR_COMMON_CONFIG_HPP
+#define ANAR_COMMON_CONFIG_HPP
+
+#define PROJECT_NAME "Anar"
+#define PROJECT_VER "1.0.0"
+#define PROJECT_VER_MAJOR ""
+#define PROJECT_VER_MINOR ""
+#define PROJECT_VER_PATCH ""
+
+#endif  // ANAR_COMMON_CONFIG_HPP
