@@ -27,22 +27,22 @@ namespace odb
   // UserModel
   //
 
-  const char alias_traits<  ::anar::model::PersonModel,
+  const char alias_traits<  ::anar::parspark::model::PersonModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::UserModel, id_mysql >::Person_tag>::
+    access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::Person_tag>::
   table_name[] = "`person_id`";
 
-  const char alias_traits<  ::anar::model::UserModel,
+  const char alias_traits<  ::anar::parspark::model::UserModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::UserModel, id_mysql >::CreatingUser_tag>::
+    access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::CreatingUser_tag>::
   table_name[] = "`creating_user_id`";
 
-  const char alias_traits<  ::anar::model::UserModel,
+  const char alias_traits<  ::anar::parspark::model::UserModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::UserModel, id_mysql >::UpdatingUser_tag>::
+    access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::UpdatingUser_tag>::
   table_name[] = "`updating_user_id`";
 
-  struct access::object_traits_impl< ::anar::model::UserModel, id_mysql >::extra_statement_cache_type
+  struct access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::extra_statement_cache_type
   {
     extra_statement_cache_type (
       mysql::connection&,
@@ -54,8 +54,8 @@ namespace odb
     }
   };
 
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::id_type
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::id_type
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   id (const id_image_type& i)
   {
     mysql::database* db (0);
@@ -74,8 +74,8 @@ namespace odb
     return id;
   }
 
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::id_type
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::id_type
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   id (const image_type& i)
   {
     mysql::database* db (0);
@@ -94,7 +94,7 @@ namespace odb
     return id;
   }
 
-  bool access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   grow (image_type& i,
         my_bool* t)
   {
@@ -156,7 +156,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   bind (MYSQL_BIND* b,
         image_type& i,
         mysql::statement_kind sk)
@@ -245,7 +245,7 @@ namespace odb
     n++;
   }
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   bind (MYSQL_BIND* b, id_image_type& i)
   {
     std::size_t n (0);
@@ -255,7 +255,7 @@ namespace odb
     b[n].is_null = &i.id_null;
   }
 
-  bool access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   init (image_type& i,
         const object_type& o,
         mysql::statement_kind sk)
@@ -328,11 +328,11 @@ namespace odb
     // Person
     //
     {
-      ::anar::model::PersonModelPtr const& v =
+      ::anar::parspark::model::PersonModelPtr const& v =
         o.Person;
 
-      typedef object_traits< ::anar::model::PersonModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::PersonModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::PersonModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::PersonModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -353,7 +353,7 @@ namespace odb
     // Type
     //
     {
-      ::anar::model::UserType const& v =
+      ::anar::parspark::model::UserType const& v =
         o.Type;
 
       bool is_null (false);
@@ -370,11 +370,11 @@ namespace odb
     // CreatingUser
     //
     {
-      ::anar::model::UserModelPtr const& v =
+      ::anar::parspark::model::UserModelPtr const& v =
         o.CreatingUser;
 
-      typedef object_traits< ::anar::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::UserModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -395,11 +395,11 @@ namespace odb
     // UpdatingUser
     //
     {
-      ::anar::model::UserModelPtr const& v =
+      ::anar::parspark::model::UserModelPtr const& v =
         o.UpdatingUser;
 
-      typedef object_traits< ::anar::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::UserModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -448,7 +448,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -504,11 +504,11 @@ namespace odb
     // Person
     //
     {
-      ::anar::model::PersonModelPtr& v =
+      ::anar::parspark::model::PersonModelPtr& v =
         o.Person;
 
-      typedef object_traits< ::anar::model::PersonModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::PersonModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::PersonModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::PersonModelPtr > ptr_traits;
 
       if (i.Person_null)
         v = ptr_traits::pointer_type ();
@@ -535,7 +535,7 @@ namespace odb
     // Type
     //
     {
-      ::anar::model::UserType& v =
+      ::anar::parspark::model::UserType& v =
         o.Type;
 
       mysql::enum_traits::set_value (
@@ -548,11 +548,11 @@ namespace odb
     // CreatingUser
     //
     {
-      ::anar::model::UserModelPtr& v =
+      ::anar::parspark::model::UserModelPtr& v =
         o.CreatingUser;
 
-      typedef object_traits< ::anar::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::UserModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
 
       if (i.CreatingUser_null)
         v = ptr_traits::pointer_type ();
@@ -579,11 +579,11 @@ namespace odb
     // UpdatingUser
     //
     {
-      ::anar::model::UserModelPtr& v =
+      ::anar::parspark::model::UserModelPtr& v =
         o.UpdatingUser;
 
-      typedef object_traits< ::anar::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::UserModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
 
       if (i.UpdatingUser_null)
         v = ptr_traits::pointer_type ();
@@ -636,7 +636,7 @@ namespace odb
     }
   }
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   init (id_image_type& i, const id_type& id)
   {
     {
@@ -649,7 +649,7 @@ namespace odb
     }
   }
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::persist_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::persist_statement[] =
   "INSERT INTO `user` "
   "(`id`, "
   "`user_name`, "
@@ -663,7 +663,7 @@ namespace odb
   "VALUES "
   "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::find_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::find_statement[] =
   "SELECT "
   "`user`.`id`, "
   "`user`.`user_name`, "
@@ -677,7 +677,7 @@ namespace odb
   "FROM `user` "
   "WHERE `user`.`id`=?";
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::update_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::update_statement[] =
   "UPDATE `user` "
   "SET "
   "`user_name`=?, "
@@ -690,11 +690,11 @@ namespace odb
   "`updated_time`=? "
   "WHERE `id`=?";
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::erase_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::erase_statement[] =
   "DELETE FROM `user` "
   "WHERE `id`=?";
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::query_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::query_statement[] =
   "SELECT\n"
   "`user`.`id`,\n"
   "`user`.`user_name`,\n"
@@ -710,13 +710,13 @@ namespace odb
   "LEFT JOIN `user` AS `creating_user_id` ON `creating_user_id`.`id`=`user`.`creating_user_id`\n"
   "LEFT JOIN `user` AS `updating_user_id` ON `updating_user_id`.`id`=`user`.`updating_user_id`";
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::erase_query_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::erase_query_statement[] =
   "DELETE FROM `user`";
 
-  const char access::object_traits_impl< ::anar::model::UserModel, id_mysql >::table_name[] =
+  const char access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::table_name[] =
   "`user`";
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   persist (database& db, object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -770,7 +770,7 @@ namespace odb
               callback_event::post_persist);
   }
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -831,7 +831,7 @@ namespace odb
     pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   erase (database& db, const id_type& id)
   {
     using namespace mysql;
@@ -860,8 +860,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::pointer_type
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::pointer_type
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   find (database& db, const id_type& id)
   {
     using namespace mysql;
@@ -916,7 +916,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace mysql;
@@ -949,7 +949,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   reload (database& db, object_type& obj)
   {
     using namespace mysql;
@@ -979,7 +979,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   find_ (statements_type& sts,
          const id_type* id)
   {
@@ -1030,8 +1030,8 @@ namespace odb
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits_impl< ::anar::model::UserModel, id_mysql >::object_type >
-  access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  result< access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::object_type >
+  access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   query (database&, const query_base_type& q)
   {
     using namespace mysql;
@@ -1081,7 +1081,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits_impl< ::anar::model::UserModel, id_mysql >::
+  unsigned long long access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace mysql;

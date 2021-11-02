@@ -1,23 +1,24 @@
 import QtQuick 2.13
 import QtQuick.Controls 1.4
-import ParsPark.View 1.0
+
+import ANAR.ParsPark.View 1.0
 
 Column {
    property var comPortModel:  {
-      commonApi.getSerialPorts()
-      return commonApi.serialPorts
+      CommonApi.getSerialPorts()
+      return CommonApi.serialPorts
    }
    property var baudRateModel: {
-      commonApi.getSerialPortBaudRates()
-      return commonApi.baudRates
+      CommonApi.getSerialPortBaudRates()
+      return CommonApi.baudRates
    }
 //       ["110", "300", "600", "1200", "2400", "4800", "9600", "14400", "19200", "28800", "38400", "56000", "57600", "115200"]
    property string address: qsTr("")
    property string baudRate: "19200"
 
-   CommonApi{
-      id: commonApi
-   }
+//   CommonApi{
+//      id: CommonApi
+//   }
 
    padding: 5
    spacing: 5

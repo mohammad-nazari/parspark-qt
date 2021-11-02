@@ -8,15 +8,15 @@ namespace odb
   //
 
   inline
-  access::object_traits< ::anar::model::SubscriptionModel >::id_type
-  access::object_traits< ::anar::model::SubscriptionModel >::
+  access::object_traits< ::anar::parspark::model::SubscriptionModel >::id_type
+  access::object_traits< ::anar::parspark::model::SubscriptionModel >::
   id (const object_type& o)
   {
     return o.Id;
   }
 
   inline
-  void access::object_traits< ::anar::model::SubscriptionModel >::
+  void access::object_traits< ::anar::parspark::model::SubscriptionModel >::
   callback (database& db, object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -25,7 +25,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits< ::anar::model::SubscriptionModel >::
+  void access::object_traits< ::anar::parspark::model::SubscriptionModel >::
   callback (database& db, const object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -40,7 +40,7 @@ namespace odb
   //
 
   inline
-  void access::object_traits_impl< ::anar::model::SubscriptionModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::SubscriptionModel, id_mysql >::
   erase (database& db, const object_type& obj)
   {
     callback (db, obj, callback_event::pre_erase);
@@ -49,7 +49,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits_impl< ::anar::model::SubscriptionModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::SubscriptionModel, id_mysql >::
   load_ (statements_type& sts,
          object_type& obj,
          bool)

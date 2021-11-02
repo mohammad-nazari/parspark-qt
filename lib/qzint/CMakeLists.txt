@@ -5,8 +5,6 @@ project(qzint)
 find_package(Qt5Widgets)
 find_package(Qt5Gui)
 
-include_directories(BEFORE "${PARS_PARK_ZINT_DIR}")
-
 set(QZint_SRCS qzint.cpp)
 
 add_library(${PROJECT_NAME} SHARED ${QZint_SRCS})

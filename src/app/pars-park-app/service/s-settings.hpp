@@ -1,9 +1,9 @@
 #ifndef ANAR_PARS_PARK_SERVICE_S_SETTING_HPP
 #define ANAR_PARS_PARK_SERVICE_S_SETTING_HPP
 
-#include "model/settings/settings.hpp"
+#include "model/settings/settings-model.hpp"
 
-namespace anar::service {
+namespace anar::parspark::service {
    class SSettings;
    using SSettingsPtr = std::shared_ptr<SSettings>;
    using SSettingsUPtr = std::unique_ptr<SSettings>;
@@ -22,17 +22,17 @@ namespace anar::service {
       bool Load(const std::string& address = "settings.json");
       bool Save(const std::string& address = "settings.json");
 
-      const model::DataBaseModelPtr& DataBase() {
-         return m_settings->SettingDataBase();
+      const anar::model::DataBaseModel& DataBase() {
+         return m_settings.DataBase;
       }
-      void DataBase(const model::DataBaseModelPtr& dataBase) {
-         m_settings->SettingDataBase(dataBase);
+      void DataBase(const anar::model::DataBaseModel& dataBase) {
+         m_settings.DataBase = dataBase;
       }
 
-      [[nodiscard]] const model::SettingsPtr& Settings() const {
+      [[nodiscard]] const model::SettingsModel& Settings() const {
          return m_settings;
       }
-      void Settings(const model::SettingsPtr& settings) {
+      void Settings(const model::SettingsModel& settings) {
          m_settings = settings;
       }
       [[nodiscard]] const std::string& Error() const {
@@ -46,8 +46,8 @@ namespace anar::service {
       SSettings();
       static SSettingsPtr _instance;
 
-      model::SettingsPtr m_settings{new model::Settings};
+      model::SettingsModel m_settings;
       std::string m_error;
    };
-}  // namespace anar::service
+}  // namespace anar::parspark::service
 #endif  // ANAR_PARS_PARK_SERVICE_S_SETTING_HPP

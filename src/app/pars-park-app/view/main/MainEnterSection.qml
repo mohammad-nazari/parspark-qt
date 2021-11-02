@@ -1,6 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
-import "qrc:/src/view/common"
+import "qrc:/src/app/pars-park-app/view/common"
 
 Rectangle{
    id: rectEnterId

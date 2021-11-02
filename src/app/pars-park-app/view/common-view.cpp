@@ -3,8 +3,14 @@
 #include "service/qt-std-converter.hpp"
 
 namespace anar::parspark::view {
-   CommonViewPtr CommonView::Create() {
-      return std::make_shared<CommonView>();
+   CommonView* CommonView::m_instance = nullptr;
+   CommonView* CommonView::QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine) {
+      Q_UNUSED(engine)
+      Q_UNUSED(scriptEngine)
+      if (!m_instance) {
+         m_instance = new CommonView();
+      }
+      return m_instance;
    }
    CommonView::CommonView()
        : View() {

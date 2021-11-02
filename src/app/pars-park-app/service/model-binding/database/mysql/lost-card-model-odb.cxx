@@ -27,17 +27,17 @@ namespace odb
   // LostCardModel
   //
 
-  const char alias_traits<  ::anar::model::CardModel,
+  const char alias_traits<  ::anar::parspark::model::CardModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::Card_tag>::
+    access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::Card_tag>::
   table_name[] = "`card_id`";
 
-  const char alias_traits<  ::anar::model::CarModel,
+  const char alias_traits<  ::anar::parspark::model::CarModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::Car_tag>::
+    access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::Car_tag>::
   table_name[] = "`car_id`";
 
-  struct access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::extra_statement_cache_type
+  struct access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::extra_statement_cache_type
   {
     extra_statement_cache_type (
       mysql::connection&,
@@ -49,8 +49,8 @@ namespace odb
     }
   };
 
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::id_type
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::id_type
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   id (const id_image_type& i)
   {
     mysql::database* db (0);
@@ -69,8 +69,8 @@ namespace odb
     return id;
   }
 
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::id_type
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::id_type
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   id (const image_type& i)
   {
     mysql::database* db (0);
@@ -89,7 +89,7 @@ namespace odb
     return id;
   }
 
-  bool access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   grow (image_type& i,
         my_bool* t)
   {
@@ -100,7 +100,7 @@ namespace odb
 
     // CreateModifyDeleteModel base
     //
-    if (object_traits_impl< ::anar::model::CreateModifyDeleteModel, id_mysql >::grow (
+    if (object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::grow (
           i, t + 0UL))
       grew = true;
 
@@ -131,7 +131,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   bind (MYSQL_BIND* b,
         image_type& i,
         mysql::statement_kind sk)
@@ -144,7 +144,7 @@ namespace odb
 
     // CreateModifyDeleteModel base
     //
-    object_traits_impl< ::anar::model::CreateModifyDeleteModel, id_mysql >::bind (b + n, i, sk);
+    object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::bind (b + n, i, sk);
     n += 4UL;
 
     // Id
@@ -193,7 +193,7 @@ namespace odb
     n++;
   }
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   bind (MYSQL_BIND* b, id_image_type& i)
   {
     std::size_t n (0);
@@ -203,7 +203,7 @@ namespace odb
     b[n].is_null = &i.id_null;
   }
 
-  bool access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   init (image_type& i,
         const object_type& o,
         mysql::statement_kind sk)
@@ -218,7 +218,7 @@ namespace odb
 
     // CreateModifyDeleteModel base
     //
-    if (object_traits_impl< ::anar::model::CreateModifyDeleteModel, id_mysql >::init (i, o, sk))
+    if (object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::init (i, o, sk))
       grew = true;
 
     // Id
@@ -239,11 +239,11 @@ namespace odb
     // Card
     //
     {
-      ::anar::model::CardModelPtr const& v =
+      ::anar::parspark::model::CardModelPtr const& v =
         o.Card;
 
-      typedef object_traits< ::anar::model::CardModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::CardModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::CardModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::CardModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -264,11 +264,11 @@ namespace odb
     // Car
     //
     {
-      ::anar::model::CarModelPtr const& v =
+      ::anar::parspark::model::CarModelPtr const& v =
         o.Car;
 
-      typedef object_traits< ::anar::model::CarModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::CarModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::CarModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::CarModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -324,7 +324,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -335,7 +335,7 @@ namespace odb
 
     // CreateModifyDeleteModel base
     //
-    object_traits_impl< ::anar::model::CreateModifyDeleteModel, id_mysql >::init (o, i, db);
+    object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::init (o, i, db);
 
     // Id
     //
@@ -354,11 +354,11 @@ namespace odb
     // Card
     //
     {
-      ::anar::model::CardModelPtr& v =
+      ::anar::parspark::model::CardModelPtr& v =
         o.Card;
 
-      typedef object_traits< ::anar::model::CardModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::CardModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::CardModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::CardModelPtr > ptr_traits;
 
       if (i.Card_null)
         v = ptr_traits::pointer_type ();
@@ -385,11 +385,11 @@ namespace odb
     // Car
     //
     {
-      ::anar::model::CarModelPtr& v =
+      ::anar::parspark::model::CarModelPtr& v =
         o.Car;
 
-      typedef object_traits< ::anar::model::CarModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::model::CarModelPtr > ptr_traits;
+      typedef object_traits< ::anar::parspark::model::CarModel > obj_traits;
+      typedef odb::pointer_traits< ::anar::parspark::model::CarModelPtr > ptr_traits;
 
       if (i.Car_null)
         v = ptr_traits::pointer_type ();
@@ -443,7 +443,7 @@ namespace odb
     }
   }
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   init (id_image_type& i, const id_type& id)
   {
     {
@@ -456,7 +456,7 @@ namespace odb
     }
   }
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::persist_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::persist_statement[] =
   "INSERT INTO `lost_card` "
   "(`creating_user_id`, "
   "`updating_user_id`, "
@@ -470,7 +470,7 @@ namespace odb
   "VALUES "
   "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::find_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::find_statement[] =
   "SELECT "
   "`lost_card`.`creating_user_id`, "
   "`lost_card`.`updating_user_id`, "
@@ -484,7 +484,7 @@ namespace odb
   "FROM `lost_card` "
   "WHERE `lost_card`.`id`=?";
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::update_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::update_statement[] =
   "UPDATE `lost_card` "
   "SET "
   "`creating_user_id`=?, "
@@ -497,11 +497,11 @@ namespace odb
   "`description`=? "
   "WHERE `id`=?";
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::erase_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::erase_statement[] =
   "DELETE FROM `lost_card` "
   "WHERE `id`=?";
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::query_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::query_statement[] =
   "SELECT\n"
   "`lost_card`.`creating_user_id`,\n"
   "`lost_card`.`updating_user_id`,\n"
@@ -518,13 +518,13 @@ namespace odb
   "LEFT JOIN `card` AS `card_id` ON `card_id`.`id`=`lost_card`.`card_id`\n"
   "LEFT JOIN `car` AS `car_id` ON `car_id`.`id`=`lost_card`.`car_id`";
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::erase_query_statement[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::erase_query_statement[] =
   "DELETE FROM `lost_card`";
 
-  const char access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::table_name[] =
+  const char access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::table_name[] =
   "`lost_card`";
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   persist (database& db, object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -578,7 +578,7 @@ namespace odb
               callback_event::post_persist);
   }
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -639,7 +639,7 @@ namespace odb
     pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  void access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   erase (database& db, const id_type& id)
   {
     using namespace mysql;
@@ -668,8 +668,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::pointer_type
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::pointer_type
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   find (database& db, const id_type& id)
   {
     using namespace mysql;
@@ -724,7 +724,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace mysql;
@@ -757,7 +757,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   reload (database& db, object_type& obj)
   {
     using namespace mysql;
@@ -787,7 +787,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  bool access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   find_ (statements_type& sts,
          const id_type* id)
   {
@@ -838,8 +838,8 @@ namespace odb
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::object_type >
-  access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  result< access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::object_type >
+  access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   query (database&, const query_base_type& q)
   {
     using namespace mysql;
@@ -889,7 +889,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits_impl< ::anar::model::LostCardModel, id_mysql >::
+  unsigned long long access::object_traits_impl< ::anar::parspark::model::LostCardModel, id_mysql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace mysql;

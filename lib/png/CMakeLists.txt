@@ -511,9 +511,6 @@ if(PNG_DEBUG)
   add_definitions(-DPNG_DEBUG)
 endif()
 
-# NOW BUILD OUR TARGET
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PARS_PARK_ZLIB_DIR})
-
 unset(PNG_LIB_TARGETS)
 
 if(PNG_SHARED)

@@ -34,7 +34,7 @@
 #include <utility>
 
 #include "contact-model-odb.hxx"
-#include "model/user-model.hpp"
+#include "model/database/user-model.hpp"
 #include "person-model-odb.hxx"
 
 namespace odb
@@ -42,17 +42,17 @@ namespace odb
   // UserModel
   //
   template <>
-  struct class_traits< ::anar::model::UserModel >
+  struct class_traits< ::anar::parspark::model::UserModel >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::anar::model::UserModel >
+  class access::object_traits< ::anar::parspark::model::UserModel >
   {
     public:
-    typedef ::anar::model::UserModel object_type;
-    typedef ::std::shared_ptr< ::anar::model::UserModel > pointer_type;
+    typedef ::anar::parspark::model::UserModel object_type;
+    typedef ::std::shared_ptr< ::anar::parspark::model::UserModel > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -95,7 +95,7 @@ namespace odb
   // UserModel
   //
   template <typename A>
-  struct pointer_query_columns< ::anar::model::UserModel, id_mysql, A >
+  struct pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >
   {
     // Id
     //
@@ -150,7 +150,7 @@ namespace odb
     typedef
     mysql::query_column<
       mysql::value_traits<
-        ::anar::model::UserType,
+        ::anar::parspark::model::UserType,
         mysql::id_enum >::query_type,
       mysql::id_enum >
     Type_type_;
@@ -207,53 +207,53 @@ namespace odb
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::Id_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::Id_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::UserName_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::UserName_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   UserName (A::table_name, "`user_name`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::PassWord_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::PassWord_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   PassWord (A::table_name, "`pass_word`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::Person_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::Person_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   Person (A::table_name, "`person_id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::Type_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::Type_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   Type (A::table_name, "`type`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::CreatingUser_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::CreatingUser_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   CreatingUser (A::table_name, "`creating_user_id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::UpdatingUser_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::UpdatingUser_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   UpdatingUser (A::table_name, "`updating_user_id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::CreatedTime_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::CreatedTime_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   CreatedTime (A::table_name, "`created_time`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::UpdatedTime_type_
-  pointer_query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::UpdatedTime_type_
+  pointer_query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   UpdatedTime (A::table_name, "`updated_time`", 0);
 
   template <>
-  class access::object_traits_impl< ::anar::model::UserModel, id_mysql >:
-    public access::object_traits< ::anar::model::UserModel >
+  class access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >:
+    public access::object_traits< ::anar::parspark::model::UserModel >
   {
     public:
     struct id_image_type
@@ -290,7 +290,7 @@ namespace odb
 
       // Type
       //
-      mysql::value_traits< ::anar::model::UserType, mysql::id_enum >::image_type Type_value;
+      mysql::value_traits< ::anar::parspark::model::UserType, mysql::id_enum >::image_type Type_value;
       unsigned long Type_size;
       my_bool Type_null;
 
@@ -419,8 +419,8 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::anar::model::UserModel, id_common >:
-    public access::object_traits_impl< ::anar::model::UserModel, id_mysql >
+  class access::object_traits_impl< ::anar::parspark::model::UserModel, id_common >:
+    public access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >
   {
   };
 
@@ -428,65 +428,65 @@ namespace odb
   //
   template <>
   struct alias_traits<
-    ::anar::model::PersonModel,
+    ::anar::parspark::model::PersonModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::UserModel, id_mysql >::Person_tag>
+    access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::Person_tag>
   {
     static const char table_name[];
   };
 
   template <>
   struct alias_traits<
-    ::anar::model::UserModel,
+    ::anar::parspark::model::UserModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::UserModel, id_mysql >::CreatingUser_tag>
+    access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::CreatingUser_tag>
   {
     static const char table_name[];
   };
 
   template <>
   struct alias_traits<
-    ::anar::model::UserModel,
+    ::anar::parspark::model::UserModel,
     id_mysql,
-    access::object_traits_impl< ::anar::model::UserModel, id_mysql >::UpdatingUser_tag>
+    access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::UpdatingUser_tag>
   {
     static const char table_name[];
   };
 
   template <>
-  struct query_columns_base< ::anar::model::UserModel, id_mysql >
+  struct query_columns_base< ::anar::parspark::model::UserModel, id_mysql >
   {
     // Person
     //
     typedef
     odb::alias_traits<
-      ::anar::model::PersonModel,
+      ::anar::parspark::model::PersonModel,
       id_mysql,
-      access::object_traits_impl< ::anar::model::UserModel, id_mysql >::Person_tag>
+      access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::Person_tag>
     Person_alias_;
 
     // CreatingUser
     //
     typedef
     odb::alias_traits<
-      ::anar::model::UserModel,
+      ::anar::parspark::model::UserModel,
       id_mysql,
-      access::object_traits_impl< ::anar::model::UserModel, id_mysql >::CreatingUser_tag>
+      access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::CreatingUser_tag>
     CreatingUser_alias_;
 
     // UpdatingUser
     //
     typedef
     odb::alias_traits<
-      ::anar::model::UserModel,
+      ::anar::parspark::model::UserModel,
       id_mysql,
-      access::object_traits_impl< ::anar::model::UserModel, id_mysql >::UpdatingUser_tag>
+      access::object_traits_impl< ::anar::parspark::model::UserModel, id_mysql >::UpdatingUser_tag>
     UpdatingUser_alias_;
   };
 
   template <typename A>
-  struct query_columns< ::anar::model::UserModel, id_mysql, A >:
-    query_columns_base< ::anar::model::UserModel, id_mysql >
+  struct query_columns< ::anar::parspark::model::UserModel, id_mysql, A >:
+    query_columns_base< ::anar::parspark::model::UserModel, id_mysql >
   {
     // Id
     //
@@ -537,7 +537,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::anar::model::PersonModel,
+        ::anar::parspark::model::PersonModel,
         id_mysql,
         Person_alias_ > >
     Person_pointer_type_;
@@ -557,7 +557,7 @@ namespace odb
     typedef
     mysql::query_column<
       mysql::value_traits<
-        ::anar::model::UserType,
+        ::anar::parspark::model::UserType,
         mysql::id_enum >::query_type,
       mysql::id_enum >
     Type_type_;
@@ -577,7 +577,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::anar::model::UserModel,
+        ::anar::parspark::model::UserModel,
         id_mysql,
         CreatingUser_alias_ > >
     CreatingUser_pointer_type_;
@@ -605,7 +605,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::anar::model::UserModel,
+        ::anar::parspark::model::UserModel,
         id_mysql,
         UpdatingUser_alias_ > >
     UpdatingUser_pointer_type_;
@@ -646,48 +646,48 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::Id_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::Id_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::UserName_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::UserName_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   UserName (A::table_name, "`user_name`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::PassWord_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::PassWord_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   PassWord (A::table_name, "`pass_word`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::Person_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::Person_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   Person (A::table_name, "`person_id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::Type_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::Type_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   Type (A::table_name, "`type`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::CreatingUser_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::CreatingUser_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   CreatingUser (A::table_name, "`creating_user_id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::UpdatingUser_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::UpdatingUser_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   UpdatingUser (A::table_name, "`updating_user_id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::CreatedTime_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::CreatedTime_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   CreatedTime (A::table_name, "`created_time`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::UserModel, id_mysql, A >::UpdatedTime_type_
-  query_columns< ::anar::model::UserModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::UpdatedTime_type_
+  query_columns< ::anar::parspark::model::UserModel, id_mysql, A >::
   UpdatedTime (A::table_name, "`updated_time`", 0);
 }
 

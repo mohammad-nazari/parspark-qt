@@ -18,7 +18,7 @@ add_definitions(-DDATABASE_MYSQL)
 option(DEPLOYMENT "In development state show console for debug and see warnings and other console data" OFF)
 
 if (WIN32)
-    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if (CMAKE_BUILD_TYPE STREQUAL "Release")
         set(DONT_SHOW_CONSOLE WIN32)
     endif ()
 endif ()
@@ -58,20 +58,6 @@ set(
 
         ${CMAKE_SOURCE_DIR}/resource/rc/icon.rc
         ${CMAKE_SOURCE_DIR}/resource/qrc/qml.qrc
-
-        model/settings/alpr.cpp
-        model/settings/parking.cpp
-        model/settings/comport.cpp
-        model/settings/board.cpp
-        model/settings/server.cpp
-        model/settings/camera.cpp
-        model/settings/gate.cpp
-        model/settings/payment.cpp
-        model/settings/software.cpp
-        model/settings/card-reader.cpp
-        model/settings/printer.cpp
-        model/settings/settings.cpp
-        model/traffic.cpp
 
         service/qt-std-converter.cpp
         service/s-settings.cpp

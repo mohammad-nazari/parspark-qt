@@ -1,24 +1,24 @@
-#ifndef VIEW_LOGIN_VIEW_HPP
-#define VIEW_LOGIN_VIEW_HPP
+#ifndef ANAR_PARS_PARK_VIEW_LOGIN_HPP
+#define ANAR_PARS_PARK_VIEW_LOGIN_HPP
 
-#include <QJSEngine>
-#include <QQmlEngine>
 #include <QVariantMap>
-#include <controller/login-controller.hpp>
-#include <model/user.hpp>
-#include <view/view.hpp>
+
+#include "controller/login-controller.hpp"
+#include "model/database/user-model.hpp"
+#include "view/view.hpp"
 
 namespace anar::parspark::view {
    class LoginView;
    using LoginViewPtr = std::shared_ptr<LoginView>;
    class LoginView : public View {
       Q_OBJECT
+      Q_DISABLE_COPY(LoginView)
       Q_PROPERTY(QVariantMap loginInfo MEMBER m_loginInfo NOTIFY loginInfoChanged)
 
      public:
-      static LoginViewPtr Create();
-      explicit LoginView(QObject* parent = nullptr);
-      static LoginView* LoginViewObjectProvider(QQmlEngine* engine, QJSEngine* scriptEngine);
+      static LoginView* QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine);
+
+      LoginView(QObject* parent = nullptr);
 
       QVariantMap loginInfo() const {
          return m_loginInfo;
@@ -26,8 +26,9 @@ namespace anar::parspark::view {
       void setLoginInfo(QVariantMap loginInfo) {
          m_loginInfo = loginInfo;
       }
-      Q_INVOKABLE bool IsLoggedin() {
-         return m_done;
+
+      bool IsLoggedIn() const {
+         return m_isLoggedIn;
       }
 
      signals:
@@ -38,8 +39,10 @@ namespace anar::parspark::view {
       void doLogin(QVariantMap loginInfo);
 
      private:
+      static LoginView* m_instance;
       QVariantMap m_loginInfo;
       controller::LoginControllerPtr m_loginController{new controller::LoginController};
+      bool m_isLoggedIn{false};
    };
-}  // namespace anar::view
-#endif  // VIEW_LOGIN_VIEW_HPP
+}  // namespace anar::parspark::view
+#endif  // ANAR_PARS_PARK_VIEW_LOGIN_HPP

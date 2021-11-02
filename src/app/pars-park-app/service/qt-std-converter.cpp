@@ -4,7 +4,7 @@
 #include <QJsonDocument>
 #include <iostream>
 
-namespace anar::service {
+namespace anar::parspark::service {
    QtStdConverter::QtStdConverter() = default;
    QtStdConverter::~QtStdConverter() = default;
 

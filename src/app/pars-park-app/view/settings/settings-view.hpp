@@ -1,8 +1,6 @@
-#ifndef VIEW_SETTING_VIEW_HPP
-#define VIEW_SETTING_VIEW_HPP
+#ifndef ANAR_PARS_PARK_VIEW_SETTING_HPP
+#define ANAR_PARS_PARK_VIEW_SETTING_HPP
 
-#include <QJSEngine>
-#include <QQmlEngine>
 #include <QVariantMap>
 
 #include "controller/settings-controller.hpp"
@@ -13,12 +11,13 @@ namespace anar::parspark::view {
    using SettingsViewPtr = std::shared_ptr<SettingsView>;
    class SettingsView : public View {
       Q_OBJECT
+      Q_DISABLE_COPY(SettingsView)
       Q_PROPERTY(QVariantMap settingsInfo MEMBER m_settingsInfo NOTIFY settingsInfoChanged)
 
      public:
-      static SettingsViewPtr Create();
+      static SettingsView* QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine);
+
       explicit SettingsView(QObject* parent = nullptr);
-      static QObject* SettingViewObjectProvider(QQmlEngine* engine, QJSEngine* scriptEngine);
 
       QVariantMap settingsInfo() const {
          return m_settingsInfo;
@@ -35,8 +34,9 @@ namespace anar::parspark::view {
       void saveSettings(QVariantMap settingsInfo);
 
      private:
+      static SettingsView* m_instance;
       QVariantMap m_settingsInfo;
       controller::SettingsControllerPtr m_settingsController{new controller::SettingsController};
    };
-}  // namespace anar::view
-#endif  // VIEW_SETTING_VIEW_HPP
+}  // namespace anar::parspark::view
+#endif  // ANAR_PARS_PARK_VIEW_SETTING_HPP

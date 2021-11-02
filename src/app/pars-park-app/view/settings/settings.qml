@@ -2,32 +2,32 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
 import QtQuick.Dialogs 1.3
-import "qrc:/src/view/common"
+import "qrc:/src/app/pars-park-app/view/common"
 
-import ParsPark.View 1.0
+import ANAR.ParsPark.View 1.0
 
 ApplicationWindow  {
    property var settingsInfo: {
-      settingApi.loadSettings()
-      return settingApi.settingsInfo
+      SettingApi.loadSettings()
+      return SettingApi.settingsInfo
    }
    property bool closing: false
 
-   SettingApi{
-      id: settingApi
-      objectName: "settingApi"
-   }
+//   SettingApi{
+//      id: SettingApi
+//      objectName: "SettingApi"
+//   }
    MessageDialog {
       id: messageDialog
       icon: StandardIcon.Critical
       onAccepted: settingWindowId.close()
    }
    function saveSettings(){
-      settingApi.saveSettings(settingsInfo)
-      if(settingApi.done){
+      SettingApi.saveSettings(settingsInfo)
+      if(SettingApi.done){
          // Any error in save database settings in file
-         if(settingApi.error.length > 0){
-            messageDialog.text = settingApi.error;
+         if(SettingApi.error.length > 0){
+            messageDialog.text = SettingApi.error;
             messageDialog.title =  qsTr("Error on save settings")
             messageDialog.visible = true;
             messageDialog.icon = StandardIcon.Warning
@@ -40,7 +40,7 @@ ApplicationWindow  {
          }
       }
       else{
-         messageDialog.text = settingApi.error;
+         messageDialog.text = SettingApi.error;
          messageDialog.title =  qsTr("Save settings failed")
          messageDialog.visible = true;
          messageDialog.icon = StandardIcon.Warning

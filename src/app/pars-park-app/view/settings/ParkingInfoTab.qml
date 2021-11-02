@@ -1,7 +1,7 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 1.4
-import "qrc:/src/view/common"
+import "qrc:/src/app/pars-park-app/view/common"
 
 Column{
    property var parkingSettings: ({})

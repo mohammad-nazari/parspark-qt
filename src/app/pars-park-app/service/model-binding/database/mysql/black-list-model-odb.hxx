@@ -29,7 +29,7 @@
 
 #include "contact-model-odb.hxx"
 #include "create-modify-delete-model-odb.hxx"
-#include "model/black-list-model.hpp"
+#include "model/database/black-list-model.hpp"
 #include "person-model-odb.hxx"
 #include "user-model-odb.hxx"
 
@@ -38,17 +38,17 @@ namespace odb
   // BlackListModel
   //
   template <>
-  struct class_traits< ::anar::model::BlackListModel >
+  struct class_traits< ::anar::parspark::model::BlackListModel >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::anar::model::BlackListModel >
+  class access::object_traits< ::anar::parspark::model::BlackListModel >
   {
     public:
-    typedef ::anar::model::BlackListModel object_type;
-    typedef ::std::shared_ptr< ::anar::model::BlackListModel > pointer_type;
+    typedef ::anar::parspark::model::BlackListModel object_type;
+    typedef ::std::shared_ptr< ::anar::parspark::model::BlackListModel > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -91,12 +91,12 @@ namespace odb
   // BlackListModel
   //
   template <typename A>
-  struct pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >:
-    pointer_query_columns< ::anar::model::CreateModifyDeleteModel, id_mysql, A >
+  struct pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >:
+    pointer_query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
   {
     // CreateModifyDeleteModel
     //
-    typedef pointer_query_columns< ::anar::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
+    typedef pointer_query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
 
     // Id
     //
@@ -136,23 +136,23 @@ namespace odb
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >::Id_type_
-  pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::Id_type_
+  pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >::PlateNumberEn_type_
-  pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::PlateNumberEn_type_
+  pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::
   PlateNumberEn (A::table_name, "`plate_number_en`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >::Description_type_
-  pointer_query_columns< ::anar::model::BlackListModel, id_mysql, A >::
+  const typename pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::Description_type_
+  pointer_query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::
   Description (A::table_name, "`description`", 0);
 
   template <>
-  class access::object_traits_impl< ::anar::model::BlackListModel, id_mysql >:
-    public access::object_traits< ::anar::model::BlackListModel >
+  class access::object_traits_impl< ::anar::parspark::model::BlackListModel, id_mysql >:
+    public access::object_traits< ::anar::parspark::model::BlackListModel >
   {
     public:
     struct id_image_type
@@ -163,7 +163,7 @@ namespace odb
       std::size_t version;
     };
 
-    struct image_type: object_traits_impl< ::anar::model::CreateModifyDeleteModel, id_mysql >::image_type
+    struct image_type: object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::image_type
     {
       // Id
       //
@@ -283,20 +283,20 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::anar::model::BlackListModel, id_common >:
-    public access::object_traits_impl< ::anar::model::BlackListModel, id_mysql >
+  class access::object_traits_impl< ::anar::parspark::model::BlackListModel, id_common >:
+    public access::object_traits_impl< ::anar::parspark::model::BlackListModel, id_mysql >
   {
   };
 
   // BlackListModel
   //
   template <typename A>
-  struct query_columns< ::anar::model::BlackListModel, id_mysql, A >:
-    query_columns< ::anar::model::CreateModifyDeleteModel, id_mysql, A >
+  struct query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >:
+    query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
   {
     // CreateModifyDeleteModel
     //
-    typedef query_columns< ::anar::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
+    typedef query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
 
     // Id
     //
@@ -336,18 +336,18 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::anar::model::BlackListModel, id_mysql, A >::Id_type_
-  query_columns< ::anar::model::BlackListModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::Id_type_
+  query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::BlackListModel, id_mysql, A >::PlateNumberEn_type_
-  query_columns< ::anar::model::BlackListModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::PlateNumberEn_type_
+  query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::
   PlateNumberEn (A::table_name, "`plate_number_en`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::BlackListModel, id_mysql, A >::Description_type_
-  query_columns< ::anar::model::BlackListModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::Description_type_
+  query_columns< ::anar::parspark::model::BlackListModel, id_mysql, A >::
   Description (A::table_name, "`description`", 0);
 }
 

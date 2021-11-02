@@ -6,16 +6,12 @@
 namespace anar::model {
    class DataBaseModel;
    using DataBaseModelPtr = std::shared_ptr<DataBaseModel>;
-   class DataBaseModel : virtual public Model {
+   class DataBaseModel : virtual public anar::model::Model {
      public:
-      static DataBaseModelPtr Create() {
-         return std::make_shared<DataBaseModel>();
-      }
       DataBaseModel()
-          : Model("DataBase", "Database") {
+          : anar::model::Model("DataBase", "Database") {
       }
 
-     public:
       std::string EngineName{};
       std::string HostAddress{"localhost"};
       std::string DBUserName{"root"};
@@ -23,5 +19,5 @@ namespace anar::model {
       uint16_t Port{3306};  // Mysql default port
       std::string DatabaseName{"parspark"};
    };
-}  // namespace anar::model
+}  // namespace anar::parspark::model
 #endif  // ANAR_MODEL_DATABASE_HPP

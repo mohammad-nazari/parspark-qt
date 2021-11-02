@@ -4,24 +4,24 @@
 #include <memory>
 #include <vector>
 
-#include "Poco/Data/MySQL/Connector.h"
-#include "Poco/Data/MySQL/MySQLException.h"
-#include "Poco/Data/SQLite/Connector.h"
-#include "Poco/Data/Session.h"
-#include "Poco/Data/SessionFactory.h"
+//#include "Poco/Data/MySQL/Connector.h"
+//#include "Poco/Data/MySQL/MySQLException.h"
+//#include "Poco/Data/SQLite/Connector.h"
+//#include "Poco/Data/Session.h"
+//#include "Poco/Data/SessionFactory.h"
 #include "Poco/FileStream.h"
 #include "anar/service/string.hpp"
-#include "model/create-modify-delete-model.hpp"
-#include "model/user-model.hpp"
+#include "model/database/create-modify-delete-model.hpp"
+#include "model/database/user-model.hpp"
 #include "odb/database.hxx"
 #include "odb/mysql/database.hxx"
 #include "odb/transaction.hxx"
 #include "service/model-binding/database/mysql/create-modify-delete-model-odb.hxx"
 #include "service/model-binding/database/mysql/user-model-odb.hxx"
 
-using namespace Poco::Data::Keywords;
-using Poco::Data::Session;
-using Poco::Data::Statement;
+//using namespace Poco::Data::Keywords;
+//using Poco::Data::Session;
+//using Poco::Data::Statement;
 
 namespace anar::test {
    void NazariTest::RunTest() {
@@ -48,7 +48,7 @@ namespace anar::test {
    }
 
    void NazariTest::TestPocoMySQL() {
-      Poco::Data::MySQL::Connector::registerConnector();
+//      Poco::Data::MySQL::Connector::registerConnector();
       //      try {
       //         std::string str = "host=localhost;user=root;password=mypassword;compress=true;auto-reconnect=true";
       //         Poco::Data::Session test(Poco::Data::SessionFactory::instance().create(Poco::Data::MySQL::Connector::KEY, str));
@@ -61,7 +61,7 @@ namespace anar::test {
       //      }
 
       // register SQLite connector
-      Poco::Data::SQLite::Connector::registerConnector();
+//      Poco::Data::SQLite::Connector::registerConnector();
 
       // create a session
       //      Session session("SQLite", "sample.db");
@@ -107,10 +107,10 @@ namespace anar::test {
 
          {
             std::cout << "Get data ..." << std::endl;
-            anar::model::UserModel userModel;
+            anar::parspark::model::UserModel userModel;
             odb::transaction t(db->begin());
-            odb::query<anar::model::UserModel> query;
-            odb::result<anar::model::UserModel> result(db->query<anar::model::UserModel>(query.UserName == "admin"));
+            odb::query<anar::parspark::model::UserModel> query;
+            odb::result<anar::parspark::model::UserModel> result(db->query<anar::parspark::model::UserModel>(query.UserName == "admin"));
             for (const auto& row : result) {
                std::cout << "UserName: " << row.UserName << "\nPassWord: " << row.PassWord << "\nFirstName: " << row.Person->FirstName << std::endl;
                std::cout << "Created Date: " << row.CreatedTime << std::endl;

@@ -2,36 +2,36 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.3
-import "qrc:/src/view/common"
+import "qrc:/src/app/pars-park-app/view/common"
 
-import ParsPark.View 1.0
+import ANAR.ParsPark.View 1.0
 
 ApplicationWindow  {
    property var loginInfo: {
-      loginApi.loadLoginInfo();
-      return loginApi.loginInfo;
+      LoginApi.loadLoginInfo();
+      return LoginApi.loginInfo;
    }
-   LoginApi{
-      id: loginApi
-      objectName: "loginApi"
-   }
+//   LoginApi{
+//      id: LoginApi
+//      objectName: "LoginApi"
+//   }
    MessageDialog {
       id: messageDialog
       icon: StandardIcon.Critical
    }
    function doLogin(){
-      loginApi.doLogin(loginInfo)
-      if(loginApi.done){
+      LoginApi.doLogin(loginInfo)
+      if(LoginApi.done){
          // Any error in save database settings in file
-         if(loginApi.error.length > 0){
-            messageDialog.text = loginApi.error;
+         if(LoginApi.error.length > 0){
+            messageDialog.text = LoginApi.error;
             messageDialog.title =  qsTr("Error on save database settings");
             messageDialog.visible = true;
             messageDialog.icon = StandardIcon.Warning
          }
          close();
       }else{
-         messageDialog.text = loginApi.error;
+         messageDialog.text = LoginApi.error;
          messageDialog.title =  qsTr("Login failed");
          messageDialog.visible = true;
       }

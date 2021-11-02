@@ -8,7 +8,7 @@
 
 #include "anar/interface/a-jsonable.hpp"
 
-namespace anar::service {
+namespace anar::parspark::service {
    class QtStdConverter {
      public:
       QtStdConverter();

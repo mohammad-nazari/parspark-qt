@@ -3,6 +3,6 @@
 
 #include "anar/model/constant-model.hpp"
 
-namespace anar::constant {}  // namespace anar::constant
+namespace anar::parspark::constant {}  // namespace anar::constant
 
 #endif  // ANAR_PARS_PARK_CONST_SETTINGS_HPP

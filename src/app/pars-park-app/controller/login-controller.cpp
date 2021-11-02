@@ -10,7 +10,7 @@
 #include "service/model-binding/database/mysql/person-model-odb.hxx"
 #include "service/s-settings.hpp"
 
-namespace anar::controller {
+namespace anar::parspark::controller {
    LoginControllerPtr LoginController::Create() {
       return std::make_shared<LoginController>();
    }
@@ -18,7 +18,7 @@ namespace anar::controller {
        : Controller() {
    }
 
-   bool LoginController::DoLogin(const model::LoginPtr& login) {
+   bool LoginController::DoLogin(const model::LoginModel& login) {
       bool isLoggedIn{false};
 //      std::string passWord = common::String::MD5(login->PassWord());
 //      database::MysqlDataBase db(login->DataBase());
@@ -39,7 +39,7 @@ namespace anar::controller {
       }
       return isLoggedIn;
    }
-   bool LoginController::SaveDataBaseSettings(const model::DataBaseModelPtr& dataBase) {
+   bool LoginController::SaveDataBaseSettings(const anar::model::DataBaseModel& dataBase) {
       service::SSettings::Instance()->DataBase(dataBase);
       auto isSaved = service::SSettings::Instance()->Save();
       if (!isSaved) {
@@ -47,7 +47,7 @@ namespace anar::controller {
       }
       return isSaved;
    }
-   model::DataBaseModelPtr LoginController::LoadLoginSetting() {
+   anar::model::DataBaseModel LoginController::LoadLoginSetting() {
       return service::SSettings::Instance()->DataBase();
    }
 }  // namespace anar::controller

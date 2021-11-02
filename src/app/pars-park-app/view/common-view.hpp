@@ -1,5 +1,5 @@
-#ifndef ANAR_COMMON_VIEW_H
-#define ANAR_COMMON_VIEW_H
+#ifndef ANAR_PARS_PARK_VIEW_COMMON_HPP
+#define ANAR_PARS_PARK_VIEW_COMMON_HPP
 
 #include "anar/controller/common-controller.hpp"
 #include "view.hpp"
@@ -9,12 +9,14 @@ namespace anar::parspark::view {
    using CommonViewPtr = std::shared_ptr<CommonView>;
    class CommonView : public View {
       Q_OBJECT
+      Q_DISABLE_COPY(CommonView)
       Q_PROPERTY(QStringList serialPorts MEMBER m_serialPorts NOTIFY serialPortsChanged)
       Q_PROPERTY(QStringList baudRates MEMBER m_baudRates NOTIFY baudRatesChanged)
       Q_PROPERTY(QStringList printers MEMBER m_printers NOTIFY printersChanged)
 
      public:
-      static CommonViewPtr Create();
+      static CommonView* QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine);
+
       CommonView();
 
      signals:
@@ -28,6 +30,7 @@ namespace anar::parspark::view {
       void getPrinters();
 
      private:
+      static CommonView* m_instance;
       QStringList m_serialPorts;
       QStringList m_baudRates;
       QStringList m_printers;
@@ -35,4 +38,4 @@ namespace anar::parspark::view {
    };
 }  // namespace anar::view
 
-#endif  // ANAR_COMMON_VIEW_H
+#endif  // ANAR_PARS_PARK_VIEW_COMMON_HPP

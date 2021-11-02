@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 2.4.4)
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
 
-project(${ANAR_ZLIB_LIB} C)
+project(zlib C)
 
 set(VERSION "1.2.11")
 

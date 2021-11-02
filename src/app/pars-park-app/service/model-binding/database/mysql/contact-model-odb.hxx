@@ -27,24 +27,24 @@
 #include <odb/wrapper-traits.hxx>
 #include <utility>
 
-#include "model/contact-model.hpp"
+#include "model/database/contact-model.hpp"
 
 namespace odb
 {
   // ContactModel
   //
   template <>
-  struct class_traits< ::anar::model::ContactModel >
+  struct class_traits< ::anar::parspark::model::ContactModel >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::anar::model::ContactModel >
+  class access::object_traits< ::anar::parspark::model::ContactModel >
   {
     public:
-    typedef ::anar::model::ContactModel object_type;
-    typedef ::std::shared_ptr< ::anar::model::ContactModel > pointer_type;
+    typedef ::anar::parspark::model::ContactModel object_type;
+    typedef ::std::shared_ptr< ::anar::parspark::model::ContactModel > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -87,7 +87,7 @@ namespace odb
   // ContactModel
   //
   template <typename A>
-  struct query_columns< ::anar::model::ContactModel, id_mysql, A >
+  struct query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >
   {
     // Id
     //
@@ -151,39 +151,39 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::anar::model::ContactModel, id_mysql, A >::Id_type_
-  query_columns< ::anar::model::ContactModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::Id_type_
+  query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::ContactModel, id_mysql, A >::Email_type_
-  query_columns< ::anar::model::ContactModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::Email_type_
+  query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::
   Email (A::table_name, "`email`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::ContactModel, id_mysql, A >::Address_type_
-  query_columns< ::anar::model::ContactModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::Address_type_
+  query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::
   Address (A::table_name, "`address`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::ContactModel, id_mysql, A >::Phone_type_
-  query_columns< ::anar::model::ContactModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::Phone_type_
+  query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::
   Phone (A::table_name, "`phone`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::model::ContactModel, id_mysql, A >::Mobile_type_
-  query_columns< ::anar::model::ContactModel, id_mysql, A >::
+  const typename query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::Mobile_type_
+  query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >::
   Mobile (A::table_name, "`mobile`", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::anar::model::ContactModel, id_mysql, A >:
-    query_columns< ::anar::model::ContactModel, id_mysql, A >
+  struct pointer_query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >:
+    query_columns< ::anar::parspark::model::ContactModel, id_mysql, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::anar::model::ContactModel, id_mysql >:
-    public access::object_traits< ::anar::model::ContactModel >
+  class access::object_traits_impl< ::anar::parspark::model::ContactModel, id_mysql >:
+    public access::object_traits< ::anar::parspark::model::ContactModel >
   {
     public:
     struct id_image_type
@@ -326,8 +326,8 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::anar::model::ContactModel, id_common >:
-    public access::object_traits_impl< ::anar::model::ContactModel, id_mysql >
+  class access::object_traits_impl< ::anar::parspark::model::ContactModel, id_common >:
+    public access::object_traits_impl< ::anar::parspark::model::ContactModel, id_mysql >
   {
   };
 

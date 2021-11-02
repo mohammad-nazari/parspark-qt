@@ -1,19 +1,19 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 1.4
-import "qrc:/src/view/common"
+import "qrc:/src/app/pars-park-app/view/common"
 
-import ParsPark.View 1.0
+import ANAR.ParsPark.View 1.0
 
 Column{
    property var printerSettings: ({})
    property var printerModel: {
-      commonApi.getPrinters();
-      return commonApi.printers;
+      CommonApi.getPrinters();
+      return CommonApi.printers;
    }
-   CommonApi{
-      id: commonApi;
-   }
+//   CommonApi{
+//      id: commonApi;
+//   }
 
    id: printerId
    padding: 10

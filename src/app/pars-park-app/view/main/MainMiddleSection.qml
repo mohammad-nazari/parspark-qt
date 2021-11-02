@@ -1,10 +1,10 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.13
-import "qrc:/src/view/common"
-import "qrc:/src/view/settings"
+import "qrc:/src/app/pars-park-app/view/common"
+import "qrc:/src/app/pars-park-app/view/settings"
 
-import ParsPark.View 1.0
+import ANAR.ParsPark.View 1.0
 
 Rectangle{
    id: middleRectangleId
@@ -21,7 +21,7 @@ Rectangle{
       height: middleRectangleId.height
       Rectangle{
          function openForm(formName) {
-            var formAddress = "/src/view/" + formName + "/" + formName + ".qml";
+            var formAddress = "/src/app/pars-park-app/view/" + formName + "/" + formName + ".qml";
             var component = Qt.createComponent(formAddress);
             var window = component.createObject(parent);
          }

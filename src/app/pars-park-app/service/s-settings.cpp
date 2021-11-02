@@ -3,7 +3,7 @@
 #include <fstream>
 #include <memory>
 
-namespace anar::service {
+namespace anar::parspark::service {
    SSettingsPtr SSettings::_instance = nullptr;
 
    SSettings::SSettings() = default;

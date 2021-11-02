@@ -1,5 +1,5 @@
-#ifndef ANAR_S_VIEW_HPP
-#define ANAR_S_VIEW_HPP
+#ifndef ANAR_PARS_PARK_VIEW_S_VIEW_HPP
+#define ANAR_PARS_PARK_VIEW_S_VIEW_HPP
 
 #include <QObject>
 #include <memory>
@@ -10,4 +10,4 @@ namespace anar::parspark::view {
    class SView {};
 }  // namespace anar::view
 
-#endif  // ANAR_S_VIEW_HPP
+#endif  // ANAR_PARS_PARK_VIEW_S_VIEW_HPP
