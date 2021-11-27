@@ -7,7 +7,7 @@
 
 // Begin prologue.
 //
-#include "anar/service/model-binding/database/traits/traits.hxx"
+#include "service/model-binding/database/traits/traits.hxx"
 //
 // End prologue.
 

@@ -9,6 +9,7 @@ namespace anar::test {
       static void TestPocoMySQL();
       static void TestPocoSHA();
       static void TestODB();
+      static void VisitorTest();
    };
 }  // namespace anar::test
 

@@ -1,6 +1,7 @@
 #ifndef ANAR_PARS_PARK_MODEL_USER_HPP
 #define ANAR_PARS_PARK_MODEL_USER_HPP
 
+#include "model/pars-park-model.hpp"
 #include "person-model.hpp"
 
 namespace anar {
@@ -10,10 +11,15 @@ namespace anar {
          class UserModel;
          using UserModelPtr = std::shared_ptr<UserModel>;
 #pragma db object table("user") pointer(std::shared_ptr) table("user")
-         class UserModel : public anar::model::Model {
+         class UserModel : public ParsParkModel {
            public:
             UserModel()
-                : anar::model::Model("User", "User") {
+                : ParsParkModel("User", "User") {
+            }
+
+            void Accept(interfaces::IParsParkModelBindingVisitor* modelBindingVisitor) override {
+//               anar::model::Model::Accept(modelBindingVisitor);
+               modelBindingVisitor->Visit(this);
             }
 
             friend class odb::access;

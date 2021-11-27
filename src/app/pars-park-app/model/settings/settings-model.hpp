@@ -2,7 +2,7 @@
 #define ANAR_PARS_PARK_MODEL_SETTING_HPP
 
 #include "alpr-model.hpp"
-#include "anar/model/database-model.hpp"
+#include "anar/database-model.hpp"
 #include "board-model.hpp"
 #include "camera-model.hpp"
 #include "card-reader-model.hpp"

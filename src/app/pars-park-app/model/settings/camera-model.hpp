@@ -1,7 +1,7 @@
 #ifndef ANAR_PARS_PARK_MODEL_CAMERA_HPP
 #define ANAR_PARS_PARK_MODEL_CAMERA_HPP
 
-#include "anar/model/model.hpp"
+#include "anar/model.hpp"
 
 namespace anar::parspark::model {
    class CameraInfoModel;

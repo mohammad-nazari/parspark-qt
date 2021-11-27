@@ -17,8 +17,7 @@ namespace anar::parspark::view {
 
      public:
       static LoginView* QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine);
-
-      LoginView(QObject* parent = nullptr);
+      static LoginView* Instance();
 
       QVariantMap loginInfo() const {
          return m_loginInfo;
@@ -40,6 +39,9 @@ namespace anar::parspark::view {
 
      private:
       static LoginView* m_instance;
+
+      LoginView(QObject* parent = nullptr);
+
       QVariantMap m_loginInfo;
       controller::LoginControllerPtr m_loginController{new controller::LoginController};
       bool m_isLoggedIn{false};

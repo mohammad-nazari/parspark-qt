@@ -13,8 +13,6 @@ set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR
 
 configure_file("config.hpp.in" "config.hpp")
 
-add_definitions(-DDATABASE_MYSQL)
-
 option(DEPLOYMENT "In development state show console for debug and see warnings and other console data" OFF)
 
 if (WIN32)
@@ -36,22 +34,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(
-        Qt5
-        COMPONENTS
-        Core
-        LinguistTools
-        Qml
-        Quick
-        REQUIRED
-)
-
 set(
         TS_FILES
         "locale/ParsPark_fa_IR.ts"
 )
-
-message("${PARS_PARK_MESSAGE} ${TS_FILES}")
 
 set(
         PARS_PARK_SOURCES
@@ -74,6 +60,7 @@ set(
         service/model-binding/database/mysql/organization-model-odb.cxx
         service/model-binding/database/mysql/parking-log-model-odb.cxx
         service/model-binding/database/mysql/subscription-model-odb.cxx
+        service/model-binding/json/from-json-visitor.cpp
 
         view/view.cpp
         view/common-view.cpp
@@ -94,28 +81,28 @@ if (WIN32)
     add_executable(
             ${PROJECT_NAME}
             ${DONT_SHOW_CONSOLE}
-            main.cpp
             ${PARS_PARK_SOURCES}
+            main.cpp
     )
-#    add_executable(
-#            ${PROJECT_NAME}_Unit_Test
-#            ${DONT_SHOW_CONSOLE}
-#            ${PARS_PARK_SOURCES}
-#            ${PARS_PARK_TEST_SOURCES}
-#            test/main.cpp
-#    )
+    #    add_executable(
+    #            ${PROJECT_NAME}_Unit_Test
+    #            ${DONT_SHOW_CONSOLE}
+    #            ${PARS_PARK_SOURCES}
+    #            ${PARS_PARK_TEST_SOURCES}
+    #            test/main.cpp
+    #    )
 else ()
     add_executable(
             ${PROJECT_NAME}
             ${PARS_PARK_SOURCES}
             main.cpp
     )
-#    add_executable(
-#            ${PROJECT_NAME}_Unit_Test
-#            ${PARS_PARK_SOURCES}
-#            ${PARS_PARK_TEST_SOURCES}
-#            test/main.cpp
-#    )
+    #    add_executable(
+    #            ${PROJECT_NAME}_Unit_Test
+    #            ${PARS_PARK_SOURCES}
+    #            ${PARS_PARK_TEST_SOURCES}
+    #            test/main.cpp
+    #    )
 endif ()
 
 target_compile_definitions(
@@ -136,27 +123,17 @@ target_link_libraries(
         Qt5::Quick
         ${PARS_PARK_MYSQL_LIB}
         ${PARS_PARK_POCO_FOUNDATION_LIB}
-        ${PARS_PARK_POCO_DATA_LIB}
-        ${PARS_PARK_POCO_DATA_MYSQL_LIB}
-        ${PARS_PARK_POCO_DATA_SQLITE_LIB}
         ${PARS_PARK_LIMEREPORT_LIB}
-#        ${PARS_PARK_NLOHMANN_JSON_LIB}
+        ${PARS_PARK_NLOHMANN_JSON_LIB}
         ${PARS_PARK_ODB_LIB}
         ${PARS_PARK_ODB_MYSQL_LIB}
         ${PARS_PARK_OATPP_LIB}
         ${PARS_PARK_SERIAL_LIB}
         ${PARS_PARK_GOOGLE_LOG_LIB}
         ${PARS_PARK_GOOGLE_TEST_LIB}
-#        ${PARS_PARK_ANAR_CONST_LIB}
-        ${PARS_PARK_ANAR_CONTROLLER_LIB}
-        ${PARS_PARK_ANAR_DATABASE_LIB}
-#        ${PARS_PARK_ANAR_EXCEPTION_LIB}
-        ${PARS_PARK_ANAR_INTERFACE_LIB}
-#        ${PARS_PARK_ANAR_LOG_LIB}
-#        ${PARS_PARK_ANAR_MODEL_LIB}
-        ${PARS_PARK_ANAR_SERVICE_LIB}
-#        ${PARS_PARK_ANAR_TASK_LIB}
+        ${PARS_PARK_ANAR_COMMON_LIB}
 )
+
 #target_link_libraries(
 #        ${PROJECT_NAME}_Unit_Test
 #        Qt5::Core

@@ -22,7 +22,7 @@
 #    else
 #      ifdef LIBODB_MYSQL_DYNAMIC_LIB
 #        ifdef DLL_EXPORT
-#          define LIBODB_MYSQL_EXPORT __declspec(dllexport)
+#          define LIBODB_MYSQL_EXPORT
 #        else
 #          define LIBODB_MYSQL_EXPORT
 #        endif

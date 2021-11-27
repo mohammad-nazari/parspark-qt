@@ -22,7 +22,7 @@
 #    else
 #      ifdef LIBODB_DYNAMIC_LIB
 #        ifdef DLL_EXPORT
-#          define LIBODB_EXPORT __declspec(dllexport)
+#          define LIBODB_EXPORT
 #        else
 #          define LIBODB_EXPORT
 #        endif

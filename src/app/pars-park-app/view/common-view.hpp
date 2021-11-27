@@ -1,7 +1,7 @@
 #ifndef ANAR_PARS_PARK_VIEW_COMMON_HPP
 #define ANAR_PARS_PARK_VIEW_COMMON_HPP
 
-#include "anar/controller/common-controller.hpp"
+#include "anar/common-controller.hpp"
 #include "view.hpp"
 
 namespace anar::parspark::view {

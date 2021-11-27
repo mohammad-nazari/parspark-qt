@@ -10,22 +10,25 @@
 //#include "Poco/Data/Session.h"
 //#include "Poco/Data/SessionFactory.h"
 #include "Poco/FileStream.h"
-#include "anar/service/string.hpp"
+#include "anar/error-model.hpp"
+#include "anar/string.hpp"
 #include "model/database/create-modify-delete-model.hpp"
 #include "model/database/user-model.hpp"
+#include "model/login-model.hpp"
 #include "odb/database.hxx"
 #include "odb/mysql/database.hxx"
 #include "odb/transaction.hxx"
 #include "service/model-binding/database/mysql/create-modify-delete-model-odb.hxx"
 #include "service/model-binding/database/mysql/user-model-odb.hxx"
+#include "service/model-binding/json/from-json-visitor.hpp"
 
-//using namespace Poco::Data::Keywords;
-//using Poco::Data::Session;
-//using Poco::Data::Statement;
+// using namespace Poco::Data::Keywords;
+// using Poco::Data::Session;
+// using Poco::Data::Statement;
 
 namespace anar::test {
    void NazariTest::RunTest() {
-      TestPocoSHA();
+      VisitorTest();
    }
 
    void NazariTest::TestPocoReadAndWrite() {
@@ -48,7 +51,7 @@ namespace anar::test {
    }
 
    void NazariTest::TestPocoMySQL() {
-//      Poco::Data::MySQL::Connector::registerConnector();
+      //      Poco::Data::MySQL::Connector::registerConnector();
       //      try {
       //         std::string str = "host=localhost;user=root;password=mypassword;compress=true;auto-reconnect=true";
       //         Poco::Data::Session test(Poco::Data::SessionFactory::instance().create(Poco::Data::MySQL::Connector::KEY, str));
@@ -61,7 +64,7 @@ namespace anar::test {
       //      }
 
       // register SQLite connector
-//      Poco::Data::SQLite::Connector::registerConnector();
+      //      Poco::Data::SQLite::Connector::registerConnector();
 
       // create a session
       //      Session session("SQLite", "sample.db");
@@ -120,6 +123,14 @@ namespace anar::test {
       } catch (const odb::exception& e) {
          std::cerr << e.what() << std::endl;
          return;
+      }
+   }
+   void NazariTest::VisitorTest() {
+      json_nlohmann jsonNlohmann;
+      anar::service::AFromJsonVisitor aFromJsonVisitor(jsonNlohmann);
+      anar::model::DataBaseModel dataBaseModel;
+      if (!dataBaseModel.Accept(&aFromJsonVisitor)) {
+         std::cout << aFromJsonVisitor.Error()->Message << std::endl;
       }
    }
 }  // namespace anar::test

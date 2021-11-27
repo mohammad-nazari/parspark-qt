@@ -1,7 +1,5 @@
 #include "login-view.hpp"
 
-#include "controller/settings-controller.hpp"
-
 namespace anar::parspark::view {
    LoginView* LoginView::m_instance = nullptr;
    LoginView* LoginView::QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine) {
@@ -9,6 +7,12 @@ namespace anar::parspark::view {
       Q_UNUSED(scriptEngine)
       if (!m_instance) {
          m_instance = new LoginView();
+      }
+      return m_instance;
+   }
+   LoginView* LoginView::Instance() {
+      if (!m_instance) {
+         QmlInstance(nullptr, nullptr);
       }
       return m_instance;
    }
@@ -37,7 +41,7 @@ namespace anar::parspark::view {
       login.Port = (m_loginInfo["serverPort"].toInt());
       login.DatabaseName = (m_loginInfo["serverDBName"].toString().toStdString());
       m_isLoggedIn = m_loginController->DoLogin(login);
-      //      m_error = std::string("Error: " + m_loginController->Error()).c_str();
+      m_error = std::string("Error: " + m_loginController->Error().Message).c_str();
       // Save new database setting if done successfully
       if (!m_isLoggedIn) {
          return;
@@ -50,7 +54,7 @@ namespace anar::parspark::view {
       dataBase.Port = (m_loginInfo["serverPort"].toInt());
       dataBase.DatabaseName = (m_loginInfo["serverDBName"].toString().toStdString());
       if (!m_loginController->SaveDataBaseSettings(dataBase)) {
-         //         m_error.fromStdString("Error: " + m_loginController->Error());
+         m_error.fromStdString("Error: " + m_loginController->Error().Message);
       }
    }
 }  // namespace anar::parspark::view

@@ -6,7 +6,7 @@
 #include <QVector>
 #include <vector>
 
-#include "anar/interface/a-jsonable.hpp"
+#include "anar/a-jsonable.hpp"
 
 namespace anar::parspark::service {
    class QtStdConverter {

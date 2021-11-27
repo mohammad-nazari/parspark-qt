@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-#include "anar/service/string.hpp"
-#include "anar/database/mysql/mysql-database.hpp"
+#include "anar/string.hpp"
+#include "anar/mysql-database.hpp"
 #include "service/model-binding/database/mysql/person-model-odb.hxx"
 #include "service/s-settings.hpp"
 
