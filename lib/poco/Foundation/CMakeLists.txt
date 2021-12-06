@@ -24,7 +24,7 @@ POCO_SOURCES_AUTO_PLAT(SRCS WIN32
 endif()
 
 # Version Resource
-if(MSVC AND BUILD_SHARED_LIBS)
+if((MSVC OR MINGW) AND BUILD_SHARED_LIBS)
 	source_group("Resources" FILES ${PROJECT_SOURCE_DIR}/DLLVersion.rc)
 	list(APPEND SRCS ${PROJECT_SOURCE_DIR}/DLLVersion.rc)
 endif()

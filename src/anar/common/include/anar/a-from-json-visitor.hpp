@@ -2,10 +2,10 @@
 #define ANAR_ABSTRACT_FROM_JSON_VISITOR_HPP
 
 #include "a-jsonable.hpp"
-#include "i-visitor.hpp"
+#include "i-model-binding-visitor.hpp"
 
 namespace anar::service {
-   class AFromJsonVisitor : virtual public interfaces::IVisitor {
+   class AFromJsonVisitor : virtual public interfaces::IModelBindingVisitor {
      public:
       AFromJsonVisitor(json_nlohmann &jsonNlohmann);
 

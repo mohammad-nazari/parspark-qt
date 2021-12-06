@@ -6,10 +6,15 @@
 namespace anar::parspark::model {
    class CardReaderModel;
    using CardReaderModelPtr = std::shared_ptr<CardReaderModel>;
-   class CardReaderModel : public anar::model::Model {
+   class CardReaderModel : public ParsParkModel {
      public:
       CardReaderModel()
-          : anar::model::Model("CardReader") {
+          : ParsParkModel("CardReader", "CardReader") {
+      }
+      ~CardReaderModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       ComPortModel Enter;

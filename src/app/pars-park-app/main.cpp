@@ -13,8 +13,8 @@
 using namespace anar::parspark;
 
 int main(int argc, char* argv[]) {
-         anar::test::NazariTest::RunTest();
-         return 0;
+   //         anar::test::NazariTest::RunTest();
+   //         return 0;
    int appCode;
    //   FLAGS_logtostderr = true;
    FLAGS_log_dir = "logs";

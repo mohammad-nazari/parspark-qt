@@ -1,15 +1,20 @@
 #ifndef ANAR_PARS_PARK_MODEL_SERVER_HPP
 #define ANAR_PARS_PARK_MODEL_SERVER_HPP
 
-#include "anar/model.hpp"
+#include "model/pars-park-model.hpp"
 
 namespace anar::parspark::model {
    class ServerModel;
    using ServerModelPtr = std::shared_ptr<ServerModel>;
-   class ServerModel : public anar::model::Model {
+   class ServerModel : public ParsParkModel {
      public:
       ServerModel()
-          : anar::model::Model("Server", "Server") {
+          : ParsParkModel("Server", "Server") {
+      }
+      ~ServerModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       std::string Address{"localhost"};

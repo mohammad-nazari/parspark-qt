@@ -11,15 +11,14 @@ namespace anar {
          class UserModel;
          using UserModelPtr = std::shared_ptr<UserModel>;
 #pragma db object table("user") pointer(std::shared_ptr) table("user")
-         class UserModel : public ParsParkModel {
+         class UserModel : public virtual ParsParkModel {
            public:
             UserModel()
                 : ParsParkModel("User", "User") {
             }
 
-            void Accept(interfaces::IParsParkModelBindingVisitor* modelBindingVisitor) override {
-//               anar::model::Model::Accept(modelBindingVisitor);
-               modelBindingVisitor->Visit(this);
+            bool Accept(interfaces::IParsParkModelBindingVisitor* modelBindingVisitor) override {
+               return modelBindingVisitor->Visit(this);
             }
 
             friend class odb::access;

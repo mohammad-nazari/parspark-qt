@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "anar/model.hpp"
-#include "error-const.hpp"
+#include "anar/error-const.hpp"
 
 namespace anar::model {
    class ErrorModel : public Model {
@@ -18,7 +18,7 @@ namespace anar::model {
       }
       ~ErrorModel() override = default;
 
-      bool Accept(service::AFromJsonVisitor* visitor) override {
+      bool Accept(interfaces::IModelBindingVisitor* visitor) override {
          return visitor->Visit(this);
       }
 

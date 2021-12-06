@@ -1,15 +1,20 @@
 #ifndef ANAR_PARS_PARK_MODEL_COMPORT_HPP
 #define ANAR_PARS_PARK_MODEL_COMPORT_HPP
 
-#include "anar/model.hpp"
+#include "model/pars-park-model.hpp"
 
 namespace anar::parspark::model {
    class ComPortModel;
    using ComPortModelPtr = std::shared_ptr<ComPortModel>;
-   class ComPortModel : public anar::model::Model {
+   class ComPortModel : public ParsParkModel {
      public:
       ComPortModel()
-          : anar::model::Model("Comport", "Comport") {
+          : ParsParkModel("Comport", "Comport") {
+      }
+      ~ComPortModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       std::string PortName;

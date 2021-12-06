@@ -7,10 +7,15 @@
 namespace anar::parspark::model {
    class PriceBoardModel;
    using PriceBoardModelPtr = std::shared_ptr<PriceBoardModel>;
-   class PriceBoardModel : public anar::model::Model {
+   class PriceBoardModel : public ParsParkModel {
      public:
       PriceBoardModel()
-          : anar::model::Model("PriceBoard") {
+          : ParsParkModel("PriceBoard") {
+      }
+      ~PriceBoardModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};
@@ -19,10 +24,15 @@ namespace anar::parspark::model {
 
    class CapacityBoardModel;
    using CapacityBoardModelPtr = std::shared_ptr<CapacityBoardModel>;
-   class CapacityBoardModel : public anar::model::Model {
+   class CapacityBoardModel : public ParsParkModel {
      public:
       CapacityBoardModel()
-          : anar::model::Model("PriceBoard") {
+          : ParsParkModel("PriceBoard") {
+      }
+      ~CapacityBoardModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};
@@ -34,10 +44,15 @@ namespace anar::parspark::model {
 
    class BoardModel;
    using BoardModelPtr = std::shared_ptr<BoardModel>;
-   class BoardModel : public anar::model::Model {
+   class BoardModel : public ParsParkModel {
      public:
       BoardModel()
-          : anar::model::Model("Board") {
+          : ParsParkModel("Board") {
+      }
+      ~BoardModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       PriceBoardModel Price;

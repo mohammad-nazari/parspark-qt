@@ -7,10 +7,10 @@ namespace anar {
    namespace parspark {
       namespace model {
 #pragma db object abstract pointer(std::shared_ptr)
-         class CreateModifyDeleteModel : public anar::model::Model {
+         class CreateModifyDeleteModel : public ParsParkModel {
            public:
             CreateModifyDeleteModel(const std::string &name, const std::string &description = "")
-                : anar::model::Model("CreateModifyDelete", "Create Modify Delete") {
+                : ParsParkModel("CreateModifyDelete", "Create Modify Delete") {
             }
 
             friend class odb::access;

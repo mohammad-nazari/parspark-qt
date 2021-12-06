@@ -5,27 +5,37 @@ project(ParsPark)
 file(STRINGS "${PROJECT_SOURCE_DIR}/libversion" SHARED_LIBRARY_VERSION)
 # Read the version information from the VERSION file
 file(STRINGS "${PROJECT_SOURCE_DIR}/VERSION" PACKAGE_VERSION)
-string(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" CPACK_PACKAGE_VERSION_MAJOR ${PACKAGE_VERSION})
-string(REGEX REPLACE "[0-9]+\\.([0-9]+)\\.[0-9]+.*" "\\1" CPACK_PACKAGE_VERSION_MINOR ${PACKAGE_VERSION})
-string(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" CPACK_PACKAGE_VERSION_PATCH ${PACKAGE_VERSION})
+string(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+\\.[0-9]+.*" "\\1" ANAR_PARS_PARK_PRODUCT_VERSION_MAJOR ${PACKAGE_VERSION})
+string(REGEX REPLACE "[0-9]+\\.([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" ANAR_PARS_PARK_PRODUCT_VERSION_MINOR ${PACKAGE_VERSION})
+string(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+)\\.[0-9]+.*" "\\1" ANAR_PARS_PARK_PRODUCT_VERSION_PATCH ${PACKAGE_VERSION})
+string(REGEX REPLACE "[0-9]+\\.[0-9]+\\.[0-9]+\\.([0-9]+.*)" "\\1" ANAR_PARS_PARK_PRODUCT_VERSION_REVISION ${PACKAGE_VERSION})
 
-set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
+set(ANAR_PARS_PARK_PRODUCT_PROJECT_VERSION ${ANAR_PARS_PARK_PRODUCT_VERSION_MAJOR}.${ANAR_PARS_PARK_PRODUCT_VERSION_MINOR}.${ANAR_PARS_PARK_PRODUCT_VERSION_PATCH}.${ANAR_PARS_PARK_PRODUCT_VERSION_REVISION})
+set(ANAR_PARS_PARK_PRODUCT_COMPANY_NAME "Anshan Rayanesh")
+set(ANAR_PARS_PARK_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/image/icon/Icon3.ico")
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+
+if (WIN32)
+    include(cmake/generate_product_version.cmake)
+    generate_product_version(
+            ProductAnarParsParkVersionFiles
+            NAME ${PROJECT_NAME}
+            VERSION_MAJOR ${ANAR_PARS_PARK_PRODUCT_VERSION_MAJOR}
+            VERSION_MINOR ${ANAR_PARS_PARK_PRODUCT_VERSION_MINOR}
+            VERSION_PATCH ${ANAR_PARS_PARK_PRODUCT_VERSION_PATCH}
+            VERSION_REVISION ${ANAR_PARS_PARK_PRODUCT_VERSION_REVISION}
+            COMPANY_NAME ${ANAR_PARS_PARK_PRODUCT_COMPANY_NAME}
+            ICON ${ANAR_PARS_PARK_PRODUCT_ICON}
+    )
+    if (CMAKE_BUILD_TYPE STREQUAL "Release")
+        set(DONT_SHOW_CONSOLE WIN32)
+    endif ()
+endif (WIN32)
 
 configure_file("config.hpp.in" "config.hpp")
 
 option(DEPLOYMENT "In development state show console for debug and see warnings and other console data" OFF)
-
-if (WIN32)
-    if (CMAKE_BUILD_TYPE STREQUAL "Release")
-        set(DONT_SHOW_CONSOLE WIN32)
-    endif ()
-endif ()
-
-set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 0)
-set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
-set(VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -42,7 +52,6 @@ set(
 set(
         PARS_PARK_SOURCES
 
-        ${CMAKE_SOURCE_DIR}/resource/rc/icon.rc
         ${CMAKE_SOURCE_DIR}/resource/qrc/qml.qrc
 
         service/qt-std-converter.cpp
@@ -61,6 +70,7 @@ set(
         service/model-binding/database/mysql/parking-log-model-odb.cxx
         service/model-binding/database/mysql/subscription-model-odb.cxx
         service/model-binding/json/from-json-visitor.cpp
+        service/model-binding/json/to-json-visitor.cpp
 
         view/view.cpp
         view/common-view.cpp
@@ -70,6 +80,7 @@ set(
 
         controller/login-controller.cpp
         controller/settings-controller.cpp
+
         nazari-test.cpp
 )
 
@@ -77,33 +88,21 @@ set(
         PARS_PARK_TEST_SOURCES
 )
 
-if (WIN32)
-    add_executable(
-            ${PROJECT_NAME}
-            ${DONT_SHOW_CONSOLE}
-            ${PARS_PARK_SOURCES}
-            main.cpp
-    )
-    #    add_executable(
-    #            ${PROJECT_NAME}_Unit_Test
-    #            ${DONT_SHOW_CONSOLE}
-    #            ${PARS_PARK_SOURCES}
-    #            ${PARS_PARK_TEST_SOURCES}
-    #            test/main.cpp
-    #    )
-else ()
-    add_executable(
-            ${PROJECT_NAME}
-            ${PARS_PARK_SOURCES}
-            main.cpp
-    )
-    #    add_executable(
-    #            ${PROJECT_NAME}_Unit_Test
-    #            ${PARS_PARK_SOURCES}
-    #            ${PARS_PARK_TEST_SOURCES}
-    #            test/main.cpp
-    #    )
-endif ()
+add_executable(
+        ${PROJECT_NAME}
+        ${DONT_SHOW_CONSOLE}
+        ${PARS_PARK_SOURCES}
+        ${ProductAnarParsParkVersionFiles}
+        main.cpp
+)
+#    add_executable(
+#            ${PROJECT_NAME}_Unit_Test
+#            ${DONT_SHOW_CONSOLE}
+#            ${PARS_PARK_SOURCES}
+#            ${PARS_PARK_TEST_SOURCES}
+#            ${ProductAnarParsParkVersionFiles}
+#            test/main.cpp
+#    )
 
 target_compile_definitions(
         ${PROJECT_NAME}

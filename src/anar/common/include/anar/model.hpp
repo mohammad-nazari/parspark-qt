@@ -7,6 +7,7 @@
 #include <string>
 
 #include "a-from-json-visitor.hpp"
+#include "a-to-json-visitor.hpp"
 
 namespace anar::model {
    class Model {
@@ -17,7 +18,7 @@ namespace anar::model {
       }
       virtual ~Model() = default;
 
-      virtual bool Accept(service::AFromJsonVisitor *visitor) {
+      virtual bool Accept(interfaces::IModelBindingVisitor *visitor) {
          return visitor->Visit(this);
       }
 

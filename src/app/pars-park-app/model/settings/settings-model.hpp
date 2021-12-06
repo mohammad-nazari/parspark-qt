@@ -15,10 +15,15 @@
 namespace anar::parspark::model {
    class SettingsModel;
    using SettingsModelPtr = std::shared_ptr<SettingsModel>;
-   class SettingsModel : public anar::model::Model {
+   class SettingsModel : public ParsParkModel {
      public:
       SettingsModel()
-          : anar::model::Model("Setting") {
+          : ParsParkModel("Setting") {
+      }
+      ~SettingsModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       AlprModel Alpr;

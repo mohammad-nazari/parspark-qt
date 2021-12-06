@@ -6,10 +6,15 @@
 namespace anar::parspark::model {
    class SoftwareModel;
    using SoftwareModelPtr = std::shared_ptr<SoftwareModel>;
-   class SoftwareModel : public anar::model::Model {
+   class SoftwareModel : public ParsParkModel {
      public:
       SoftwareModel()
-          : anar::model::Model("Software") {
+          : ParsParkModel("Software") {
+      }
+      ~SoftwareModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool ActiveEnter{false};

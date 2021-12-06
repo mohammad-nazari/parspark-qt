@@ -1,15 +1,20 @@
 #ifndef ANAR_PARS_PARK_MODEL_CAMERA_HPP
 #define ANAR_PARS_PARK_MODEL_CAMERA_HPP
 
-#include "anar/model.hpp"
+#include "model/pars-park-model.hpp"
 
 namespace anar::parspark::model {
    class CameraInfoModel;
    using CameraInfoModelPtr = std::shared_ptr<CameraInfoModel>;
-   class CameraInfoModel : public anar::model::Model {
+   class CameraInfoModel : public ParsParkModel {
      public:
       CameraInfoModel()
-          : anar::model::Model("Camera") {
+          : ParsParkModel("Camera") {
+      }
+      ~CameraInfoModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};
@@ -18,10 +23,15 @@ namespace anar::parspark::model {
 
    class CameraModel;
    using CameraModelPtr = std::shared_ptr<CameraModel>;
-   class CameraModel : public anar::model::Model {
+   class CameraModel : public ParsParkModel {
      public:
       CameraModel()
-          : anar::model::Model("Camera") {
+          : ParsParkModel("Camera") {
+      }
+      ~CameraModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       CameraInfoModel Enter;

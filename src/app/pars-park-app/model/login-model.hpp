@@ -9,16 +9,16 @@ namespace anar::parspark::model {
    class LoginModel;
    using LoginModelPtr = std::shared_ptr<LoginModel>;
    class LoginModel
-       : public anar::model::Model
-       , public anar::model::DataBaseModel
+       : public anar::model::DataBaseModel
        , public UserModel {
      public:
       LoginModel()
-          : anar::model::Model("Login", "Login") {
+          : ParsParkModel("Login", "Login") {
       }
+      ~LoginModel() override = default;
 
-      void Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
    };
 }  // namespace anar::parspark::model

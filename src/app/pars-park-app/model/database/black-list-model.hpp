@@ -14,6 +14,7 @@ namespace anar {
             BlackListModel()
                 : CreateModifyDeleteModel("BlackList", "Black List") {
             }
+            ~BlackListModel() override = default;
 
             friend class odb::access;
 #pragma db id auto column("id")

@@ -1,7 +1,7 @@
 #ifndef ANAR_PARS_PARK_MODEL_CONTACT_HPP
 #define ANAR_PARS_PARK_MODEL_CONTACT_HPP
 
-#include "anar/model.hpp"
+#include "model/pars-park-model.hpp"
 #include "odb/forward.hxx"
 
 namespace anar {
@@ -10,10 +10,10 @@ namespace anar {
          class ContactModel;
          using ContactModelPtr = std::shared_ptr<ContactModel>;
 #pragma db object table("contact") pointer(std::shared_ptr)
-         class ContactModel : public anar::model::Model {
+         class ContactModel : public ParsParkModel {
            public:
             ContactModel()
-                : anar::model::Model("Contact", "Contact") {
+                : ParsParkModel("Contact", "Contact") {
             }
 
             friend class odb::access;

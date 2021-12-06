@@ -1,15 +1,20 @@
 #ifndef ANAR_PARS_PARK_MODEL_ALPR_HPP
 #define ANAR_PARS_PARK_MODEL_ALPR_HPP
 
-#include "anar/model.hpp"
+#include "model/pars-park-model.hpp"
 
 namespace anar::parspark::model {
    class AlprByCameraModel;
    using AlprByCameraModelPtr = std::shared_ptr<AlprByCameraModel>;
-   class AlprByCameraModel : public anar::model::Model {
+   class AlprByCameraModel : public ParsParkModel {
      public:
       AlprByCameraModel()
-          : anar::model::Model("AlprByCamera", "Alpr By  Camera") {
+          : ParsParkModel("AlprByCamera", "Alpr By  Camera") {
+      }
+      ~AlprByCameraModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};
@@ -19,10 +24,15 @@ namespace anar::parspark::model {
 
    class AlprModel;
    using AlprModelPtr = std::shared_ptr<AlprModel>;
-   class AlprModel : public anar::model::Model {
+   class AlprModel : public ParsParkModel {
      public:
       AlprModel()
-          : anar::model::Model("Alpr", "Alpr") {
+          : ParsParkModel("Alpr", "Alpr") {
+      }
+      ~AlprModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};

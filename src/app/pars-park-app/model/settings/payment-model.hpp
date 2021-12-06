@@ -6,10 +6,15 @@
 namespace anar::parspark::model {
    class PaymentInfoModel;
    using PaymentInfoModelPtr = std::shared_ptr<PaymentInfoModel>;
-   class PaymentInfoModel : public anar::model::Model {
+   class PaymentInfoModel : public ParsParkModel {
      public:
       PaymentInfoModel()
-          : anar::model::Model("PaymentInfo") {
+          : ParsParkModel("PaymentInfo") {
+      }
+      ~PaymentInfoModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};
@@ -19,10 +24,15 @@ namespace anar::parspark::model {
 
    class PaymentModel;
    using PaymentModelPtr = std::shared_ptr<PaymentModel>;
-   class PaymentModel : public anar::model::Model {
+   class PaymentModel : public ParsParkModel {
      public:
       PaymentModel()
-          : anar::model::Model("Payment") {
+          : ParsParkModel("Payment") {
+      }
+      ~PaymentModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       PaymentInfoModel CitizenDevice;

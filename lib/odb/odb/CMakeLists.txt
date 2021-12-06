@@ -1,197 +1,43 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.0)
 
 project(odb VERSION 2.4.0 LANGUAGES CXX)
 
 set(
-        sources
+        ODB_SOURCES
         odb/database.cxx
-        odb/database.hxx
-        odb/database.ixx
-        odb/database.txx
-        odb/exception.hxx
         odb/exceptions.cxx
-        odb/exceptions.hxx
-        odb/forward.hxx
-        odb/function-table.hxx
-        odb/lazy-pointer-traits.hxx
-        odb/lazy-ptr.hxx
-        odb/lazy-ptr.ixx
-        odb/lazy-ptr.txx
         odb/lazy-ptr-impl.cxx
-        odb/lazy-ptr-impl.hxx
-        odb/lazy-ptr-impl.ixx
-        odb/lazy-ptr-impl.txx
-        odb/libodb-vc8.vcproj
-        odb/libodb-vc9.vcproj
-        odb/libodb-vc10.vcxproj
-        odb/libodb-vc10.vcxproj.filters
-        odb/libodb-vc11.vcxproj
-        odb/libodb-vc11.vcxproj.filters
-        odb/libodb-vc12.vcxproj
-        odb/libodb-vc12.vcxproj.filters
-        odb/no-id-object-result.hxx
-        odb/no-id-object-result.txx
-        odb/no-op-cache-traits.hxx
-        odb/nullable.hxx
-        odb/object-result.hxx
-        odb/pointer-traits.hxx
-        odb/polymorphic-info.hxx
-        odb/polymorphic-map.hxx
-        odb/polymorphic-map.ixx
-        odb/polymorphic-map.txx
-        odb/polymorphic-object-result.hxx
-        odb/polymorphic-object-result.txx
-        odb/post.hxx
-        odb/pre.hxx
         odb/prepared-query.cxx
-        odb/prepared-query.hxx
-        odb/query.hxx
         odb/query-dynamic.cxx
-        odb/query-dynamic.hxx
-        odb/query-dynamic.ixx
-        odb/query-dynamic.txx
         odb/result.cxx
-        odb/result.hxx
-        odb/result.txx
         odb/schema-catalog.cxx
-        odb/schema-catalog.hxx
-        odb/schema-catalog-impl.hxx
-        odb/schema-version.hxx
         odb/section.cxx
-        odb/section.hxx
         odb/session.cxx
-        odb/session.hxx
-        odb/session.ixx
-        odb/session.txx
-        odb/simple-object-result.hxx
-        odb/simple-object-result.txx
         odb/statement.cxx
-        odb/statement.hxx
         odb/statement-processing.cxx
-        odb/statement-processing-common.hxx
-        odb/std-array-traits.hxx
-        odb/std-deque-traits.hxx
-        odb/std-forward-list-traits.hxx
-        odb/std-list-traits.hxx
-        odb/std-map-traits.hxx
-        odb/std-set-traits.hxx
-        odb/std-unordered-map-traits.hxx
-        odb/std-unordered-set-traits.hxx
-        odb/std-vector-traits.hxx
         odb/tracer.cxx
-        odb/tracer.hxx
-        odb/traits.hxx
         odb/transaction.cxx
-        odb/transaction.hxx
-        odb/transaction.ixx
-        odb/vector.hxx
-        odb/vector.ixx
         odb/vector-impl.cxx
-        odb/vector-impl.hxx
-        odb/vector-impl.ixx
-        odb/vector-traits.hxx
-        odb/vector-traits.txx
-        odb/version.hxx
-        odb/view-image.hxx
-        odb/view-result.hxx
-        odb/view-result.txx
-        odb/wrapper-traits.hxx
-        odb/cache-traits.hxx
         odb/callback.cxx
-        odb/callback.hxx
         odb/connection.cxx
-        odb/connection.hxx
-        odb/connection.ixx
-        odb/connection.txx
-        odb/container-traits.hxx
-        odb/core.hxx
-        odb/compilers/vc/pre.hxx
-        odb/compilers/vc/post.hxx
-        odb/details/config-vc.h
-        odb/details/c-string.hxx
-        odb/details/exception.hxx
-        odb/details/export.hxx
-        odb/details/function-wrapper.hxx
-        odb/details/function-wrapper.ixx
-        odb/details/function-wrapper.txx
         odb/details/lock.cxx
-        odb/details/lock.hxx
         odb/details/mutex.cxx
-        odb/details/mutex.hxx
-        odb/details/shared-ptr.hxx
-        odb/details/shared-ptr-fwd.hxx
-        odb/details/thread.hxx
-        odb/details/tls.hxx
-        odb/details/transfer-ptr.hxx
-        odb/details/type-info.hxx
-        odb/details/unique-ptr.hxx
-        odb/details/unused.hxx
-        odb/details/wrapper-p.hxx
         odb/details/buffer.cxx
-        odb/details/buffer.hxx
         odb/details/condition.cxx
-        odb/details/condition.hxx
-        odb/details/config.hxx
-        odb/details/meta/remove-volatile.hxx
-        odb/details/meta/static-assert.hxx
-        odb/details/meta/answer.hxx
-        odb/details/meta/class-p.hxx
-        odb/details/meta/polymorphic-p.hxx
-        odb/details/meta/remove-const.hxx
-        odb/details/meta/remove-const-volatile.hxx
-        odb/details/meta/remove-pointer.hxx
-        #        odb/details/posix/condition.hxx
-        #        odb/details/posix/condition.ixx
         #        odb/details/posix/exceptions.cxx
-        #        odb/details/posix/exceptions.hxx
-        #        odb/details/posix/mutex.hxx
-        #        odb/details/posix/mutex.ixx
         #        odb/details/posix/thread.cxx
-        #        odb/details/posix/thread.hxx
-        #        odb/details/posix/thread.ixx
-        #        odb/details/posix/tls.hxx
-        #        odb/details/posix/tls.ixx
-        #        odb/details/posix/tls.txx
-        odb/details/shared-ptr/base.txx
-        odb/details/shared-ptr/counter-type.hxx
-        odb/details/shared-ptr/exception.hxx
         odb/details/shared-ptr/base.cxx
-        odb/details/shared-ptr/base.hxx
-        odb/details/shared-ptr/base.ixx
         odb/details/win32/exceptions.cxx
-        odb/details/win32/exceptions.hxx
         odb/details/win32/init.cxx
-        odb/details/win32/init.hxx
-        odb/details/win32/lock.hxx
-        odb/details/win32/mutex.hxx
-        odb/details/win32/mutex.ixx
         odb/details/win32/once.cxx
-        odb/details/win32/once.hxx
-        odb/details/win32/once.ixx
-        odb/details/win32/once-init.hxx
         odb/details/win32/thread.cxx
-        odb/details/win32/thread.hxx
         odb/details/win32/tls.cxx
-        odb/details/win32/tls.hxx
-        odb/details/win32/tls.ixx
-        odb/details/win32/tls.txx
-        odb/details/win32/tls-init.hxx
-        odb/details/win32/windows.hxx
         odb/details/win32/condition.cxx
-        odb/details/win32/condition.hxx
-        odb/details/win32/condition.ixx
         odb/details/win32/dll.cxx
-        odb/tr1/wrapper-traits.hxx
-        odb/tr1/lazy-pointer-traits.hxx
-        odb/tr1/lazy-ptr.hxx
-        odb/tr1/lazy-ptr.ixx
-        odb/tr1/lazy-ptr.txx
-        odb/tr1/memory.hxx
-        odb/tr1/pointer-traits.hxx
 )
 
 add_library(
         ${PROJECT_NAME}
         SHARED
-        ${sources}
+        ${ODB_SOURCES}
 )

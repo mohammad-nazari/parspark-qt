@@ -6,10 +6,15 @@
 namespace anar::parspark::model {
    class GateInfoModel;
    using GateInfoModelPtr = std::shared_ptr<GateInfoModel>;
-   class GateInfoModel : public anar::model::Model {
+   class GateInfoModel : public ParsParkModel {
      public:
       GateInfoModel()
-          : anar::model::Model("Gate") {
+          : ParsParkModel("Gate") {
+      }
+      ~GateInfoModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       bool Enable{false};
@@ -21,10 +26,15 @@ namespace anar::parspark::model {
 
    class GateModel;
    using GateModelPtr = std::shared_ptr<GateModel>;
-   class GateModel : public anar::model::Model {
+   class GateModel : public ParsParkModel {
      public:
       GateModel()
-          : anar::model::Model("Gate") {
+          : ParsParkModel("Gate") {
+      }
+      ~GateModel() override = default;
+
+      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
+         return modelBindingVisitor->Visit(this);
       }
 
       GateInfoModel Enter;

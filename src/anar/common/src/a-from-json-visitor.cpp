@@ -42,12 +42,11 @@ namespace anar::service {
          if (!error->Model::Accept(this)) {
             return false;
          }
-         AFromJsonVisitor* aFromJsonVisitor;
          error->Code = m_json["Code"];
-         aFromJsonVisitor = new AFromJsonVisitor(m_json["Level"]);
+         AFromJsonVisitor* aFromJsonVisitor = new AFromJsonVisitor(m_json["Level"]);
          if (!error->Level.Accept(aFromJsonVisitor)) {
             m_error = std::make_shared<model::ErrorModel>(1, constant::ErrorLevel::ANAR_HIGH_WARNING, "Error on read 'error' json data.");
-            m_error->SubErrors.emplace_back(*aFromJsonVisitor->Error());
+            m_error->SubErrors.emplace_back(*(aFromJsonVisitor->Error()));
             return false;
          }
          error->Message = m_json["Code"];

@@ -2,6 +2,21 @@ cmake_minimum_required(VERSION 3.5)
 
 project(AnarCommon)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+if (WIN32)
+    include(cmake/generate_product_version.cmake)
+    generate_product_version(
+            ProductAnarCommonVersionFiles
+            NAME AnarCommon
+            VERSION_MAJOR ${ANAR_PRODUCT_VERSION_MAJOR}
+            VERSION_MINOR ${ANAR_PRODUCT_VERSION_MINOR}
+            VERSION_PATCH ${ANAR_PRODUCT_VERSION_PATCH}
+            VERSION_REVISION ${ANAR_PRODUCT_VERSION_REVISION}
+            COMPANY_NAME ${ANAR_PRODUCT_COMPANY_NAME}
+            ICON ${ANAR_PRODUCT_ICON}
+    )
+endif (WIN32)
+
 set(
         ANAR_SOURCES
 
@@ -24,13 +39,13 @@ set(
         src/serial-port.cpp
         src/a-to-json-visitor.cpp
         src/exception.cpp
-        src/i-visitor.cpp
 )
 
 add_library(
         AnarCommon
         SHARED
         ${ANAR_SOURCES}
+        ${ProductAnarCommonVersionFiles}
 )
 add_library(
         Anar::Common

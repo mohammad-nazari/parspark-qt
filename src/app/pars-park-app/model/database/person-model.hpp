@@ -9,10 +9,10 @@ namespace anar {
          class PersonModel;
          using PersonModelPtr = std::shared_ptr<PersonModel>;
 #pragma db object table("person") pointer(std::shared_ptr)
-         class PersonModel : public anar::model::Model {
+         class PersonModel : public ParsParkModel {
            public:
             PersonModel()
-                : anar::model::Model("Person", "Person") {
+                : ParsParkModel("Person", "Person") {
             }
 
             friend class odb::access;

@@ -10,7 +10,7 @@ namespace anar::model {
           : Model("DataBase", "Database") {
       }
 
-      bool Accept(service::AFromJsonVisitor *visitor) final {
+      bool Accept(interfaces::IModelBindingVisitor *visitor) final {
          return visitor->Visit(this);
       }
 

@@ -12,7 +12,7 @@ namespace anar::model {
       }
       ~ConstantModel() override = default;
 
-      bool Accept(service::AFromJsonVisitor *visitor) override {
+      bool Accept(interfaces::IModelBindingVisitor *visitor) override {
          return visitor->Visit(this);
       }
 
