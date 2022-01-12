@@ -11,17 +11,13 @@ ApplicationWindow  {
       LoginApi.loadLoginInfo();
       return LoginApi.loginInfo;
    }
-//   LoginApi{
-//      id: LoginApi
-//      objectName: "LoginApi"
-//   }
    MessageDialog {
       id: messageDialog
       icon: StandardIcon.Critical
    }
    function doLogin(){
       LoginApi.doLogin(loginInfo)
-      if(LoginApi.done){
+      if(LoginApi.isLoggedIn){
          // Any error in save database settings in file
          if(LoginApi.error.length > 0){
             messageDialog.text = LoginApi.error;

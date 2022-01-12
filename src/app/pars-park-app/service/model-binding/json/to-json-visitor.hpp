@@ -1,15 +1,15 @@
-#ifndef ANAR_PARS_PARK_SERVICE_FROM_JSON_VISITOR_HPP
-#define ANAR_PARS_PARK_SERVICE_FROM_JSON_VISITOR_HPP
+#ifndef ANAR_PARS_PARK_SERVICE_TO_JSON_VISITOR_HPP
+#define ANAR_PARS_PARK_SERVICE_TO_JSON_VISITOR_HPP
 
-#include "anar/a-from-json-visitor.hpp"
+#include "anar/a-to-json-visitor.hpp"
 #include "interface/i-pars-park-model-binding-visitor.hpp"
 
 namespace anar::parspark::service {
-    class FromJsonVisitor
-        : public anar::service::AFromJsonVisitor
+    class ToJsonVisitor
+        : public anar::service::AToJsonVisitor
         , public interfaces::IParsParkModelBindingVisitor {
        public:
-        FromJsonVisitor(nlohmann::ordered_json &jsonNlohmann);
+        ToJsonVisitor(nlohmann::ordered_json &jsonNlohmann);
 
         bool Visit(model::ParsParkModel &parPark) final;
         bool Visit(model::UserModel &user) final;
@@ -34,7 +34,7 @@ namespace anar::parspark::service {
         bool Visit(model::SettingsModel &settings) final;
         bool Visit(model::SoftwareModel &software) final;
     };
-    using FromJsonVisitorPtr = std::shared_ptr<FromJsonVisitor>;
+    using ToJsonVisitorPtr = std::shared_ptr<ToJsonVisitor>;
 }  // namespace anar::parspark::service
 
-#endif  // ANAR_PARS_PARK_SERVICE_FROM_JSON_VISITOR_HPP
+#endif  // ANAR_PARS_PARK_SERVICE_TO_JSON_VISITOR_HPP

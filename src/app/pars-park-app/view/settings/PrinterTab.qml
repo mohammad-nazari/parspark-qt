@@ -22,8 +22,8 @@ Column{
       id: printBillGroupBoxId
       title: qsTr("Print Bill")
       checkable: true
-      checked: printerSettings.enable
-      onCheckedChanged: {printerSettings.enable = checked}
+      checked: printerSettings.Enable
+      onCheckedChanged: {printerSettings.Enable = checked}
       Column{
          padding: 5
          spacing: 5
@@ -33,8 +33,8 @@ Column{
             labelText: qsTr("Custom Text:")
             textFieldWidth: 480
             placeholderTextText: qsTr("Input custom text")
-            textFieldText: printerSettings.title
-            onTextFieldTextChanged: {printerSettings.title = textFieldText}
+            textFieldText: printerSettings.Title
+            onTextFieldTextChanged: {printerSettings.Title = textFieldText}
          }
          CommonComboBox{
             id: printersComboBoxId
@@ -42,8 +42,8 @@ Column{
             labelText: qsTr("Printers:")
             comboBoxWidth: 300
             comboBoxModel: printerModel
-            comboBoxCurrentText: printerSettings.name
-            onComboBoxCurrentTextChanged: {printerSettings.name = comboBoxCurrentText}
+            comboBoxCurrentText: printerSettings.PrinterName
+            onComboBoxCurrentTextChanged: {printerSettings.PrinterName = comboBoxCurrentText}
          }
          CommonButton{
             id: testPrinterButtonId

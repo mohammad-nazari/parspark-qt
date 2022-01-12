@@ -13,17 +13,17 @@ namespace anar::model {
 namespace anar::interfaces {
    class IModelBindingVisitor {
      public:
-      virtual bool Visit(model::Model *model) = 0;
-      virtual bool visit(model::ConstantModel *constant) = 0;
-      virtual bool visit(model::ErrorModel *error) = 0;
-      virtual bool Visit(model::DataBaseModel *dataBase) = 0;
+      virtual bool Visit(model::Model &model) = 0;
+      virtual bool visit(model::ConstantModel &constant) = 0;
+      virtual bool visit(model::ErrorModel &error) = 0;
+      virtual bool Visit(model::DataBaseModel &dataBase) = 0;
 
-      [[nodiscard]] std::shared_ptr<model::ErrorModel> Error() const{
+      [[nodiscard]] std::shared_ptr<model::ErrorModel> Error() const {
          return m_error;
       }
 
      protected:
-      std::shared_ptr<model::ErrorModel> m_error{nullptr};
+      std::shared_ptr<model::ErrorModel> m_error;
    };
 }  // namespace anar::interfaces
 

@@ -22,8 +22,8 @@ namespace anar::parspark::model {
       }
       ~SettingsModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       AlprModel Alpr;

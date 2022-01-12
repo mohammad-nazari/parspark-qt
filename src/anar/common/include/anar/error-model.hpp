@@ -4,8 +4,8 @@
 #include <utility>
 #include <vector>
 
-#include "anar/model.hpp"
 #include "anar/error-const.hpp"
+#include "anar/model.hpp"
 
 namespace anar::model {
    class ErrorModel : public Model {
@@ -18,8 +18,8 @@ namespace anar::model {
       }
       ~ErrorModel() override = default;
 
-      bool Accept(interfaces::IModelBindingVisitor* visitor) override {
-         return visitor->Visit(this);
+      bool Accept(interfaces::IModelBindingVisitor& visitor) final {
+         return visitor.Visit(*this);
       }
 
       uint64_t Code{0};
@@ -27,5 +27,6 @@ namespace anar::model {
       std::string Message;
       std::vector<ErrorModel> SubErrors{};
    };
+   using ErrorModelPtr = std::shared_ptr<ErrorModel>;
 }  // namespace anar::model
 #endif  // ANAR_MODEL_ERROR_HPP

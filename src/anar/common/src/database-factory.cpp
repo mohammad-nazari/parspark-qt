@@ -10,7 +10,7 @@ namespace anar::database {
         }}};
 
    DatabasePtr DatabaseFactory::Create(const std::string& engineName, const model::DataBaseModel& dataBaseModel) {
-      if (_databases.find(engineName) != _databases.end()) {
+      if (_databases.find(engineName) == _databases.end()) {
          return nullptr;
       }
       return _databases.at(engineName)(dataBaseModel);

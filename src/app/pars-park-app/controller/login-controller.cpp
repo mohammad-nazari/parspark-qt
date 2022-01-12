@@ -4,50 +4,63 @@
 #include <Poco/MD5Engine.h>
 
 #include <iostream>
+#include <odb/query.hxx>
 
-#include "anar/string.hpp"
+#include "anar/database-const.hpp"
+#include "anar/database-factory.hpp"
+#include "anar/error-manager.hpp"
 #include "anar/mysql-database.hpp"
-#include "service/model-binding/database/mysql/person-model-odb.hxx"
+#include "anar/string.hpp"
+#include "model/database/user-model.hpp"
+#include "service/model-binding/database/mysql/user-model-odb.hxx"
 #include "service/s-settings.hpp"
 
 namespace anar::parspark::controller {
-   LoginControllerPtr LoginController::Create() {
-      return std::make_shared<LoginController>();
-   }
-   LoginController::LoginController()
-       : Controller() {
-   }
+    LoginControllerPtr LoginController::Create() {
+        return std::make_shared<LoginController>();
+    }
+    LoginController::LoginController()
+        : Controller() {
+    }
 
-   bool LoginController::DoLogin(const model::LoginModel& login) {
-      bool isLoggedIn{false};
-//      std::string passWord = common::String::MD5(login->PassWord());
-//      database::MysqlDataBase db(login->DataBase());
-      try {
-//         if (db.Connect()) {
-//            odb::query<users> query(odb::query<users>::username == login->UserName() && odb::query<users>::password == passWord);
-//            std::vector<users> userList = db.Select<users>(query);
-//            isLoggedIn = !userList.empty();
-//            if (!isLoggedIn) {
-//               m_error = "User name '" + login->UserName() + "' or password '" + login->PassWord() + "(" + passWord + ")' is incorrect";
-//            }
-//         } else {
-//            m_error = "Incorrect database information";
-//         }
-      } catch (std::exception& exception) {
-         isLoggedIn = false;
-//         m_error = "DB Error: " + std::string(exception.what());
-      }
-      return isLoggedIn;
-   }
-   bool LoginController::SaveDataBaseSettings(const anar::model::DataBaseModel& dataBase) {
-      service::SSettings::Instance()->DataBase(dataBase);
-      auto isSaved = service::SSettings::Instance()->Save();
-      if (!isSaved) {
-//         m_error = service::SSettings::Instance()->Error();
-      }
-      return isSaved;
-   }
-   anar::model::DataBaseModel LoginController::LoadLoginSetting() {
-      return service::SSettings::Instance()->DataBase();
-   }
-}  // namespace anar::controller
+    bool LoginController::DoLogin(const model::LoginModel& login) {
+        try {
+            anar::service::ErrorManager::ResetError(m_error);
+            std::string passWord = ::anar::service::String::SHA512(login.PassWord);
+            ::anar::database::DatabasePtr db = ::anar::database::DatabaseFactory::Create(::anar::constant::DatabaseEngines::ANAR_MYSQL.Name, login);
+            if (db) {
+                if (db->Connect()) {
+                    odb::query<model::UserModel> query(odb::query<model::UserModel>::UserName == login.UserName && odb::query<model::UserModel>::PassWord == passWord);
+                    std::vector<model::UserModel> userList;
+                    if (db->Select<model::UserModel>(query, userList)) {
+                        if (userList.empty()) {
+                            m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR,
+                                                                                   "User name '" + login.UserName + "' or password '" + login.PassWord + "(" + passWord + ")' is incorrect.");
+                        }
+                    } else {
+                        m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "Database Error");
+                        m_error.SubErrors.emplace_back(db->Error());
+                    }
+                } else {
+                    m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "Incorrect database information");
+                }
+            } else {
+                m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "Incorrect database information");
+            }
+        } catch (std::exception& exception) {
+            m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "DB Error: " + std::string(exception.what()));
+        }
+        return ::anar::service::ErrorManager::HaveNoError(m_error);
+    }
+    bool LoginController::SaveDataBaseSettings(const ::anar::model::DataBaseModel& dataBase) {
+        anar::service::ErrorManager::ResetError(m_error);
+        service::SSettings::Instance()->DataBase(dataBase);
+        if (!service::SSettings::Instance()->Save()) {
+            m_error = service::SSettings::Instance()->Error();
+        }
+        return ::anar::service::ErrorManager::HaveNoError(m_error);
+    }
+    ::anar::model::DataBaseModel LoginController::LoadLoginSetting() {
+        return service::SSettings::Instance()->DataBase();
+    }
+}  // namespace anar::parspark::controller

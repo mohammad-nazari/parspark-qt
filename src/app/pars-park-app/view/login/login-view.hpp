@@ -14,6 +14,7 @@ namespace anar::parspark::view {
       Q_OBJECT
       Q_DISABLE_COPY(LoginView)
       Q_PROPERTY(QVariantMap loginInfo MEMBER m_loginInfo NOTIFY loginInfoChanged)
+      Q_PROPERTY(bool isLoggedIn MEMBER m_isLoggedIn NOTIFY isLoggedIn)
 
      public:
       static LoginView* QmlInstance(QQmlEngine* engine, QJSEngine* scriptEngine);
@@ -32,6 +33,7 @@ namespace anar::parspark::view {
 
      signals:
       void loginInfoChanged(QVariantMap loginInfo);
+      void isLoggedIn();
 
      public slots:
       void loadLoginInfo();

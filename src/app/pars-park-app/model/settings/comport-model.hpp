@@ -13,8 +13,8 @@ namespace anar::parspark::model {
       }
       ~ComPortModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       std::string PortName;

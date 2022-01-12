@@ -17,8 +17,8 @@ namespace anar::parspark::model {
       }
       ~LoginModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
    };
 }  // namespace anar::parspark::model

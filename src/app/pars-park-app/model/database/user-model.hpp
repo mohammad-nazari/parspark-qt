@@ -17,8 +17,8 @@ namespace anar {
                 : ParsParkModel("User", "User") {
             }
 
-            bool Accept(interfaces::IParsParkModelBindingVisitor* modelBindingVisitor) override {
-               return modelBindingVisitor->Visit(this);
+            bool Accept(interfaces::IParsParkModelBindingVisitor & modelBindingVisitor) override {
+               return modelBindingVisitor.Visit(*this);
             }
 
             friend class odb::access;

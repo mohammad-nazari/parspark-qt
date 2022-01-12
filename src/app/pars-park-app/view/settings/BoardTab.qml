@@ -14,22 +14,22 @@ Row{
       id: sendPriceGroupBoxId
       title: qsTr("Send Price")
       checkable: true
-      checked: boardSettings.price.enable
-      onCheckedChanged: {boardSettings.price.enable = checked}
+      checked: boardSettings.PriceBoard.Enable
+      onCheckedChanged: {boardSettings.PriceBoard.Enable = checked}
       CommonCOMPort {
          id: priceBoardCompPortId
-         address: boardSettings.price.address.portName
-         onAddressChanged: {boardSettings.price.address.portName = address}
-         baudRate: boardSettings.price.address.baudRate
-         onBaudRateChanged: {boardSettings.price.address.baudRate = baudRate}
+         address: boardSettings.PriceBoard.Address.PortName
+         onAddressChanged: {boardSettings.PriceBoard.Address.PortName = address}
+         baudRate: boardSettings.PriceBoard.Address.BaudRate
+         onBaudRateChanged: {boardSettings.PriceBoard.Address.BaudRate = baudRate}
       }
    }
    GroupBox {
       id: sendCapacityGroupBoxId
       title: qsTr("Send Capacity")
       checkable: true
-      checked: boardSettings.capacity.enable
-      onCheckedChanged: {boardSettings.capacity.enable = checked}
+      checked: boardSettings.CapacityBoard.Enable
+      onCheckedChanged: {boardSettings.CapacityBoard.Enable = checked}
       Column {
          padding: 5
          spacing: 5
@@ -42,17 +42,17 @@ Row{
             RadioButton{
                id: sendCapacityToBoardRadioButtonId
                text: qsTr("To board")
-               checked: boardSettings.capacity.sendToBoard
-               onCheckedChanged: {boardSettings.capacity.sendToBoard = checked}
+               checked: boardSettings.CapacityBoard.SendToBoard
+               onCheckedChanged: {boardSettings.CapacityBoard.SendToBoard = checked}
                exclusiveGroup: capacityOptions
             }
             CommonCOMPort {
                id: capacityBoardCompPortId
                enabled: sendCapacityToBoardRadioButtonId.checked
-               address: boardSettings.capacity.address.portName
-               onAddressChanged: {boardSettings.capacity.address.portName = address}
-               baudRate: boardSettings.capacity.address.baudRate
-               onBaudRateChanged: {boardSettings.capacity.address.baudRate = baudRate}
+               address: boardSettings.CapacityBoard.ComPortAddress.PortName
+               onAddressChanged: {boardSettings.CapacityBoard.ComPortAddress.PortName = address}
+               baudRate: boardSettings.CapacityBoard.Address.BaudRate
+               onBaudRateChanged: {boardSettings.CapacityBoard.Address.BaudRate = baudRate}
             }
          }
          Column {
@@ -61,8 +61,8 @@ Row{
             RadioButton{
                id: sendCapacityToServerRadioButtonId
                text: qsTr("To server")
-               checked: !boardSettings.capacity.sendToBoard
-               onCheckedChanged: {boardSettings.capacity.sendToBoard = !checked}
+               checked: !boardSettings.CapacityBoard.SendToBoard
+               onCheckedChanged: {boardSettings.CapacityBoard.SendToBoard = !checked}
                exclusiveGroup: capacityOptions
             }
             Column {
@@ -71,10 +71,10 @@ Row{
                spacing: 2
                CommonServer{
                   id: serverId
-                  address: boardSettings.capacity.serverAddress.address
-                  onAddressChanged: {boardSettings.capacity.serverAddress.address = address}
-                  port: boardSettings.capacity.serverAddress.port
-                  onPortChanged: {boardSettings.capacity.serverAddress.port = port}
+                  address: boardSettings.CapacityBoard.ServerAddress.Address
+                  onAddressChanged: {boardSettings.CapacityBoard.ServerAddress.Address = address}
+                  port: boardSettings.CapacityBoard.ServerAddress.Port
+                  onPortChanged: {boardSettings.CapacityBoard.ServerAddress.Port = port}
                }
                CommonTextField {
                   id: parkingNameTextFieldId
@@ -82,8 +82,8 @@ Row{
                   labelWidth: 100
                   placeholderTextText: qsTr("Enter parking name")
                   textFieldWidth: 200
-                  textFieldText: boardSettings.capacity.parkingName
-                  onTextFieldTextChanged: {boardSettings.capacity.parkingName = textFieldText}
+                  textFieldText: boardSettings.CapacityBoard.ParkingName
+                  onTextFieldTextChanged: {boardSettings.CapacityBoard.ParkingName = textFieldText}
                }
             }
          }

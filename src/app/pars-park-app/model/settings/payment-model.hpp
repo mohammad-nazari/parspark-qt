@@ -13,12 +13,12 @@ namespace anar::parspark::model {
       }
       ~PaymentInfoModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       bool Enable{false};
-      ComPortModel Address;
+      ComPortModel ComPortAddress;
       bool SendDirect{false};
    };
 
@@ -31,8 +31,8 @@ namespace anar::parspark::model {
       }
       ~PaymentModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       PaymentInfoModel CitizenDevice;

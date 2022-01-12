@@ -1,7 +1,7 @@
 #include "anar/json-parser.hpp"
 
 namespace anar::service {
-   model::ErrorModel JsonParserService::FromJson(model::Model& model, json_nlohmann& json) {
+   model::ErrorModel JsonParserService::FromJson(model::Model& model, nlohmann::ordered_json& json) {
       model::ErrorModel errorModelResult;
       try {
          model.UUId = json["uuid"];
@@ -15,7 +15,7 @@ namespace anar::service {
       }
       return errorModelResult;
    }
-   model::ErrorModel JsonParserService::ToJson(const model::Model& model, json_nlohmann& json) {
+   model::ErrorModel JsonParserService::ToJson(const model::Model& model, nlohmann::ordered_json& json) {
       model::ErrorModel errorModelResult;
       try {
          json["uuid"] = model.UUId;
@@ -30,7 +30,7 @@ namespace anar::service {
       return errorModelResult;
    }
 
-   model::ErrorModel JsonParserService::FromJson(model::ConstantModel& constantModel, json_nlohmann& json) {
+   model::ErrorModel JsonParserService::FromJson(model::ConstantModel& constantModel, nlohmann::ordered_json& json) {
       model::ErrorModel errorModelResult = FromJson((model::Model&)constantModel, json);
       if (errorModelResult.Code < 1) {
          return errorModelResult;
@@ -45,7 +45,7 @@ namespace anar::service {
       }
       return errorModelResult;
    }
-   model::ErrorModel JsonParserService::ToJson(const model::ConstantModel& constantModel, json_nlohmann& json) {
+   model::ErrorModel JsonParserService::ToJson(const model::ConstantModel& constantModel, nlohmann::ordered_json& json) {
       model::ErrorModel errorModelResult = ToJson((model::Model&)constantModel, json);
       if (errorModelResult.Code < 1) {
          return errorModelResult;
@@ -61,7 +61,7 @@ namespace anar::service {
       return errorModelResult;
    }
 
-   model::ErrorModel JsonParserService::FromJson(model::ErrorModel& errorModel, json_nlohmann& json) {
+   model::ErrorModel JsonParserService::FromJson(model::ErrorModel& errorModel, nlohmann::ordered_json& json) {
       model::ErrorModel errorModelResult = FromJson((model::Model&)errorModel, json);
       if (errorModelResult.Code < 1) {
          return errorModelResult;
@@ -88,7 +88,7 @@ namespace anar::service {
       }
       return errorModelResult;
    }
-   model::ErrorModel JsonParserService::ToJson(const model::ErrorModel& errorModel, json_nlohmann& json) {
+   model::ErrorModel JsonParserService::ToJson(const model::ErrorModel& errorModel, nlohmann::ordered_json& json) {
       model::ErrorModel errorModelResult = FromJson((model::Model&)errorModel, json);
       if (errorModelResult.Code < 1) {
          return errorModelResult;
@@ -97,7 +97,7 @@ namespace anar::service {
          json["code"] = errorModel.Code;
          ToJson(errorModel.Level, json["level"]);
          json["message"] = errorModel.Message;
-         json_nlohmann jsonTemp = json_nlohmann::object();
+         nlohmann::ordered_json jsonTemp = nlohmann::ordered_json::object();
          for (const auto& subError : errorModel.SubErrors) {
             errorModelResult = ToJson(subError, jsonTemp);
             if (errorModelResult.Code < 1) {

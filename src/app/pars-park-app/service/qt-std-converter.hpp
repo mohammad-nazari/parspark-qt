@@ -22,10 +22,10 @@ namespace anar::parspark::service {
       static std::vector<std::string> QStringListToVector(const QStringList& qVector);
       static QStringList VectorToQStringList(const std::vector<std::string>& stdVector);
 
-      static QVariant JsonToQVariant(const json_nlohmann& json);
-      static json_nlohmann QVariantToJson(const QVariant& qVariant);
-      static QVariantMap JsonToQVariantMap(const json_nlohmann& json);
-      static json_nlohmann QVariantMapToJson(const QVariantMap& qVariantMap);
+      static QVariant JsonToQVariant(const nlohmann::ordered_json& json);
+      static nlohmann::ordered_json QVariantToJson(const QVariant& qVariant);
+      static QVariantMap JsonToQVariantMap(const nlohmann::ordered_json& json);
+      static nlohmann::ordered_json QVariantMapToJson(const QVariantMap& qVariantMap);
    };
    template <typename Temp>
    std::vector<Temp> QtStdConverter::QVectorToVector(const QVector<Temp>& qVector) {

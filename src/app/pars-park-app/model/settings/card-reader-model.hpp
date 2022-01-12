@@ -13,12 +13,12 @@ namespace anar::parspark::model {
       }
       ~CardReaderModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
-      ComPortModel Enter;
-      ComPortModel Exit;
+      ComPortModel EnterCardReader;
+      ComPortModel ExitCardReader;
    };
 }  // namespace anar::parspark::model
 #endif  // ANAR_PARS_PARK_MODEL_CARD_READER_HPP

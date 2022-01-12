@@ -17,14 +17,14 @@ Row{
          CheckBox{
             id: activeEnterSectionCheckBoxId
             text: qsTr("Active enter section")
-            checked: softwareSettings.activeEnter
-            onCheckedChanged: {softwareSettings.activeEnter = checked}
+            checked: softwareSettings.ActiveEnter
+            onCheckedChanged: {softwareSettings.ActiveEnter = checked}
          }
          CheckBox{
             id: activeExitSectionCheckBoxId
             text: qsTr("Active exit section")
-            checked: softwareSettings.activeExit
-            onCheckedChanged: {softwareSettings.activeExit = checked}
+            checked: softwareSettings.ActiveExit
+            onCheckedChanged: {softwareSettings.ActiveExit = checked}
          }
       }
    }
@@ -43,8 +43,8 @@ Row{
                id: serverSoftwareTypeRadioButtonId
                text: qsTr("Server type")
                exclusiveGroup: softwareTypeOptions
-               checked: softwareSettings.asServer
-               onCheckedChanged: {softwareSettings.asServer = checked}
+               checked: softwareSettings.IsServer
+               onCheckedChanged: {softwareSettings.IsServer = checked}
             }
             CommonSpinBox{
                id: portNumberSpinBoxId
@@ -53,8 +53,8 @@ Row{
                labelWidth: 100
                minimumValueValue: 1
                maximumValueValue: 65535
-               spinBoxValue: softwareSettings.port
-               onSpinBoxValueChanged: {softwareSettings.port = spinBoxValue}
+               spinBoxValue: softwareSettings.Port
+               onSpinBoxValueChanged: {softwareSettings.Port = spinBoxValue}
             }
          }
          Column{
@@ -64,16 +64,16 @@ Row{
                id: clientSoftwareTypeRadioButtonId
                text: qsTr("Client type")
                exclusiveGroup: softwareTypeOptions
-               checked: !softwareSettings.asServer
-               onCheckedChanged: {softwareSettings.asServer = !checked}
+               checked: !softwareSettings.IsServer
+               onCheckedChanged: {softwareSettings.IsServer = !checked}
             }
             CommonServer {
                id: serverId
                enabled: clientSoftwareTypeRadioButtonId.checked
-               address: softwareSettings.serverAddress.address
-               onAddressChanged: {softwareSettings.serverAddress.address = address}
-               port: softwareSettings.serverAddress.port
-               onPortChanged: {softwareSettings.serverAddress.port = port}
+               address: softwareSettings.ServerAddress.Address
+               onAddressChanged: {softwareSettings.ServerAddress.Address = address}
+               port: softwareSettings.ServerAddress.Port
+               onPortChanged: {softwareSettings.ServerAddress.Port = port}
             }
          }
       }

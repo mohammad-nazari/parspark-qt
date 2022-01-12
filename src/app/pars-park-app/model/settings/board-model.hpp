@@ -14,8 +14,8 @@ namespace anar::parspark::model {
       }
       ~PriceBoardModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       bool Enable{false};
@@ -31,13 +31,13 @@ namespace anar::parspark::model {
       }
       ~CapacityBoardModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       bool Enable{false};
       bool SendToBoard{true};  // Opposite of m_sendToServer
-      ComPortModel Address;
+      ComPortModel ComPortAddress;
       ServerModel ServerAddress;
       std::string ParkingName{"Parking"};
    };
@@ -51,12 +51,12 @@ namespace anar::parspark::model {
       }
       ~BoardModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
-      PriceBoardModel Price;
-      CapacityBoardModel Capacity;
+      PriceBoardModel PriceBoard;
+      CapacityBoardModel CapacityBoard;
    };
 }  // namespace anar::parspark::model
 #endif  // ANAR_PARS_PARK_MODEL_BOARD_HPP

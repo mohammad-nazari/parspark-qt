@@ -208,5 +208,10 @@ add_subdirectory("${PARS_PARK_GOOGLE_TEST_DIR}")
 add_subdirectory("${PARS_PARK_ANAR_LIB_DIR}")
 add_subdirectory("${PARS_PARK_PARS_PARK_APP_DIR}")
 
+file(
+        MAKE_DIRECTORY
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/logs
+)
+
 #d:\Tools\ODB\odb-compiler\bin\odb.exe -d mysql --generate-query --generate-schema --std c++11 person.hxx
 #d:\Tools\ODB\odb-compiler\bin\odb.exe --std c++11 --database mysql --generate-schema --generate-query --hxx-prologue "#include \"traits.hxx\""  --table-prefix mapping_ person.hxx

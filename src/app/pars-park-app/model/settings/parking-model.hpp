@@ -19,8 +19,8 @@ namespace anar::parspark::model {
       }
       ~TariffModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor* modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor& modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       uint8_t FromHour{7};
@@ -38,8 +38,8 @@ namespace anar::parspark::model {
       }
       ~ParkingModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor* modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor& modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       std::string ParkingName{"My Parking"};

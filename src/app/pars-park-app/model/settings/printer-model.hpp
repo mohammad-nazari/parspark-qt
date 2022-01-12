@@ -13,11 +13,12 @@ namespace anar::parspark::model {
       }
       ~PrinterModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       bool Enable{false};
+      std::string PrinterName;
       std::string Title{"In the name of GOD"};
    };
 }  // namespace anar::parspark::model

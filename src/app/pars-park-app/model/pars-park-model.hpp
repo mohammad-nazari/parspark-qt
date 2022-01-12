@@ -10,8 +10,8 @@ namespace anar::parspark::model {
       ParsParkModel(const std::string &name, const std::string &description = "")
           : anar::model::Model(name, description) {
       }
-      virtual bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) {
-         return false;
+      virtual bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) {
+         return modelBindingVisitor.Visit(*this);
       }
    };
 }  // namespace anar::parspark::model

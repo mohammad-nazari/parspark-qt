@@ -12,11 +12,6 @@ ApplicationWindow  {
       return SettingApi.settingsInfo
    }
    property bool closing: false
-
-//   SettingApi{
-//      id: SettingApi
-//      objectName: "SettingApi"
-//   }
    MessageDialog {
       id: messageDialog
       icon: StandardIcon.Critical
@@ -24,27 +19,19 @@ ApplicationWindow  {
    }
    function saveSettings(){
       SettingApi.saveSettings(settingsInfo)
-      if(SettingApi.done){
-         // Any error in save database settings in file
-         if(SettingApi.error.length > 0){
-            messageDialog.text = SettingApi.error;
-            messageDialog.title =  qsTr("Error on save settings")
-            messageDialog.visible = true;
-            messageDialog.icon = StandardIcon.Warning
-         }
-         else{
-            messageDialog.text = qsTr("Settings saved successfully")
-            messageDialog.title =  qsTr("Save settings")
-            messageDialog.visible = true;
-            messageDialog.icon = StandardIcon.Information
-         }
-      }
-      else{
-         messageDialog.text = SettingApi.error;
-         messageDialog.title =  qsTr("Save settings failed")
-         messageDialog.visible = true;
-         messageDialog.icon = StandardIcon.Warning
-      }
+     // Any error in save database settings in file
+     if(SettingApi.error.length > 0){
+        messageDialog.text = SettingApi.error;
+        messageDialog.title =  qsTr("Error on save settings")
+        messageDialog.visible = true;
+        messageDialog.icon = StandardIcon.Warning
+     }
+     else{
+        messageDialog.text = qsTr("Settings saved successfully")
+        messageDialog.title =  qsTr("Save settings")
+        messageDialog.visible = true;
+        messageDialog.icon = StandardIcon.Information
+     }
       closing = true;
    }
    onClosing: {
@@ -134,34 +121,34 @@ ApplicationWindow  {
          height: parent.height - tabBarId.height
          currentIndex: tabBarId.currentIndex
          ParkingInfoTab{
-            parkingSettings: settingsInfo.parking
+            parkingSettings: settingsInfo.Parking
          }
          ALPRTab{
-            alprSettings: settingsInfo.alpr
+            alprSettings: settingsInfo.Alpr
          }
          DataBaseTab{
-            dataBaseSettings: settingsInfo.dataBase
+            dataBaseSettings: settingsInfo.DataBase
          }
          CameraTab{
-            cameraSettings: settingsInfo.camera
+            cameraSettings: settingsInfo.Camera
          }
          PrinterTab{
-            printerSettings: settingsInfo.printer
+            printerSettings: settingsInfo.Printer
          }
          CardReaderTab{
-            cardReaderSettings: settingsInfo.cardReader
+            cardReaderSettings: settingsInfo.CardReader
          }
          SoftwareTab{
-            softwareSettings: settingsInfo.software
+            softwareSettings: settingsInfo.Software
          }
          GateTab{
-            gateSettings: settingsInfo.gate
+            gateSettings: settingsInfo.Gate
          }
          BoardTab{
-            boardSettings: settingsInfo.board
+            boardSettings: settingsInfo.Board
          }
          PaymentTab{
-            paymentSettings: settingsInfo.payment
+            paymentSettings: settingsInfo.Payment
          }
       }
       //        CommonButton{

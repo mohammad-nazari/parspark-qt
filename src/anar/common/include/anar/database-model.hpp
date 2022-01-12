@@ -10,8 +10,8 @@ namespace anar::model {
           : Model("DataBase", "Database") {
       }
 
-      bool Accept(interfaces::IModelBindingVisitor *visitor) final {
-         return visitor->Visit(this);
+      bool Accept(interfaces::IModelBindingVisitor &visitor) final {
+         return visitor.Visit(*this);
       }
 
       std::string EngineName{};

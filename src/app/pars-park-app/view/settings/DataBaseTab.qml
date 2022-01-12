@@ -15,8 +15,8 @@ Column{
       labelWidth: 100
       placeholderTextText:qsTr("Input database server address")
       textFieldWidth: 500
-      textFieldText: dataBaseSettings.hostAddress
-      onTextFieldTextChanged: {dataBaseSettings.hostAddress = textFieldText}
+      textFieldText: dataBaseSettings.HostAddress
+      onTextFieldTextChanged: {dataBaseSettings.HostAddress = textFieldText}
    }
    CommonTextField {
       id: serverUserTextFieldId
@@ -24,8 +24,8 @@ Column{
       labelWidth: 100
       placeholderTextText:qsTr("Input database server user name")
       textFieldWidth: 500
-      textFieldText: dataBaseSettings.userName
-      onTextFieldTextChanged: {dataBaseSettings.userName = textFieldText}
+      textFieldText: dataBaseSettings.DBUserName
+      onTextFieldTextChanged: {dataBaseSettings.DBUserName = textFieldText}
    }
    CommonTextField {
       id: serverPasswordTextFieldId
@@ -34,8 +34,8 @@ Column{
       placeholderTextText:qsTr("Input database server user password")
       textFieldWidth: 500
       textFieldEchoMode: TextInput.Password
-      textFieldText: dataBaseSettings.passWord
-      onTextFieldTextChanged: {dataBaseSettings.passWord = textFieldText}
+      textFieldText: dataBaseSettings.DBPassWord
+      onTextFieldTextChanged: {dataBaseSettings.DBPassWord = textFieldText}
    }
    CommonSpinBox {
       id: serverPortSpinBoxId
@@ -43,8 +43,8 @@ Column{
       labelWidth: 100
       minimumValueValue: 1
       maximumValueValue: 65535
-      spinBoxValue: dataBaseSettings.port
-      onSpinBoxValueChanged: {dataBaseSettings.port = spinBoxValue}
+      spinBoxValue: dataBaseSettings.Port
+      onSpinBoxValueChanged: {dataBaseSettings.Port = spinBoxValue}
    }
    CommonTextField {
       id: serverDBNameTextFieldId
@@ -52,8 +52,8 @@ Column{
       labelWidth: 100
       placeholderTextText:qsTr("Input database name")
       textFieldWidth: 500
-      textFieldText: dataBaseSettings.databaseName
-      onTextFieldTextChanged: {dataBaseSettings.databaseName = textFieldText}
+      textFieldText: dataBaseSettings.DatabaseName
+      onTextFieldTextChanged: {dataBaseSettings.DatabaseName = textFieldText}
    }
    CommonButton{
       id: testDbButtonId

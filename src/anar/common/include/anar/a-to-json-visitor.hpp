@@ -7,15 +7,15 @@
 namespace anar::service {
    class AToJsonVisitor : virtual public interfaces::IModelBindingVisitor {
      public:
-      AToJsonVisitor(json_nlohmann &jsonNlohmann);
+      AToJsonVisitor(nlohmann::ordered_json &jsonNlohmann);
 
-      bool Visit(model::Model *model) final;
-      bool visit(model::ConstantModel *constant) final;
-      bool visit(model::ErrorModel *error) final;
-      bool Visit(model::DataBaseModel *dataBase) final;
+      bool Visit(model::Model &model) final;
+      bool visit(model::ConstantModel &constant) final;
+      bool visit(model::ErrorModel &error) final;
+      bool Visit(model::DataBaseModel &dataBase) final;
 
      protected:
-      json_nlohmann &m_json;
+      nlohmann::ordered_json &m_json;
    };
 }  // namespace anar::service
 

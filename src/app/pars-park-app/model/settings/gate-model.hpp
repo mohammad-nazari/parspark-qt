@@ -13,12 +13,12 @@ namespace anar::parspark::model {
       }
       ~GateInfoModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       bool Enable{false};
-      ComPortModel Address;
+      ComPortModel ComPortAddress;
       bool OpenAuto{true};
       bool CloseAuto{true};
       uint16_t CloseAfter{15};
@@ -33,12 +33,12 @@ namespace anar::parspark::model {
       }
       ~GateModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
-      GateInfoModel Enter;
-      GateInfoModel Exit;
+      GateInfoModel EnterGate;
+      GateInfoModel ExitGate;
    };
 }  // namespace anar::parspark::model
 #endif  // ANAR_PARS_PARK_MODEL_GATE_HPP

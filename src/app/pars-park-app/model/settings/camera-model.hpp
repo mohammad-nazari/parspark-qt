@@ -13,8 +13,8 @@ namespace anar::parspark::model {
       }
       ~CameraInfoModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
       bool Enable{false};
@@ -30,12 +30,12 @@ namespace anar::parspark::model {
       }
       ~CameraModel() override = default;
 
-      bool Accept(interfaces::IParsParkModelBindingVisitor *modelBindingVisitor) final {
-         return modelBindingVisitor->Visit(this);
+      bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) final {
+         return modelBindingVisitor.Visit(*this);
       }
 
-      CameraInfoModel Enter;
-      CameraInfoModel Exit;
+      CameraInfoModel EnterCamera;
+      CameraInfoModel ExitCamera;
    };
 }  // namespace anar::parspark::model
 #endif  // ANAR_PARS_PARK_MODEL_CAMERA_HPP

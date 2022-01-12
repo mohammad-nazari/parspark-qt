@@ -19,8 +19,8 @@ Column{
             labelWidth: 100
             placeholderTextText:qsTr("Input parking name")
             textFieldWidth: 480
-            textFieldText: parkingSettings.parkingName
-            onTextFieldTextChanged: {parkingSettings.parkingName = textFieldText}
+            textFieldText: parkingSettings.ParkingName
+            onTextFieldTextChanged: {parkingSettings.ParkingName = textFieldText}
             textFieldValidator: RegExpValidator { regExp: /^[0-9A-F]{5,20}$/ }
          }
          CommonSpinBox {
@@ -29,8 +29,8 @@ Column{
             labelWidth: 100
             minimumValueValue: 1
             maximumValueValue: 99999
-            spinBoxValue: parkingSettings.capacity
-            onSpinBoxValueChanged: {parkingSettings.capacity = spinBoxValue}
+            spinBoxValue: parkingSettings.Capacity
+            onSpinBoxValueChanged: {parkingSettings.Capacity = spinBoxValue}
          }
       }
    }
@@ -43,11 +43,11 @@ Column{
             labelText: qsTr("From(Hour):")
             labelWidth: 75
             maximumValue: 23
-            comboBoxCurrentValue: parkingSettings.dayTariff.fromHour
+            comboBoxCurrentValue: parkingSettings.DayTariff.fromHour
             onComboBoxCurrentIndexChanged: {
                nightToComboBoxId.comboBoxCurrentIndex = comboBoxCurrentIndex
-               parkingSettings.dayTariff.fromHour = comboBoxCurrentValue
-               parkingSettings.nightTariff.toHour = comboBoxCurrentValue
+               parkingSettings.DayTariff.fromHour = comboBoxCurrentValue
+               parkingSettings.NightTariff.toHour = comboBoxCurrentValue
             }
          }
          CommonNumericComboBox {
@@ -56,7 +56,7 @@ Column{
             labelText: qsTr("To(Hour):")
             labelWidth: 50
             maximumValue: 23
-            comboBoxCurrentValue: parkingSettings.dayTariff.toHour
+            comboBoxCurrentValue: parkingSettings.DayTariff.toHour
          }
          CommonSpinBox{
             labelText: qsTr("First Hour(Tomans):")
@@ -64,8 +64,8 @@ Column{
             id: dayFirstHourSpinBoxId
             minimumValueValue: 0
             maximumValueValue: 999999
-            spinBoxValue: parkingSettings.dayTariff.firstHour
-            onSpinBoxValueChanged: {parkingSettings.dayTariff.firstHour = spinBoxValue}
+            spinBoxValue: parkingSettings.DayTariff.FirstHour
+            onSpinBoxValueChanged: {parkingSettings.DayTariff.FirstHour = spinBoxValue}
          }
          CommonSpinBox{
             id: dayNextHoursSpinBoxId
@@ -73,8 +73,8 @@ Column{
             labelWidth: 110
             minimumValueValue: 0
             maximumValueValue: 999999
-            spinBoxValue: parkingSettings.dayTariff.nextHour
-            onSpinBoxValueChanged: {parkingSettings.dayTariff.nextHour = spinBoxValue}
+            spinBoxValue: parkingSettings.DayTariff.NextHour
+            onSpinBoxValueChanged: {parkingSettings.DayTariff.NextHour = spinBoxValue}
          }
       }
    }
@@ -87,11 +87,11 @@ Column{
             labelText: qsTr("From(Hour):")
             labelWidth: 75
             maximumValue: 23
-            comboBoxCurrentValue: parkingSettings.nightTariff.fromHour
+            comboBoxCurrentValue: parkingSettings.NightTariff.FromHour
             onComboBoxCurrentIndexChanged: {
                dayToComboBoxId.comboBoxCurrentIndex = comboBoxCurrentIndex
-               parkingSettings.nightTariff.fromHour = comboBoxCurrentValue
-               parkingSettings.dayTariff.toHour = comboBoxCurrentValue
+               parkingSettings.NightTariff.FromHour = comboBoxCurrentValue
+               parkingSettings.DayTariff.ToHour = comboBoxCurrentValue
             }
          }
          CommonNumericComboBox {
@@ -100,7 +100,7 @@ Column{
             labelText: qsTr("To(Hour):")
             labelWidth: 50
             maximumValue: 23
-            comboBoxCurrentValue: parkingSettings.nightTariff.toHour
+            comboBoxCurrentValue: parkingSettings.NightTariff.ToHour
          }
          CommonSpinBox{
             labelText: qsTr("First Hour(Tomans):")
@@ -108,8 +108,8 @@ Column{
             id: nightFirstHourSpinBoxId
             minimumValueValue: 0
             maximumValueValue: 999999
-            spinBoxValue: parkingSettings.nightTariff.firstHour
-            onSpinBoxValueChanged: {parkingSettings.nightTariff.firstHour = spinBoxValue}
+            spinBoxValue: parkingSettings.NightTariff.FirstHour
+            onSpinBoxValueChanged: {parkingSettings.NightTariff.FirstHour = spinBoxValue}
          }
          CommonSpinBox{
             id: nightNextHoursSpinBoxId
@@ -117,8 +117,8 @@ Column{
             labelWidth: 110
             minimumValueValue: 0
             maximumValueValue: 999999
-            spinBoxValue: parkingSettings.nightTariff.nextHour
-            onSpinBoxValueChanged: {parkingSettings.nightTariff.nextHour = spinBoxValue}
+            spinBoxValue: parkingSettings.NightTariff.NextHour
+            onSpinBoxValueChanged: {parkingSettings.NightTariff.NextHour = spinBoxValue}
          }
       }
    }
@@ -130,8 +130,8 @@ Column{
          labelWidth: 100
          minimumValueValue: 0
          maximumValueValue: 999999
-         spinBoxValue: parkingSettings.aDayTariff
-         onSpinBoxValueChanged: {parkingSettings.aDayTariff = spinBoxValue}
+         spinBoxValue: parkingSettings.EveryDayTariff
+         onSpinBoxValueChanged: {parkingSettings.EveryDayTariff = spinBoxValue}
       }
    }
    GroupBox {
@@ -143,16 +143,16 @@ Column{
             labelText: qsTr("Free Time(Minutes):")
             labelWidth: 100
             maximumValue: 120
-            comboBoxCurrentValue: parkingSettings.freeTime
-            onComboBoxCurrentValueChanged: {parkingSettings.freeTime = comboBoxCurrentValue}
+            comboBoxCurrentValue: parkingSettings.FreeTime
+            onComboBoxCurrentValueChanged: {parkingSettings.FreeTime = comboBoxCurrentValue}
          }
          CommonNumericComboBox {
             id: lastHourFreeTimeComboBoxId
             labelText: qsTr("Last Hour Free Time(Minutes):")
             labelWidth: 150
             maximumValue: 15
-            comboBoxCurrentValue: parkingSettings.lastHourFreeTime
-            onComboBoxCurrentValueChanged: {parkingSettings.lastHourFreeTime = comboBoxCurrentValue}
+            comboBoxCurrentValue: parkingSettings.LastHourFreeTime
+            onComboBoxCurrentValueChanged: {parkingSettings.LastHourFreeTime = comboBoxCurrentValue}
          }
       }
    }

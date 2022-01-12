@@ -2,15 +2,10 @@
 #define ANAR_SERVICE_JSON_PARSER_HPP
 
 #include <fstream>
-#include <nlohmann/fifo-map/fifo_map.hpp>
 #include <nlohmann/json.hpp>
 #include <string>
 
 #include "anar/service.hpp"
-
-template <class K, class V, class dummy_compare, class A>
-using my_workaround_fifo_map = nlohmann::fifo_map<K, V, nlohmann::fifo_map_compare<K>, A>;
-using json_nlohmann = nlohmann::basic_json<my_workaround_fifo_map>;
 
 namespace anar::service {
    class JsonParserService : public Service {
@@ -19,7 +14,7 @@ namespace anar::service {
          model::ErrorModel errorModelResult;
          try {
             // Parse JSON format string to JSON document
-            json_nlohmann json = json_nlohmann::parse(jsonString);
+            nlohmann::ordered_json json = nlohmann::ordered_json::parse(jsonString);
             // Read object data from JSON document
             errorModelResult = FromJson(jsonableClass, json);
 #ifdef UNIX
@@ -61,7 +56,7 @@ namespace anar::service {
          try {
             // Parse JSON format string to JSON document
             if (ifStream.is_open()) {
-               json_nlohmann json = json_nlohmann::parse(ifStream);
+               nlohmann::ordered_json json = nlohmann::ordered_json::parse(ifStream);
                // Read object data from JSON document
                errorModelResult = FromJson(jsonableClass, json);
             }
@@ -103,7 +98,7 @@ namespace anar::service {
          return errorModelResult;
       }
 
-      static model::ErrorModel FromJson(std::function<model::ErrorModel(model::Model&, json_nlohmann&)> const& fromJsonFunction, model::Model& model, json_nlohmann& json) {
+      static model::ErrorModel FromJson(std::function<model::ErrorModel(model::Model&, nlohmann::ordered_json&)> const& fromJsonFunction, model::Model& model, nlohmann::ordered_json& json) {
          model::ErrorModel errorModelResult;
          try {
             errorModelResult = fromJsonFunction(model, json);
@@ -115,7 +110,7 @@ namespace anar::service {
          }
          return errorModelResult;
       }
-      static model::ErrorModel ToJson(std::function<model::ErrorModel(model::Model&, json_nlohmann&)> const& toJsonFunction, model::Model& model, json_nlohmann& json) {
+      static model::ErrorModel ToJson(std::function<model::ErrorModel(model::Model&, nlohmann::ordered_json&)> const& toJsonFunction, model::Model& model, nlohmann::ordered_json& json) {
          model::ErrorModel errorModelResult;
          try {
             errorModelResult = toJsonFunction(model, json);
@@ -128,14 +123,14 @@ namespace anar::service {
          return errorModelResult;
       }
 
-      static model::ErrorModel FromJson(model::Model& model, json_nlohmann& json);
-      static model::ErrorModel ToJson(const model::Model& model, json_nlohmann& json);
+      static model::ErrorModel FromJson(model::Model& model, nlohmann::ordered_json& json);
+      static model::ErrorModel ToJson(const model::Model& model, nlohmann::ordered_json& json);
 
-      static model::ErrorModel FromJson(model::ConstantModel& constantModel, json_nlohmann& json);
-      static model::ErrorModel ToJson(const model::ConstantModel& constantModel, json_nlohmann& json);
+      static model::ErrorModel FromJson(model::ConstantModel& constantModel, nlohmann::ordered_json& json);
+      static model::ErrorModel ToJson(const model::ConstantModel& constantModel, nlohmann::ordered_json& json);
 
-      static model::ErrorModel FromJson(model::ErrorModel& errorModel, json_nlohmann& json);
-      static model::ErrorModel ToJson(const model::ErrorModel& errorModel, json_nlohmann& json);
+      static model::ErrorModel FromJson(model::ErrorModel& errorModel, nlohmann::ordered_json& json);
+      static model::ErrorModel ToJson(const model::ErrorModel& errorModel, nlohmann::ordered_json& json);
    };
 }  // namespace anar::service
 

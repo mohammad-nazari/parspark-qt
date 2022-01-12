@@ -9,7 +9,7 @@ namespace anar::interfaces {
    bool AJsonable::FromJsonString(const std::string& jsonString) {
       try {
          // Parse JSON format string to JSON document
-         json_nlohmann json = json_nlohmann::parse(jsonString);
+         nlohmann::ordered_json json = nlohmann::ordered_json::parse(jsonString);
          // Read object data from JSON document
          bool result;// = FromJson(json);
 #ifdef UNIX

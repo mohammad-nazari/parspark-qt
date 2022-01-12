@@ -18,8 +18,8 @@ namespace anar::model {
       }
       virtual ~Model() = default;
 
-      virtual bool Accept(interfaces::IModelBindingVisitor *visitor) {
-         return visitor->Visit(this);
+      virtual bool Accept(interfaces::IModelBindingVisitor &visitor) {
+         return visitor.Visit(*this);
       }
 
       uint64_t Id{0};                                                                 // This is for database mapping and is unique

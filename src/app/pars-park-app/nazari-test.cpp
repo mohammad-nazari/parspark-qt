@@ -122,10 +122,10 @@ namespace anar::test {
       }
    }
    void NazariTest::VisitorTest() {
-      json_nlohmann jsonNlohmann;
+      nlohmann::ordered_json jsonNlohmann;
       anar::service::AFromJsonVisitor aFromJsonVisitor(jsonNlohmann);
       anar::model::DataBaseModel dataBaseModel;
-      if (!dataBaseModel.Accept(&aFromJsonVisitor)) {
+      if (!dataBaseModel.Accept(aFromJsonVisitor)) {
          std::cout << aFromJsonVisitor.Error()->Message << std::endl;
       }
    }

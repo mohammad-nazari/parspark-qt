@@ -31,6 +31,7 @@ set(
         src/a-jsonable.cpp
 
         src/service.cpp
+        src/error-manager.cpp
         src/json-parser.cpp
         src/a-from-json-visitor.cpp
         src/binary.cpp

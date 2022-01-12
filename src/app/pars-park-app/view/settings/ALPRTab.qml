@@ -13,8 +13,8 @@ Column{
         id: savePlateNumberGroupBoxId
         title: qsTr("Save Plate Number")
         checkable: true
-        checked: alprSettings.enable
-        onCheckedChanged: {alprSettings.enable = checked}
+        checked: alprSettings.Enable
+        onCheckedChanged: {alprSettings.Enable = checked}
         Column {
             leftPadding: 5
             spacing: 10
@@ -26,8 +26,8 @@ Column{
                 RadioButton {
                     id: submitWithCameraId
                     text: qsTr("Submit with camera")
-                    checked: alprSettings.byCamera.enable
-                    onCheckedChanged: {alprSettings.byCamera.enable = checked}
+                    checked: alprSettings.ByCamera.Enable
+                    onCheckedChanged: {alprSettings.ByCamera.Enable = checked}
                     exclusiveGroup: alprOptions
                 }
                 Column{
@@ -37,14 +37,14 @@ Column{
                     CheckBox{
                         id: allowSaveWithoutEnterCheckBoxId
                         text: qsTr("Allow save without enter plate number")
-                        checked: alprSettings.byCamera.submitWithoutEnterPlate
-                        onCheckedChanged: {alprSettings.byCamera.submitWithoutEnterPlate = checked}
+                        checked: alprSettings.ByCamera.SubmitWithoutEnterPlate
+                        onCheckedChanged: {alprSettings.ByCamera.SubmitWithoutEnterPlate = checked}
                     }
                     CheckBox{
                         id: allowSaveWithoutExitCheckBoxId
                         text: qsTr("Allow save without exit plate number")
-                        checked: alprSettings.byCamera.submitWithoutExitPlate
-                        onCheckedChanged: {alprSettings.byCamera.submitWithoutExitPlate = checked}
+                        checked: alprSettings.ByCamera.SubmitWithoutExitPlate
+                        onCheckedChanged: {alprSettings.ByCamera.SubmitWithoutExitPlate = checked}
                     }
                 }
             }
@@ -52,8 +52,8 @@ Column{
                 id: submitManuallyRadioButtonId
                 text: qsTr("Submit manually")
                 exclusiveGroup: alprOptions
-                checked: !alprSettings.byCamera.enable
-                onCheckedChanged: {alprSettings.byCamera.enable = !checked}
+                checked: !alprSettings.ByCamera.Enable
+                onCheckedChanged: {alprSettings.ByCamera.Enable = !checked}
             }
         }
     }

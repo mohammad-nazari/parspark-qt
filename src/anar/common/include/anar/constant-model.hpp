@@ -12,8 +12,8 @@ namespace anar::model {
       }
       ~ConstantModel() override = default;
 
-      bool Accept(interfaces::IModelBindingVisitor *visitor) override {
-         return visitor->Visit(this);
+      bool Accept(interfaces::IModelBindingVisitor &visitor) override {
+         return visitor.Visit(*this);
       }
 
       uint32_t Code{0};

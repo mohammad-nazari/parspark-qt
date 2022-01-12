@@ -13,20 +13,20 @@ Row{
       title: qsTr("Enter Card Reader")
       CommonCOMPort{
          id: enterCardReaderCompPortId
-         address: cardReaderSettings.enter.portName
-         onAddressChanged: {cardReaderSettings.enter.portName = address}
-         baudRate: cardReaderSettings.enter.baudRate
-         onBaudRateChanged: {cardReaderSettings.enter.baudRate = baudRate}
+         address: cardReaderSettings.EnterCardReader.PortName
+         onAddressChanged: {cardReaderSettings.EnterCardReader.PortName = address}
+         baudRate: cardReaderSettings.EnterCardReader.BaudRate
+         onBaudRateChanged: {cardReaderSettings.EnterCardReader.BaudRate = baudRate}
       }
    }
    GroupBox {
       title: qsTr("Exit Card Reader")
       CommonCOMPort{
          id: exitCardReaderCompPortId
-         address: cardReaderSettings.exit.portName
-         onAddressChanged: {cardReaderSettings.exit.portName = address}
-         baudRate: cardReaderSettings.exit.baudRate
-         onBaudRateChanged: {cardReaderSettings.exit.baudRate = baudRate}
+         address: cardReaderSettings.ExitCardReader.PortName
+         onAddressChanged: {cardReaderSettings.ExitCardReader.PortName = address}
+         baudRate: cardReaderSettings.ExitCardReader.BaudRate
+         onBaudRateChanged: {cardReaderSettings.ExitCardReader.BaudRate = baudRate}
       }
    }
 }
