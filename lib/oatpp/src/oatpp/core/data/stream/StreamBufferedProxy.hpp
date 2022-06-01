@@ -33,9 +33,6 @@
 namespace oatpp { namespace data{ namespace stream {
   
 class OutputStreamBufferedProxy : public oatpp::base::Countable, public OutputStream {
-public:
-  OBJECT_POOL(OutputStreamBufferedProxy_Pool, OutputStreamBufferedProxy, 32)
-  SHARED_OBJECT_POOL(Shared_OutputStreamBufferedProxy_Pool, OutputStreamBufferedProxy, 32)
 private:
   std::shared_ptr<OutputStream> m_outputStream;
   oatpp::data::share::MemoryLabel m_memoryLabel;
@@ -45,12 +42,12 @@ public:
                             const oatpp::data::share::MemoryLabel& memoryLabel)
     : m_outputStream(outputStream)
     , m_memoryLabel(memoryLabel)
-    , m_buffer(memoryLabel.getData(), memoryLabel.getSize())
+    , m_buffer((void *) memoryLabel.getData(), memoryLabel.getSize())
   {}
 public:
   
   static std::shared_ptr<OutputStreamBufferedProxy> createShared(const std::shared_ptr<OutputStream>& outputStream, const oatpp::data::share::MemoryLabel& memoryLabel) {
-    return Shared_OutputStreamBufferedProxy_Pool::allocateShared(outputStream, memoryLabel);
+    return std::make_shared<OutputStreamBufferedProxy>(outputStream, memoryLabel);
   }
   
   v_io_size write(const void *data, v_buff_size count, async::Action& action) override;
@@ -82,10 +79,7 @@ public:
   
 };
   
-class InputStreamBufferedProxy : public oatpp::base::Countable, public InputStream {
-public:
-  OBJECT_POOL(InputStreamBufferedProxy_Pool, InputStreamBufferedProxy, 32)
-  SHARED_OBJECT_POOL(Shared_InputStreamBufferedProxy_Pool, InputStreamBufferedProxy, 32)
+class InputStreamBufferedProxy : public oatpp::base::Countable, public BufferedInputStream {
 protected:
   std::shared_ptr<InputStream> m_inputStream;
   oatpp::data::share::MemoryLabel m_memoryLabel;
@@ -98,14 +92,14 @@ public:
                            bool bufferCanRead)
     : m_inputStream(inputStream)
     , m_memoryLabel(memoryLabel)
-    , m_buffer(memoryLabel.getData(), memoryLabel.getSize(), bufferReadPosition, bufferWritePosition, bufferCanRead)
+    , m_buffer((void*) memoryLabel.getData(), memoryLabel.getSize(), bufferReadPosition, bufferWritePosition, bufferCanRead)
   {}
 public:
   
   static std::shared_ptr<InputStreamBufferedProxy> createShared(const std::shared_ptr<InputStream>& inputStream,
                                                                 const oatpp::data::share::MemoryLabel& memoryLabel)
   {
-    return Shared_InputStreamBufferedProxy_Pool::allocateShared(inputStream, memoryLabel, 0, 0, false);
+    return std::make_shared<InputStreamBufferedProxy>(inputStream, memoryLabel, 0, 0, false);
   }
   
   static std::shared_ptr<InputStreamBufferedProxy> createShared(const std::shared_ptr<InputStream>& inputStream,
@@ -114,14 +108,16 @@ public:
                                                                 v_io_size bufferWritePosition,
                                                                 bool bufferCanRead)
   {
-    return Shared_InputStreamBufferedProxy_Pool::allocateShared(inputStream, memoryLabel, bufferReadPosition, bufferWritePosition, bufferCanRead);
+    return std::make_shared<InputStreamBufferedProxy>(inputStream, memoryLabel, bufferReadPosition, bufferWritePosition, bufferCanRead);
   }
   
   v_io_size read(void *data, v_buff_size count, async::Action& action) override;
 
-  v_io_size peek(void *data, v_buff_size count, async::Action& action);
+  v_io_size peek(void *data, v_buff_size count, async::Action& action) override;
 
-  v_io_size commitReadOffset(v_buff_size count);
+  v_io_size commitReadOffset(v_buff_size count) override;
+
+  v_io_size availableToRead() const override;
 
   /**
    * Set InputStream I/O mode.

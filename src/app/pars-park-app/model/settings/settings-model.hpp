@@ -30,7 +30,7 @@ namespace anar::parspark::model {
       BoardModel Board;
       CameraModel Camera;
       CardReaderModel CardReader;
-      anar::model::DataBaseModel DataBase;
+      anar::common::model::DataBaseModel DataBase;
       GateModel Gate;
       ParkingModel Parking;
       PaymentModel Payment;

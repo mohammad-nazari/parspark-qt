@@ -1,5 +1,8 @@
 #include "settings-view.hpp"
 
+#include <QJsonDocument>
+
+#include "glog/logging.h"
 #include "nlohmann/json.hpp"
 #include "service/model-binding/json/from-json-visitor.hpp"
 #include "service/model-binding/json/to-json-visitor.hpp"
@@ -29,6 +32,7 @@ namespace anar::parspark::view {
     void SettingsView::saveSettings(QVariantMap settingsInfo) {
         m_error.clear();
         m_settingsInfo = std::move(settingsInfo);
+//        LOG(INFO) << QJsonDocument::fromVariant(m_settingsInfo).toJson().toStdString();
         // ToDO: validate settings
         // Save settings
         model::SettingsModel settings;

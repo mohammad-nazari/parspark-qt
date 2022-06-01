@@ -26,7 +26,6 @@
 #define oatpp_async_worker_IOWorker_hpp
 
 #include "./Worker.hpp"
-#include "oatpp/core/collection/LinkedList.hpp"
 #include "oatpp/core/concurrency/SpinLock.hpp"
 
 #include <thread>
@@ -42,8 +41,8 @@ namespace oatpp { namespace async { namespace worker {
 class IOWorker : public Worker {
 private:
   bool m_running;
-  oatpp::collection::FastQueue<CoroutineHandle> m_backlog;
-  oatpp::collection::FastQueue<CoroutineHandle> m_queue;
+  utils::FastQueue<CoroutineHandle> m_backlog;
+  utils::FastQueue<CoroutineHandle> m_queue;
   oatpp::concurrency::SpinLock m_backlogLock;
   std::condition_variable_any m_backlogCondition;
 private:
@@ -59,9 +58,9 @@ public:
 
   /**
   * Push list of tasks to worker.
-  * @param tasks - &id:oatpp::collection::FastQueue; of &id:oatpp::async::CoroutineHandle;.
+  * @param tasks - &id:oatpp::async::utils::FastQueue; of &id:oatpp::async::CoroutineHandle;.
   */
-  void pushTasks(oatpp::collection::FastQueue<CoroutineHandle>& tasks) override;
+  void pushTasks(utils::FastQueue<CoroutineHandle>& tasks) override;
 
   /**
   * Push one task to worker.

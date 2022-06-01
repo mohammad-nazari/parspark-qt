@@ -23,10 +23,10 @@ namespace anar::parspark::service {
         bool Load(const std::string& address = "settings.json");
         bool Save(const std::string& address = "settings.json");
 
-        const anar::model::DataBaseModel& DataBase() {
+        const anar::common::model::DataBaseModel& DataBase() {
             return m_settings.DataBase;
         }
-        void DataBase(const anar::model::DataBaseModel& dataBase) {
+        void DataBase(const anar::common::model::DataBaseModel& dataBase) {
             m_settings.DataBase = dataBase;
         }
 
@@ -36,10 +36,10 @@ namespace anar::parspark::service {
         void Settings(const model::SettingsModel& settings) {
             m_settings = settings;
         }
-        [[nodiscard]] const anar::model::ErrorModel& Error() const {
+        [[nodiscard]] const anar::common::model::ErrorModel& Error() const {
             return m_error;
         }
-        void Error(const anar::model::ErrorModel& error) {
+        void Error(const anar::common::model::ErrorModel& error) {
             m_error = error;
         }
 
@@ -48,7 +48,7 @@ namespace anar::parspark::service {
         static SSettingsPtr _instance;
 
         model::SettingsModel m_settings;
-        anar::model::ErrorModel m_error;
+        anar::common::model::ErrorModel m_error;
     };
 }  // namespace anar::parspark::service
 #endif  // ANAR_PARS_PARK_SERVICE_S_SETTING_HPP

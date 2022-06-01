@@ -43,7 +43,7 @@ if(WIN32)
 	if ("${CMAKE_GENERATOR}" MATCHES "Visual Studio" OR "${CMAKE_GENERATOR}" MATCHES "NMake Makefiles")
         find_program(CMAKE_MC_COMPILER mc.exe HINTS "${sdk_bindir}" "${kit_bindir}" "${kit81_bindir}" ${kit10_bindir}
                 DOC "path to message compiler")
-    elseif ("${CMAKE_GENERATOR}" MATCHES "MinGW Makefiles")
+    elseif (("${CMAKE_GENERATOR}" MATCHES "MinGW Makefiles") OR ("${CMAKE_GENERATOR}" MATCHES "Ninja"))
         find_program(CMAKE_MC_COMPILER windmc.exe HINTS "${sdk_bindir}" "${kit_bindir}" "${kit81_bindir}" ${kit10_bindir}
                 DOC "path to message compiler")
     endif ()

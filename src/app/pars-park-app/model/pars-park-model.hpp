@@ -5,10 +5,10 @@
 #include "interface/i-pars-park-model-binding-visitor.hpp"
 
 namespace anar::parspark::model {
-   class ParsParkModel : public anar::model::Model {
+   class ParsParkModel : public anar::common::model::Model {
      public:
       ParsParkModel(const std::string &name, const std::string &description = "")
-          : anar::model::Model(name, description) {
+          : anar::common::model::Model(name, description) {
       }
       virtual bool Accept(interfaces::IParsParkModelBindingVisitor &modelBindingVisitor) {
          return modelBindingVisitor.Visit(*this);

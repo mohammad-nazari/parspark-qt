@@ -11,13 +11,13 @@ endif()
 
 if(UNIX AND NOT APPLE)
     # If Linux, add rt and pthread
-    set(rt_LIBRARIES rt)
-    set(pthread_LIBRARIES pthread)
-    catkin_package(
-        LIBRARIES ${PROJECT_NAME}
-        INCLUDE_DIRS include
-        DEPENDS rt pthread
-    )
+#    set(rt_LIBRARIES rt)
+#    set(pthread_LIBRARIES pthread)
+#    catkin_package(
+#        LIBRARIES ${PROJECT_NAME}
+#        INCLUDE_DIRS include
+#        DEPENDS rt pthread
+#    )
 else()
     # Otherwise normal call
 #    catkin_package(

@@ -9,25 +9,25 @@
 #include "a-from-json-visitor.hpp"
 #include "a-to-json-visitor.hpp"
 
-namespace anar::model {
-   class Model {
-     public:
-      Model(std::string name, std::string description = "")
-          : Name(std::move(name))
-          , Description(std::move(description)) {
-      }
-      virtual ~Model() = default;
+namespace anar::common::model {
+    class Model {
+       public:
+        Model(std::string name, std::string description = "")
+            : Name(std::move(name))
+            , Description(std::move(description)) {
+        }
+        virtual ~Model() = default;
 
-      virtual bool Accept(interfaces::IModelBindingVisitor &visitor) {
-         return visitor.Visit(*this);
-      }
+        virtual bool Accept(interfaces::IModelBindingVisitor &visitor) {
+            return visitor.Visit(*this);
+        }
 
-      uint64_t Id{0};                                                                 // This is for database mapping and is unique
-      std::string UUId{Poco::UUIDGenerator::defaultGenerator().create().toString()};  // This is a unique UUID
-      std::string Name;
-      std::string Description;
-   };
+        uint64_t Id{0};                                                                 // This is for database mapping and is unique
+        std::string UUId{Poco::UUIDGenerator::defaultGenerator().create().toString()};  // This is a unique UUID
+        std::string Name;
+        std::string Description;
+    };
 
-   using ModelPtr = std::shared_ptr<Model>;
-}  // namespace anar::model
+    using ModelPtr = std::shared_ptr<Model>;
+}  // namespace anar::common::model
 #endif  // ANAR_MODEL_HPP

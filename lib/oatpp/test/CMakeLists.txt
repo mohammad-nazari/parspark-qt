@@ -7,12 +7,6 @@ add_executable(oatppAllTests
         oatpp/core/base/CommandLineArgumentsTest.hpp
         oatpp/core/base/LoggerTest.cpp
         oatpp/core/base/LoggerTest.hpp
-        oatpp/core/base/collection/LinkedListTest.cpp
-        oatpp/core/base/collection/LinkedListTest.hpp
-        oatpp/core/base/memory/MemoryPoolTest.cpp
-        oatpp/core/base/memory/MemoryPoolTest.hpp
-        oatpp/core/base/memory/PerfTest.cpp
-        oatpp/core/base/memory/PerfTest.hpp
         oatpp/core/data/buffer/ProcessorTest.cpp
         oatpp/core/data/buffer/ProcessorTest.hpp
         oatpp/core/data/mapping/type/AnyTest.cpp
@@ -43,6 +37,8 @@ add_executable(oatppAllTests
         oatpp/core/data/mapping/type/VectorTest.hpp
         oatpp/core/data/mapping/TypeResolverTest.cpp
         oatpp/core/data/mapping/TypeResolverTest.hpp
+        oatpp/core/data/resource/InMemoryDataTest.cpp
+        oatpp/core/data/resource/InMemoryDataTest.hpp
         oatpp/core/data/share/LazyStringMapTest.cpp
         oatpp/core/data/share/LazyStringMapTest.hpp
         oatpp/core/data/share/MemoryLabelTest.cpp
@@ -51,24 +47,26 @@ add_executable(oatppAllTests
         oatpp/core/data/share/StringTemplateTest.hpp
         oatpp/core/data/stream/BufferStreamTest.cpp
         oatpp/core/data/stream/BufferStreamTest.hpp
-        oatpp/core/data/stream/ChunkedBufferTest.cpp
-        oatpp/core/data/stream/ChunkedBufferTest.hpp
         oatpp/core/parser/CaretTest.cpp
         oatpp/core/parser/CaretTest.hpp
         oatpp/core/provider/PoolTest.cpp
         oatpp/core/provider/PoolTest.hpp
+        oatpp/core/provider/PoolTemplateTest.cpp
+        oatpp/core/provider/PoolTemplateTest.hpp
         oatpp/encoding/Base64Test.cpp
         oatpp/encoding/Base64Test.hpp
         oatpp/encoding/UnicodeTest.cpp
         oatpp/encoding/UnicodeTest.hpp
-        oatpp/network/ConnectionPoolTest.cpp
-        oatpp/network/ConnectionPoolTest.hpp
-        oatpp/network/UrlTest.cpp
-        oatpp/network/UrlTest.hpp
+        oatpp/network/monitor/ConnectionMonitorTest.cpp
+        oatpp/network/monitor/ConnectionMonitorTest.hpp
         oatpp/network/virtual_/InterfaceTest.cpp
         oatpp/network/virtual_/InterfaceTest.hpp
         oatpp/network/virtual_/PipeTest.cpp
         oatpp/network/virtual_/PipeTest.hpp
+        oatpp/network/ConnectionPoolTest.cpp
+        oatpp/network/ConnectionPoolTest.hpp
+        oatpp/network/UrlTest.cpp
+        oatpp/network/UrlTest.hpp
         oatpp/parser/json/mapping/DTOMapperPerfTest.cpp
         oatpp/parser/json/mapping/DTOMapperPerfTest.hpp
         oatpp/parser/json/mapping/DTOMapperTest.cpp
@@ -87,6 +85,10 @@ add_executable(oatppAllTests
         oatpp/web/server/api/ApiControllerTest.hpp
         oatpp/web/server/handler/AuthorizationHandlerTest.cpp
         oatpp/web/server/handler/AuthorizationHandlerTest.hpp
+        oatpp/web/server/HttpRouterTest.cpp
+        oatpp/web/server/HttpRouterTest.hpp
+        oatpp/web/server/ServerStopTest.cpp
+        oatpp/web/server/ServerStopTest.hpp
         oatpp/web/ClientRetryTest.cpp
         oatpp/web/ClientRetryTest.hpp
         oatpp/web/PipelineTest.cpp
@@ -116,6 +118,9 @@ set_target_properties(oatppAllTests PROPERTIES
     CXX_EXTENSIONS OFF
     CXX_STANDARD_REQUIRED ON
 )
+if (MSVC)
+    target_compile_options(oatppAllTests PRIVATE /permissive-)
+endif()
 
 target_include_directories(oatppAllTests PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

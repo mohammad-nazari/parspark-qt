@@ -38,4 +38,4 @@ namespace anar::parspark::service {
       nlohmann::ordered_json json = nlohmann::ordered_json::parse(qJson.toJson().toStdString());
       return json;
    }
-}  // namespace anar::service
+}  // namespace anar::common::service

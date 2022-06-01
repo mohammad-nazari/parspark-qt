@@ -14,7 +14,7 @@ Column {
    }
 //       ["110", "300", "600", "1200", "2400", "4800", "9600", "14400", "19200", "28800", "38400", "56000", "57600", "115200"]
    property string address: qsTr("")
-   property string baudRate: "19200"
+   property int baudRate: 19200
 
 //   CommonApi{
 //      id: CommonApi

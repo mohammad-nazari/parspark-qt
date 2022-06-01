@@ -27,17 +27,17 @@ namespace odb
   // CreateModifyDeleteModel
   //
 
-  const char alias_traits<  ::anar::parspark::model::UserModel,
+  const char alias_traits<  anar::parspark::model::UserModel,
     id_mysql,
-    access::object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::CreatingUser_tag>::
+    access::object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::CreatingUser_tag>::
   table_name[] = "`creating_user_id`";
 
-  const char alias_traits<  ::anar::parspark::model::UserModel,
+  const char alias_traits<  anar::parspark::model::UserModel,
     id_mysql,
-    access::object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::UpdatingUser_tag>::
+    access::object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::UpdatingUser_tag>::
   table_name[] = "`updating_user_id`";
 
-  bool access::object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
+  bool access::object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
   grow (image_type& i,
         my_bool* t)
   {
@@ -65,7 +65,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
+  void access::object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
   bind (MYSQL_BIND* b,
         image_type& i,
         mysql::statement_kind sk)
@@ -107,7 +107,7 @@ namespace odb
     n++;
   }
 
-  bool access::object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
+  bool access::object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
   init (image_type& i,
         const object_type& o,
         mysql::statement_kind sk)
@@ -123,11 +123,11 @@ namespace odb
     // CreatingUser
     //
     {
-      ::anar::parspark::model::UserModelPtr const& v =
+      anar::parspark::model::UserModelPtr const& v =
         o.CreatingUser;
 
-      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
+      typedef object_traits< anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< anar::parspark::model::UserModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -148,11 +148,11 @@ namespace odb
     // UpdatingUser
     //
     {
-      ::anar::parspark::model::UserModelPtr const& v =
+      anar::parspark::model::UserModelPtr const& v =
         o.UpdatingUser;
 
-      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
+      typedef object_traits< anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< anar::parspark::model::UserModelPtr > ptr_traits;
 
       bool is_null (ptr_traits::null_ptr (v));
       if (!is_null)
@@ -201,7 +201,7 @@ namespace odb
     return grew;
   }
 
-  void access::object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
+  void access::object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -213,11 +213,11 @@ namespace odb
     // CreatingUser
     //
     {
-      ::anar::parspark::model::UserModelPtr& v =
+      anar::parspark::model::UserModelPtr& v =
         o.CreatingUser;
 
-      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
+      typedef object_traits< anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< anar::parspark::model::UserModelPtr > ptr_traits;
 
       if (i.CreatingUser_null)
         v = ptr_traits::pointer_type ();
@@ -244,11 +244,11 @@ namespace odb
     // UpdatingUser
     //
     {
-      ::anar::parspark::model::UserModelPtr& v =
+      anar::parspark::model::UserModelPtr& v =
         o.UpdatingUser;
 
-      typedef object_traits< ::anar::parspark::model::UserModel > obj_traits;
-      typedef odb::pointer_traits< ::anar::parspark::model::UserModelPtr > ptr_traits;
+      typedef object_traits< anar::parspark::model::UserModel > obj_traits;
+      typedef odb::pointer_traits< anar::parspark::model::UserModelPtr > ptr_traits;
 
       if (i.UpdatingUser_null)
         v = ptr_traits::pointer_type ();

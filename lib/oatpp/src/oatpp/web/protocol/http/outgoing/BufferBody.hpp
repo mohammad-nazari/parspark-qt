@@ -35,9 +35,6 @@ namespace oatpp { namespace web { namespace protocol { namespace http { namespac
  * Implements functionality to use &id::oatpp::String; as data source for http body.
  */
 class BufferBody : public oatpp::base::Countable, public Body {
-public:
-  OBJECT_POOL(Http_Outgoing_BufferBody_Pool, BufferBody, 32)
-  SHARED_OBJECT_POOL(Shared_Http_Outgoing_BufferBody_Pool, BufferBody, 32)
 private:
   oatpp::String m_buffer;
   oatpp::data::share::StringKeyLabel m_contentType;
@@ -81,7 +78,7 @@ public:
    * Return known size of the body.
    * @return - `v_buff_size`.
    */
-  v_buff_size getKnownSize() override;
+  v_int64 getKnownSize() override;
   
 };
   

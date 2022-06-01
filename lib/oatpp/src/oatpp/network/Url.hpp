@@ -27,7 +27,6 @@
 
 #include "oatpp/core/data/share/LazyStringMap.hpp"
 #include "oatpp/core/parser/Caret.hpp"
-#include "oatpp/core/collection/ListMap.hpp"
 #include "oatpp/core/Types.hpp"
 
 namespace oatpp { namespace network {
@@ -44,9 +43,9 @@ public:
   typedef oatpp::data::share::StringKeyLabel StringKeyLabel;
 public:
   /**
-   * Parameters - map string to string.
+   * Parameters - map string to string. &id:oatpp::data::share::LazyStringMultimap;.
    */
-  typedef oatpp::data::share::LazyStringMap<oatpp::data::share::StringKeyLabel> Parameters;
+  typedef oatpp::data::share::LazyStringMultimap<oatpp::data::share::StringKeyLabel> Parameters;
 
 public:
 

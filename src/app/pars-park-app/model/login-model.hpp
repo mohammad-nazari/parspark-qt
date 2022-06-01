@@ -9,7 +9,7 @@ namespace anar::parspark::model {
    class LoginModel;
    using LoginModelPtr = std::shared_ptr<LoginModel>;
    class LoginModel
-       : public anar::model::DataBaseModel
+       : public anar::common::model::DataBaseModel
        , public UserModel {
      public:
       LoginModel()

@@ -1,9 +1,18 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(ParsParkUnitTest)
+project(AnarParsParkUnitTest)
 
-set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 0)
-set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
-set(VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
+set(
+        TEST_SOURCES
+        main.cpp
+)
+
+add_executable(
+        ${PROJECT_NAME}
+        ${TEST_SOURCES}
+)
+
+target_link_libraries(
+        ${PROJECT_NAME}
+        gtest
+)

@@ -13,10 +13,11 @@
 using namespace anar::parspark;
 
 int main(int argc, char* argv[]) {
-    //         anar::test::NazariTest::RunTest();
-    //         return 0;
+//    anar::test::NazariTest::RunTest();
     int appCode;
-    //   FLAGS_logtostderr = true;
+#ifdef _DEBUG
+    FLAGS_logtostderr = true;
+#endif
     FLAGS_log_dir = "logs";
     google::EnableLogCleaner(3);
     google::InitGoogleLogging(argv[0]);

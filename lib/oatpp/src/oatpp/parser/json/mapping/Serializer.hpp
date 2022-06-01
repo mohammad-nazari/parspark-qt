@@ -25,6 +25,7 @@
 #ifndef oatpp_parser_json_mapping_Serializer_hpp
 #define oatpp_parser_json_mapping_Serializer_hpp
 
+#include "oatpp/parser/json/Utils.hpp"
 #include "oatpp/parser/json/Beautifier.hpp"
 #include "oatpp/core/Types.hpp"
 #include <vector>
@@ -65,8 +66,19 @@ public:
 
     /**
      * Include fields with value == nullptr into serialized json.
+     * Field will still be included when field-info `required` is set to true and &id:alwaysIncludeRequired is set to true.
      */
     bool includeNullFields = true;
+
+    /**
+     * Always include required fields (set in in DTO_FIELD_INFO) even if they are `value == nullptr`
+     */
+    bool alwaysIncludeRequired = false;
+
+    /**
+     * Always include array or map elements, even if their value is `nullptr`.
+     */
+    bool alwaysIncludeNullCollectionElements = false;
 
     /**
      * If `true` - insert string `"<unknown-type>"` in json field value in case unknown field found.
@@ -96,6 +108,11 @@ public:
      */
     std::vector<std::string> enabledInterpretations = {};
 
+    /**
+     * Escape flags.
+     */
+    v_uint32 escapeFlags = json::Utils::FLAG_ESCAPE_ALL;
+
   };
 public:
   typedef void (*SerializerMethod)(Serializer*,
@@ -115,60 +132,12 @@ private:
       stream->writeSimple("null", 4);
     }
   }
+  
+  static void serializeString(oatpp::data::stream::ConsistentOutputStream* stream,
+                              const char* data,
+                              v_buff_size size,
+                              v_uint32 escapeFlags);
 
-  template<class Collection>
-  static void serializeList(Serializer* serializer, data::stream::ConsistentOutputStream* stream, const oatpp::Void& polymorph) {
-
-    if(!polymorph) {
-      stream->writeSimple("null", 4);
-      return;
-    }
-
-    const auto& list = polymorph.staticCast<Collection>();
-
-    stream->writeCharSimple('[');
-    bool first = true;
-
-    for(auto& value : *list) {
-      if(value || serializer->getConfig()->includeNullFields) {
-        (first) ? first = false : stream->writeSimple(",", 1);
-        serializer->serialize(stream, value);
-      }
-    }
-
-    stream->writeCharSimple(']');
-
-  }
-
-  template<class Collection>
-  static void serializeKeyValue(Serializer* serializer, data::stream::ConsistentOutputStream* stream, const oatpp::Void& polymorph) {
-
-    if(!polymorph) {
-      stream->writeSimple("null", 4);
-      return;
-    }
-
-    const auto& map = polymorph.staticCast<Collection>();
-
-    stream->writeCharSimple('{');
-    bool first = true;
-
-    for(auto& pair : *map) {
-      const auto& value = pair.second;
-      if(value || serializer->getConfig()->includeNullFields) {
-        (first) ? first = false : stream->writeSimple(",", 1);
-        const auto& key = pair.first;
-        serializeString(stream, key->getData(), key->getSize());
-        stream->writeSimple(":", 1);
-        serializer->serialize(stream, value);
-      }
-    }
-
-    stream->writeCharSimple('}');
-
-  }
-
-  static void serializeString(oatpp::data::stream::ConsistentOutputStream* stream, p_char8 data, v_buff_size size);
   static void serializeString(Serializer* serializer,
                               data::stream::ConsistentOutputStream* stream,
                               const oatpp::Void& polymorph);
@@ -180,6 +149,14 @@ private:
   static void serializeEnum(Serializer* serializer,
                             data::stream::ConsistentOutputStream* stream,
                             const oatpp::Void& polymorph);
+
+  static void serializeCollection(Serializer* serializer,
+                                  data::stream::ConsistentOutputStream* stream,
+                                  const oatpp::Void& polymorph);
+
+  static void serializeMap(Serializer* serializer,
+                           data::stream::ConsistentOutputStream* stream,
+                           const oatpp::Void& polymorph);
 
   static void serializeObject(Serializer* serializer,
                               data::stream::ConsistentOutputStream* stream,

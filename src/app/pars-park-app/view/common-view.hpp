@@ -34,7 +34,7 @@ namespace anar::parspark::view {
       QStringList m_serialPorts;
       QStringList m_baudRates;
       QStringList m_printers;
-      controller::CommonControllerPtr m_commonController{new controller::CommonController};
+      anar::common::controller::CommonControllerPtr m_commonController{new anar::common::controller::CommonController};
    };
 }  // namespace anar::view
 

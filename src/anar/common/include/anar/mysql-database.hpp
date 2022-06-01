@@ -5,14 +5,14 @@
 
 #include "i-database.hpp"
 
-namespace anar::database {
-   class MysqlDataBase;
-   using MysqlDataBasePtr = std::shared_ptr<MysqlDataBase>;
-   class MysqlDataBase : public IDatabase {
-     public:
-      static MysqlDataBasePtr Create(const model::DataBaseModel& dataBaseModel);
-      MysqlDataBase(const model::DataBaseModel& dataBaseModel);
-      ~MysqlDataBase() override;
-   };
-}  // namespace anar::database
+namespace anar::common::database {
+    class MysqlDataBase;
+    using MysqlDataBasePtr = std::shared_ptr<MysqlDataBase>;
+    class MysqlDataBase : public IDatabase {
+       public:
+        static MysqlDataBasePtr Create(const model::DataBaseModel& dataBaseModel);
+        MysqlDataBase(const model::DataBaseModel& dataBaseModel);
+        ~MysqlDataBase() override;
+    };
+}  // namespace anar::common::database
 #endif  // ANAR_DATABASE_MYSQL_HPP

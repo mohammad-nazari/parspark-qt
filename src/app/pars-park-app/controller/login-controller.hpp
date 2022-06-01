@@ -8,14 +8,14 @@
 namespace anar::parspark::controller {
    class LoginController;
    using LoginControllerPtr = std::shared_ptr<LoginController>;
-   class LoginController : public anar::controller::Controller {
+   class LoginController : public anar::common::controller::Controller {
      public:
       static LoginControllerPtr Create();
       explicit LoginController();
 
       bool DoLogin(const model::LoginModel& login);
-      bool SaveDataBaseSettings(const anar::model::DataBaseModel& dataBase);
-      anar::model::DataBaseModel LoadLoginSetting();
+      bool SaveDataBaseSettings(const anar::common::model::DataBaseModel& dataBase);
+      anar::common::model::DataBaseModel LoadLoginSetting();
    };
 }  // namespace anar::parspark::controller
 

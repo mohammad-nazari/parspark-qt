@@ -38,5 +38,5 @@ target_link_libraries(
         ${PROJECT_NAME}
         PRIVATE
         odb
-        mysql
+        ${PARS_PARK_MYSQL_LIB}
 )

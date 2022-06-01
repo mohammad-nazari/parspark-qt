@@ -3,7 +3,7 @@
 #    include <windows.h>
 #endif
 
-namespace anar::service {
+namespace anar::common::service {
     PrinterPtr Printer::Create() {
         return std::make_shared<Printer>();
     }
@@ -12,32 +12,32 @@ namespace anar::service {
     //   QList<QPrinterInfo> Printer::GetList() {
     //      return QPrinterInfo::availablePrinters();
     //   }
-//#ifdef WIN32
-//    PRINTER_INFO_2* Printer::GetList(DWORD& count) {
-//        PRINTER_INFO_2* printers;
-//        DWORD sz = 0;
-//        DWORD Level = 2;
-//        int i;
-//        int sl;
-//
-//        EnumPrinters(PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS, NULL, Level, NULL, 0, &sz, &count);
-//
-//        if ((printers = (PRINTER_INFO_2*)malloc(sz)) == 0)
-//            return {};
-//
-//        if (!EnumPrinters(PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS, NULL, Level, (LPBYTE)printers, sz, &sz, &count)) {
-//            free(printers);
-//            return {};
-//        }
-//        return printers;
-//    }
-//#endif
+    //#ifdef WIN32
+    //    PRINTER_INFO_2* Printer::GetList(DWORD& count) {
+    //        PRINTER_INFO_2* printers;
+    //        DWORD sz = 0;
+    //        DWORD Level = 2;
+    //        int i;
+    //        int sl;
+    //
+    //        EnumPrinters(PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS, NULL, Level, NULL, 0, &sz, &count);
+    //
+    //        if ((printers = (PRINTER_INFO_2*)malloc(sz)) == 0)
+    //            return {};
+    //
+    //        if (!EnumPrinters(PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS, NULL, Level, (LPBYTE)printers, sz, &sz, &count)) {
+    //            free(printers);
+    //            return {};
+    //        }
+    //        return printers;
+    //    }
+    //#endif
 
     std::vector<std::string> Printer::GetListNames() {
         std::vector<std::string> printerNames;
 #ifdef WIN32
         DWORD count = 0;
-//        PRINTER_INFO_2* printers = GetList(count);
+        //        PRINTER_INFO_2* printers = GetList(count);
         PRINTER_INFO_2* printers;
         DWORD sz = 0;
         DWORD Level = 2;
@@ -81,4 +81,4 @@ namespace anar::service {
     //   QPrinterInfo Printer::GetInfo(const QString& printerName) {
     //      return QPrinterInfo::printerInfo(printerName);
     //   }
-}  // namespace anar::service
+}  // namespace anar::common::service

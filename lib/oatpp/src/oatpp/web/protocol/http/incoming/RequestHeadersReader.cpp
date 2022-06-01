@@ -24,8 +24,6 @@
 
 #include "RequestHeadersReader.hpp"
 
-#include "oatpp/core/data/stream/ChunkedBuffer.hpp"
-
 namespace oatpp { namespace web { namespace protocol { namespace http { namespace incoming {
 
 v_io_size RequestHeadersReader::readHeadersSectionIterative(ReadHeadersIteration& iteration,
@@ -95,7 +93,7 @@ RequestHeadersReader::Result RequestHeadersReader::readHeaders(data::stream::Inp
   }
   
   if(error.ioStatus > 0) {
-    oatpp::parser::Caret caret (m_bufferStream->getData(), m_bufferStream->getCurrentPosition());
+    oatpp::parser::Caret caret ((const char*) m_bufferStream->getData(), m_bufferStream->getCurrentPosition());
     http::Status status;
     http::Parser::parseRequestStartingLine(result.startingLine, nullptr, caret, status);
     if(status.code == 0) {
@@ -155,7 +153,7 @@ RequestHeadersReader::readHeadersAsync(const std::shared_ptr<data::stream::Input
     
     Action parseHeaders() {
 
-      oatpp::parser::Caret caret (m_this->m_bufferStream->getData(), m_this->m_bufferStream->getCurrentPosition());
+      oatpp::parser::Caret caret ((const char*) m_this->m_bufferStream->getData(), m_this->m_bufferStream->getCurrentPosition());
       http::Status status;
       http::Parser::parseRequestStartingLine(m_result.startingLine, nullptr, caret, status);
       if(status.code == 0) {

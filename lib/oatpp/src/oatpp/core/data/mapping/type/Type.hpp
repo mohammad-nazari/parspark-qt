@@ -34,7 +34,7 @@
 #include <string>
 
 namespace oatpp { namespace data { namespace mapping { namespace type {
-  
+
 class Type; // FWD
 
 /**
@@ -42,13 +42,21 @@ class Type; // FWD
  */
 class ClassId {
 private:
-  static std::atomic_int ID_COUNTER;
+  static std::mutex& getClassMutex();
+  static std::vector<const char*>& getClassNames();
+  static v_int32 registerClassName(const char* name);
 public:
   /**
    * Get count of all type classes created.
    * @return
    */
   static int getClassCount();
+
+  /**
+   * Get registered class names.
+   * @return
+   */
+  static std::vector<const char*> getRegisteredClassNames();
 public:
 
   /**
@@ -67,6 +75,17 @@ public:
    * *Note: class type IDs are integer values incremented continuously from [0 to `getClassCount()`]*
    */
   const v_int32 id;
+
+public:
+
+  inline bool operator == (const ClassId& other) const {
+    return id == other.id;
+  }
+
+  inline bool operator != (const ClassId& other) const {
+    return id != other.id;
+  }
+
 };
 
 
@@ -90,6 +109,8 @@ namespace __class {
 
 }
 
+class Void; // FWD
+
 /**
  * ObjectWrapper holds std::shared_ptr to object, object static type, plus object dynamic type information.
  * @tparam T - Object Type.
@@ -97,8 +118,14 @@ namespace __class {
  */
 template <class T, class Clazz = __class::Void>
 class ObjectWrapper {
+  friend Void;
+  template <class Q, class W>
+  friend class ObjectWrapper;
+protected:
+  static void checkType(const Type* _this, const Type* other);
 protected:
   std::shared_ptr<T> m_ptr;
+  const Type* m_valueType;
 public:
 
   /**
@@ -114,61 +141,83 @@ public:
 
   ObjectWrapper(const std::shared_ptr<T>& ptr)
     : m_ptr(ptr)
-    , valueType(Class::getType())
+    , m_valueType(Class::getType())
   {}
 
   ObjectWrapper(const std::shared_ptr<T>& ptr, const Type* const type)
     : m_ptr(ptr)
-    , valueType(type)
+    , m_valueType(type)
   {}
 
   ObjectWrapper(std::shared_ptr<T>&& ptr, const Type* const type)
     : m_ptr(std::move(ptr))
-    , valueType(type)
+    , m_valueType(type)
   {}
   
 public:
 
   ObjectWrapper()
-    : valueType(Class::getType())
+    : m_valueType(Class::getType())
   {}
 
   ObjectWrapper(std::nullptr_t)
-    : valueType(Class::getType())
+    : m_valueType(Class::getType())
   {}
 
   ObjectWrapper(const Type* const type)
-    : valueType(type)
+    : m_valueType(type)
   {}
 
   ObjectWrapper(const ObjectWrapper& other)
     : m_ptr(other.m_ptr)
-    , valueType(other.valueType)
+    , m_valueType(other.m_valueType)
   {}
 
   ObjectWrapper(ObjectWrapper&& other)
     : m_ptr(std::move(other.m_ptr))
-    , valueType(other.valueType)
+    , m_valueType(other.m_valueType)
+  {}
+
+  template <class Q, class W>
+  ObjectWrapper(const ObjectWrapper<Q, W>& other)
+    : m_ptr(other.m_ptr)
+    , m_valueType(other.m_valueType)
+  {}
+
+  template <class Q, class W>
+  ObjectWrapper(ObjectWrapper<Q, W>&& other)
+    : m_ptr(std::move(other.m_ptr))
+    , m_valueType(other.m_valueType)
   {}
 
   inline ObjectWrapper& operator=(const ObjectWrapper& other){
+    checkType(m_valueType, other.m_valueType);
     m_ptr = other.m_ptr;
     return *this;
   }
 
   inline ObjectWrapper& operator=(ObjectWrapper&& other){
+    checkType(m_valueType, other.m_valueType);
     m_ptr = std::move(other.m_ptr);
     return *this;
   }
-  
-  inline operator ObjectWrapper<void>() const {
-    return ObjectWrapper<void>(this->m_ptr, valueType);
+
+  template <class Q, class W>
+  inline ObjectWrapper& operator=(const ObjectWrapper<Q, W>& other){
+    checkType(m_valueType, other.m_valueType);
+    m_ptr = other.m_ptr;
+    return *this;
+  }
+
+  template <class Q, class W>
+  inline ObjectWrapper& operator=(ObjectWrapper<Q, W>&& other){
+    checkType(m_valueType, other.m_valueType);
+    m_ptr = std::move(other.m_ptr);
+    return *this;
   }
 
   template<class Wrapper>
-  Wrapper staticCast() const {
-    return Wrapper(std::static_pointer_cast<typename Wrapper::ObjectType>(m_ptr), valueType);
-  }
+  Wrapper cast() const;
 
   inline T* operator->() const {
     return m_ptr.operator->();
@@ -178,7 +227,7 @@ public:
     return m_ptr.get();
   }
   
-  void setPtr(const std::shared_ptr<T>& ptr) {
+  void resetPtr(const std::shared_ptr<T>& ptr = nullptr) {
     m_ptr = ptr;
   }
   
@@ -207,14 +256,117 @@ public:
   }
 
   /**
-   * Value type information.
-   * See &l:Type;.
+   * Get value type
+   * @return
    */
-  const Type* const valueType;
+  const Type* getValueType() const {
+    return m_valueType;
+  }
   
 };
 
-typedef ObjectWrapper<void, __class::Void> Void;
+class Void : public ObjectWrapper<void, __class::Void> {
+public:
+  Void(const std::shared_ptr<void>& ptr, const type::Type* const valueType)
+    : ObjectWrapper<void, __class::Void>(ptr, valueType)
+  {}
+public:
+
+  Void() {}
+
+  template<typename T,
+    typename enabled = typename std::enable_if<std::is_same<T, std::nullptr_t>::value, void>::type
+  >
+  Void(T) {}
+
+  Void(const Type* const type)
+    : ObjectWrapper<void, __class::Void>(type)
+  {}
+
+  Void(const std::shared_ptr<void>& ptr)
+    : type::ObjectWrapper<void, __class::Void>(ptr)
+  {}
+
+  Void(std::shared_ptr<void>&& ptr)
+    : type::ObjectWrapper<void, __class::Void>(std::forward<std::shared_ptr<void>>(ptr))
+  {}
+
+  Void(const Void& other)
+    : type::ObjectWrapper<void, __class::Void>(other.getPtr(), other.getValueType())
+  {}
+
+  Void(Void&& other)
+    : type::ObjectWrapper<void, __class::Void>(std::move(other.getPtr()), other.getValueType())
+  {}
+
+  template<typename T, typename C>
+  Void(const ObjectWrapper<T, C>& other)
+    : type::ObjectWrapper<void, __class::Void>(other.getPtr(), other.getValueType())
+  {}
+
+  template<typename T, typename C>
+  Void(ObjectWrapper<T, C>&& other)
+    : type::ObjectWrapper<void, __class::Void>(std::move(other.getPtr()), other.getValueType())
+  {}
+
+  template<typename T,
+    typename enabled = typename std::enable_if<std::is_same<T, std::nullptr_t>::value, void>::type
+  >
+  inline Void& operator = (std::nullptr_t) {
+    m_ptr.reset();
+    return *this;
+  }
+
+  inline Void& operator = (const Void& other){
+    m_ptr = other.m_ptr;
+    m_valueType = other.getValueType();
+    return *this;
+  }
+
+  inline Void& operator = (Void&& other){
+    m_ptr = std::move(other.m_ptr);
+    m_valueType = other.getValueType();
+    return *this;
+  }
+
+  template<typename T, typename C>
+  inline Void& operator = (const ObjectWrapper<T, C>& other){
+    m_ptr = other.m_ptr;
+    m_valueType = other.getValueType();
+    return *this;
+  }
+
+  template<typename T, typename C>
+  inline Void& operator = (ObjectWrapper<T, C>&& other){
+    m_ptr = std::move(other.m_ptr);
+    m_valueType = other.getValueType();
+    return *this;
+  }
+
+  template<typename T,
+    typename enabled = typename std::enable_if<std::is_same<T, std::nullptr_t>::value, void>::type
+  >
+  inline bool operator == (T) const {
+    return m_ptr.get() == nullptr;
+  }
+
+  template<typename T,
+    typename enabled = typename std::enable_if<std::is_same<T, std::nullptr_t>::value, void>::type
+  >
+  inline bool operator != (T) const {
+    return m_ptr.get() != nullptr;
+  }
+
+  template<typename T, typename C>
+  inline bool operator == (const ObjectWrapper<T, C> &other) const {
+    return m_ptr.get() == other.get();
+  }
+
+  template<typename T, typename C>
+  inline bool operator != (const ObjectWrapper<T, C> &other) const {
+    return m_ptr.get() != other.get();
+  }
+};
 
 template <typename T>
 struct ObjectWrapperByUnderlyingType {};
@@ -230,6 +382,9 @@ public:
    */
   class AbstractInterpretation {
   public:
+
+    virtual ~AbstractInterpretation() = default;
+
     /**
      * Convert the object to its interpretation.
      * @param originalValue
@@ -256,11 +411,11 @@ public:
   public:
 
     Void toInterpretation(const Void& originalValue) const override {
-      return interpret(originalValue.staticCast<OriginalWrapper>());
+      return interpret(originalValue.template cast<OriginalWrapper>());
     }
 
     Void fromInterpretation(const Void& interValue) const override {
-      return reproduce(interValue.staticCast<InterWrapper>());
+      return reproduce(interValue.template cast<InterWrapper>());
     }
 
     const Type* getInterpretationType() const override {
@@ -279,16 +434,62 @@ public:
 public:
 
   /**
+   * Type info.
+   */
+  struct Info {
+
+    /**
+     * Default constructor.
+     */
+    Info() {}
+
+    /**
+     * Type name qualifier.
+     */
+    const char* nameQualifier = nullptr;
+
+    /**
+     * List of type parameters - for templated types.
+     */
+    std::vector<const Type*> params;
+
+    /**
+     * PolymorphicDispatcher is responsible for forwarding polymorphic calls to a correct object of type `Type`.
+     */
+    void* polymorphicDispatcher = nullptr;
+
+    /**
+     * Map of type Interpretations.
+     */
+    InterpretationMap interpretationMap;
+
+    /**
+     * Parent type. <br>
+     * Ex.: DTO super-class type. <br>
+     * **Note:** setting `parent` type also means that child object can be
+     * statically casted to parent type without any violations.
+     */
+    const Type* parent = nullptr;
+
+    /**
+     * polymorphicDispatcher extends &id:oatpp::data::mapping::type::__class::Collection::PolymorphicDispatcher;.
+     */
+     bool isCollection = false;
+
+    /**
+     * polymorphicDispatcher extends &id:oatpp::data::mapping::type::__class::Map::PolymorphicDispatcher;.
+     */
+     bool isMap = false;
+  };
+
+public:
+
+  /**
    * Constructor.
    * @param pClassId - type class id.
-   * @param pNameQualifier - type name qualifier.
-   * @param pPolymorphicDispatcher - is an object to forward polymorphic calls to a correct object of type `Type`.
-   * @param pInterpretationMap - Map of type Interpretations.
+   * @param typeInfo - type creation info. &l:Type::Info;.
    */
-  Type(const ClassId& pClassId,
-       const char* pNameQualifier,
-       void* pPolymorphicDispatcher = nullptr,
-       InterpretationMap&& pInterpretationMap = {});
+  Type(const ClassId& pClassId, const Info& typeInfo = Info());
 
   /**
    * type class id.
@@ -303,7 +504,7 @@ public:
   /**
    * List of type parameters - for templated types.
    */
-  std::list<const Type*> params;
+  const std::vector<const Type*> params;
 
   /**
    * PolymorphicDispatcher - is an object to forward polymorphic calls to a correct object of type `Type`.
@@ -315,6 +516,24 @@ public:
    */
   const InterpretationMap interpretationMap;
 
+  /**
+   * Parent type. <br>
+   * Ex.: DTO super-class type. <br>
+   * **Note:** setting `parent` type also means that child object can be
+   * statically casted to parent type without any violations.
+   */
+  const Type* const parent;
+
+  /**
+   * polymorphicDispatcher extends &id:oatpp::data::mapping::type::__class::Collection::PolymorphicDispatcher;.
+   */
+  const bool isCollection;
+
+  /**
+   * polymorphicDispatcher extends &id:oatpp::data::mapping::type::__class::Map::PolymorphicDispatcher;.
+   */
+  const bool isMap;
+
 public:
 
   /**
@@ -324,8 +543,37 @@ public:
    * interpretations found.
    */
   const AbstractInterpretation* findInterpretation(const std::vector<std::string>& names) const;
+
+  /**
+   * Check if type extends other type.
+   * @param other
+   * @return
+   */
+  bool extends(const Type* other) const;
   
 };
+
+template <class T, class Clazz>
+template<class Wrapper>
+Wrapper ObjectWrapper<T, Clazz>::cast() const {
+  if(!Wrapper::Class::getType()->extends(m_valueType)) {
+    if(Wrapper::Class::getType() != __class::Void::getType() && m_valueType != __class::Void::getType()) {
+      throw std::runtime_error("[oatpp::data::mapping::type::ObjectWrapper::cast()]: Error. Invalid cast "
+                               "from '" + std::string(m_valueType->classId.name) + "' to '" +
+                               std::string(Wrapper::Class::getType()->classId.name) + "'.");
+    }
+  }
+  return Wrapper(std::static_pointer_cast<typename Wrapper::ObjectType>(m_ptr), Wrapper::Class::getType());
+}
+
+template <class T, class Clazz>
+void ObjectWrapper<T, Clazz>::checkType(const Type* _this, const Type* other) {
+  if(!_this->extends(other)) {
+    throw std::runtime_error("[oatpp::data::mapping::type::ObjectWrapper::checkType()]: Error. "
+                             "Type mismatch: stored '" + std::string(_this->classId.name) + "' vs "
+                             "assigned '" + std::string(other->classId.name) + "'.");
+  }
+}
 
 #define OATPP_DEFINE_OBJECT_WRAPPER_DEFAULTS(WRAPPER_NAME, OBJECT_TYPE, OBJECT_CLASS) \
 public: \
@@ -365,7 +613,7 @@ public: \
   } \
 \
   inline WRAPPER_NAME& operator = (WRAPPER_NAME&& other) { \
-    this->m_ptr = std::forward<std::shared_ptr<OBJECT_TYPE>>(other.m_ptr); \
+    this->m_ptr = std::move(other.m_ptr); \
     return *this; \
   } \
 
@@ -373,6 +621,18 @@ public: \
 }}}}
 
 namespace std {
+
+template<>
+struct hash<oatpp::data::mapping::type::ClassId> {
+
+  typedef oatpp::data::mapping::type::ClassId argument_type;
+  typedef v_uint64 result_type;
+
+  result_type operator()(argument_type const& v) const noexcept {
+    return v.id;
+  }
+
+};
 
 template<>
 struct hash<oatpp::data::mapping::type::Void> {

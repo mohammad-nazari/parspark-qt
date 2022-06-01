@@ -24,7 +24,7 @@
 
 #include "LockTest.hpp"
 
-#include "oatpp/core/data/stream/ChunkedBuffer.hpp"
+#include "oatpp/core/data/stream/BufferStream.hpp"
 
 #include "oatpp/core/async/Executor.hpp"
 #include "oatpp/core/async/Lock.hpp"
@@ -40,11 +40,11 @@ static constexpr v_int32 NUM_SYMBOLS = 20;
 
 class Buff {
 private:
-  oatpp::data::stream::ChunkedBuffer *m_buffer;
+  oatpp::data::stream::BufferOutputStream *m_buffer;
   std::mutex m_mutex;
 public:
 
-  Buff(oatpp::data::stream::ChunkedBuffer *buffer)
+  Buff(oatpp::data::stream::BufferOutputStream *buffer)
     : m_buffer(buffer) {}
 
   void writeChar(char c) {
@@ -159,7 +159,7 @@ bool checkSymbol(char symbol, const char* data, v_buff_size size) {
 }
 
 bool checkSymbol(char symbol, const oatpp::String& str) {
-  return checkSymbol(symbol, (const char*)str->getData(), str->getSize());
+  return checkSymbol(symbol, str->data(), str->size());
 }
 
 }
@@ -168,7 +168,7 @@ bool checkSymbol(char symbol, const oatpp::String& str) {
 void LockTest::onRun() {
 
   oatpp::async::Lock lock;
-  oatpp::data::stream::ChunkedBuffer buffer;
+  oatpp::data::stream::BufferOutputStream buffer;
   Buff buff(&buffer);
 
   oatpp::async::Executor executor(10, 1, 1);
@@ -201,8 +201,8 @@ void LockTest::onRun() {
     bool check = checkSymbol((char)c, result);
     if(!check) {
       v_int32 code = c;
-      auto str = oatpp::String((const char*)&c, 1, true);
-      OATPP_LOGE(TAG, "Failed for symbol %d, '%s'", code, str->getData());
+      auto str = oatpp::String((const char*)&c, 1);
+      OATPP_LOGE(TAG, "Failed for symbol %d, '%s'", code, str->data());
     }
     OATPP_ASSERT(check);
   }

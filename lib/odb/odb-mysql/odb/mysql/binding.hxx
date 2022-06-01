@@ -12,6 +12,7 @@
 #include <odb/forward.hxx>
 
 #include <odb/mysql/version.hxx>
+#include <odb/mysql/mysql.hxx>
 #include <odb/mysql/mysql-types.hxx>
 
 #include <odb/mysql/details/export.hxx>

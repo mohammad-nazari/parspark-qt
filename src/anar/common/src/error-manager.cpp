@@ -1,6 +1,6 @@
 #include "anar/error-manager.hpp"
 
-namespace anar::service {
+namespace anar::common::service {
     model::ErrorModel ErrorManager::GenerateError(uint64_t code, const model::ConstantModel& level, std::string message) {
         return model::ErrorModel(code, level, level.Description + ": " + message);
     }
@@ -31,4 +31,4 @@ namespace anar::service {
         error->Message.clear();
         error->SubErrors.clear();
     }
-}  // namespace anar::service
+}  // namespace anar::common::service

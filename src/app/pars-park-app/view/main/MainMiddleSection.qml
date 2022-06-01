@@ -56,6 +56,9 @@ Rectangle{
             id: menuItemId
             CommonButton{
                onClicked: {
+                    if(formName=="exit"){
+                        close();
+                    }
                   menuRectangleId.openForm(formName);
                }
                buttonText: menuButtonText

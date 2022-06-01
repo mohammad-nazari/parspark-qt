@@ -7,7 +7,7 @@
 namespace anar::parspark::controller {
    class SettingsController;
    using SettingsControllerPtr = std::shared_ptr<SettingsController>;
-   class SettingsController : public anar::controller::Controller {
+   class SettingsController : public anar::common::controller::Controller {
      public:
       static SettingsControllerPtr Create();
       explicit SettingsController();

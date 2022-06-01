@@ -87,6 +87,8 @@ namespace __class {
         : notNull(pNotNull)
       {}
 
+      virtual ~PolymorphicDispatcher() = default;
+
       const bool notNull;
 
       virtual type::Void createObject() const = 0;
@@ -278,7 +280,7 @@ public:
    */
   template<class OtherInter>
   EnumObjectWrapper(const EnumObjectWrapper<T, OtherInter>& other)
-    : type::ObjectWrapper<T, EnumObjectClass>(other.getPtr())
+    : type::ObjectWrapper<T, EnumObjectClass>(other.m_ptr)
   {}
 
   /**
@@ -288,7 +290,7 @@ public:
    */
   template<class OtherInter>
   EnumObjectWrapper(EnumObjectWrapper<T, OtherInter>&& other)
-    : type::ObjectWrapper<T, EnumObjectClass>(std::move(other.getPtr()))
+    : type::ObjectWrapper<T, EnumObjectClass>(std::move(other.m_ptr))
   {}
 
   inline EnumObjectWrapper& operator = (std::nullptr_t) {
@@ -304,7 +306,7 @@ public:
 
   template<class OtherInter>
   inline EnumObjectWrapper& operator = (EnumObjectWrapper<T, OtherInter>&& other) {
-    this->m_ptr = std::forward<std::shared_ptr<T>>(other.m_ptr);
+    this->m_ptr = std::move(other.m_ptr);
     return *this;
   }
 
@@ -457,7 +459,7 @@ template<class T, bool notnull>
 Void EnumInterpreterAsString<T, notnull>::toInterpretation(const Void& enumValue, EnumInterpreterError& error) {
   typedef EnumObjectWrapper<T, EnumInterpreterAsString<T, notnull>> EnumOW;
 
-  if(enumValue.valueType != EnumOW::Class::getType()) {
+  if(enumValue.getValueType() != EnumOW::Class::getType()) {
     error = EnumInterpreterError::TYPE_MISMATCH_ENUM;
     return Void(nullptr, String::Class::getType());
   }
@@ -470,7 +472,7 @@ Void EnumInterpreterAsString<T, notnull>::toInterpretation(const Void& enumValue
     return Void(nullptr, String::Class::getType());
   }
 
-  const auto& ow = enumValue.staticCast<EnumOW>();
+  const auto& ow = enumValue.template cast<EnumOW>();
   const auto& entry = EnumOW::getEntryByValue(*ow);
   return entry.name.toString();
 }
@@ -479,7 +481,7 @@ template<class T, bool notnull>
 Void EnumInterpreterAsString<T, notnull>::fromInterpretation(const Void& interValue, EnumInterpreterError& error) {
   typedef EnumObjectWrapper<T, EnumInterpreterAsString<T, notnull>> EnumOW;
 
-  if(interValue.valueType != String::Class::getType()) {
+  if(interValue.getValueType() != String::Class::getType()) {
     error = EnumInterpreterError::TYPE_MISMATCH_ENUM_VALUE;
     return Void(nullptr, EnumOW::Class::getType());
   }
@@ -493,9 +495,9 @@ Void EnumInterpreterAsString<T, notnull>::fromInterpretation(const Void& interVa
   }
 
   try {
-    const auto &entry = EnumOW::getEntryByName(interValue.staticCast<String>());
+    const auto &entry = EnumOW::getEntryByName(interValue.template cast<String>());
     return EnumOW(entry.value);
-  } catch (const std::runtime_error& e) { // TODO - add a specific error for this.
+  } catch (const std::runtime_error&) { // TODO - add a specific error for this.
     error = EnumInterpreterError::ENTRY_NOT_FOUND;
   }
   return Void(nullptr, EnumOW::Class::getType());
@@ -513,7 +515,7 @@ Void EnumInterpreterAsNumber<T, notnull>::toInterpretation(const Void& enumValue
   typedef typename std::underlying_type<T>::type EnumUT;
   typedef typename ObjectWrapperByUnderlyingType<EnumUT>::ObjectWrapper UTOW;
 
-  if(enumValue.valueType != EnumOW::Class::getType()) {
+  if(enumValue.getValueType() != EnumOW::Class::getType()) {
     error = EnumInterpreterError::TYPE_MISMATCH_ENUM;
     return Void(nullptr, UTOW::Class::getType());
   }
@@ -526,7 +528,7 @@ Void EnumInterpreterAsNumber<T, notnull>::toInterpretation(const Void& enumValue
     return Void(nullptr, UTOW::Class::getType());
   }
 
-  const auto& ow = enumValue.staticCast<EnumOW>();
+  const auto& ow = enumValue.template cast<EnumOW>();
   return UTOW(static_cast<EnumUT>(*ow));
 
 }
@@ -538,7 +540,7 @@ Void EnumInterpreterAsNumber<T, notnull>::fromInterpretation(const Void& interVa
   typedef typename std::underlying_type<T>::type EnumUT;
   typedef typename ObjectWrapperByUnderlyingType<EnumUT>::ObjectWrapper OW;
 
-  if(interValue.valueType != OW::Class::getType()) {
+  if(interValue.getValueType() != OW::Class::getType()) {
     error = EnumInterpreterError::TYPE_MISMATCH_ENUM_VALUE;
     return Void(nullptr, EnumOW::Class::getType());
   }
@@ -553,10 +555,10 @@ Void EnumInterpreterAsNumber<T, notnull>::fromInterpretation(const Void& interVa
 
   try{
     const auto& entry = EnumOW::getEntryByUnderlyingValue(
-      interValue.staticCast<OW>()
+      interValue.template cast<OW>()
     );
     return EnumOW(entry.value);
-  } catch (const std::runtime_error& e) { // TODO - add a specific error for this.
+  } catch (const std::runtime_error&) { // TODO - add a specific error for this.
     error = EnumInterpreterError::ENTRY_NOT_FOUND;
   }
   return Void(nullptr, EnumOW::Class::getType());
@@ -620,8 +622,10 @@ namespace __class {
   private:
 
     static Type createType() {
-      Type type(__class::AbstractEnum::CLASS_ID, type::EnumMeta<T>::getInfo()->nameQualifier, new PolymorphicDispatcher());
-      return type;
+      Type::Info info;
+      info.nameQualifier = type::EnumMeta<T>::getInfo()->nameQualifier;
+      info.polymorphicDispatcher = new PolymorphicDispatcher();
+      return Type(__class::AbstractEnum::CLASS_ID, info);
     }
 
   public:

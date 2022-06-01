@@ -25,6 +25,7 @@
 #ifndef oatpp_data_mapping_type_List_hpp
 #define oatpp_data_mapping_type_List_hpp
 
+#include "./Collection.hpp"
 #include "./Type.hpp"
 
 #include <list>
@@ -39,27 +40,11 @@ namespace __class {
    */
   class AbstractList {
   public:
+
     /**
      * Class Id.
      */
     static const ClassId CLASS_ID;
-  public:
-
-    /**
-     * Polymorphic Dispatcher
-     */
-    class PolymorphicDispatcher {
-    public:
-
-      virtual type::Void createObject() const = 0;
-
-      /**
-       * Add item.
-       * @param object - List to add item to.
-       * @param item - Item to add.
-       */
-      virtual void addPolymorphicItem(const type::Void& object, const type::Void& item) const = 0;
-    };
 
   };
 
@@ -113,35 +98,20 @@ public:
 template<class T>
 using List = ListObjectWrapper<T, __class::List<T>>;
 
-typedef ListObjectWrapper<type::Void, __class::AbstractList> AbstractList;
+typedef List<Void> AbstractList;
 
 namespace __class {
 
   template<class T>
   class List : public AbstractList {
-  public:
-
-    class PolymorphicDispatcher : public AbstractList::PolymorphicDispatcher {
-    public:
-
-      type::Void createObject() const override {
-        return type::Void(std::make_shared<std::list<T>>(), getType());
-      }
-
-      void addPolymorphicItem(const type::Void& object, const type::Void& item) const override {
-        const auto& list = object.staticCast<type::List<T>>();
-        const auto& listItem = item.staticCast<T>();
-        list->push_back(listItem);
-      }
-
-    };
-
   private:
 
     static Type createType() {
-      Type type(__class::AbstractList::CLASS_ID, nullptr, new PolymorphicDispatcher());
-      type.params.push_back(T::Class::getType());
-      return type;
+      Type::Info info;
+      info.params.push_back(T::Class::getType());
+      info.polymorphicDispatcher = new typename StandardCollection<std::list<T>, T, List>::PolymorphicDispatcher();
+      info.isCollection = true;
+      return Type(__class::AbstractList::CLASS_ID, info);
     }
 
   public:

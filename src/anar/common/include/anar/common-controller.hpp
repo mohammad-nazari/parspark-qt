@@ -5,17 +5,17 @@
 
 #include "anar/controller.hpp"
 
-namespace anar::controller {
-   class CommonController;
-   using CommonControllerPtr = std::shared_ptr<CommonController>;
-   class CommonController : public Controller {
-     public:
-      static CommonControllerPtr Create();
-      CommonController();
+namespace anar::common::controller {
+    class CommonController;
+    using CommonControllerPtr = std::shared_ptr<CommonController>;
+    class CommonController : public Controller {
+       public:
+        static CommonControllerPtr Create();
+        CommonController();
 
-      static std::vector<std::string> GetSerialPortListNames();
-      static std::vector<std::string> GetSerialPortBaudRates();
-      static std::vector<std::string> GetPrinterListNames();
-   };
-}  // namespace anar::controller
+        static std::vector<std::string> GetSerialPortListNames();
+        static std::vector<std::string> GetSerialPortBaudRates();
+        static std::vector<std::string> GetPrinterListNames();
+    };
+}  // namespace anar::common::controller
 #endif  // ANAR_CONTROLLER_COMMON_HPP

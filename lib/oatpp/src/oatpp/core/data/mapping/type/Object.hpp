@@ -36,7 +36,6 @@
 #include "./Vector.hpp"
 #include "./UnorderedSet.hpp"
 
-#include "oatpp/core/base/memory/ObjectPool.hpp"
 #include "oatpp/core/base/Countable.hpp"
 
 #include <type_traits>
@@ -56,14 +55,64 @@ public:
   public:
 
     /**
+     * Property Type Selector.
+     */
+    class TypeSelector {
+    public:
+
+      /**
+       * Default destructor.
+       */
+      virtual ~TypeSelector() = default;
+
+      /**
+       * Select property type.
+       * @param self - pointer to `this` object.
+       * @return - &id:oatpp::Type;.
+       */
+      virtual const type::Type* selectType(BaseObject* self) = 0;
+    };
+
+    template<class DTOType>
+    class FieldTypeSelector : public TypeSelector {
+    public:
+
+      const type::Type* selectType(BaseObject* self) override {
+        return selectFieldType(static_cast<DTOType*>(self));
+      }
+
+      virtual const type::Type* selectFieldType(DTOType* self) = 0;
+
+    };
+
+  public:
+
+    /**
      * Editional Info about Property.
      */
     struct Info {
+
       /**
        * Description.
        */
       std::string description = "";
+
+      /**
+       * Pattern.
+       */
       std::string pattern = "";
+
+      /**
+       * Required.
+       */
+      bool required = false;
+
+      /**
+       * Type selector.
+       * &l:Property::TypeSelector;.
+       */
+      TypeSelector* typeSelector = nullptr;
+
     };
 
   private:
@@ -176,6 +225,8 @@ namespace __class {
 
     class PolymorphicDispatcher {
     public:
+      
+      virtual ~PolymorphicDispatcher() = default;
 
       virtual type::Void createObject() const = 0;
 
@@ -216,14 +267,35 @@ namespace __class {
   private:
 
     static type::BaseObject::Properties* initProperties() {
-      T obj; // initializer;
+
+      /* initializer */
+      T obj;
+
+      /* init parent properties */
+      auto parentType = Object<typename T::Z__CLASS_EXTENDED>::getType();
+      if(parentType->parent != nullptr) {
+        auto dispatcher = static_cast<const AbstractObject::PolymorphicDispatcher*>(parentType->polymorphicDispatcher);
+        dispatcher->getProperties();
+      }
+
+      /* extend parent properties */
       T::Z__CLASS_EXTEND(T::Z__CLASS::Z__CLASS_GET_FIELDS_MAP(), T::Z__CLASS_EXTENDED::Z__CLASS_GET_FIELDS_MAP());
+
       return T::Z__CLASS::Z__CLASS_GET_FIELDS_MAP();
+
     }
 
     static const BaseObject::Properties* propertiesGetter() {
       static type::BaseObject::Properties* properties = initProperties();
       return properties;
+    }
+
+    static Type* createType() {
+      Type::Info info;
+      info.nameQualifier = T::Z__CLASS_TYPE_NAME();
+      info.polymorphicDispatcher = new PolymorphicDispatcher();
+      info.parent = T::getParentType();
+      return new Type(CLASS_ID, info);
     }
 
   public:
@@ -233,7 +305,7 @@ namespace __class {
      * @return - &id:oatpp::data::mapping::type::Type;
      */
     static Type* getType() {
-      static Type* type = new Type(CLASS_ID, T::Z__CLASS_TYPE_NAME(), new PolymorphicDispatcher());
+      static Type* type = createType();
       return type;
     }
     
@@ -247,6 +319,8 @@ namespace __class {
  */
 template<class ObjT>
 class DTOWrapper : public ObjectWrapper<ObjT, __class::Object<ObjT>> {
+  template<class Type>
+  friend class DTOWrapper;
 public:
   typedef ObjT TemplateObjectType;
   typedef __class::Object<ObjT> TemplateObjectClass;
@@ -254,8 +328,30 @@ public:
 
   OATPP_DEFINE_OBJECT_WRAPPER_DEFAULTS(DTOWrapper, TemplateObjectType, TemplateObjectClass)
 
+  template<class OtherT>
+  DTOWrapper(const OtherT& other)
+    : type::ObjectWrapper<ObjT, __class::Object<ObjT>>(other.m_ptr)
+  {}
+
+  template<class OtherT>
+  DTOWrapper(OtherT&& other)
+    : type::ObjectWrapper<ObjT, __class::Object<ObjT>>(std::move(other.m_ptr))
+  {}
+
   static DTOWrapper createShared() {
     return std::make_shared<TemplateObjectType>();
+  }
+
+  template<class T>
+  DTOWrapper& operator = (const DTOWrapper<T>& other) {
+    this->m_ptr = other.m_ptr;
+    return *this;
+  }
+
+  template<class T>
+  DTOWrapper& operator = (DTOWrapper<T>&& other) {
+    this->m_ptr = std::move(other.m_ptr);
+    return *this;
   }
 
   template<typename T,
@@ -288,6 +384,31 @@ public:
     return !operator == (other);
   }
 
+  static const std::unordered_map<std::string, BaseObject::Property*>& getPropertiesMap() {
+    auto dispatcher = static_cast<const __class::AbstractObject::PolymorphicDispatcher*>(
+      __class::Object<ObjT>::getType()->polymorphicDispatcher
+    );
+    return dispatcher->getProperties()->getMap();
+  }
+
+  static const std::list<BaseObject::Property*>& getPropertiesList() {
+    auto dispatcher = static_cast<const __class::AbstractObject::PolymorphicDispatcher*>(
+      __class::Object<ObjT>::getType()->polymorphicDispatcher
+    );
+    return dispatcher->getProperties()->getList();
+  }
+
+  static v_int64 getPropertiesCount() {
+    auto dispatcher = static_cast<const __class::AbstractObject::PolymorphicDispatcher*>(
+      __class::Object<ObjT>::getType()->polymorphicDispatcher
+    );
+    return dispatcher->getProperties()->getList().size();
+  }
+
+  ObjectWrapper<void>& operator[](const std::string& propertyName) {
+    return getPropertiesMap().at(propertyName)->getAsRef(this->m_ptr.get());
+  }
+
 };
 
 /**
@@ -297,6 +418,9 @@ public:
 class DTO : public BaseObject {
   template<class T>
   friend class __class::Object;
+private:
+  typedef DTO Z__CLASS;
+  typedef DTO Z__CLASS_EXTENDED;
 public:
   typedef oatpp::data::mapping::type::Void Void;
   typedef oatpp::data::mapping::type::Any Any;
@@ -335,10 +459,10 @@ public:
   using UnorderedFields = oatpp::data::mapping::type::UnorderedMap<String, Value>;
 
 private:
-  
-  static BaseObject::Properties* Z__CLASS_EXTEND(BaseObject::Properties* properties, BaseObject::Properties* extensionProperties);
+  static const mapping::type::Type* getParentType();
+  static const char* Z__CLASS_TYPE_NAME();
   static data::mapping::type::BaseObject::Properties* Z__CLASS_GET_FIELDS_MAP();
-  
+  static BaseObject::Properties* Z__CLASS_EXTEND(BaseObject::Properties* properties, BaseObject::Properties* extensionProperties);
 public:
 
   virtual v_uint64 defaultHashCode() const {

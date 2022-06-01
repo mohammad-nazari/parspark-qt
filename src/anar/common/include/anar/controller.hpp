@@ -6,7 +6,7 @@
 
 #include "error-model.hpp"
 
-namespace anar::controller {
+namespace anar::common::controller {
     class Controller;
     using ControllerPtr = std::shared_ptr<Controller>;
     class Controller {
@@ -25,5 +25,5 @@ namespace anar::controller {
        protected:
         model::ErrorModel m_error;
     };
-}  // namespace anar::controller
+}  // namespace anar::common::controller
 #endif  // ANAR_CONTROLLER_HPP

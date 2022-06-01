@@ -21,16 +21,16 @@ ApplicationWindow  {
       SettingApi.saveSettings(settingsInfo)
      // Any error in save database settings in file
      if(SettingApi.error.length > 0){
-        messageDialog.text = SettingApi.error;
         messageDialog.title =  qsTr("Error on save settings")
         messageDialog.visible = true;
         messageDialog.icon = StandardIcon.Warning
+        messageDialog.text = SettingApi.error;
      }
      else{
-        messageDialog.text = qsTr("Settings saved successfully")
         messageDialog.title =  qsTr("Save settings")
         messageDialog.visible = true;
         messageDialog.icon = StandardIcon.Information
+        messageDialog.text = qsTr("Settings saved successfully")
      }
       closing = true;
    }

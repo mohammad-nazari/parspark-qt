@@ -6,17 +6,18 @@ set(PARS_PARK_MESSAGE "[[PARS_PARK]]")
 function(ANAR_MESSAGE message)
     message("${PARS_PARK_MESSAGE} ${message}")
 endfunction()
-ANAR_MESSAGE("QT dir: ${QTDIR}")
 
-find_package(
-        Qt5
-        COMPONENTS
-        Core
-        LinguistTools
-        Qml
-        Quick
-        REQUIRED
-)
+ANAR_MESSAGE("QT5 dir: ${QTDIR5}")
+
+ANAR_MESSAGE("CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+
+list(APPEND QT_COMPONENTS Core Gui Network PrintSupport Qml QmlModels QmlWorkerScript Quick QuickControls2 QuickTemplates2 Script ScriptTools Svg Widgets Xml XmlPatterns UiTools LinguistTools Sql)
+list(APPEND QT_PACKAGES)
+foreach (QT_LIB ${QT_COMPONENTS})
+    list(APPEND QT_PACKAGES Qt5::${QT_LIB})
+endforeach ()
+
+find_package(Qt5 COMPONENTS ${QT_COMPONENTS} REQUIRED)
 
 if (WIN32)
     # Set minimum windows version to windows 7
@@ -38,6 +39,7 @@ set(PARS_PARK_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
 set(PARS_PARK_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
 set(PARS_PARK_ANAR_LIB_DIR "${PARS_PARK_SOURCE_DIR}/anar")
 set(PARS_PARK_APP_DIR "${PARS_PARK_SOURCE_DIR}/app")
+set(PARS_PARK_UNIT_TEST_DIR "${CMAKE_SOURCE_DIR}/test")
 
 #region QT
 set(CMAKE_PREFIX_PATH "$ENV{QTDIR}")
@@ -45,20 +47,27 @@ set(CMAKE_PREFIX_PATH "$ENV{QTDIR}")
 
 #region MYSQL
 add_definitions(-DDATABASE_MYSQL)
-#set(ENABLE_DATA_MYSQL true)
-#set(MYSQL_FOUND true)
-set(PARS_PARK_MYSQL_LIB mysql)
 set(PARS_PARK_MYSQL_FOLDER mysql)
 if (WIN32)
+    set(PARS_PARK_MYSQL_LIB mysql)
     set(PARS_PARK_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_MYSQL_FOLDER}/mysql-connector-c/win/x64")
-    file(COPY "${PARS_PARK_MYSQL_DIR}/lib/libmysql.dll"
-            DESTINATION "${CMAKE_BINARY_DIR}/bin")
-elseif (UNIX)
-    set(PARS_PARK_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_MYSQL_FOLDER}/mysql-connector-c/unix/x64")
-    file(COPY "${PARS_PARK_MYSQL_DIR}/lib/libmysql.so"
-            DESTINATION "${CMAKE_BINARY_DIR}/bin")
+    file(
+            COPY "${PARS_PARK_MYSQL_DIR}/lib/libmysql.dll"
+            DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    )
+else()
+    set(PARS_PARK_MYSQL_LIB mysqlclient)
 endif ()
 set(MYSQL_ROOT_DIR "${PARS_PARK_MYSQL_DIR}")
+#endregion
+
+#region ZLIB
+set(PARS_PARK_ZLIB_LIB zlib)
+set(ZLIB_LIBRARY ${PARS_PARK_ZLIB_LIB})
+set(PARS_PARK_ZLIB_FOLDER zlib)
+set(PARS_PARK_ZLIB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ZLIB_FOLDER}")
+set(PARS_PARK_ZLIB_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_ZLIB_FOLDER}")
+set(ZLIB_INCLUDE_DIR ${PARS_PARK_ZLIB_DIR})
 #endregion
 
 #region PNG
@@ -66,13 +75,6 @@ set(PARS_PARK_PNG_LIB png)
 set(PARS_PARK_PNG_FOLDER png)
 set(PARS_PARK_PNG_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_PNG_FOLDER}")
 set(PARS_PARK_PNG_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_PNG_FOLDER}")
-#endregion
-
-#region ZLIB
-set(PARS_PARK_ZLIB_LIB zlib)
-set(PARS_PARK_ZLIB_FOLDER zlib)
-set(PARS_PARK_ZLIB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ZLIB_FOLDER}")
-set(PARS_PARK_ZLIB_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_ZLIB_FOLDER}")
 #endregion
 
 #region ZINT
@@ -125,10 +127,11 @@ set(PARS_PARK_OATPP_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_OATPP_FOLDER}")
 #region ODB
 set(PARS_PARK_ODB_LIB odb)
 set(PARS_PARK_ODB_MYSQL_LIB ODB::MySQL)
+set(PARS_PARK_ODB_ALL_FOLDER odb)
 set(PARS_PARK_ODB_FOLDER odb)
 set(PARS_PARK_ODB_MYSQL_FOLDER odb-mysql)
-set(PARS_PARK_ODB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_FOLDER}/${PARS_PARK_ODB_FOLDER}")
-set(PARS_PARK_ODB_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_FOLDER}/${PARS_PARK_ODB_MYSQL_FOLDER}")
+set(PARS_PARK_ODB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_ALL_FOLDER}/${PARS_PARK_ODB_FOLDER}")
+set(PARS_PARK_ODB_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_ALL_FOLDER}/${PARS_PARK_ODB_MYSQL_FOLDER}")
 #endregion
 
 #region Serial
@@ -166,10 +169,12 @@ set(PARS_PARK_PARS_PARK_APP_DIR "${PARS_PARK_APP_DIR}/${PARS_PARK_PARS_PARK_APP_
 #endregion Anar Pars Park App
 
 link_directories(
+        "${QTDIR5}/lib"
         "${PARS_PARK_MYSQL_DIR}/lib"
 )
 
 include_directories(
+        "${QTDIR5}/include"
         "${PARS_PARK_PNG_BIN_DIR}"
         "${PARS_PARK_PNG_DIR}"
         "${PARS_PARK_ZLIB_BIN_DIR}"
@@ -187,13 +192,13 @@ include_directories(
         "${PARS_PARK_ODB_MYSQL_DIR}"
         "${PARS_PARK_SERIAL_DIR}/include"
         "${PARS_PARK_GOOGLE_LOG_DIR}/src"
-        "${PARS_PARK_GOOGLE_TEST_DIR}/${PARS_PARK_GOOGLE_TEST_DIR}/include"
+        "${PARS_PARK_GOOGLE_TEST_DIR}/${PARS_PARK_GOOGLE_TEST_FOLDER}/include"
         "${PARS_PARK_ANAR_COMMON_LIB_DIR}/include"
         "${PARS_PARK_PARS_PARK_APP_DIR}"
 )
 
-add_subdirectory("${PARS_PARK_PNG_DIR}")
 add_subdirectory("${PARS_PARK_ZLIB_DIR}")
+add_subdirectory("${PARS_PARK_PNG_DIR}")
 add_subdirectory("${PARS_PARK_ZINT_DIR}")
 add_subdirectory("${PARS_PARK_QZINT_DIR}")
 add_subdirectory("${PARS_PARK_LIMEREPORT_DIR}")
@@ -204,14 +209,46 @@ add_subdirectory("${PARS_PARK_ODB_DIR}")
 add_subdirectory("${PARS_PARK_ODB_MYSQL_DIR}")
 add_subdirectory("${PARS_PARK_SERIAL_DIR}")
 add_subdirectory("${PARS_PARK_GOOGLE_LOG_DIR}")
-add_subdirectory("${PARS_PARK_GOOGLE_TEST_DIR}")
 add_subdirectory("${PARS_PARK_ANAR_LIB_DIR}")
 add_subdirectory("${PARS_PARK_PARS_PARK_APP_DIR}")
+add_subdirectory("${PARS_PARK_GOOGLE_TEST_DIR}")
+add_subdirectory("${PARS_PARK_UNIT_TEST_DIR}")
 
 file(
         MAKE_DIRECTORY
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/logs
 )
 
+if (WIN32)
+    set(DEBUG_SUFFIX)
+    if ((CMAKE_CXX_COMPILER_ID STREQUAL "MSVC") AND (CMAKE_BUILD_TYPE MATCHES "Debug"))
+        set(DEBUG_SUFFIX "d")
+    endif ()
+    set(QT_INSTALL_PATH "${QTDIR5}")
+    if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
+        set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")
+        if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
+            set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")
+        endif ()
+    endif ()
+    if (EXISTS "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll")
+        file(
+                COPY "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll"
+                DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/plugins/platforms/"
+        )
+    endif ()
+    foreach (QT_LIB ${QT_COMPONENTS})
+        if (EXISTS "${QT_INSTALL_PATH}/bin/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll")
+            file(
+                    COPY "${QT_INSTALL_PATH}/bin/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll"
+                    DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+            )
+        endif ()
+    endforeach ()
+    file(
+            COPY "${QT_INSTALL_PATH}/qml"
+            DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    )
+endif ()
 #d:\Tools\ODB\odb-compiler\bin\odb.exe -d mysql --generate-query --generate-schema --std c++11 person.hxx
 #d:\Tools\ODB\odb-compiler\bin\odb.exe --std c++11 --database mysql --generate-schema --generate-query --hxx-prologue "#include \"traits.hxx\""  --table-prefix mapping_ person.hxx

@@ -1,6 +1,24 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(odb VERSION 2.4.0 LANGUAGES CXX)
+if (WIN32)
+    set(
+            PLATFORM_SOURCES
+            odb/details/win32/exceptions.cxx
+            odb/details/win32/init.cxx
+            odb/details/win32/once.cxx
+            odb/details/win32/thread.cxx
+            odb/details/win32/tls.cxx
+            odb/details/win32/condition.cxx
+            odb/details/win32/dll.cxx
+    )
+else ()
+    set(
+            PLATFORM_SOURCES
+            odb/details/posix/exceptions.cxx
+            odb/details/posix/thread.cxx
+    )
+endif ()
 
 set(
         ODB_SOURCES
@@ -24,16 +42,8 @@ set(
         odb/details/mutex.cxx
         odb/details/buffer.cxx
         odb/details/condition.cxx
-        #        odb/details/posix/exceptions.cxx
-        #        odb/details/posix/thread.cxx
         odb/details/shared-ptr/base.cxx
-        odb/details/win32/exceptions.cxx
-        odb/details/win32/init.cxx
-        odb/details/win32/once.cxx
-        odb/details/win32/thread.cxx
-        odb/details/win32/tls.cxx
-        odb/details/win32/condition.cxx
-        odb/details/win32/dll.cxx
+        ${PLATFORM_SOURCES}
 )
 
 add_library(

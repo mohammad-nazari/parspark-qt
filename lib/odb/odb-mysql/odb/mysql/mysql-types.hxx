@@ -7,12 +7,12 @@
 
 #include <odb/mysql/details/config.hxx>
 
+#ifdef LIBODB_MYSQL_INCLUDE_SHORT
 typedef char my_bool;
 typedef struct st_mysql_bind MYSQL_BIND;
-
-#ifdef LIBODB_MYSQL_INCLUDE_SHORT
 #  include <mysql_time.h>
 #else
+typedef bool my_bool;
 #  include <mysql/mysql_time.h>
 #endif
 

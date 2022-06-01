@@ -3,7 +3,7 @@
 
 #include "constant-model.hpp"
 
-namespace anar::constant {
+namespace anar::common::constant {
     namespace ErrorLevel {
         const model::ConstantModel ANAR_NO_ERROR{0, "no-error", ""};
         const model::ConstantModel ANAR_LOW_INFO{1, "low-info", "Low information message"};
@@ -22,5 +22,5 @@ namespace anar::constant {
         const model::ConstantModel ANAR_FATAL{41, "fatal", "Fatal Message"};
         const model::ConstantModel ANAR_HIGH_FATAL{42, "high-fatal", "High fatal message"};
     }  // namespace ErrorLevel
-}  // namespace anar::constant
+}  // namespace anar::common::constant
 #endif  // ANAR_CONST_ERROR_HPP-

@@ -3,7 +3,7 @@
 
 #include "anar/error-model.hpp"
 
-namespace anar::service {
+namespace anar::common::service {
     class ErrorManager {
        public:
         static model::ErrorModel GenerateError(uint64_t code, const model::ConstantModel& level = constant::ErrorLevel::ANAR_NO_ERROR, std::string message = "");
@@ -15,6 +15,6 @@ namespace anar::service {
         static void ResetError(model::ErrorModel& error);
         static void ResetError(model::ErrorModelPtr error);
     };
-}  // namespace anar::service
+}  // namespace anar::common::service
 
 #endif  // ANAR_PARS_PARK_SERVICE_ERROR_MANAGER_HPP

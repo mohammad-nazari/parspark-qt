@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace anar::service {
+namespace anar::common::service {
     class Printer;
     using PrinterPtr = std::shared_ptr<Printer>;
     class Printer {
@@ -18,13 +18,13 @@ namespace anar::service {
 
         //      static std::vector<QPrinterInfo> GetList();
 
-//#ifdef WIN32
-//        static PRINTER_INFO_2* GetList(DWORD& count);
-//#endif
+        //#ifdef WIN32
+        //        static PRINTER_INFO_2* GetList(DWORD& count);
+        //#endif
         static std::vector<std::string> GetListNames();
         //      static QPrinterInfo GetDefault();
         static std::string GetDefaultName();
         //      static QPrinterInfo GetInfo(const std::string& printerName);
     };
-}  // namespace anar::service
+}  // namespace anar::common::service
 #endif  // ANAR_SERVICE_PRINTER_HPP

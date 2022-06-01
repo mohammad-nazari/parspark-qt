@@ -10,7 +10,7 @@
 #include "database-model.hpp"
 #include "odb/database.hxx"
 
-namespace anar::database {
+namespace anar::common::database {
     class IDatabase;
     using DatabasePtr = std::shared_ptr<IDatabase>;
     class IDatabase {
@@ -24,7 +24,7 @@ namespace anar::database {
         bool Insert(const std::map<std::string, std::string>& dataInfos);
         template <typename TableTemp>
         bool Select(const odb::query<TableTemp>& query, std::vector<TableTemp>& resultList) {
-            ::anar::service::ErrorManager::ResetError(m_error);
+            service::ErrorManager::ResetError(m_error);
             try {
                 resultList.clear();
                 odb::core::transaction transaction(m_dataBaseHandler->begin());
@@ -36,9 +36,9 @@ namespace anar::database {
                 }
                 transaction.commit();
             } catch (std::exception& exception) {
-                m_error = ::anar::service::ErrorManager::GenerateError(1, ::anar::constant::ErrorLevel::ANAR_FATAL, std::string("Database error: ") + exception.what());
+                m_error = service::ErrorManager::GenerateError(1, constant::ErrorLevel::ANAR_FATAL, std::string("Database error: ") + exception.what());
             }
-            return ::anar::service::ErrorManager::HaveNoError(m_error);
+            return service::ErrorManager::HaveNoError(m_error);
         }
         bool Update(const std::string& conditions, const std::string& rowValues);
         bool Delete(const std::string& conditions);
@@ -51,8 +51,8 @@ namespace anar::database {
        protected:
         model::DataBaseModel m_dataBaseModel;
         std::shared_ptr<odb::database> m_dataBaseHandler;
-        ::anar::model::ErrorModel m_error;
+        model::ErrorModel m_error;
     };
-}  // namespace anar::database
+}  // namespace anar::common::database
 
 #endif  // ANAR_I_DATABASE_HPP

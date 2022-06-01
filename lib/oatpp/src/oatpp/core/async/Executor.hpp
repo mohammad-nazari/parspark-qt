@@ -31,8 +31,6 @@
 #include "oatpp/core/concurrency/SpinLock.hpp"
 #include "oatpp/core/concurrency/Thread.hpp"
 
-#include "oatpp/core/collection/LinkedList.hpp"
-
 #include <tuple>
 #include <mutex>
 #include <condition_variable>
@@ -65,7 +63,7 @@ private:
 
     oatpp::async::Processor& getProcessor();
 
-    void pushTasks(oatpp::collection::FastQueue<CoroutineHandle>& tasks) override;
+    void pushTasks(utils::FastQueue<CoroutineHandle>& tasks) override;
 
     void pushOneTask(CoroutineHandle* task) override;
 

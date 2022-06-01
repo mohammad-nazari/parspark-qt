@@ -39,9 +39,9 @@ void UnorderedSetTest::onRun() {
     OATPP_ASSERT(set == nullptr);
 
     OATPP_ASSERT(set.get() == nullptr);
-    OATPP_ASSERT(set.valueType->classId.id == oatpp::data::mapping::type::__class::AbstractUnorderedSet::CLASS_ID.id);
-    OATPP_ASSERT(set.valueType->params.size() == 1);
-    OATPP_ASSERT(set.valueType->params.front() == oatpp::String::Class::getType());
+    OATPP_ASSERT(set.getValueType()->classId.id == oatpp::data::mapping::type::__class::AbstractUnorderedSet::CLASS_ID.id);
+    OATPP_ASSERT(set.getValueType()->params.size() == 1);
+    OATPP_ASSERT(set.getValueType()->params.front() == oatpp::String::Class::getType());
     OATPP_LOGI(TAG, "OK");
   }
 
@@ -54,9 +54,9 @@ void UnorderedSetTest::onRun() {
     OATPP_ASSERT(set->size() == 0);
 
     OATPP_ASSERT(set.get() != nullptr);
-    OATPP_ASSERT(set.valueType->classId.id == oatpp::data::mapping::type::__class::AbstractUnorderedSet::CLASS_ID.id);
-    OATPP_ASSERT(set.valueType->params.size() == 1);
-    OATPP_ASSERT(set.valueType->params.front() == oatpp::String::Class::getType());
+    OATPP_ASSERT(set.getValueType()->classId.id == oatpp::data::mapping::type::__class::AbstractUnorderedSet::CLASS_ID.id);
+    OATPP_ASSERT(set.getValueType()->params.size() == 1);
+    OATPP_ASSERT(set.getValueType()->params.front() == oatpp::String::Class::getType());
     OATPP_LOGI(TAG, "OK");
   }
 
@@ -69,7 +69,7 @@ void UnorderedSetTest::onRun() {
     OATPP_ASSERT(set->size() == 0);
 
     OATPP_ASSERT(set.get() != nullptr);
-    OATPP_ASSERT(set.valueType->classId.id == oatpp::data::mapping::type::__class::AbstractUnorderedSet::CLASS_ID.id);
+    OATPP_ASSERT(set.getValueType()->classId.id == oatpp::data::mapping::type::__class::AbstractUnorderedSet::CLASS_ID.id);
     OATPP_LOGI(TAG, "OK");
   }
 
@@ -120,15 +120,15 @@ void UnorderedSetTest::onRun() {
     OATPP_LOGI(TAG, "test polymorphicDispatcher...");
     oatpp::UnorderedSet<oatpp::String> set = {"a", "b", "c"};
 
-    auto polymorphicDispatcher = static_cast<const typename oatpp::UnorderedSet<oatpp::String>::Class::PolymorphicDispatcher*>(
-      set.valueType->polymorphicDispatcher
+    auto polymorphicDispatcher = static_cast<const typename oatpp::data::mapping::type::__class::Collection::PolymorphicDispatcher*>(
+      set.getValueType()->polymorphicDispatcher
     );
 
-    polymorphicDispatcher->addPolymorphicItem(set, oatpp::String("a"));
-    polymorphicDispatcher->addPolymorphicItem(set, oatpp::String("b"));
-    polymorphicDispatcher->addPolymorphicItem(set, oatpp::String("c"));
+    polymorphicDispatcher->addItem(set, oatpp::String("a"));
+    polymorphicDispatcher->addItem(set, oatpp::String("b"));
+    polymorphicDispatcher->addItem(set, oatpp::String("c"));
 
-    polymorphicDispatcher->addPolymorphicItem(set, oatpp::String("d"));
+    polymorphicDispatcher->addItem(set, oatpp::String("d"));
 
     OATPP_ASSERT(set->size() == 4);
 

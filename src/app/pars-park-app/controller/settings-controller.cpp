@@ -16,11 +16,11 @@ namespace anar::parspark::controller {
         return service::SSettings::Instance()->Settings();
     }
     bool SettingsController::Save(const model::SettingsModel& settings) {
-        ::anar::service::ErrorManager::ResetError(m_error);
+        anar::common::service::ErrorManager::ResetError(m_error);
         service::SSettings::Instance()->Settings(settings);
         if (service::SSettings::Instance()->Save()) {
             m_error = service::SSettings::Instance()->Error();
         }
-        return ::anar::service::ErrorManager::HaveNoError(m_error);
+        return anar::common::service::ErrorManager::HaveNoError(m_error);
     }
 }  // namespace anar::parspark::controller

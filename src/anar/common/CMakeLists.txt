@@ -40,7 +40,7 @@ set(
         src/serial-port.cpp
         src/a-to-json-visitor.cpp
         src/exception.cpp
-)
+        test/main.cpp)
 
 add_library(
         AnarCommon

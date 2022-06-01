@@ -6,7 +6,7 @@
 
 namespace anar::parspark::service {
     class ToJsonVisitor
-        : public anar::service::AToJsonVisitor
+        : public anar::common::service::AToJsonVisitor
         , public interfaces::IParsParkModelBindingVisitor {
        public:
         ToJsonVisitor(nlohmann::ordered_json &jsonNlohmann);

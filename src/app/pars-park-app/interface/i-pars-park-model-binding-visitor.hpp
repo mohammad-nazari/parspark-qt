@@ -30,7 +30,7 @@ namespace anar::parspark::model {
 }  // namespace anar::parspark::model
 
 namespace anar::parspark::interfaces {
-    class IParsParkModelBindingVisitor : virtual public anar::interfaces::IModelBindingVisitor {
+    class IParsParkModelBindingVisitor : virtual public anar::common::interfaces::IModelBindingVisitor {
        public:
         virtual bool Visit(model::ParsParkModel &parPark) = 0;
         virtual bool Visit(model::UserModel &user) = 0;

@@ -18,7 +18,7 @@ namespace anar::parspark::model {
       }
 
       std::string PortName;
-      uint16_t BaudRate{19200};
+      uint32_t BaudRate{19200};
    };
 }  // namespace anar::parspark::model
 #endif  // ANAR_PARS_PARK_MODEL_COMPORT_HPP

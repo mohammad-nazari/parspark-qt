@@ -47,7 +47,7 @@ namespace anar::parspark::view {
             m_error = m_loginController->Error().Message.c_str();
             return;
         }
-        anar::model::DataBaseModel dataBase;
+        anar::common::model::DataBaseModel dataBase;
         dataBase.HostAddress = (m_loginInfo["serverAddress"].toString().toStdString());
         dataBase.DBUserName = (m_loginInfo["serverUser"].toString().toStdString());
         dataBase.DBPassWord = (m_loginInfo["serverPassword"].toString().toStdString());

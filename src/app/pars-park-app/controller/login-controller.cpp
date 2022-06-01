@@ -25,42 +25,42 @@ namespace anar::parspark::controller {
 
     bool LoginController::DoLogin(const model::LoginModel& login) {
         try {
-            anar::service::ErrorManager::ResetError(m_error);
-            std::string passWord = ::anar::service::String::SHA512(login.PassWord);
-            ::anar::database::DatabasePtr db = ::anar::database::DatabaseFactory::Create(::anar::constant::DatabaseEngines::ANAR_MYSQL.Name, login);
+            anar::common::service::ErrorManager::ResetError(m_error);
+            std::string passWord = anar::common::service::String::SHA512(login.PassWord);
+            anar::common::database::DatabasePtr db = anar::common::database::DatabaseFactory::Create(anar::common::constant::DatabaseEngines::ANAR_MYSQL.Name, login);
             if (db) {
                 if (db->Connect()) {
                     odb::query<model::UserModel> query(odb::query<model::UserModel>::UserName == login.UserName && odb::query<model::UserModel>::PassWord == passWord);
                     std::vector<model::UserModel> userList;
                     if (db->Select<model::UserModel>(query, userList)) {
                         if (userList.empty()) {
-                            m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR,
+                            m_error = anar::common::service::ErrorManager::GenerateError(1, anar::common::constant::ErrorLevel::ANAR_HIGH_ERROR,
                                                                                    "User name '" + login.UserName + "' or password '" + login.PassWord + "(" + passWord + ")' is incorrect.");
                         }
                     } else {
-                        m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "Database Error");
+                        m_error = anar::common::service::ErrorManager::GenerateError(1, anar::common::constant::ErrorLevel::ANAR_HIGH_ERROR, "Database Error");
                         m_error.SubErrors.emplace_back(db->Error());
                     }
                 } else {
-                    m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "Incorrect database information");
+                    m_error = anar::common::service::ErrorManager::GenerateError(1, anar::common::constant::ErrorLevel::ANAR_HIGH_ERROR, "Incorrect database information");
                 }
             } else {
-                m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "Incorrect database information");
+                m_error = anar::common::service::ErrorManager::GenerateError(1, anar::common::constant::ErrorLevel::ANAR_HIGH_ERROR, "Incorrect database information");
             }
         } catch (std::exception& exception) {
-            m_error = ::anar::service::ErrorManager::GenerateError(1, anar::constant::ErrorLevel::ANAR_HIGH_ERROR, "DB Error: " + std::string(exception.what()));
+            m_error = anar::common::service::ErrorManager::GenerateError(1, anar::common::constant::ErrorLevel::ANAR_HIGH_ERROR, "DB Error: " + std::string(exception.what()));
         }
-        return ::anar::service::ErrorManager::HaveNoError(m_error);
+        return anar::common::service::ErrorManager::HaveNoError(m_error);
     }
-    bool LoginController::SaveDataBaseSettings(const ::anar::model::DataBaseModel& dataBase) {
-        anar::service::ErrorManager::ResetError(m_error);
+    bool LoginController::SaveDataBaseSettings(const anar::common::model::DataBaseModel& dataBase) {
+        anar::common::service::ErrorManager::ResetError(m_error);
         service::SSettings::Instance()->DataBase(dataBase);
         if (!service::SSettings::Instance()->Save()) {
             m_error = service::SSettings::Instance()->Error();
         }
-        return ::anar::service::ErrorManager::HaveNoError(m_error);
+        return anar::common::service::ErrorManager::HaveNoError(m_error);
     }
-    ::anar::model::DataBaseModel LoginController::LoadLoginSetting() {
+    anar::common::model::DataBaseModel LoginController::LoadLoginSetting() {
         return service::SSettings::Instance()->DataBase();
     }
 }  // namespace anar::parspark::controller

@@ -2,7 +2,7 @@
 
 #include <Poco/FileStream.h>
 
-namespace anar::interfaces {
+namespace anar::common::interfaces {
    AJsonable::AJsonable() = default;
    AJsonable::~AJsonable() = default;
 

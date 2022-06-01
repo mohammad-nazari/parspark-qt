@@ -40,17 +40,17 @@ namespace odb
   // CarModel
   //
   template <>
-  struct class_traits< ::anar::parspark::model::CarModel >
+  struct class_traits< anar::parspark::model::CarModel >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::anar::parspark::model::CarModel >
+  class access::object_traits< anar::parspark::model::CarModel >
   {
     public:
-    typedef ::anar::parspark::model::CarModel object_type;
-    typedef ::std::shared_ptr< ::anar::parspark::model::CarModel > pointer_type;
+    typedef anar::parspark::model::CarModel object_type;
+    typedef ::std::shared_ptr< anar::parspark::model::CarModel > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -93,12 +93,12 @@ namespace odb
   // CarModel
   //
   template <typename A>
-  struct pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >:
-    pointer_query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
+  struct pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >:
+    pointer_query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
   {
     // CreateModifyDeleteModel
     //
-    typedef pointer_query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
+    typedef pointer_query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
 
     // Id
     //
@@ -162,33 +162,33 @@ namespace odb
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::Id_type_
-  pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::Id_type_
+  pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::PlateNumberEn_type_
-  pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::PlateNumberEn_type_
+  pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   PlateNumberEn (A::table_name, "`plate_number_en`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::Driver_type_
-  pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::Driver_type_
+  pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   Driver (A::table_name, "`driver_id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::Organization_type_
-  pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::Organization_type_
+  pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   Organization (A::table_name, "`person_id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::PictureAddress_type_
-  pointer_query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::PictureAddress_type_
+  pointer_query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   PictureAddress (A::table_name, "`picture_address`", 0);
 
   template <>
-  class access::object_traits_impl< ::anar::parspark::model::CarModel, id_mysql >:
-    public access::object_traits< ::anar::parspark::model::CarModel >
+  class access::object_traits_impl< anar::parspark::model::CarModel, id_mysql >:
+    public access::object_traits< anar::parspark::model::CarModel >
   {
     public:
     struct id_image_type
@@ -199,7 +199,7 @@ namespace odb
       std::size_t version;
     };
 
-    struct image_type: object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::image_type
+    struct image_type: object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::image_type
     {
       // Id
       //
@@ -332,8 +332,8 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::anar::parspark::model::CarModel, id_common >:
-    public access::object_traits_impl< ::anar::parspark::model::CarModel, id_mysql >
+  class access::object_traits_impl< anar::parspark::model::CarModel, id_common >:
+    public access::object_traits_impl< anar::parspark::model::CarModel, id_mysql >
   {
   };
 
@@ -341,52 +341,52 @@ namespace odb
   //
   template <>
   struct alias_traits<
-    ::anar::parspark::model::DriverModel,
+    anar::parspark::model::DriverModel,
     id_mysql,
-    access::object_traits_impl< ::anar::parspark::model::CarModel, id_mysql >::Driver_tag>
+    access::object_traits_impl< anar::parspark::model::CarModel, id_mysql >::Driver_tag>
   {
     static const char table_name[];
   };
 
   template <>
   struct alias_traits<
-    ::anar::parspark::model::OrganizationModel,
+    anar::parspark::model::OrganizationModel,
     id_mysql,
-    access::object_traits_impl< ::anar::parspark::model::CarModel, id_mysql >::Organization_tag>
+    access::object_traits_impl< anar::parspark::model::CarModel, id_mysql >::Organization_tag>
   {
     static const char table_name[];
   };
 
   template <>
-  struct query_columns_base< ::anar::parspark::model::CarModel, id_mysql >
+  struct query_columns_base< anar::parspark::model::CarModel, id_mysql >
   {
     // Driver
     //
     typedef
     odb::alias_traits<
-      ::anar::parspark::model::DriverModel,
+      anar::parspark::model::DriverModel,
       id_mysql,
-      access::object_traits_impl< ::anar::parspark::model::CarModel, id_mysql >::Driver_tag>
+      access::object_traits_impl< anar::parspark::model::CarModel, id_mysql >::Driver_tag>
     Driver_alias_;
 
     // Organization
     //
     typedef
     odb::alias_traits<
-      ::anar::parspark::model::OrganizationModel,
+      anar::parspark::model::OrganizationModel,
       id_mysql,
-      access::object_traits_impl< ::anar::parspark::model::CarModel, id_mysql >::Organization_tag>
+      access::object_traits_impl< anar::parspark::model::CarModel, id_mysql >::Organization_tag>
     Organization_alias_;
   };
 
   template <typename A>
-  struct query_columns< ::anar::parspark::model::CarModel, id_mysql, A >:
-    query_columns_base< ::anar::parspark::model::CarModel, id_mysql >,
-    query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
+  struct query_columns< anar::parspark::model::CarModel, id_mysql, A >:
+    query_columns_base< anar::parspark::model::CarModel, id_mysql >,
+    query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
   {
     // CreateModifyDeleteModel
     //
-    typedef query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
+    typedef query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
 
     // Id
     //
@@ -425,7 +425,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::anar::parspark::model::DriverModel,
+        anar::parspark::model::DriverModel,
         id_mysql,
         Driver_alias_ > >
     Driver_pointer_type_;
@@ -453,7 +453,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::anar::parspark::model::OrganizationModel,
+        anar::parspark::model::OrganizationModel,
         id_mysql,
         Organization_alias_ > >
     Organization_pointer_type_;
@@ -482,28 +482,28 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::Id_type_
-  query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CarModel, id_mysql, A >::Id_type_
+  query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::PlateNumberEn_type_
-  query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CarModel, id_mysql, A >::PlateNumberEn_type_
+  query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   PlateNumberEn (A::table_name, "`plate_number_en`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::Driver_type_
-  query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CarModel, id_mysql, A >::Driver_type_
+  query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   Driver (A::table_name, "`driver_id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::Organization_type_
-  query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CarModel, id_mysql, A >::Organization_type_
+  query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   Organization (A::table_name, "`person_id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::PictureAddress_type_
-  query_columns< ::anar::parspark::model::CarModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CarModel, id_mysql, A >::PictureAddress_type_
+  query_columns< anar::parspark::model::CarModel, id_mysql, A >::
   PictureAddress (A::table_name, "`picture_address`", 0);
 }
 

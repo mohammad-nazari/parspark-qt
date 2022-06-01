@@ -38,17 +38,17 @@ namespace odb
   // CardModel
   //
   template <>
-  struct class_traits< ::anar::parspark::model::CardModel >
+  struct class_traits< anar::parspark::model::CardModel >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::anar::parspark::model::CardModel >
+  class access::object_traits< anar::parspark::model::CardModel >
   {
     public:
-    typedef ::anar::parspark::model::CardModel object_type;
-    typedef ::std::shared_ptr< ::anar::parspark::model::CardModel > pointer_type;
+    typedef anar::parspark::model::CardModel object_type;
+    typedef ::std::shared_ptr< anar::parspark::model::CardModel > pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -91,12 +91,12 @@ namespace odb
   // CardModel
   //
   template <typename A>
-  struct pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >:
-    pointer_query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
+  struct pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >:
+    pointer_query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
   {
     // CreateModifyDeleteModel
     //
-    typedef pointer_query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
+    typedef pointer_query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
 
     // Id
     //
@@ -136,23 +136,23 @@ namespace odb
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::Id_type_
-  pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >::Id_type_
+  pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::Code_type_
-  pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >::Code_type_
+  pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >::
   Code (A::table_name, "`code`", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::Key_type_
-  pointer_query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::
+  const typename pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >::Key_type_
+  pointer_query_columns< anar::parspark::model::CardModel, id_mysql, A >::
   Key (A::table_name, "`key`", 0);
 
   template <>
-  class access::object_traits_impl< ::anar::parspark::model::CardModel, id_mysql >:
-    public access::object_traits< ::anar::parspark::model::CardModel >
+  class access::object_traits_impl< anar::parspark::model::CardModel, id_mysql >:
+    public access::object_traits< anar::parspark::model::CardModel >
   {
     public:
     struct id_image_type
@@ -163,7 +163,7 @@ namespace odb
       std::size_t version;
     };
 
-    struct image_type: object_traits_impl< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql >::image_type
+    struct image_type: object_traits_impl< anar::parspark::model::CreateModifyDeleteModel, id_mysql >::image_type
     {
       // Id
       //
@@ -283,20 +283,20 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::anar::parspark::model::CardModel, id_common >:
-    public access::object_traits_impl< ::anar::parspark::model::CardModel, id_mysql >
+  class access::object_traits_impl< anar::parspark::model::CardModel, id_common >:
+    public access::object_traits_impl< anar::parspark::model::CardModel, id_mysql >
   {
   };
 
   // CardModel
   //
   template <typename A>
-  struct query_columns< ::anar::parspark::model::CardModel, id_mysql, A >:
-    query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
+  struct query_columns< anar::parspark::model::CardModel, id_mysql, A >:
+    query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A >
   {
     // CreateModifyDeleteModel
     //
-    typedef query_columns< ::anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
+    typedef query_columns< anar::parspark::model::CreateModifyDeleteModel, id_mysql, A > CreateModifyDeleteModel;
 
     // Id
     //
@@ -336,18 +336,18 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::Id_type_
-  query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CardModel, id_mysql, A >::Id_type_
+  query_columns< anar::parspark::model::CardModel, id_mysql, A >::
   Id (A::table_name, "`id`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::Code_type_
-  query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CardModel, id_mysql, A >::Code_type_
+  query_columns< anar::parspark::model::CardModel, id_mysql, A >::
   Code (A::table_name, "`code`", 0);
 
   template <typename A>
-  const typename query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::Key_type_
-  query_columns< ::anar::parspark::model::CardModel, id_mysql, A >::
+  const typename query_columns< anar::parspark::model::CardModel, id_mysql, A >::Key_type_
+  query_columns< anar::parspark::model::CardModel, id_mysql, A >::
   Key (A::table_name, "`key`", 0);
 }
 
