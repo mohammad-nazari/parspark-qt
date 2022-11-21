@@ -75,3 +75,6 @@ Thumbs.db
 /build/
 /.idea
 .idea
+/.vscode/
+/.vscode
+.vscode
