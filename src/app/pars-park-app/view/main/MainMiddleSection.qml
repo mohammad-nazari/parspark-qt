@@ -1,10 +1,10 @@
-import QtQuick 2.13
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.13
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import "qrc:/src/app/pars-park-app/view/common"
 import "qrc:/src/app/pars-park-app/view/settings"
 
-import ANAR.ParsPark.View 1.0
+import ANAR.ParsPark.View
 
 Rectangle{
    id: middleRectangleId
@@ -12,7 +12,7 @@ Rectangle{
    Layout.fillWidth: true
    Layout.fillHeight: true
    // Width is provided by 240px from 640px relation from main window Width
-   width: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 3 / 8 : mainWindowId.width - (2 * (mainWindowId.height * relativeSize * 5 / 16))
+   width: mainApplicationWindowId.width / mainApplicationWindowId.height < relativeSize ? parent.width * 3 / 8 : mainApplicationWindowId.width - (2 * (mainApplicationWindowId.height * relativeSize * 5 / 16))
    height: parent.height - 20
    Column{
       id: middleColumnLayoutId

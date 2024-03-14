@@ -16,8 +16,8 @@ namespace anar::common::model {
 
         std::string EngineName{};
         std::string HostAddress{"localhost"};
-        std::string DBUserName{"parspark"};
-        std::string DBPassWord{"123456"};
+        std::string DBUserName{"admin"};
+        std::string DBPassWord{"PersianBoy@2"};
         uint16_t Port{3306};  // Mysql default port
         std::string DatabaseName{"parspark"};
     };

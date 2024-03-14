@@ -1,7 +1,7 @@
-import QtQuick 2.13
-import QtQuick.Controls 1.4
+import QtQuick
+import QtQuick.Controls
 
-import ANAR.ParsPark.View 1.0
+import ANAR.ParsPark.View
 
 Column {
    property var comPortModel:  {

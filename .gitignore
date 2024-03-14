@@ -75,6 +75,8 @@ Thumbs.db
 /build/
 /.idea
 .idea
+.idea/*
+/.idea/*
 /.vscode/
 /.vscode
 .vscode
@@ -83,3 +85,5 @@ lib/png/cmake-build-release
 lib/png/cmake-build-debug
 lib/png/cmake-build-release/*
 lib/png/cmake-build-debug/*
+
+CMakeLists.txt.*

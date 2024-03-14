@@ -351,12 +351,12 @@ namespace odb
     // NationalCardNumber
     //
     {
-      ::std::shared_ptr< long long unsigned int > const& v =
+      ::std::shared_ptr< long unsigned int > const& v =
         o.NationalCardNumber;
 
       bool is_null (true);
       mysql::value_traits<
-          ::std::shared_ptr< long long unsigned int >,
+          ::std::shared_ptr< long unsigned int >,
           mysql::id_ulonglong >::set_image (
         i.NationalCardNumber_value, is_null, v);
       i.NationalCardNumber_null = is_null;
@@ -540,11 +540,11 @@ namespace odb
     // NationalCardNumber
     //
     {
-      ::std::shared_ptr< long long unsigned int >& v =
+      ::std::shared_ptr< long unsigned int >& v =
         o.NationalCardNumber;
 
       mysql::value_traits<
-          ::std::shared_ptr< long long unsigned int >,
+          ::std::shared_ptr< long unsigned int >,
           mysql::id_ulonglong >::set_value (
         v,
         i.NationalCardNumber_value,

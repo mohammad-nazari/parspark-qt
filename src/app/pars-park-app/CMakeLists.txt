@@ -124,9 +124,9 @@ target_include_directories(
 
 target_link_libraries(
         ${PROJECT_NAME}
-        Qt5::Core
-        Qt5::Qml
-        Qt5::Quick
+        Qt6::Core
+        Qt6::Qml
+        Qt6::Quick
         ${PARS_PARK_MYSQL_LIB}
         ${PARS_PARK_POCO_FOUNDATION_LIB}
         ${PARS_PARK_LIMEREPORT_LIB}
@@ -142,9 +142,9 @@ target_link_libraries(
 
 #target_link_libraries(
 #        ${PROJECT_NAME}_Unit_Test
-#        Qt5::Core
-#        Qt5::Qml
-#        Qt5::Quick
+#        Qt6::Core
+#        Qt6::Qml
+#        Qt6::Quick
 #        ${PARS_PARK_MYSQL_LIB}
 #        ${PARS_PARK_POCO_FOUNDATION_LIB}
 #        ${PARS_PARK_POCO_DATA_LIB}
@@ -169,7 +169,7 @@ target_link_libraries(
 #        ${PARS_PARK_ANAR_TASK_LIB}
 #)
 
-qt5_create_translation(
+qt6_create_translation(
         QM_FILES
         ${TS_FILES}
 )

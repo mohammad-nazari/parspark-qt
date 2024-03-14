@@ -1,5 +1,5 @@
-import QtQuick 2.13
-import QtQuick.Controls 1.4
+import QtQuick
+import QtQuick.Controls
 
 Row {
    property string labelText: qsTr("Label:")
@@ -17,8 +17,8 @@ Row {
    }
    SpinBox{
       id: serverPortNumberSpinBoxId
-      minimumValue: minimumValueValue
-      maximumValue: maximumValueValue
+      from: minimumValueValue
+      to: maximumValueValue
       value: spinBoxValue
       onValueChanged: {spinBoxValue = value}
    }

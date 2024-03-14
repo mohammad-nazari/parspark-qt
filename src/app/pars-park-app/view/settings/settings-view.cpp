@@ -32,7 +32,7 @@ namespace anar::parspark::view {
     void SettingsView::saveSettings(QVariantMap settingsInfo) {
         m_error.clear();
         m_settingsInfo = std::move(settingsInfo);
-//        LOG(INFO) << QJsonDocument::fromVariant(m_settingsInfo).toJson().toStdString();
+        //        LOG(INFO) << QJsonDocument::fromVariant(m_settingsInfo).toJson().toStdString();
         // ToDO: validate settings
         // Save settings
         model::SettingsModel settings;

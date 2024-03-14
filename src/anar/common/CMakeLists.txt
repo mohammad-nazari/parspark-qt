@@ -70,9 +70,9 @@ target_include_directories(
 target_link_libraries(
         AnarCommon
         PUBLIC
-        Qt5::Core
-        Qt5::Qml
-        Qt5::Quick
+        Qt6::Core
+        Qt6::Qml
+        Qt6::Quick
         ${PARS_PARK_MYSQL_LIB}
         ${PARS_PARK_POCO_FOUNDATION_LIB}
         ${PARS_PARK_LIMEREPORT_LIB}

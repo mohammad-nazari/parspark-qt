@@ -1,5 +1,5 @@
-import QtQuick 2.13
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Layouts
 
 Row{
     property int capacity: 1000

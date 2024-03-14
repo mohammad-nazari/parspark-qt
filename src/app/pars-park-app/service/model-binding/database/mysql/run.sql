@@ -32,7 +32,7 @@ CREATE TABLE `user`
     `pass_word`    VARCHAR(1024)                         NOT NULL CHECK (LENGTH(`pass_word`) > 64),
     `person_id`    BIGINT UNSIGNED                       NULL,
     `type`         ENUM ('admin', 'manager', 'employee') NOT NULL DEFAULT 'employee',
-    `created_time` TIMESTAMP(6)                          NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    `created_time` TIMESTAMP(6)                          NOT NULL,
     `updated_time` TIMESTAMP(6)                          NULL,
     CHECK (`updated_time` > `created_time`)
 )

@@ -7,17 +7,19 @@ function(ANAR_MESSAGE message)
     message("${PARS_PARK_MESSAGE} ${message}")
 endfunction()
 
-ANAR_MESSAGE("QT5 dir: ${QTDIR5}")
+ANAR_MESSAGE("QT_INSTALL_PATH: ${QT_INSTALL_PATH}")
+ANAR_MESSAGE("QT6 dir: ${QTDIR5}")
 
 ANAR_MESSAGE("CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 
-list(APPEND QT_COMPONENTS Core Gui Network PrintSupport Qml QmlModels QmlWorkerScript Quick QuickControls2 QuickTemplates2 Script ScriptTools Svg Widgets Xml XmlPatterns UiTools LinguistTools Sql)
+#list(APPEND QT_COMPONENTS Core Gui Network PrintSupport Qml QmlModels QmlWorkerScript Quick QuickControls2 QuickTemplates2 Script ScriptTools Svg Widgets Xml XmlPatterns UiTools LinguistTools Sql)
+list(APPEND QT_COMPONENTS Core Gui Network PrintSupport Qml QmlModels QmlWorkerScript Quick QuickControls2 QuickTemplates2 Svg Widgets Xml UiTools LinguistTools Sql)
 list(APPEND QT_PACKAGES)
 foreach (QT_LIB ${QT_COMPONENTS})
-    list(APPEND QT_PACKAGES Qt5::${QT_LIB})
+    list(APPEND QT_PACKAGES Qt6::${QT_LIB})
 endforeach ()
 
-find_package(Qt5 COMPONENTS ${QT_COMPONENTS} REQUIRED)
+find_package(Qt6 COMPONENTS ${QT_COMPONENTS} REQUIRED)
 
 if (WIN32)
     # Set minimum windows version to windows 7
@@ -34,8 +36,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ANAR_MESSAGE("Generator: ${CMAKE_GENERATOR}")
 ANAR_MESSAGE("C++ standard: ${CMAKE_CXX_STANDARD}")
 
-set(PARS_PARK_LIB_DIR "${CMAKE_SOURCE_DIR}/lib")
-set(PARS_PARK_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/lib")
+set(PARS_PARK_LIB_DIR "${CMAKE_SOURCE_DIR}/libs")
+set(PARS_PARK_LIB_BIN_DIR "${CMAKE_BINARY_DIR}/libs")
 set(PARS_PARK_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
 set(PARS_PARK_ANAR_LIB_DIR "${PARS_PARK_SOURCE_DIR}/anar")
 set(PARS_PARK_APP_DIR "${PARS_PARK_SOURCE_DIR}/app")
@@ -52,7 +54,7 @@ if (WIN32)
     set(PARS_PARK_MYSQL_LIB mysql)
     set(PARS_PARK_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_MYSQL_FOLDER}/mysql-connector-c/win/x64")
     file(
-            COPY "${PARS_PARK_MYSQL_DIR}/lib/libmysql.dll"
+            COPY "${PARS_PARK_MYSQL_DIR}/libs/libmysql.dll"
             DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
     )
 else ()
@@ -77,6 +79,7 @@ set(PARS_PARK_PNG_BIN_DIR "${PARS_PARK_LIB_BIN_DIR}/${PARS_PARK_PNG_FOLDER}")
 #endregion
 
 #region ZINT
+set(ZINT_UNINSTALL OFF)
 set(PARS_PARK_ZINT_LIB zint)
 set(PARS_PARK_ZINT_FOLDER zint)
 set(PARS_PARK_ZINT_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ZINT_FOLDER}")
@@ -104,7 +107,10 @@ set(PARS_PARK_POCO_FOUNDATION_DIR "${PARS_PARK_POCO_DIR}/Foundation/include")
 #endregion
 
 #region Lime Report
-set(PARS_PARK_LIMEREPORT_LIB limereport)
+set(PARS_PARK_LIMEREPORT_LIB limereport-qt6)
+set(ENABLE_ZINT ON)
+set(LIMEREPORT_DEMO ON)
+set(USE_QT6 ON)
 set(PARS_PARK_LIMEREPORT_FOLDER lime-report)
 set(PARS_PARK_LIMEREPORT_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_LIMEREPORT_FOLDER}")
 #endregion
@@ -124,11 +130,11 @@ set(PARS_PARK_OATPP_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_OATPP_FOLDER}")
 #endregion
 
 #region ODB
-set(PARS_PARK_ODB_LIB odb)
+set(PARS_PARK_ODB_LIB libodb)
 set(PARS_PARK_ODB_MYSQL_LIB ODB::MySQL)
 set(PARS_PARK_ODB_ALL_FOLDER odb)
-set(PARS_PARK_ODB_FOLDER odb)
-set(PARS_PARK_ODB_MYSQL_FOLDER odb-mysql)
+set(PARS_PARK_ODB_FOLDER libodb)
+set(PARS_PARK_ODB_MYSQL_FOLDER libodb-mysql)
 set(PARS_PARK_ODB_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_ALL_FOLDER}/${PARS_PARK_ODB_FOLDER}")
 set(PARS_PARK_ODB_MYSQL_DIR "${PARS_PARK_LIB_DIR}/${PARS_PARK_ODB_ALL_FOLDER}/${PARS_PARK_ODB_MYSQL_FOLDER}")
 #endregion
@@ -237,9 +243,9 @@ if (WIN32)
         )
     endif ()
     foreach (QT_LIB ${QT_COMPONENTS})
-        if (EXISTS "${QT_INSTALL_PATH}/bin/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll")
+        if (EXISTS "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll")
             file(
-                    COPY "${QT_INSTALL_PATH}/bin/Qt5${QT_LIB}${DEBUG_SUFFIX}.dll"
+                    COPY "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll"
                     DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
             )
         endif ()
@@ -251,4 +257,4 @@ if (WIN32)
 endif ()
 
 #  cd D:\Projects\Desktop\ParsPark\QT\ParsPark\src\app\pars-park-app\service\model-binding\database\mysql
-# odb.exe --std c++11 --hxx-prologue '#include \"service/model-binding/database/traits/traits.hxx\"' --database mysql -ID:\Projects\Desktop\ParsPark\QT\ParsPark\src\app\pars-park-app -ID:\Projects\Desktop\ParsPark\QT\ParsPark\src\anar\common\include -ID:\Projects\Desktop\ParsPark\QT\ParsPark\lib\poco\Foundation\include -ID:\Projects\Desktop\ParsPark\QT\ParsPark\lib\nlohmann\nlohmann-json\include --generate-schema --generate-query D:\Projects\Desktop\ParsPark\QT\ParsPark\src\app\pars-park-app\model\database\*-model.hpp
+# odb.exe --std c++11 --hxx-prologue '#include \"service/model-binding/database/traits/traits.hxx\"' --database mysql -ID:\Projects\Desktop\ParsPark\QT\ParsPark\src\app\pars-park-app -ID:\Projects\Desktop\ParsPark\QT\ParsPark\src\anar\common\include -ID:\Projects\Desktop\ParsPark\QT\ParsPark\libs\poco\Foundation\include -ID:\Projects\Desktop\ParsPark\QT\ParsPark\libs\nlohmann\nlohmann-json\include --generate-schema --generate-query D:\Projects\Desktop\ParsPark\QT\ParsPark\src\app\pars-park-app\model\database\*-model.hpp

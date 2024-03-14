@@ -1,5 +1,5 @@
-import QtQuick 2.13
-import QtQuick.Controls 1.4
+import QtQuick
+import QtQuick.Controls
 
 Row {
    property string labelText: qsTr("Label:")
@@ -7,8 +7,8 @@ Row {
    property string placeholderTextText: qsTr("")
    property int textFieldWidth: 200
    property string textFieldText: qsTr("")
-   property var textFieldEchoMode: TextInput.Normal
-   property var textFieldValidator: RegExpValidator {}
+   property int textFieldEchoMode: TextInput.Normal
+   property var textFieldValidator: RegularExpressionValidator {}
    property string imageSourceTrue: qsTr("qrc:/image/png/hotovo.png")
    property string imageSourceFalse: qsTr("qrc:/image/png/check.png")
 
@@ -31,7 +31,7 @@ Row {
    }
    Image {
       id: platePictureImageId
-      width: height
+      width: labelId.height
       height: labelId.height
       source: textFieldId.acceptableInput ? imageSourceTrue : imageSourceFalse
    }

@@ -1,6 +1,6 @@
-import QtQuick 2.13
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 1.4
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 Row {
    property var comboBoxModel: []

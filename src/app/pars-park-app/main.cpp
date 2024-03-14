@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QQmlComponent>
+#include <QQmlEngine>
 
 #include "anar/json-parser.hpp"
 #include "const/view-const.hpp"
@@ -13,9 +14,9 @@
 using namespace anar::parspark;
 
 int main(int argc, char* argv[]) {
-//    anar::test::NazariTest::RunTest();
+    //    anar::test::NazariTest::RunTest();
     int appCode;
-#ifdef _DEBUG
+#ifdef _DEBUGgit
     FLAGS_logtostderr = true;
 #endif
     FLAGS_log_dir = "logs";
@@ -60,5 +61,4 @@ int main(int argc, char* argv[]) {
     LOG(INFO) << "Close application with code " << appCode;
     google::FlushLogFiles(google::LogSeverity());
     return appCode;
-    return 0;
 }

@@ -1,5 +1,5 @@
-import QtQuick 2.13
-import QtQuick.Layouts 1.12
+import QtQuick
+import QtQuick.Layouts
 import "qrc:/src/app/pars-park-app/view/common"
 
 Rectangle{
@@ -8,7 +8,7 @@ Rectangle{
    Layout.fillWidth: true
    Layout.fillHeight: true
    // Width is provided by 200px from 640px relation from main window Width
-   width: mainWindowId.width / mainWindowId.height < relativeSize ? parent.width * 5 / 16 : mainWindowId.height * relativeSize * 5 / 16
+   width: mainApplicationWindowId.width / mainApplicationWindowId.height < relativeSize ? parent.width * 5 / 16 : mainApplicationWindowId.height * relativeSize * 5 / 16
    height: parent.height
    Column{
       id: colEnterId

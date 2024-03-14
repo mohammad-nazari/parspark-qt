@@ -1,5 +1,5 @@
-import QtQuick 2.13
-import QtQuick.Controls 1.4
+import QtQuick
+import QtQuick.Controls
 
 Column {
    property string address: qsTr("127.0.0.1")
