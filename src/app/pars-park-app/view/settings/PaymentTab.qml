@@ -21,7 +21,7 @@ Row {
             onCheckedChanged: {paymentSettings.CitizenDevice.Enable = checked}
         }
         Column {
-            enabled: controlExitGate.checked
+            enabled: payWithCitizenCard.checked
             padding: 5
             spacing: 5
             CommonCOMPort {

@@ -33,9 +33,9 @@ ApplicationWindow {
         closing = true;
     }
 
-    onClosing: {
+    onClosing: (close) => {
         close.accepted = closing
-        onTriggered: if (!closing) saveSettings()
+        if (!settingWindowId.closing) saveSettings()
     }
 
     id: settingWindowId
